@@ -103,18 +103,30 @@ document.addEventListener('DOMContentLoaded', function () {
         return { time: new Date(p.t.replace(' ', 'T')), height: parseFloat(p.v), type: p.type };
       });
 
-      /* Next tide (display) */
-      var next = null;
+      /* Current tide height (cosine interpolation between the
+         surrounding high/low, the standard tide approximation) */
+      var prev = null, next = null;
       for (var i = 0; i < events.length; i++) {
-        if (events[i].time > now) { next = events[i]; break; }
+        if (events[i].time > now) { next = events[i]; prev = events[i - 1] || null; break; }
       }
       if (!next) { tideFallback(); return; }
       var kind = next.type === 'H' ? 'High' : 'Low';
-      var ft = next.height.toFixed(1) + ' ft';
-      setText(els.tideStrip, kind + ' ' + fmtTime(next.time));
-      setText(els.tideStripNote, ft + ' · Port San Luis');
-      setText(els.tideInline, kind + ' Tide ' + fmtTime(next.time));
-      setText(els.tideInlineNote, ft + ' · NOAA Port San Luis');
+      var nextStr = kind + ' ' + fmtTime(next.time) + ' (' + next.height.toFixed(1) + ' ft)';
+
+      if (prev) {
+        var frac = (now - prev.time) / (next.time - prev.time);
+        var nowHt = prev.height + (next.height - prev.height) * (1 - Math.cos(Math.PI * frac)) / 2;
+        var rising = next.height > prev.height;
+        setText(els.tideStrip, nowHt.toFixed(1) + ' ft · ' + (rising ? 'Rising' : 'Falling'));
+        setText(els.tideStripNote, 'Next: ' + nextStr);
+        setText(els.tideInline, nowHt.toFixed(1) + ' ft ' + (rising ? '↑' : '↓'));
+        setText(els.tideInlineNote, (rising ? 'Rising' : 'Falling') + ' · Next: ' + nextStr);
+      } else {
+        setText(els.tideStrip, kind + ' ' + fmtTime(next.time));
+        setText(els.tideStripNote, next.height.toFixed(1) + ' ft · Port San Luis');
+        setText(els.tideInline, kind + ' Tide ' + fmtTime(next.time));
+        setText(els.tideInlineNote, next.height.toFixed(1) + ' ft · NOAA Port San Luis');
+      }
 
       /* Creek estimate from proximity to high tide */
       if (autoMode()) {
