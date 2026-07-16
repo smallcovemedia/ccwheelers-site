@@ -26,19 +26,19 @@ document.addEventListener('click', function (e) {
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact | CCWheelers Oceano Dunes</title>
-<meta name="description" content="Contact Central Coast Wheelers with questions about visiting Oceano Dunes, or reach the park directly.">
-<link rel="canonical" href="https://ccwheelers.com/contact.html">
+<title>CCWheelers Merch | Dune Gear from Central Coast Wheelers</title>
+<meta name="description" content="Official CCWheelers apparel and gear for Oceano Dunes riders, printed on demand and shipped to your door. New designs coming soon.">
+<link rel="canonical" href="https://ccwheelers.com/merch.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="CCWheelers">
-<meta property="og:title" content="Contact | CCWheelers Oceano Dunes">
-<meta property="og:description" content="Contact Central Coast Wheelers with questions about visiting Oceano Dunes, or reach the park directly.">
-<meta property="og:url" content="https://ccwheelers.com/contact.html">
+<meta property="og:title" content="CCWheelers Merch | Dune Gear from Central Coast Wheelers">
+<meta property="og:description" content="Official CCWheelers apparel and gear for Oceano Dunes riders, printed on demand and shipped to your door. New designs coming soon.">
+<meta property="og:url" content="https://ccwheelers.com/merch.html">
 <meta property="og:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Contact | CCWheelers Oceano Dunes">
+<meta name="twitter:title" content="CCWheelers Merch | Dune Gear from Central Coast Wheelers">
 <meta name="twitter:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
 <link rel="icon" type="image/png" href="images/favicon.png?v=4">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=4">
@@ -47,14 +47,9 @@ document.addEventListener('click', function (e) {
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
 <style>
-  form{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:34px}
-  label{display:block;font-weight:600;font-size:14px;margin:18px 0 6px;color:var(--ocean)}
-  label:first-of-type{margin-top:0}
-  input,textarea{width:100%;padding:13px 15px;border:1.5px solid var(--sand-deep);border-radius:10px;font-family:'Inter';font-size:15px;background:var(--sand)}
-  input:focus,textarea:focus{outline:none;border-color:var(--dune-dark);background:#fff}
-  textarea{min-height:140px;resize:vertical}
-  button[type=submit]{margin-top:22px;padding:14px 30px;border:none;border-radius:999px;background:var(--sunset-hot);color:#fff;font-family:'Inter';font-weight:700;font-size:15px;cursor:pointer;box-shadow:0 6px 18px rgba(212,85,42,.35)}
-  button[type=submit]:hover{transform:translateY(-2px)}
+  .soon-tag{display:inline-block;margin-top:14px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ocean);background:var(--sand-deep);border-radius:999px;padding:5px 14px}
+  .merch-shot{height:150px;border-radius:10px;margin-bottom:18px;background:linear-gradient(135deg,var(--sand-deep),var(--sand));display:grid;place-items:center}
+  .merch-shot svg{width:52px;height:52px;stroke:var(--ocean);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
 </style>
 <script src="nav.js" defer></script>
 </head>
@@ -75,7 +70,7 @@ document.addEventListener('click', function (e) {
         <li><a href="dayuse.html">Day Use</a></li>
         <li><a href="map.html">Map</a></li>
         <li><a href="news.html">News</a></li>
-        <li><a href="merch.html">Merch</a></li>
+        <li><a href="merch.html" class="active">Merch</a></li>
         <li class="has-sub">
           <button class="sub-toggle" aria-expanded="false" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
           <ul class="sub">
@@ -88,7 +83,7 @@ document.addEventListener('click', function (e) {
             <li><a href="gallery.html">Gallery</a></li>
             <li><a href="faq.html">FAQ</a></li>
             <li><a href="about.html">About</a></li>
-            <li><a href="contact.html" class="active">Contact</a></li>
+            <li><a href="contact.html">Contact</a></li>
           </ul>
         </li>
       </ul>
@@ -101,44 +96,60 @@ document.addEventListener('click', function (e) {
 <main>
 <div class="page-head">
   <div class="wrap">
-    <span class="eyebrow">Get in Touch</span>
-    <h1>Contact Us</h1>
-    <p>Questions about visiting the dunes? Email us and an associate will get back to you. Want to volunteer for a cleanup? Even better.</p>
+    <span class="eyebrow">New</span>
+    <h1>CCWheelers Merch</h1>
+    <p>Gear for people who love these dunes. Printed on demand and shipped straight to your door, new designs are on the way.</p>
   </div>
 </div>
 
 <section>
-  <div class="wrap split">
-    <div>
-      <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-        <p style="display:none"><label>Don't fill this out: <input name="bot-field"></label></p>
-        <label for="name">Name</label>
-        <input id="name" type="text" name="name" required>
-        <label for="email">Email</label>
-        <input id="email" type="email" name="email" required>
-        <label for="comments">Comments</label>
-        <textarea id="comments" name="comments" placeholder="Ask us anything about visiting Oceano Dunes..." required></textarea>
-        <button type="submit">Send Message</button>
-      </form>
-    </div>
-    <div>
-      <span class="eyebrow">Direct Lines</span>
-      <h2 class="section-title">Reach Us Directly</h2>
-      <ul class="rules-list">
-        <li><strong>Email CCWheelers:</strong> <a href="mailto:info@ccwheelers.com">info@ccwheelers.com</a></li>
-        <li><strong>Call CCWheelers:</strong> (805) 709-7370</li>
-        <li><strong>Park info line:</strong> (805) 473-7220 (recorded). Oceano Dunes SVRA, 928 Pacific Blvd, Oceano, CA 93445</li>
-        <li><strong>Camping reservations:</strong> (800) 444-7275 or <a href="https://www.reservecalifornia.com">ReserveCalifornia</a></li>
-        <li><strong>Facebook:</strong> <a href="https://www.facebook.com/pages/CCWheelers/178066642249449">CCWheelers on Facebook</a>, with creek photos and videos when the river runs</li>
-        <li><strong>Twitter/X:</strong> <a href="https://twitter.com/CCWheelers">@CCWheelers</a></li>
-      </ul>
-      <div class="callout info">
-        <strong>Want to help?</strong>
-        Central Coast Wheelers picks up trash, repairs fences, and helps visitors learn the rules. Email us to volunteer. Donations belong with <a href="http://oceanodunes.org">Friends of Oceano Dunes</a>, who carry the fight to keep the dunes open in the political arena.
+  <div class="wrap">
+    <span class="eyebrow">Coming Soon</span>
+    <h2 class="section-title">First Drop In The Works</h2>
+    <p class="lede">We're setting up the shop now. Check back soon, or watch our Facebook page for the announcement when it goes live.</p>
+
+    <!--
+      INTEGRATION NOTE (remove once live):
+      Each card below is a placeholder for one product. To finish the shop:
+        1. Create the product in Printful and sync it to a connected sales
+           channel that supports embeddable buy buttons (Shopify's "Buy
+           Button" channel is the standard route for a plain static site
+           like this one -- Printful does not host its own checkout).
+        2. In that channel, generate the product's Buy Button embed script.
+        3. Paste the embed script into the matching <div class="buy-slot">
+           below, in place of the "Coming Soon" tag.
+      Repeat per product, then delete this comment.
+    -->
+    <div class="cards">
+      <div class="card">
+        <div class="merch-shot"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4 4 7l2 3 2-1.5V20h8V8.5L18 10l2-3-4-3-2 1.5h-4L8 4Z"/></svg></div>
+        <h3>CCWheelers Tee</h3>
+        <p>Classic logo tee for riding, camping, or everyday wear.</p>
+        <div class="buy-slot"><span class="soon-tag">Coming Soon</span></div>
+      </div>
+      <div class="card">
+        <div class="merch-shot"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 3 4 6l2 3 2-1.5V21h8V7.5L18 9l2-3-4-3-2 1.5h-4L8 3Z"/><path d="M9 3.5a3 3 0 0 0 6 0"/></svg></div>
+        <h3>CCWheelers Hoodie</h3>
+        <p>Heavyweight hoodie for cold mornings at Post 2.</p>
+        <div class="buy-slot"><span class="soon-tag">Coming Soon</span></div>
+      </div>
+      <div class="card">
+        <div class="merch-shot"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 15c0-5 3.5-9 8-9s8 4 8 9" /><path d="M3 15h18l-1.5 3a2 2 0 0 1-1.8 1.1H6.3A2 2 0 0 1 4.5 18Z"/></svg></div>
+        <h3>Dune Cap</h3>
+        <p>Structured cap with the CCWheelers emblem up front.</p>
+        <div class="buy-slot"><span class="soon-tag">Coming Soon</span></div>
+      </div>
+      <div class="card">
+        <div class="merch-shot"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 4.5h9L19.5 10v9.5h-15Z"/><path d="M13.5 4.5V10h6"/></svg></div>
+        <h3>Sticker Pack</h3>
+        <p>A set of CCWheelers stickers for your rig, cooler, or tailgate.</p>
+        <div class="buy-slot"><span class="soon-tag">Coming Soon</span></div>
       </div>
     </div>
   </div>
 </section>
+
+<div class="wrap" style="padding:0 24px 72px;text-align:center"><p style="font-size:15px;color:var(--ink-soft);margin-bottom:14px">Want to know the second the shop opens?</p><a class="btn btn-primary" href="contact.html">Contact Us</a></div>
 </main>
 
 <footer>
