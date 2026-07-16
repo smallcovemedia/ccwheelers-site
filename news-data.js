@@ -8,6 +8,14 @@
    ============================================================ */
 window.CCW_NEWS = [
   {
+    date: '2026-07-10',
+    tag: 'park',
+    title: 'Presale Passes Expanding, No Kiosk Sales on Busy Days',
+    summary: 'State Parks is rolling out presale day-use passes for the dunes, and on designated presale days you cannot buy a pass at the kiosk. Day use is capped at 1,800 passes and annual pass holders do not get access on those days, so buy online ahead of time or plan around them. Rangers say the Fourth of July trial run kept traffic off the highway.',
+    source: 'KSBY',
+    url: 'https://www.ksby.com/oceano/why-pre-order-passes-are-being-rolled-out-at-the-oceano-dunes'
+  },
+  {
     date: '2026-07-07',
     tag: 'park',
     title: 'Advance Day-Use Passes Available for July 11',
