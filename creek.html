@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N9HPGB15V1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-N9HPGB15V1');
+// CCWheelers click events: money actions for an info site
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a, button');
+  if (!a || typeof gtag !== 'function') return;
+  var href = a.getAttribute && (a.getAttribute('href') || '');
+  if (href.indexOf('tel:') === 0) {
+    gtag('event', 'phone_call', { page_path: location.pathname });
+  } else if (/^https?:\/\//.test(href) && href.indexOf('ccwheelers.com') === -1) {
+    gtag('event', 'outbound_click', { link_domain: href.split('/')[2] || '', page_path: location.pathname });
+  } else if (location.pathname.indexOf('planner') > -1 && a.tagName === 'BUTTON') {
+    gtag('event', 'planner_use', { button_text: (a.textContent || '').trim().slice(0, 40) });
+  } else if (location.pathname.indexOf('gallery') > -1 && (a.closest('.gallery') || a.querySelector('img'))) {
+    gtag('event', 'gallery_open', {});
+  }
+}, { passive: true });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arroyo Grande Creek Status &amp; Crossing Guide | CCWheelers</title>
+<meta name="description" content="Current Arroyo Grande Creek status at Oceano Dunes, what a closure means, and how to cross the creek safely.">
+<link rel="canonical" href="https://ccwheelers.com/creek.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CCWheelers">
+<meta property="og:title" content="Arroyo Grande Creek Status &amp; Crossing Guide | CCWheelers">
+<meta property="og:description" content="Current Arroyo Grande Creek status at Oceano Dunes, what a closure means, and how to cross the creek safely.">
+<meta property="og:url" content="https://ccwheelers.com/creek.html">
+<meta property="og:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Arroyo Grande Creek Status &amp; Crossing Guide | CCWheelers">
+<meta name="twitter:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .status-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:34px;display:flex;gap:24px;align-items:center;flex-wrap:wrap;margin-top:-34px;position:relative;z-index:5}
+  .status-light{width:74px;height:74px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#9fe8ad,#2f8e46);box-shadow:0 0 0 8px rgba(63,142,70,.15);flex:0 0 74px}
+  .status-card h2{font-size:30px;color:var(--ocean)}
+  .status-card .sub{color:var(--ink-soft);font-size:14.5px}
+  .status-light.light-warning{background:radial-gradient(circle at 35% 30%,#ffe2a8,#c98a12);box-shadow:0 0 0 8px rgba(201,138,18,.15)}
+  .status-light.light-closed{background:radial-gradient(circle at 35% 30%,#ffb3a3,#c8401f);box-shadow:0 0 0 8px rgba(200,64,31,.15)}
+  .status-light.light-neutral{background:radial-gradient(circle at 35% 30%,#d8dee2,#7b8a92);box-shadow:0 0 0 8px rgba(123,138,146,.15)}
+</style>
+<script src="nav.js" defer></script>
+<script src="conditions.js" defer></script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html">
+      <span class="logo-chip"><img src="images/ccw-logo.png" alt="Central Coast Wheelers logo"></span>
+      <div class="logo-text">CCWheelers<small>Oceano Dunes Info Center</small></div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="camping.html">Camping</a></li>
+        <li><a href="creek.html" class="active">Creek</a></li>
+        <li><a href="tides.html">Tides</a></li>
+        <li><a href="planner.html">Planner</a></li>
+        <li><a href="dayuse.html">Day Use</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li><a href="news.html">News</a></li>
+        <li class="has-sub">
+          <button class="sub-toggle" aria-expanded="false" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+          <ul class="sub">
+            <li><a href="weather.html">Weather</a></li>
+            <li><a href="gas.html">Gas Prices</a></li>
+            <li><a href="fires.html">Campfires</a></li>
+            <li><a href="rules.html">Rules</a></li>
+            <li><a href="tips.html">Tips</a></li>
+            <li><a href="emergency.html">Emergency</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary nav-book" href="https://www.reservecalifornia.com" target="_blank" rel="noopener">Book a Campsite</a>
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main>
+<div class="page-head" style="padding-bottom:80px">
+  <div class="wrap">
+    <span class="eyebrow">Arroyo Grande Creek</span>
+    <h1>Creek Status &amp; Crossing Guide</h1>
+    <p>The creek sits between the Pier Avenue entrance and the OHV and camping areas. When it runs high, it controls whether you get in or out. Check here, and check the tide, before every trip.</p>
+  </div>
+</div>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="status-card">
+      <div class="status-light" id="creekLight"></div>
+      <div style="flex:1;min-width:240px">
+        <span class="eyebrow" style="margin-bottom:4px">Current Creek Status <span style="text-transform:none;letter-spacing:0">(live tide estimate)</span></span>
+        <h2 id="creekPageTitle" aria-live="polite">Checking…</h2>
+        <p class="sub" id="creekPageSub">Estimating from live NOAA tide data…</p>
+      </div>
+      <a class="btn btn-outline" href="tides.html">Monthly Tide Schedule</a>
+    </div>
+
+    <div class="split" style="margin-top:64px">
+      <div>
+        <span class="eyebrow">The Rule</span>
+        <h2 class="section-title">Closed Means Closed</h2>
+        <p class="lede">People always ask whether "closed" means "we do not recommend crossing" or "you will be cited." We asked the local authorities directly. The answer: <strong>"If you cross, you will get a ticket."</strong></p>
+        <p style="margin-top:16px;color:var(--ink-soft)">Why so strict? If you do not make it across and your life is on the line, you are now risking the lives of the local authorities who have to come rescue you. Please follow the rules.</p>
+        <div class="callout">
+          <strong>When does it close?</strong>
+          The creek is subject to water releases at Lopez Dam and increased flow during winter storms. It commonly runs when it rains, and a heavy rain plus a very high tide is the recipe for a closure.
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow">Timing</span>
+        <h2 class="section-title">Plan Around the Tide</h2>
+        <p class="lede">High tides, heavy rains, deep sand, and the creek together determine whether you can drive the beach without getting stuck.</p>
+        <ul class="rules-list">
+          <li><strong>Arrive and depart at low tide.</strong> This is the single best thing you can do for an easy crossing and an easy tow down the beach.</li>
+          <li><strong>Watch the forecast.</strong> Rain upstream can change the creek overnight.</li>
+          <li><strong>When in doubt, wait it out.</strong> Waiting a few hours for a lower tide might save you thousands of dollars.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--dune)">When It's Open</span>
+    <h2 class="section-title">How to Cross the Creek</h2>
+    <p class="lede">The riverbed itself is hard-packed sand, so the crossing will not swallow your tires. Nearly every creek disaster comes down to one of these three things.</p>
+    <ol class="steps" style="max-width:820px">
+      <li><p><strong>Know your vehicle.</strong> Light cars should not cross when the creek is running above 2 feet deep. If that's you, wait for it to drop.</p></li>
+      <li><p><strong>Cross in the fresh water, not the surf.</strong> You can usually see where the ocean surf meets the river. Cross through the river's fresh water rather than submerging your vehicle in salt water. In the ocean's current you fight two forces at once: the river pushing you and the tide pulling you into the surf.</p></li>
+      <li><p><strong>Drive slow.</strong> The number one reason vehicles die in the creek is driving too fast. Speed pushes a bow wave into your engine compartment, where your air intake can suck in water or a soaked distributor stalls you mid-stream. That is an expensive lesson.</p></li>
+    </ol>
+    <div class="callout" style="background:rgba(255,255,255,.08);color:#fff;max-width:820px">
+      <strong>Bottom line</strong>
+      If you are not sure of the conditions, you do not have to cross. A few hours of patience is cheaper than a drowned engine.
+    </div>
+  </div>
+</section>
+<div class="wrap" style="padding:0 24px 72px;text-align:center"><p style="font-size:15px;color:var(--ink-soft);margin-bottom:14px">Coming out? Get a personalized plan with tide windows, checklists, and local tricks.</p><a class="btn btn-primary" href="planner.html">Plan Your Trip</a></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>CCWheelers</h4>
+        <p>The Oceano Dunes Information Center. Built and maintained by Central Coast Wheelers, an OHV community keeping the dunes clean, safe, and open.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="camping.html">Camping</a></li>
+          <li><a href="creek.html">Creek Status</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="planner.html">Trip Planner</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="dayuse.html">Day Use</a></li>
+          <li><a href="rules.html">Rules</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ride</h4>
+        <ul>
+          <li><a href="map.html">Virtual Map</a></li>
+          <li><a href="tips.html">Riding Tips</a></li>
+          <li><a href="emergency.html">Emergency Info</a></li>
+          <li><a href="about.html">About CCW</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Oceano Dunes SVRA<br>928 Pacific Blvd<br>Oceano, CA 93445</li>
+          <li>Info: (805) 473-7220 (recorded)</li>
+          <li>Reservations: (800) 444-7275</li>
+          <li><a href="contact.html">Contact CCWheelers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 CCWheelers.com · Central Coast Wheelers</span>
+      <span>Not an official California State Parks website</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

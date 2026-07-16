@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N9HPGB15V1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-N9HPGB15V1');
+// CCWheelers click events: money actions for an info site
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a, button');
+  if (!a || typeof gtag !== 'function') return;
+  var href = a.getAttribute && (a.getAttribute('href') || '');
+  if (href.indexOf('tel:') === 0) {
+    gtag('event', 'phone_call', { page_path: location.pathname });
+  } else if (/^https?:\/\//.test(href) && href.indexOf('ccwheelers.com') === -1) {
+    gtag('event', 'outbound_click', { link_domain: href.split('/')[2] || '', page_path: location.pathname });
+  } else if (location.pathname.indexOf('planner') > -1 && a.tagName === 'BUTTON') {
+    gtag('event', 'planner_use', { button_text: (a.textContent || '').trim().slice(0, 40) });
+  } else if (location.pathname.indexOf('gallery') > -1 && (a.closest('.gallery') || a.querySelector('img'))) {
+    gtag('event', 'gallery_open', {});
+  }
+}, { passive: true });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oceano Dunes Camping, Creek Status &amp; OHV Guide | CCWheelers</title>
+<meta name="description" content="Live creek status, tides, beach camping, campfire rules, and OHV riding info for Oceano Dunes SVRA in California. The complete visitor guide from Central Coast Wheelers.">
+<link rel="canonical" href="https://ccwheelers.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CCWheelers">
+<meta property="og:title" content="Oceano Dunes Camping, Creek Status &amp; OHV Guide | CCWheelers">
+<meta property="og:description" content="Live creek status, tides, beach camping, campfire rules, and OHV riding info for Oceano Dunes SVRA in California. The complete visitor guide from Central Coast Wheelers.">
+<meta property="og:url" content="https://ccwheelers.com/">
+<meta property="og:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Oceano Dunes Camping, Creek Status &amp; OHV Guide | CCWheelers">
+<meta name="twitter:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"Organization","name":"Central Coast Wheelers","url":"https://ccwheelers.com/","sameAs":["https://www.facebook.com/pages/CCWheelers/178066642249449","https://twitter.com/CCWheelers"]},
+{"@type":"WebSite","name":"CCWheelers Oceano Dunes Information Center","url":"https://ccwheelers.com/","description":"Visitor guide to Oceano Dunes State Vehicular Recreation Area: camping, creek status, tides, campfire rules, and OHV riding."},
+{"@type":"TouristAttraction","name":"Oceano Dunes State Vehicular Recreation Area","address":{"@type":"PostalAddress","streetAddress":"928 Pacific Blvd","addressLocality":"Oceano","addressRegion":"CA","postalCode":"93445","addressCountry":"US"},"telephone":"+1-805-473-7220","openingHours":"Mo-Su 07:00-22:00","petsAllowed":true,"publicAccess":true}
+]}
+</script>
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sand:#f5ede0;
+    --sand-deep:#e8dcc8;
+    --dune:#d9a55b;
+    --dune-dark:#b57f3a;
+    --ocean:#0e3a4d;
+    --ocean-deep:#092835;
+    --sunset:#e26d3a;
+    --sunset-hot:#d4552a;
+    --ink:#1d2a30;
+    --ink-soft:#4a5b63;
+    --white:#ffffff;
+    --radius:14px;
+    --shadow:0 10px 30px rgba(14,58,77,.10);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',-apple-system,sans-serif;color:var(--ink);background:var(--sand);line-height:1.65}
+  h1,h2,h3,.display{font-family:'Barlow Condensed','Inter',sans-serif;line-height:1.05;text-transform:uppercase;letter-spacing:.5px}
+  img{max-width:100%}
+  a{color:var(--sunset-hot)}
+  .wrap{max-width:1140px;margin:0 auto;padding:0 24px}
+  .eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--sunset-hot);margin-bottom:14px}
+  section{padding:88px 0}
+  .section-title{font-size:clamp(34px,4.5vw,52px);font-weight:800;color:var(--ocean);margin-bottom:18px}
+  .lede{font-size:18px;color:var(--ink-soft);max-width:62ch}
+
+  /* ALERT BAR */
+  .alert{background:var(--sunset-hot);color:#fff;text-align:center;padding:10px 20px;font-size:14px;font-weight:600}
+  .alert a{color:#fff;text-decoration:underline;text-underline-offset:3px}
+
+  /* NAV */
+  header{position:sticky;top:0;z-index:100;background:rgba(9,40,53,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+  .logo-mark{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,var(--sunset) 0%,var(--dune) 100%);display:grid;place-items:center;font-family:'Barlow Condensed';font-weight:800;font-size:19px;color:#fff;letter-spacing:0}
+  .logo-text{color:#fff;font-family:'Barlow Condensed';font-weight:700;font-size:22px;letter-spacing:1px;text-transform:uppercase}
+  .logo-text small{display:block;font-family:'Inter';font-size:10px;font-weight:500;letter-spacing:2px;color:var(--dune);text-transform:uppercase}
+  nav ul{display:flex;gap:19px;list-style:none;align-items:center}
+  nav a{color:rgba(255,255,255,.85);text-decoration:none;font-size:13.5px;font-weight:600;transition:color .2s}
+  nav a:hover{color:var(--dune)}
+  .btn{display:inline-block;padding:13px 26px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none;transition:transform .15s ease, box-shadow .15s ease}
+  .btn:hover{transform:translateY(-2px)}
+  .btn-primary{background:var(--sunset-hot);color:#fff;box-shadow:0 6px 18px rgba(212,85,42,.35)}
+  .btn-ghost{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.4)}
+  .btn-ghost:hover{border-color:#fff}
+  .nav .btn{padding:10px 20px;font-size:14px}
+  .menu-toggle{display:none;background:none;border:none;color:#fff;font-size:26px;cursor:pointer}
+
+  /* HERO */
+  .hero{position:relative;background:linear-gradient(180deg,rgba(9,32,44,.55) 0%,rgba(9,32,44,.22) 45%,rgba(9,32,44,.38) 100%),url(images/hero-bg.jpg) center 62%/cover no-repeat #0b2f40;color:#fff;padding:110px 0 0;overflow:hidden}
+  .hero-inner{position:relative;z-index:2;max-width:860px;margin:0 auto;padding-bottom:150px;text-align:center}
+  .hero .eyebrow{color:#ffd9a0}
+  .hero h1{font-size:clamp(52px,8vw,104px);font-weight:800;margin-bottom:20px;text-shadow:0 4px 30px rgba(9,40,53,.35)}
+  .hero h1 span{color:#ffcf8f}
+  .hero p{font-size:19px;max-width:56ch;color:rgba(255,255,255,.95);margin:0 auto 36px;text-shadow:0 2px 14px rgba(9,32,44,.6)}
+  .hero-ctas{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+  .hero-dunes{position:absolute;bottom:-2px;left:0;width:100%;z-index:1;display:block}
+  .hero-sun{display:none}
+  @media(max-width:700px){
+    .hero{background-image:linear-gradient(180deg,rgba(9,32,44,.6) 0%,rgba(9,32,44,.3) 50%,rgba(9,32,44,.42) 100%),url(images/hero-bg-mobile.jpg);background-position:66% center}
+  }
+
+  /* LIVE CONDITIONS CENTER */
+  .status-strip{background:var(--ocean-deep);color:#fff;padding:30px 0 0}
+  .conditions-head{text-align:center;padding-bottom:22px}
+  .conditions-head h2{font-size:24px;font-weight:800;color:#fff;letter-spacing:1.5px}
+  .conditions-head p{font-size:13.5px;color:rgba(255,255,255,.6);margin-top:4px}
+  .status-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,.08)}
+  .status-grid a.status-cell:nth-child(n+4){border-top:1px solid rgba(255,255,255,.08)}
+  .status-grid a.status-cell:nth-child(4){border-left:none}
+  a.status-cell{display:block;text-decoration:none;color:#fff;padding:22px;border-left:1px solid rgba(255,255,255,.08);text-align:center;transition:background .2s}
+  a.status-cell:hover{background:rgba(255,255,255,.05)}
+  .status-cell:first-child{border-left:none}
+  .status-cell .k{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--dune);font-weight:700;margin-bottom:6px}
+  .status-cell .v{font-family:'Barlow Condensed';font-size:26px;font-weight:700;text-transform:uppercase;line-height:1.1}
+  .status-cell small{color:rgba(255,255,255,.55);font-size:13px;display:block;margin-top:4px}
+  .status-open{color:#7fd88f}
+  .status-closed{color:#ff7a7a}
+  .status-warning{color:#ffc857}
+  .live-dot{display:inline-block;width:8px;height:8px;background:#6ee17f;border-radius:50%;margin-left:8px;vertical-align:middle;animation:pulse 2s infinite}
+  @keyframes pulse{0%{opacity:.4}50%{opacity:1}100%{opacity:.4}}
+
+  /* INLINE CONDITIONS (creek section) */
+  .cond-inline{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:28px;max-width:520px}
+  .cond-box{background:#fff;border-radius:12px;box-shadow:var(--shadow);padding:18px 20px;text-align:center}
+  .cond-box .cond-k{font-size:11.5px;letter-spacing:1.8px;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:5px}
+  .cond-box .cond-v{font-family:'Barlow Condensed';font-size:26px;font-weight:800;text-transform:uppercase;color:var(--ocean);line-height:1.1}
+  .cond-box .cond-v.status-open{color:#2e9e52}
+  .cond-box .cond-v.status-closed{color:#c8401f}
+  .cond-box .cond-v.status-warning{color:#c98a12}
+  .cond-box small{display:block;color:var(--ink-soft);font-size:12.5px;margin-top:4px}
+  .cond-note{margin-top:14px;font-size:13.5px;color:var(--ink-soft)}
+
+  /* LATEST NEWS BAND */
+  .news-band{background:var(--sand-deep);padding:30px 0 34px}
+  .nb-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;gap:14px;flex-wrap:wrap}
+  .nb-head .eyebrow{margin-bottom:0}
+  .nb-head a{font-size:14px;font-weight:700;text-decoration:none;white-space:nowrap}
+  .nb-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  a.nb-item{display:block;background:#fff;border-radius:12px;padding:16px 20px;text-decoration:none;color:var(--ink);box-shadow:var(--shadow);transition:transform .15s ease}
+  a.nb-item:hover{transform:translateY(-3px)}
+  .nb-item .nb-meta{font-size:11.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--sunset-hot);margin-bottom:6px}
+  .nb-item .nb-meta span{color:var(--ink-soft);font-weight:600;letter-spacing:0;text-transform:none;margin-left:8px}
+  .nb-item h3{font-size:17px;line-height:1.25;color:var(--ocean);font-family:'Inter',sans-serif;text-transform:none;letter-spacing:0;font-weight:700}
+  @media(max-width:900px){.nb-grid{grid-template-columns:1fr}}
+
+  /* ACCESSIBILITY */
+  .skip-link{position:absolute;left:-9999px;top:0;z-index:999;background:var(--ocean);color:#fff;padding:12px 20px;font-weight:700;border-radius:0 0 10px 0}
+  .skip-link:focus{left:0}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--dune);outline-offset:2px}
+
+  /* CARDS */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+  .card{background:#fff;border-radius:var(--radius);padding:34px 30px;box-shadow:var(--shadow);display:flex;flex-direction:column;transition:transform .2s ease}
+  .card:hover{transform:translateY(-5px)}
+  .card .icon{width:52px;height:52px;border-radius:12px;display:grid;place-items:center;margin-bottom:20px;background:linear-gradient(135deg,var(--sand-deep),var(--sand));font-size:26px}
+  .card h3{font-size:24px;color:var(--ocean);margin-bottom:10px}
+  .card p{font-size:15px;color:var(--ink-soft);flex:1}
+  .card a.more{margin-top:18px;font-weight:700;font-size:14px;text-decoration:none;text-transform:uppercase;letter-spacing:1px}
+  .card a.more::after{content:" →"}
+
+  /* SPLIT SECTIONS */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+  .panel{border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+  .rules-list{list-style:none;margin-top:26px}
+  .rules-list li{padding:14px 0 14px 40px;position:relative;border-bottom:1px solid var(--sand-deep);font-size:15.5px;color:var(--ink-soft)}
+  .rules-list li strong{color:var(--ink)}
+  .rules-list li::before{content:"✓";position:absolute;left:0;top:13px;width:26px;height:26px;border-radius:50%;background:var(--ocean);color:#fff;font-size:13px;display:grid;place-items:center;font-weight:700}
+  .rules-list.warn li::before{content:"!";background:var(--sunset-hot)}
+
+  .callout{margin-top:26px;background:var(--sand-deep);border-left:5px solid var(--sunset-hot);border-radius:0 10px 10px 0;padding:18px 22px;font-size:15px;color:var(--ink)}
+  .callout strong{color:var(--sunset-hot);text-transform:uppercase;font-size:13px;letter-spacing:1px;display:block;margin-bottom:4px}
+
+  .band{background:var(--ocean);color:#fff}
+  .band .section-title{color:#fff}
+  .band .lede{color:rgba(255,255,255,.8)}
+  .band .card{background:rgba(255,255,255,.06);box-shadow:none;border:1px solid rgba(255,255,255,.1)}
+  .band .card h3{color:#fff}
+  .band .card p{color:rgba(255,255,255,.75)}
+  .band .card .icon{background:rgba(255,255,255,.1)}
+
+  .steps{counter-reset:step;list-style:none;margin-top:30px}
+  .steps li{counter-increment:step;display:flex;gap:20px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.12);align-items:flex-start}
+  .steps li::before{content:counter(step);flex:0 0 40px;height:40px;border-radius:50%;background:var(--dune);color:var(--ocean-deep);font-family:'Barlow Condensed';font-weight:800;font-size:20px;display:grid;place-items:center}
+  .steps li p{color:rgba(255,255,255,.85);font-size:15.5px}
+
+  /* NATURE */
+  .nature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
+
+  /* HISTORY */
+  .history{background:linear-gradient(180deg,var(--sand) 0%,var(--sand-deep) 100%)}
+  blockquote{font-family:'Barlow Condensed';font-size:clamp(26px,3.4vw,38px);font-weight:600;color:var(--ocean);text-transform:none;line-height:1.25;border-left:5px solid var(--dune);padding-left:28px;margin:30px 0}
+
+  /* VOLUNTEER CTA */
+  .cta-band{background:linear-gradient(120deg,var(--sunset-hot) 0%,var(--dune-dark) 100%);color:#fff;text-align:center;padding:80px 0}
+  .cta-band h2{font-size:clamp(34px,4.5vw,50px);font-weight:800;margin-bottom:16px}
+  .cta-band p{max-width:64ch;margin:0 auto 34px;color:rgba(255,255,255,.92);font-size:17px}
+  .cta-band .btn-ghost{border-color:rgba(255,255,255,.6)}
+
+  /* FOOTER */
+  footer{background:var(--ocean-deep);color:rgba(255,255,255,.7);padding:70px 0 30px;font-size:14.5px}
+  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:44px;margin-bottom:50px}
+  footer h4{font-family:'Barlow Condensed';color:#fff;font-size:19px;text-transform:uppercase;letter-spacing:1px;margin-bottom:16px}
+  footer ul{list-style:none}
+  footer li{margin-bottom:9px}
+  footer a{color:rgba(255,255,255,.7);text-decoration:none}
+  footer a:hover{color:var(--dune)}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:26px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:13px;color:rgba(255,255,255,.45)}
+
+  @media(max-width:900px){
+    nav ul{display:none}
+    .menu-toggle{display:block}
+    .nav{position:relative}
+    .menu-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%)}
+    .logo-text{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;width:max-content}
+    .logo-text small{letter-spacing:1.5px}
+    .nav .btn{display:none}
+    header.nav-open nav>ul{display:flex;flex-direction:column;align-items:stretch;gap:0;position:absolute;top:70px;left:0;right:0;background:var(--ocean-deep);padding:10px 0 14px;border-bottom:1px solid rgba(255,255,255,.12);box-shadow:0 18px 30px rgba(0,0,0,.35)}
+    header.nav-open nav a{display:block;padding:13px 26px;font-size:16px;border-bottom:1px solid rgba(255,255,255,.06)}
+    .status-grid{grid-template-columns:repeat(2,1fr)}
+    a.status-cell{border-left:none;border-top:1px solid rgba(255,255,255,.08)}
+    .status-cell .v{font-size:22px;line-height:1.1}
+    .cond-inline{grid-template-columns:1fr}
+    .cards,.nature-grid{grid-template-columns:1fr}
+    .split{grid-template-columns:1fr;gap:40px}
+    .foot-grid{grid-template-columns:1fr 1fr}
+    section{padding:64px 0}
+  }
+  @media(min-width:901px) and (max-width:1250px){nav ul{gap:13px}nav a{font-size:12.5px}.logo-text small{display:none}}
+
+/* ---- v3: nav dropdown, emblems, button polish ---- */
+.btn{display:inline-flex;align-items:center;justify-content:center;line-height:1;text-align:center}
+.icon svg{width:26px;height:26px;stroke:var(--ocean);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.k svg,.cond-k svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:5px}
+.alert svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px}
+.has-sub{position:relative}
+.sub-toggle{background:none;border:none;color:rgba(255,255,255,.85);font-family:'Inter',sans-serif;font-size:13.5px;font-weight:600;cursor:pointer;padding:0;display:inline-flex;align-items:center;gap:5px}
+.sub-toggle:hover{color:var(--dune)}
+.sub{display:none;position:absolute;top:calc(100% + 18px);right:-14px;background:var(--ocean-deep);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:8px 0;min-width:172px;box-shadow:0 18px 40px rgba(0,0,0,.4);list-style:none;z-index:1300}
+.has-sub.open .sub{display:block}
+.sub li{display:block;margin:0}
+.sub a{display:block;padding:10px 20px;font-size:14px}
+.nav-book{margin-left:4px;white-space:nowrap}
+@media(max-width:1180px){.nav-book{display:none}}
+@media(max-width:900px){
+  nav ul .sub{display:block;position:static;background:none;border:none;box-shadow:none;padding:0;min-width:0}
+  .sub-toggle{display:none}
+  header.nav-open nav .sub a{padding:13px 26px;font-size:16px;color:rgba(255,255,255,.85);border-bottom:1px solid rgba(255,255,255,.06)}
+}
+
+/* ---- v4: real CCW logo ---- */
+.logo-chip{display:flex;align-items:center;flex:0 0 auto}
+.logo-chip img{height:30px;width:auto;display:block}
+</style>
+<script src="nav.js" defer></script>
+<script src="news-data.js" defer></script>
+<script src="conditions.js" defer></script>
+</head>
+<body>
+
+<a class="skip-link" href="#plan">Skip to content</a>
+
+<div class="alert">
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 15c2.5-2.8 5-2.8 7.5 0s5 2.8 7.5 0 3.5-2.3 5-1M2 9.5c2.5-2.8 5-2.8 7.5 0s5 2.8 7.5 0 3.5-2.3 5-1"/></svg> Creek advisory: Arroyo Grande Creek can close beach access after rain or Lopez Dam releases. <a href="creek.html">Check current creek status before you go</a>
+</div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top">
+      <span class="logo-chip"><img src="images/ccw-logo.png" alt="Central Coast Wheelers logo"></span>
+      <div class="logo-text">CCWheelers<small>Oceano Dunes Info Center</small></div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="camping.html">Camping</a></li>
+        <li><a href="creek.html">Creek</a></li>
+        <li><a href="tides.html">Tides</a></li>
+        <li><a href="planner.html">Planner</a></li>
+        <li><a href="dayuse.html">Day Use</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li><a href="news.html">News</a></li>
+        <li class="has-sub">
+          <button class="sub-toggle" aria-expanded="false" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+          <ul class="sub">
+            <li><a href="weather.html">Weather</a></li>
+            <li><a href="gas.html">Gas Prices</a></li>
+            <li><a href="fires.html">Campfires</a></li>
+            <li><a href="rules.html">Rules</a></li>
+            <li><a href="tips.html">Tips</a></li>
+            <li><a href="emergency.html">Emergency</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary nav-book" href="https://www.reservecalifornia.com" target="_blank" rel="noopener">Book a Campsite</a>
+    <button class="menu-toggle" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<div class="hero" id="top">
+  <div class="hero-sun"></div>
+  <div class="wrap hero-inner">
+    <span class="eyebrow">Oceano Dunes State Vehicular Recreation Area</span>
+    <h1>The Last Beach in California <span>You Can Still Drive On</span></h1>
+    <p>Eighteen miles of coastal dunes, beach camping under the stars, and the finest OHV riding on the West Coast. CCWheelers is your complete guide to visiting Oceano Dunes the right way.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="planner.html">Plan Your Trip</a>
+      <a class="btn btn-ghost" href="creek.html">Check Creek Status</a>
+    </div>
+  </div>
+  <svg focusable="false" class="hero-dunes" viewBox="0 0 1440 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M0,120 C240,40 420,150 720,100 C980,58 1180,150 1440,90 L1440,220 L0,220 Z" fill="#e8dcc8" opacity=".55"/>
+    <path d="M0,160 C300,90 560,190 860,140 C1120,98 1300,180 1440,140 L1440,220 L0,220 Z" fill="#efe5d2" opacity=".8"/>
+    <path d="M0,190 C360,130 700,215 1040,175 C1240,152 1360,195 1440,180 L1440,220 L0,220 Z" fill="#f5ede0"/>
+  </svg>
+</div>
+
+<div class="status-strip" role="region" aria-label="Live conditions">
+  <div class="wrap conditions-head">
+    <h2 class="display">Live Conditions<span class="live-dot" aria-hidden="true"></span></h2>
+    <p>Updated throughout the day so you know before you go.</p>
+  </div>
+  <div class="wrap status-grid">
+    <a class="status-cell" href="creek.html">
+      <div class="k"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 15c2.5-2.8 5-2.8 7.5 0s5 2.8 7.5 0 3.5-2.3 5-1M2 9.5c2.5-2.8 5-2.8 7.5 0s5 2.8 7.5 0 3.5-2.3 5-1"/></svg> Creek Crossing</div>
+      <div class="v" id="creekStatus" aria-live="polite">Checking…</div>
+      <small id="creekUpdated">Tap for full creek info</small>
+    </a>
+    <a class="status-cell" href="tides.html">
+      <div class="k"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"/></svg> Next Tide</div>
+      <div class="v" id="tideStatus" aria-live="polite">Checking…</div>
+      <small id="tideDetail">Port San Luis station</small>
+    </a>
+    <a class="status-cell" href="weather.html">
+      <div class="k"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 12h9a3 3 0 1 0-3-3M2 17h13a3 3 0 1 1-3 3"/></svg> Weather &amp; Wind</div>
+      <div class="v" id="weatherStatus" aria-live="polite">Checking…</div>
+      <small id="weatherDetail">Live at the dunes</small>
+    </a>
+    <a class="status-cell" href="camping.html">
+      <div class="k"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4 3 20h18L12 4Zm0 8.5L8.2 20m3.8-7.5 3.8 7.5"/></svg> Camping</div>
+      <div class="v">Reserve Ahead</div>
+      <small>(800) 444-7275 · up to 6 months out</small>
+    </a>
+    <a class="status-cell" href="map.html">
+      <div class="k"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 19c3-6.5 6-6.5 9 0m1.5 0c2-4.5 4.5-4.5 9.5 0M16.5 9V3.5l4 1.4-4 1.6"/></svg> OHV Area</div>
+      <div class="v status-open">Open</div>
+      <small>Post 2 south · green sticker required</small>
+    </a>
+    <a class="status-cell" href="gas.html">
+      <div class="k"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16M3 21h14M15 9l3-1 2 2v7a1.5 1.5 0 0 1-3 0v-4h-2M7 7h6v4H7z"/></svg> Gas Prices</div>
+      <div class="v" id="gasStatus" aria-live="polite">Checking…</div>
+      <small id="gasDetail">SLO county average</small>
+    </a>
+  </div>
+</div>
+
+<div class="news-band" role="region" aria-label="Latest news">
+  <div class="wrap">
+    <div class="nb-head">
+      <span class="eyebrow">Latest From the Dunes</span>
+      <a href="news.html">All news &amp; events &rarr;</a>
+    </div>
+    <div class="nb-grid" id="latestNews">
+      <a class="nb-item" href="news.html"><div class="nb-meta">News</div><h3>See what's happening at the dunes</h3></a>
+    </div>
+  </div>
+</div>
+
+<section id="plan">
+  <div class="wrap">
+    <span class="eyebrow">Plan Your Trip</span>
+    <h2 class="section-title">Everything You Need to Know Before You Hit the Sand</h2>
+    <p class="lede">Formerly Pismo Dunes SVRA, this geologically unique dune complex draws off-highway enthusiasts from across the country. Beyond riding, visitors come for swimming, surfing, kite surfing, jet skiing, surf fishing, camping, and hiking.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4 3 20h18L12 4Zm0 8.5L8.2 20m3.8-7.5 3.8 7.5"/></svg></div>
+        <h3>Beach Camping</h3>
+        <p>Camp right on the beach south of Post 2 or in the open dunes. Reservations open 10 days to 6 months in advance and holiday weekends fill fast. Bring water, pack out trash, and plan on 4-wheel drive.</p>
+        <a class="more" href="camping.html">Camping details</a>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 21c-3.6 0-6-2.5-6-6 0-2.4 1.4-4.1 2.8-5.9C10 7.7 10.7 5.8 10.2 3.5c3 1.5 4.7 3.9 5 6.2.7-.6 1.1-1.5 1.2-2.6 1.4 1.8 1.8 3.9 1.8 5.9 0 3.5-2.6 6-6.2 6Z"/></svg></div>
+        <h3>Campfire Rules</h3>
+        <p>Fires are allowed, and driftwood collecting is encouraged here. But there are rules that will save you a ticket, and one that keeps everyone safe: never bury a fire in sand.</p>
+        <a class="more" href="fires.html">Fire rules</a>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 21V4m0 .8h11.5L15 8.4l2.5 3.6H6"/></svg></div>
+        <h3>The OHV Area</h3>
+        <p>The riding area starts at Post 2, one mile south of Pier Avenue. Every OHV needs a current green sticker, and Sand Highway follows regular highway law up to Pole 11.</p>
+        <a class="more" href="rules.html">Riding rules</a>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 15c2.5-2.8 5-2.8 7.5 0s5 2.8 7.5 0 3.5-2.3 5-1M2 9.5c2.5-2.8 5-2.8 7.5 0s5 2.8 7.5 0 3.5-2.3 5-1"/></svg></div>
+        <h3>Creek Crossing</h3>
+        <p>Arroyo Grande Creek can close access to the OHV and camping areas after storms or dam releases. When it is closed, crossing gets you a ticket. No exceptions.</p>
+        <a class="more" href="creek.html">Current status</a>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/></svg></div>
+        <h3>Safety &amp; Emergencies</h3>
+        <p>Know before you go: CB channel 9 reaches ranger base, and a solar-powered emergency call box sits at the entrance to Sand Highway. Plus our field-tested tips for getting unstuck.</p>
+        <a class="more" href="emergency.html">Safety guide</a>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Zm0 0v14m6-12v14"/></svg></div>
+        <h3>Virtual Map &amp; GPS</h3>
+        <p>Explore the dunes before you arrive with our interactive satellite map: named camps, gates, Competition Hill, zone boundaries, and GPS waypoints across the riding area.</p>
+        <a class="more" href="map.html">Open the map</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="camping" class="history" style="padding-top:88px">
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow">Camping &amp; Facilities</span>
+      <h2 class="section-title">Fall Asleep to the Waves, Wake Up on the Beach</h2>
+      <p class="lede">Camping is allowed south of Post 2 on the beach and in the open dune area. Vault and chemical toilets are provided. This is primitive beach camping, so come prepared.</p>
+      <ul class="rules-list">
+        <li><strong>Reserve early:</strong> campsites book from 10 days to six months ahead at (800) 444-7275. Holidays go fast.</li>
+        <li><strong>4WD strongly recommended:</strong> high tides, heavy rain, and blowing sand decide whether you make it down the beach without getting stuck.</li>
+        <li><strong>Bring water, pack out trash:</strong> there are no hookups or water sources on the beach.</li>
+        <li><strong>No gray water on the beach:</strong> dumping gray water is prohibited by state law.</li>
+      </ul>
+      <div class="callout">
+        <strong>Heads up</strong>
+        Access can be restricted by Arroyo Grande Creek, which rises with winter storms and water releases from Lopez Dam. Always check creek status before towing out.
+      </div>
+    </div>
+    <div class="panel">
+      <img src="images/rv-dusk.jpg" alt="Fifth wheel trailer camped on the beach at dusk" style="display:block;width:100%;height:100%;object-fit:cover" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<section id="fires">
+  <div class="wrap split">
+    <div class="panel">
+      <img src="images/fire-camp.jpg" alt="Driftwood campfire burning on the sand in front of a fifth-wheel trailer" style="display:block;width:100%;height:100%;object-fit:cover" loading="lazy">
+    </div>
+    <div>
+      <span class="eyebrow">Campfires</span>
+      <h2 class="section-title">Yes, You Can Have a Fire. Here's How to Do It Right.</h2>
+      <p class="lede">Unlike most state parks, Oceano Dunes encourages visitors to collect and burn the driftwood laying around, and after a storm there is plenty of free wood to burn.</p>
+      <ul class="rules-list warn">
+        <li><strong>Burn wood only.</strong> Pallets or boards with nails or metal attached are prohibited and will earn you a ticket.</li>
+        <li><strong>Never bury a fire with sand.</strong> Buried coals stay dangerously hot for hours and burn feet long after you leave. Put fires out by dousing with water.</li>
+        <li><strong>Mind the wind.</strong> It can shift in a moment. Keep real distance between your fire and anything with a gas tank.</li>
+        <li><strong>Stay with your fire.</strong> Never leave a fire unattended, and keep it under 3 feet across and 2 feet tall, the official maximum size.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="riding" class="band">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--dune)">The OHV Area</span>
+    <h2 class="section-title">Ride the Finest Coastal Dunes Left in California</h2>
+    <p class="lede">The OHV area begins at Post 2, one mile south of Pier Avenue. All OHVs must be transported to that point before off-loading. Fenced and signed areas are closed to protect private property and sensitive plant and animal life.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 4.5h15v15h-15zM8.5 12l2.5 2.5 5-5"/></svg></div>
+        <h3>Registration</h3>
+        <p>Every OHV must be registered through the DMV and display a current green sticker. Those registration dollars fund the acquisition, development, and operation of OHV areas statewide.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7.5 4 4 20M16.5 4 20 20M12 5v3.2m0 4v3.2m0 4V20"/></svg></div>
+        <h3>Sand Highway Rules</h3>
+        <p>Sand Highway is a legal extension of Highway 1, and all highway rules apply up to Pole 11: seatbelts, speed limits, helmet law, and DUI enforcement included. No driver's license is required in the open riding area, but a suspended or revoked license means you cannot legally operate here.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 19 10 6.5l4 6.8 3-4L21 19H3Z"/></svg></div>
+        <h3>Know Your Slipfaces</h3>
+        <p>Dune crests run north to south with gentle windward slopes and steep leeward drops. Slipfaces normally face east, so be extra cautious riding east. Learn the telltale signs and avoid surprises.</p>
+      </div>
+    </div>
+    <div class="split" style="margin-top:72px">
+      <div>
+        <h3 style="font-size:30px;margin-bottom:6px">Stuck in the Sand?</h3>
+        <p style="color:rgba(255,255,255,.8)">It happens to everyone eventually. Work the problem in this order before calling for a tow (beach towing is available if you need it).</p>
+        <ol class="steps">
+          <li><p><strong>Air down.</strong> Drop your tire pressure, but do not go below 15 PSI.</p></li>
+          <li><p><strong>Dig out.</strong> Clear the sand from around all four tires.</p></li>
+          <li><p><strong>Push straight.</strong> Recruit some friends, keep the front wheels straight, and push while driving gently forward or backward.</p></li>
+          <li><p><strong>Never spin your wheels.</strong> Spinning only digs you in deeper. Duner trick: pour water on the sand ahead of your tires — wet sand packs hard.</p></li>
+        </ol>
+      </div>
+      <div>
+        <h3 style="font-size:30px;margin-bottom:6px">Ride Smart</h3>
+        <p style="color:rgba(255,255,255,.8)">Minimize your chance of injury and maximize the fun with common sense and courtesy to other riders.</p>
+        <ol class="steps">
+          <li><p><strong>Gear up.</strong> Every ATV rider must wear a helmet and should wear proper protective clothing.</p></li>
+          <li><p><strong>Get trained.</strong> A certified ATV safety course is recommended for everyone and mandatory for riders under 18.</p></li>
+          <li><p><strong>Learn the terrain</strong> and your vehicle's controls before you open it up.</p></li>
+          <li><p><strong>Ride within your limits.</strong> When in doubt, stop, think, and look it over before you proceed.</p></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="creek">
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow">Arroyo Grande Creek</span>
+      <h2 class="section-title">If the Creek Is Closed, Crossing Means a Ticket</h2>
+      <p class="lede">People always ask whether "closed" means "not recommended" or "you will be cited." We asked the local authorities directly. The answer: if you cross, you will get a ticket.</p>
+      <p style="margin-top:18px;color:var(--ink-soft)">Why so strict? If you do not make it across and your life is on the line, you are now risking the lives of the local authorities who have to rescue you. Please follow the rules.</p>
+      <div class="cond-inline">
+        <div class="cond-box">
+          <div class="cond-k"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 15c2.5-2.8 5-2.8 7.5 0s5 2.8 7.5 0 3.5-2.3 5-1M2 9.5c2.5-2.8 5-2.8 7.5 0s5 2.8 7.5 0 3.5-2.3 5-1"/></svg> Creek Crossing</div>
+          <div class="cond-v" data-cond="creek" aria-live="polite">Checking…</div>
+          <small data-cond="creek-note">&nbsp;</small>
+        </div>
+        <div class="cond-box">
+          <div class="cond-k"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5Z"/></svg> Next Tide</div>
+          <div class="cond-v" data-cond="tide" aria-live="polite">Checking…</div>
+          <small data-cond="tide-note">&nbsp;</small>
+        </div>
+      </div>
+      <p class="cond-note">Conditions update automatically throughout the day. <a href="creek.html">Full creek details →</a> · <a href="tides.html">Monthly tide chart →</a></p>
+    </div>
+    <div class="panel">
+      <img src="images/truck-creek.jpg" alt="Pickup truck stuck in the flooded Arroyo Grande Creek" style="display:block;width:100%;object-fit:cover" loading="lazy">
+      <p style="font-size:12.5px;color:var(--ink-soft);padding:10px 14px;background:#fff;margin:0">This is what "wait a few hours" prevents. When the creek is running, patience is the cheap option.</p>
+    </div>
+  </div>
+</section>
+
+<section id="safety" class="history">
+  <div class="wrap">
+    <span class="eyebrow">Emergencies</span>
+    <h2 class="section-title">When Something Goes Wrong on the Dunes</h2>
+    <div class="cards" style="margin-top:36px">
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 9.5h17V20h-17zM7 9.5v-4l10-2v6M7.5 14.5h4m4-1v.01m0 3v.01"/></svg></div>
+        <h3>CB Channel 9</h3>
+        <p>For vehicle accidents or injuries, contact a ranger or radio ranger base on CB channel 9. It is monitored and it works out on the sand where cell coverage gets thin.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 3.5h10a1.5 1.5 0 0 1 1.5 1.5v14a1.5 1.5 0 0 1-1.5 1.5H7A1.5 1.5 0 0 1 5.5 19V5A1.5 1.5 0 0 1 7 3.5ZM12 8v5m0 3.5v.01"/></svg></div>
+        <h3>Emergency Call Box</h3>
+        <p>A solar-powered emergency call box is located at the entrance to Sand Highway. Know where it is before you need it.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 3.5h8l4.5 4.5v8L16 20.5H8L3.5 16V8L8 3.5ZM8.5 12h7"/></svg></div>
+        <h3>Do Not Move the Injured</h3>
+        <p>Never move an injured person unless he or she is in immediate danger. Wait for trained help to arrive.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="nature">
+  <div class="wrap">
+    <span class="eyebrow">The Dunes Themselves</span>
+    <h2 class="section-title">The Finest Coastal Dunes Remaining in California</h2>
+    <p class="lede">Scientists, conservationists, government agencies, and the public all agree: the Oceano dune complex is the most extensive coastal dune system left in the state. Rivers carried this sand to the ocean, currents deposited it here, and the wind sculpted it into the wave-like crests you ride today.</p>
+    <div class="nature-grid">
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 11c2.3-2.8 4.7-2.8 7 0m4 0c2.3-2.8 4.7-2.8 7 0M9.5 16.5c1.7-2 3.3-2 5 0"/></svg></div>
+        <h3>Protected Nesting</h3>
+        <p>The threatened snowy plover and endangered California least tern both nest inside the SVRA. From March 1 through September 30, fenced enclosures protect nests, and with ongoing support from OHVers the program has been a huge success.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 9.3C10 7 10 4.2 12 3c2 1.2 2 4 0 6.3Zm0 5.4c2 2.3 2 5.1 0 6.3-2-1.2-2-4 0-6.3ZM9.3 12C7 14 4.2 14 3 12c1.2-2 4-2 6.3 0Zm5.4 0c2.3-2 5.1-2 6.3 0-1.2 2-4 2-6.3 0Z"/></svg></div>
+        <h3>Rare Plant Life</h3>
+        <p>Arroyo willow, California sagebrush, sand verbena, and bush lupine are native here, alongside rarities like surf thistle and giant coreopsis. Most dune plants are fragile and easily destroyed, so respect the fenced areas.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 14.5a7.5 7.5 0 0 1 15 0l-1.8 3.5H6.3l-1.8-3.5ZM12 7v11M8.3 8l1.9 10M15.7 8l-1.9 10"/></svg></div>
+        <h3>Pismo Clamming</h3>
+        <p>Clams may be taken with a fishing license and a rigid measuring device: minimum 4½ inches, bag limit of 10, from half an hour before sunrise to half an hour after sunset. Rebury the undersized ones where you dug them.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="history" id="history">
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow">Since 1769</span>
+      <h2 class="section-title">Skinny Bears, Spanish Explorers, and the Dunites</h2>
+      <p class="lede">Portola's overland expedition crossed these dunes in 1769, where his men killed "un oso flaco," a skinny bear, giving Oso Flaco Lake its name. In the 1930s and 40s the dunes became home to the Dunites: mystics, nudists, artists, writers, and hermits who published a magazine called The Dune Forum.</p>
+      <blockquote>The Dunites believed Oceano Dunes was one of the centers of creative energy in California. Seek out the solitude of the dunes and perhaps you will feel it too.</blockquote>
+    </div>
+    <div class="panel">
+      <img src="images/history.jpg" alt="Painting of Oceano Dunes history: Spanish explorers on a dune ridge, a skinny bear at the water, and a lantern-lit Dunites driftwood cabin" style="display:block;width:100%;height:100%;object-fit:cover" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <div class="wrap">
+    <span class="eyebrow" style="color:#ffe3ae">Keep the Dunes Open</span>
+    <h2>This Place Stays Open Because People Like You Show Up</h2>
+    <p>Central Coast Wheelers does its part by picking up trash, repairing fences, and helping visitors learn the rules. Want to pitch in? Volunteer with us. Want to support the fight to keep OHV access alive? Donations go to Friends of Oceano Dunes, who carry the cause in the political arena. There is power in numbers, but only when the numbers work as a team.</p>
+    <div class="hero-ctas" style="justify-content:center;align-items:center">
+      <a class="btn btn-ghost" href="contact.html">Volunteer With CCWheelers</a>
+      <a class="btn" style="background:#fff;color:var(--sunset-hot)" href="http://oceanodunes.org">Support Friends of Oceano Dunes</a>
+      <a href="http://oceanodunes.org" aria-label="Friends of Oceano Dunes"><img src="images/food-logo.jpg" alt="Friends of Oceano Dunes logo" style="height:52px;border-radius:8px;display:block" loading="lazy"></a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>CCWheelers</h4>
+        <p>The Oceano Dunes Information Center. Built and maintained by Central Coast Wheelers, an OHV community keeping the dunes clean, safe, and open. Smile and wave: please be friendly with your fellow riders out there.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="camping.html">Camping</a></li>
+          <li><a href="fires.html">Campfires</a></li>
+          <li><a href="creek.html">Creek Status</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="planner.html">Trip Planner</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="dayuse.html">Day Use</a></li>
+          <li><a href="rules.html">Rules</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ride</h4>
+        <ul>
+          <li><a href="rules.html">OHV Rules</a></li>
+          <li><a href="map.html">Virtual Map</a></li>
+          <li><a href="tips.html">Riding Tips</a></li>
+          <li><a href="emergency.html">Emergency Info</a></li>
+          <li><a href="about.html">About CCW</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Oceano Dunes SVRA<br>928 Pacific Blvd<br>Oceano, CA 93445</li>
+          <li>Info: (805) 473-7220 (recorded)</li>
+          <li>Reservations: (800) 444-7275</li>
+          <li><a href="contact.html">Contact CCWheelers</a></li>
+          <li><a href="https://www.facebook.com/pages/CCWheelers/178066642249449">Facebook</a> · <a href="https://twitter.com/CCWheelers">Twitter/X</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 CCWheelers.com · Central Coast Wheelers</span>
+      <span>Not an official California State Parks website</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

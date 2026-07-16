@@ -1,0 +1,85 @@
+[build]
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+
+[[headers]]
+  for = "/dash-c7w2r9/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+# ---- Legacy-site URLs (old backlinks + Google index) -> new pages, permanent ----
+[[redirects]]
+  from = "/GPS.htm"
+  to = "/map.html"
+  status = 301
+
+[[redirects]]
+  from = "/gps.htm"
+  to = "/map.html"
+  status = 301
+
+[[redirects]]
+  from = "/intermap.html"
+  to = "/map.html"
+  status = 301
+
+[[redirects]]
+  from = "/Info.htm"
+  to = "/faq.html"
+  status = 301
+
+[[redirects]]
+  from = "/info.htm"
+  to = "/faq.html"
+  status = 301
+
+[[redirects]]
+  from = "/links.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/index.htm"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/mobile"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/mobile/index.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/mobile/*"
+  to = "/:splat"
+  status = 301
+
+[[redirects]]
+  from = "/ccwforum/*"
+  to = "/news.html"
+  status = 301
+
+[[redirects]]
+  from = "/gallery/*"
+  to = "/gallery.html"
+  status = 301
+
+# ---- Fallback: anything unknown lands on the homepage ----
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

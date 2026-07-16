@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N9HPGB15V1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-N9HPGB15V1');
+// CCWheelers click events: money actions for an info site
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a, button');
+  if (!a || typeof gtag !== 'function') return;
+  var href = a.getAttribute && (a.getAttribute('href') || '');
+  if (href.indexOf('tel:') === 0) {
+    gtag('event', 'phone_call', { page_path: location.pathname });
+  } else if (/^https?:\/\//.test(href) && href.indexOf('ccwheelers.com') === -1) {
+    gtag('event', 'outbound_click', { link_domain: href.split('/')[2] || '', page_path: location.pathname });
+  } else if (location.pathname.indexOf('planner') > -1 && a.tagName === 'BUTTON') {
+    gtag('event', 'planner_use', { button_text: (a.textContent || '').trim().slice(0, 40) });
+  } else if (location.pathname.indexOf('gallery') > -1 && (a.closest('.gallery') || a.querySelector('img'))) {
+    gtag('event', 'gallery_open', {});
+  }
+}, { passive: true });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oceano Dunes Camping &amp; Reservations | Beach Camping Guide | CCWheelers</title>
+<meta name="description" content="Oceano Dunes camping reservations made simple: how to book through ReserveCalifornia, fees, check-in, where to camp on the beach, and camp setup tips from locals.">
+<link rel="canonical" href="https://ccwheelers.com/camping.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CCWheelers">
+<meta property="og:title" content="Oceano Dunes Camping &amp; Reservations | Beach Camping Guide | CCWheelers">
+<meta property="og:description" content="Oceano Dunes camping reservations made simple: how to book through ReserveCalifornia, fees, check-in, where to camp on the beach, and camp setup tips from locals.">
+<meta property="og:url" content="https://ccwheelers.com/camping.html">
+<meta property="og:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Oceano Dunes Camping &amp; Reservations | Beach Camping Guide | CCWheelers">
+<meta name="twitter:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<script src="nav.js" defer></script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html">
+      <span class="logo-chip"><img src="images/ccw-logo.png" alt="Central Coast Wheelers logo"></span>
+      <div class="logo-text">CCWheelers<small>Oceano Dunes Info Center</small></div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="camping.html" class="active">Camping</a></li>
+        <li><a href="creek.html">Creek</a></li>
+        <li><a href="tides.html">Tides</a></li>
+        <li><a href="planner.html">Planner</a></li>
+        <li><a href="dayuse.html">Day Use</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li><a href="news.html">News</a></li>
+        <li class="has-sub">
+          <button class="sub-toggle" aria-expanded="false" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+          <ul class="sub">
+            <li><a href="weather.html">Weather</a></li>
+            <li><a href="gas.html">Gas Prices</a></li>
+            <li><a href="fires.html">Campfires</a></li>
+            <li><a href="rules.html">Rules</a></li>
+            <li><a href="tips.html">Tips</a></li>
+            <li><a href="emergency.html">Emergency</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary nav-book" href="https://www.reservecalifornia.com" target="_blank" rel="noopener">Book a Campsite</a>
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main>
+<div class="page-head">
+  <div class="wrap">
+    <span class="eyebrow">Camping &amp; Facilities</span>
+    <h1>Camping at Oceano Dunes</h1>
+    <p>Primitive camping right on the beach and in the open dunes, south of Post 2. Here is how reservations work, what to expect, and the camp setup wisdom that only comes from years on the sand.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow">Reservations</span>
+      <h2 class="section-title">Book Through ReserveCalifornia</h2>
+      <p class="lede">All camping at Oceano Dunes SVRA is reserved through the state's ReserveCalifornia system, online around the clock or by phone at <strong>(800) 444-7275</strong> (8 a.m. to 6 p.m. PST, 7 days a week).</p>
+      <ul class="rules-list">
+        <li><strong>Booking window:</strong> on the first of each month, an entire month of start dates opens up to 7 months in advance. New inventory goes on sale at 8:00 a.m.</li>
+        <li><strong>Last-minute trips:</strong> you can reserve as late as 2 days before arrival, subject to availability.</li>
+        <li><strong>Limits:</strong> a maximum of 10 reservations per person for Oceano Dunes. Each reservation covers one vehicle plus one legally towed vehicle.</li>
+        <li><strong>No extra vehicles:</strong> there is no space for additional cars and no overnight extra-vehicle parking outside the Oceano campground.</li>
+        <li><strong>Check-in and check-out:</strong> check-in is as tides allow on your arrival date. Check-out time is 6:00 p.m.</li>
+      </ul>
+      <div class="callout info">
+        <strong>Fees</strong>
+        Camping was last listed at $10 per night for up to 8 people, but State Parks fees change over time. Confirm the current rate on the ReserveCalifornia website when you book.
+      </div>
+      <div class="callout">
+        <strong>Want hookups and hot showers?</strong>
+        The district also runs two developed campgrounds next door at Pismo State Beach: North Beach and Oceano. Both have picnic tables, fire rings, and restrooms with hot showers; Oceano Campground has hook-up sites. Beach campers can use the fee-based RV dump station on Le Sage Drive, just north of the Grand Avenue entrance.
+      </div>
+      <p style="margin-top:24px"><a class="btn btn-primary" href="https://www.reservecalifornia.com">Reserve a Site</a></p>
+    </div>
+    <div>
+      <span class="eyebrow">The Basics</span>
+      <h2 class="section-title">What Camping Here Is Like</h2>
+      <p class="lede">This is open beach and dune camping: no numbered sites, no hookups, no water. It is one of the last places in California where you can camp with the surf at your door.</p>
+      <ul class="rules-list">
+        <li><strong>Where:</strong> south of Post 2, beyond the concession area, on the beach and in the open dunes. Post 2 is one mile south of the Pier Avenue entrance, just past Arroyo Grande Creek.</li>
+        <li><strong>4WD recommended:</strong> high tides, heavy rain, and blowing sand decide whether you can drive the beach without getting stuck.</li>
+        <li><strong>Tent camping is permitted</strong>, but never place your campsite at the base of a slipface or dune.</li>
+        <li><strong>Facilities:</strong> vault and chemical toilets are provided. Water delivery and holding-tank pump-out services are available on the beach.</li>
+        <li><strong>Gray water:</strong> dumping gray water on the beach is prohibited by state law.</li>
+        <li><strong>Creek closures:</strong> access can be restricted by Arroyo Grande Creek after storms or Lopez Dam releases. <a href="creek.html">Check creek status</a> before you tow out.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--dune)">Local Knowledge</span>
+    <h2 class="section-title">Camp Setup Tips From People Who Live This</h2>
+    <p class="lede">The dunes will sandblast everything you own if you let them. A few habits make the difference between a great weekend and a miserable one.</p>
+    <div class="split" style="margin-top:40px">
+      <ol class="steps">
+        <li><p><strong>Face your doors east.</strong> Wind normally blows in from the west. Pointing camper and tent doors east keeps the sand out of your living space.</p></li>
+        <li><p><strong>Skirt the west side of your trailer.</strong> Run plywood from front to back on the west-facing side to stop wind from tunneling underneath.</p></li>
+        <li><p><strong>Give the tide room.</strong> Leave enough space between the high-tide waterline and your camp for two lanes of traffic to pass at high tide. Not sure? Ask a neighbor.</p></li>
+        <li><p><strong>Ask before you settle in.</strong> There are no marked sites, so give other campers space, and check that the spot you like is not being saved for someone's late-arriving crew.</p></li>
+      </ol>
+      <ol class="steps">
+        <li><p><strong>Tow in on Friday morning's low tide.</strong> Conditions are best early. As the weekend wears on, stuck vehicles chew up the beachfront and towing gets hard.</p></li>
+        <li><p><strong>By Saturday, leave the 2WD at camp.</strong> Two-wheel-drive vehicles are not recommended in the OHV area once the sand is torn up.</p></li>
+        <li><p><strong>Drive the hard pack, not the water.</strong> The sand near the waterline is firmest, but driving in salt water invites rust and electrical gremlins.</p></li>
+        <li><p><strong>Roping off is allowed, within reason.</strong> Taping off a modest area is fine in quieter spots. Claiming big stretches of beachfront is just plain rude unless you are saving room for arriving friends.</p></li>
+      </ol>
+    </div>
+    <div class="callout" style="background:rgba(255,255,255,.08);color:rgba(255,255,255,.9)">
+      <strong>Speed limit</strong>
+      15 MPH on the beach and within 50 feet of any camp or group of people. Plan arrivals and departures around low tide.
+    </div>
+  </div>
+</section>
+
+
+<div class="wrap" style="margin-top:56px">
+  <figure style="margin:0">
+    <img src="images/beach-panorama.jpg" alt="Wide view of RVs and campers along the beach with Pismo hills behind" style="width:100%;border-radius:14px;display:block;box-shadow:0 10px 30px rgba(14,58,77,.10)" loading="lazy">
+    <figcaption style="font-size:13px;color:var(--ink-soft);margin-top:8px;text-align:center">A busy weekend on the camping beach, looking north toward Pismo. No numbered sites — just find your spot above the high-tide line.</figcaption>
+  </figure>
+</div>
+
+<section id="supplies">
+  <div class="wrap">
+    <span class="eyebrow">Beer, Ice &amp; Supplies</span>
+    <h2 class="section-title">Last Stops Before the Sand</h2>
+    <p class="lede">Stock up on the way in: once you're set up on the beach, a supply run means airing up, driving to town, and airing back down. Here's where to grab beer, ice, firewood backup, and whatever you forgot.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 9 5.5 4h13L20 9M4 9v11h16V9M4 9h16M9.5 20v-5.5h5V20"/></svg></div>
+        <h3>Pier Ave Entrance</h3>
+        <p><strong>Pier Liquor</strong> · 393 Pier Ave, Oceano · (805) 489-7722. The classic last stop, a few hundred feet from the beach gate. Beer, ice, and convenience-store basics, typically open 7 AM to 9 PM. If you forgot it, they probably have it.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 4.5h2.5L8 15.5h9.7l2.3-7.5H6M9.5 19.5v.01M16.5 19.5v.01"/></svg></div>
+        <h3>Grand Ave Entrance</h3>
+        <p>For a real grocery run: <strong>Vons</strong> · 1758 W Grand Ave, Grover Beach (full supermarket, beer, bagged ice). Quicker stops on the same street: <strong>Beverage House Liquor</strong> at 1199 W Grand Ave and the <strong>Flyers station</strong> at 684 W Grand Ave for fuel plus a full liquor store in one stop.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2.5 6.5H14v9.5H2.5zM14 9.5h4l3.5 3.5v3H14M6 19a2 2 0 1 0 0-.01M17.5 19a2 2 0 1 0 0-.01"/></svg></div>
+        <h3>On the Beach</h3>
+        <p>You don't always have to leave: vendor trucks patrol the beach and camping area selling <strong>ice, firewood, water, and snacks</strong> right to your camp. Flag one down when it rolls by — paying beach prices beats breaking camp for a bag of ice.</p>
+      </div>
+    </div>
+    <div class="callout">
+      <strong>Drink smart out here</strong>
+      Enjoy the beer at camp. It is illegal to have an open container in or on an OHV, and DUI laws apply on the sand exactly like the highway. Rangers enforce both.
+    </div>
+  </div>
+</section>
+<div class="wrap" style="padding:0 24px 72px;text-align:center"><p style="font-size:15px;color:var(--ink-soft);margin-bottom:14px">Coming out? Get a personalized plan with tide windows, checklists, and local tricks.</p><a class="btn btn-primary" href="planner.html">Plan Your Trip</a></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>CCWheelers</h4>
+        <p>The Oceano Dunes Information Center. Built and maintained by Central Coast Wheelers, an OHV community keeping the dunes clean, safe, and open.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="camping.html">Camping</a></li>
+          <li><a href="creek.html">Creek Status</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="planner.html">Trip Planner</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="dayuse.html">Day Use</a></li>
+          <li><a href="rules.html">Rules</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ride</h4>
+        <ul>
+          <li><a href="map.html">Virtual Map</a></li>
+          <li><a href="tips.html">Riding Tips</a></li>
+          <li><a href="emergency.html">Emergency Info</a></li>
+          <li><a href="about.html">About CCW</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Oceano Dunes SVRA<br>928 Pacific Blvd<br>Oceano, CA 93445</li>
+          <li>Info: (805) 473-7220 (recorded)</li>
+          <li>Reservations: (800) 444-7275</li>
+          <li><a href="contact.html">Contact CCWheelers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 CCWheelers.com · Central Coast Wheelers</span>
+      <span>Not an official California State Parks website</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

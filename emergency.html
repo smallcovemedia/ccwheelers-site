@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N9HPGB15V1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-N9HPGB15V1');
+// CCWheelers click events: money actions for an info site
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a, button');
+  if (!a || typeof gtag !== 'function') return;
+  var href = a.getAttribute && (a.getAttribute('href') || '');
+  if (href.indexOf('tel:') === 0) {
+    gtag('event', 'phone_call', { page_path: location.pathname });
+  } else if (/^https?:\/\//.test(href) && href.indexOf('ccwheelers.com') === -1) {
+    gtag('event', 'outbound_click', { link_domain: href.split('/')[2] || '', page_path: location.pathname });
+  } else if (location.pathname.indexOf('planner') > -1 && a.tagName === 'BUTTON') {
+    gtag('event', 'planner_use', { button_text: (a.textContent || '').trim().slice(0, 40) });
+  } else if (location.pathname.indexOf('gallery') > -1 && (a.closest('.gallery') || a.querySelector('img'))) {
+    gtag('event', 'gallery_open', {});
+  }
+}, { passive: true });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emergency Information | CCWheelers Oceano Dunes</title>
+<meta name="description" content="Emergency information for Oceano Dunes SVRA: CB channel 9, the Sand Highway call box, where to get help, and first aid basics.">
+<link rel="canonical" href="https://ccwheelers.com/emergency.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CCWheelers">
+<meta property="og:title" content="Emergency Information | CCWheelers Oceano Dunes">
+<meta property="og:description" content="Emergency information for Oceano Dunes SVRA: CB channel 9, the Sand Highway call box, where to get help, and first aid basics.">
+<meta property="og:url" content="https://ccwheelers.com/emergency.html">
+<meta property="og:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Emergency Information | CCWheelers Oceano Dunes">
+<meta name="twitter:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<script src="nav.js" defer></script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html">
+      <span class="logo-chip"><img src="images/ccw-logo.png" alt="Central Coast Wheelers logo"></span>
+      <div class="logo-text">CCWheelers<small>Oceano Dunes Info Center</small></div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="camping.html">Camping</a></li>
+        <li><a href="creek.html">Creek</a></li>
+        <li><a href="tides.html">Tides</a></li>
+        <li><a href="planner.html">Planner</a></li>
+        <li><a href="dayuse.html">Day Use</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li><a href="news.html">News</a></li>
+        <li class="has-sub">
+          <button class="sub-toggle" aria-expanded="false" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+          <ul class="sub">
+            <li><a href="weather.html">Weather</a></li>
+            <li><a href="gas.html">Gas Prices</a></li>
+            <li><a href="fires.html">Campfires</a></li>
+            <li><a href="rules.html">Rules</a></li>
+            <li><a href="tips.html">Tips</a></li>
+            <li><a href="emergency.html" class="active">Emergency</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary nav-book" href="https://www.reservecalifornia.com" target="_blank" rel="noopener">Book a Campsite</a>
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main>
+<div class="page-head" style="background:linear-gradient(180deg,#7c1f1f 0%,#a13030 100%)">
+  <div class="wrap">
+    <span class="eyebrow" style="color:#ffd9a0">Emergencies</span>
+    <h1>When Something Goes Wrong</h1>
+    <p>Cell coverage gets thin on the sand. Know these three things before you need them.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="cards">
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.8 3.5c.6 2 1.5 3.7 2.7 5.3L7.7 10.6c1.5 2.7 3.6 4.8 6.3 6.3l1.8-1.8c1.6 1.2 3.3 2.1 5.3 2.7v3c-9-1-16.5-8.5-17.5-17.5l3.2.2Z"/></svg></div>
+        <h3>Call 911 First</h3>
+        <p>If you have signal, 911 is always the fastest route to help. Know roughly where you are; the nearest post number, camp name, or landmark from the <a href="map.html">map</a> saves rescuers precious minutes.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3.5 9.5h17V20h-17zM7 9.5v-4l10-2v6M7.5 14.5h4m4-1v.01m0 3v.01"/></svg></div>
+        <h3>CB Channel 9</h3>
+        <p>For vehicle accidents or injuries, contact a ranger or radio ranger base on CB channel 9. It's monitored, and it works where cell phones don't.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7 3.5h10a1.5 1.5 0 0 1 1.5 1.5v14a1.5 1.5 0 0 1-1.5 1.5H7A1.5 1.5 0 0 1 5.5 19V5A1.5 1.5 0 0 1 7 3.5ZM12 8v5m0 3.5v.01"/></svg></div>
+        <h3>The Call Box</h3>
+        <p>An emergency solar-powered call box is located at the entrance to Sand Highway. Note it on your way in.</p>
+      </div>
+    </div>
+
+    <div class="split" style="margin-top:64px">
+      <div>
+        <span class="eyebrow">First Response</span>
+        <h2 class="section-title">Until Help Arrives</h2>
+        <ul class="rules-list warn">
+          <li><strong>Do not move an injured person</strong> unless he or she is in immediate danger. Sand riding injuries often involve the spine; wait for trained help.</li>
+          <li><strong>Send two people for help</strong> if you have them: one to high ground for cell signal, one toward the ranger station or call box.</li>
+          <li><strong>Mark the location.</strong> Flag down other riders; a circle of vehicles (at a safe distance) makes the scene visible to responders.</li>
+        </ul>
+        <div class="callout">
+          <strong>A note on CPR</strong>
+          The original version of this page carried detailed 1990s-era CPR instructions. Guidance has changed substantially since then, and current recommendations favor hands-only CPR for untrained bystanders. Take a modern course through the American Red Cross or American Heart Association; a weekend class is the best gear you'll ever carry.
+        </div>
+      </div>
+      <div>
+        <span class="eyebrow">On Busy Weekends</span>
+        <h2 class="section-title">Where to Get Help</h2>
+        <p class="lede">On major holiday weekends the ranger staff is supplemented by volunteer groups such as the Sheriff's Search and Rescue and the Equestrian Mounted Assistance Patrol, all prepared to offer help and information.</p>
+        <ul class="rules-list">
+          <li><strong>Mobile ranger station:</strong> on most holiday weekends, a mobile ranger station is located at the Sand Highway entrance.</li>
+          <li><strong>Ranger info line:</strong> (805) 473-7220 (recorded).</li>
+          <li><strong>Stuck, not hurt?</strong> That's not an emergency. See the <a href="tips.html">recovery steps</a> and remember beach towing is available.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--dune)">Know What Help Looks Like</span>
+    <h2 class="section-title">The Cavalry, When It's Needed</h2>
+    <p class="lede">Help exists out here, but it takes time to reach you on sand. Recognize these resources, know where the call box is, and ride like the ambulance is 20 minutes away — because it is.</p>
+    <div class="cards">
+      <div class="card">
+        <img src="images/callbox.jpg" alt="Yellow solar-powered emergency call box" style="width:100%;border-radius:10px;margin-bottom:14px;display:block" loading="lazy">
+        <h3>The Emergency Call Box</h3>
+        <p>Solar-powered, at the entrance to Sand Highway by the Dunes Information Center. If you have no CB and no cell signal, this is your lifeline. Show it to everyone in your crew on the way in.</p>
+      </div>
+      <div class="card">
+        <img src="images/ambulance.jpg" alt="San Luis Ambulance and ranger truck on the beach" style="width:100%;border-radius:10px;margin-bottom:14px;display:block" loading="lazy">
+        <h3>Beach Ambulance</h3>
+        <p>San Luis Ambulance runs the sand with ranger units. Give responders room, keep bystanders clear, and never move an injured rider unless they are in immediate danger.</p>
+      </div>
+      <div class="card">
+        <img src="images/helicopter.jpg" alt="CALSTAR medical helicopter on the dunes" style="width:100%;border-radius:10px;margin-bottom:14px;display:block" loading="lazy">
+        <h3>CALSTAR Medevac</h3>
+        <p>Serious injuries get flown out. If a helicopter is landing, stay well back and stop riding in the area: rotor wash turns loose sand into a sandblaster.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>CCWheelers</h4>
+        <p>The Oceano Dunes Information Center. Built and maintained by Central Coast Wheelers, an OHV community keeping the dunes clean, safe, and open.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="camping.html">Camping</a></li>
+          <li><a href="creek.html">Creek Status</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="planner.html">Trip Planner</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="dayuse.html">Day Use</a></li>
+          <li><a href="rules.html">Rules</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ride</h4>
+        <ul>
+          <li><a href="map.html">Virtual Map</a></li>
+          <li><a href="tips.html">Riding Tips</a></li>
+          <li><a href="emergency.html">Emergency Info</a></li>
+          <li><a href="about.html">About CCW</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Oceano Dunes SVRA<br>928 Pacific Blvd<br>Oceano, CA 93445</li>
+          <li>Info: (805) 473-7220 (recorded)</li>
+          <li>Reservations: (800) 444-7275</li>
+          <li><a href="contact.html">Contact CCWheelers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 CCWheelers.com · Central Coast Wheelers</span>
+      <span>Not an official California State Parks website · Not medical advice</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N9HPGB15V1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-N9HPGB15V1');
+// CCWheelers click events: money actions for an info site
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a, button');
+  if (!a || typeof gtag !== 'function') return;
+  var href = a.getAttribute && (a.getAttribute('href') || '');
+  if (href.indexOf('tel:') === 0) {
+    gtag('event', 'phone_call', { page_path: location.pathname });
+  } else if (/^https?:\/\//.test(href) && href.indexOf('ccwheelers.com') === -1) {
+    gtag('event', 'outbound_click', { link_domain: href.split('/')[2] || '', page_path: location.pathname });
+  } else if (location.pathname.indexOf('planner') > -1 && a.tagName === 'BUTTON') {
+    gtag('event', 'planner_use', { button_text: (a.textContent || '').trim().slice(0, 40) });
+  } else if (location.pathname.indexOf('gallery') > -1 && (a.closest('.gallery') || a.querySelector('img'))) {
+    gtag('event', 'gallery_open', {});
+  }
+}, { passive: true });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rules &amp; Regulations | CCWheelers Oceano Dunes</title>
+<meta name="description" content="Oceano Dunes rules and regulations: green and red stickers, nonresident permits, ATV rules for minors, equipment requirements, alcohol laws, and shorebird protection.">
+<link rel="canonical" href="https://ccwheelers.com/rules.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CCWheelers">
+<meta property="og:title" content="Rules &amp; Regulations | CCWheelers Oceano Dunes">
+<meta property="og:description" content="Oceano Dunes rules and regulations: green and red stickers, nonresident permits, ATV rules for minors, equipment requirements, alcohol laws, and shorebird protection.">
+<meta property="og:url" content="https://ccwheelers.com/rules.html">
+<meta property="og:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Rules &amp; Regulations | CCWheelers Oceano Dunes">
+<meta name="twitter:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<script src="nav.js" defer></script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html">
+      <span class="logo-chip"><img src="images/ccw-logo.png" alt="Central Coast Wheelers logo"></span>
+      <div class="logo-text">CCWheelers<small>Oceano Dunes Info Center</small></div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="camping.html">Camping</a></li>
+        <li><a href="creek.html">Creek</a></li>
+        <li><a href="tides.html">Tides</a></li>
+        <li><a href="planner.html">Planner</a></li>
+        <li><a href="dayuse.html">Day Use</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li><a href="news.html">News</a></li>
+        <li class="has-sub">
+          <button class="sub-toggle" aria-expanded="false" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+          <ul class="sub">
+            <li><a href="weather.html">Weather</a></li>
+            <li><a href="gas.html">Gas Prices</a></li>
+            <li><a href="fires.html">Campfires</a></li>
+            <li><a href="rules.html" class="active">Rules</a></li>
+            <li><a href="tips.html">Tips</a></li>
+            <li><a href="emergency.html">Emergency</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary nav-book" href="https://www.reservecalifornia.com" target="_blank" rel="noopener">Book a Campsite</a>
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main>
+<div class="page-head">
+  <div class="wrap">
+    <span class="eyebrow">Know Before You Ride</span>
+    <h1>Rules &amp; Regulations</h1>
+    <p>The rules that keep the dunes open, keep riders safe, and keep tickets off your windshield. Vehicle code citations included for the folks who like receipts.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">Registration</span>
+    <h2 class="section-title">Every Vehicle Needs One of Three Things</h2>
+    <p class="lede">All vehicles operated on public lands must be registered with the DMV. OHV registration fees fund new riding areas, operations, enforcement, and resource protection.</p>
+    <div class="cards">
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 16l1.5-5.5L8 8h8l2.5 2.5L20 16m-16 0v3.5M20 16v3.5M4 16h16M7.5 12.5h9"/></svg></div>
+        <h3>Street-Legal Plate</h3>
+        <p>For 4-wheel drives and dual-purpose motorcycles used both on-highway and off. A street-licensed vehicle is good to go.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 4.5h15v15h-15zM8.5 12l2.5 2.5 5-5"/></svg></div>
+        <h3>Green or Red Sticker</h3>
+        <p>Off-highway-only vehicles need a DMV-issued sticker. Green stickers (2002-and-older OHVs plus newer emissions-compliant vehicles) are valid year-round statewide. Red stickers go to 2003-and-newer OHVs that don't meet California OHV emissions standards (a "3" or "C" in the 8th VIN position). Oceano Dunes allows red sticker riding all year round.</p>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 8a2 2 0 0 0 2-2h12a2 2 0 0 0 2 2v8a2 2 0 0 0-2 2H6a2 2 0 0 0-2-2V8Zm11-2v12"/></svg></div>
+        <h3>Nonresident Permit</h3>
+        <p>Visiting from out of state without current home-state registration? You must buy a California Nonresident OHV Use Permit before riding public lands.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" style="padding:56px 0">
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow" style="color:var(--dune)">Basic Dune Rules</span>
+      <h2 class="section-title">On the Sand</h2>
+      <ul class="rules-list warn">
+        <li><strong>15 MPH</strong> on the beach and within 50 feet of any camp or group of people. California's Basic Speed Law applies everywhere in the dunes: never faster than conditions allow.</li>
+        <li><strong>DUI laws are identical off-highway.</strong> And it is illegal to possess an open container of alcohol in or on an OHV. Secured, inaccessible transport (locked containers, strapped ice chests) is allowed.</li>
+        <li><strong>Helmets are required</strong> for everyone operating or riding an ATV (CVC 38505).</li>
+        <li><strong>No passengers</strong> on three- or four-wheeled single-seat ATVs.</li>
+        <li><strong>Stay out of vegetated areas.</strong> Motor vehicles must keep to open sand.</li>
+        <li><strong>Towing anything other than another motor vehicle is prohibited.</strong></li>
+        <li><strong>Campfires:</strong> allowed on the sand south of Grand Avenue, maximum 3 feet across by 2 feet tall, clean untreated wood only. Never leave a fire unattended; douse with water, never bury.</li>
+        <li><strong>Trash:</strong> deposit all trash in the designated receptacles at Post 2, or pack it out.</li>
+        <li><strong>Suspended or revoked license?</strong> You may not operate a motor vehicle off-road, period.</li>
+        <li><strong>Night riding:</strong> unlicensed operators may not ride during nighttime hours or outside the designated OHV area.</li>
+      </ul>
+    </div>
+    <div>
+      <span class="eyebrow" style="color:var(--dune)">Minors on ATVs</span>
+      <h2 class="section-title">Rules for Riders Under 18</h2>
+      <ul class="rules-list">
+        <li><strong>Under 18:</strong> must hold an ATV safety certificate, be taking a certified training course, or ride under direct supervision of an adult who holds a certificate (CVC 38503). Training is funded for ages 6 to 17; sign up through the ATV Safety Institute at (800) 887-2887.</li>
+        <li><strong>13 and under:</strong> must be supervised at all times while in the park, on or off the machine.</li>
+        <li><strong>Under 14:</strong> all of the above, plus direct supervision by a parent, guardian, or an adult they authorize (CVC 38504).</li>
+        <li><strong>Fines escalate:</strong> $125 (or court-ordered training) for a first conviction, up to $250 for a second, and up to $500 after that. Courts can also order the child and the supervising adult back to training together.</li>
+        <li><strong>Every unlicensed operator</strong> must be supervised by a licensed adult and be physically able to work all the controls.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">Equipment</span>
+    <h2 class="section-title">What Your Machine Must Have</h2>
+    <table class="fees">
+      <tr><th>Requirement</th><th>The Rule</th></tr>
+      <tr><td>Whip flag</td><td>An 8-foot whip with a solid orange or red flag, required on ALL vehicles operating in the dunes, including street-legal 4WDs.</td></tr>
+      <tr><td>Noise limit</td><td>96 dBA max for vehicles built 1986 or later (101 dBA for older), measured at 20 inches under SAE J-1287. Competition vehicles: 96 dBA if built 1998 or later.</td></tr>
+      <tr><td>Spark arrester</td><td>Required in effective working order on any OHV (CVC 38366), mounted so exhaust heat and flame can't ignite flammable material.</td></tr>
+      <tr><td>Lights at night</td><td>Between sunset and sunrise: at least one headlight good for 200 feet and one red taillight visible for 200 feet (CVC 38335, 38345).</td></tr>
+      <tr><td>ROVs (side-by-sides)</td><td>Helmets, whip and flag, and seatbelts are all required while operating.</td></tr>
+      <tr><td>Roll protection</td><td>Except for 2-, 3-, and 4-wheeled cycles, vehicles need roll bars or a roof structure strong enough to support the vehicle, plus a secure seat and seat belt for the operator and every passenger.</td></tr>
+      <tr><td>No red/blue warning lights</td><td>Prohibited except for emergencies (CVC 38346). Sirens are prohibited on anything but authorized emergency vehicles (CVC 38375).</td></tr>
+    </table>
+  </div>
+</section>
+
+<section class="band" style="background:var(--ocean-deep)">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--dune)">Shorebird Protection</span>
+    <h2 class="section-title">Share the Sand With the Plover and the Tern</h2>
+    <p class="lede">The endangered California least tern and the threatened western snowy plover nest right on these sands. Following these rules protects the birds and protects your riding access.</p>
+    <ul class="rules-list warn" style="max-width:760px">
+      <li><strong>Do not enter posted nest exclosures.</strong></li>
+      <li><strong>Do not camp or park within 100 feet</strong> of a posted exclosure.</li>
+      <li><strong>Keep dogs leashed at all times.</strong></li>
+      <li><strong>Pack out trash properly</strong> so it doesn't attract predators to the nests.</li>
+      <li><strong>No kite flying.</strong> Kites read as predators and frighten nesting birds.</li>
+    </ul>
+  </div>
+</section>
+<div class="wrap" style="padding:0 24px 72px;text-align:center"><p style="font-size:15px;color:var(--ink-soft);margin-bottom:14px">Coming out? Get a personalized plan with tide windows, checklists, and local tricks.</p><a class="btn btn-primary" href="planner.html">Plan Your Trip</a></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>CCWheelers</h4>
+        <p>The Oceano Dunes Information Center. Built and maintained by Central Coast Wheelers, an OHV community keeping the dunes clean, safe, and open.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="camping.html">Camping</a></li>
+          <li><a href="creek.html">Creek Status</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="planner.html">Trip Planner</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="dayuse.html">Day Use</a></li>
+          <li><a href="rules.html">Rules</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ride</h4>
+        <ul>
+          <li><a href="map.html">Virtual Map</a></li>
+          <li><a href="tips.html">Riding Tips</a></li>
+          <li><a href="emergency.html">Emergency Info</a></li>
+          <li><a href="about.html">About CCW</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Oceano Dunes SVRA<br>928 Pacific Blvd<br>Oceano, CA 93445</li>
+          <li>Info: (805) 473-7220 (recorded)</li>
+          <li>Reservations: (800) 444-7275</li>
+          <li><a href="contact.html">Contact CCWheelers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 CCWheelers.com · Central Coast Wheelers</span>
+      <span>Not an official California State Parks website · Rules summarized for convenience; posted signs and current law govern</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

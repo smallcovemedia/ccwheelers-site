@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>CCWheelers — Site Dashboard</title>
+<style>
+:root {
+  --sand:#f5ede0; --dune:#d9a55b; --dune-dark:#b57f3a; --ocean:#0e3a4d;
+  --ocean-deep:#092835; --sunset:#e26d3a; --ink:#1d2a30; --ink-soft:#4a5b63; --white:#fff;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', -apple-system, sans-serif; background: var(--sand); color: var(--ink); }
+header { background: var(--ocean-deep); color: #fff; padding: 20px 24px; display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; }
+header h1 { font-family: 'Barlow Condensed', 'Inter', sans-serif; font-size: 26px; text-transform: uppercase; letter-spacing: 1px; }
+header h1 span { color: var(--dune); }
+header .sub { font-size: 12.5px; color: #9fb4bd; }
+header .range { text-align: right; font-size: 13px; color: #cfe0e7; }
+main { max-width: 1000px; margin: 0 auto; padding: 28px 20px 60px; }
+h2 { font-family: 'Barlow Condensed', 'Inter', sans-serif; font-size: 24px; text-transform: uppercase; letter-spacing: .5px; color: var(--ocean); margin: 30px 0 4px; }
+.section-note { font-size: 13.5px; color: var(--ink-soft); margin-bottom: 14px; }
+#sampleBanner { background: #fff3cd; border: 1px solid #e6ce85; color: #7a6210; padding: 10px 16px; border-radius: 10px; margin-bottom: 18px; font-size: 14px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+.tile { background: #fff; border-radius: 14px; padding: 18px 16px; box-shadow: 0 2px 6px rgba(9,40,53,.06), 0 10px 24px rgba(9,40,53,.07); }
+.tile.hot { background: var(--ocean); color: #fff; }
+.tile.hot .sub { color: #cfe0e7; }
+.tile .num { font-family: 'Barlow Condensed', sans-serif; font-size: 38px; font-weight: 700; line-height: 1; }
+.tile.hot .num { color: var(--dune); }
+.tile .lbl { font-size: 13px; font-weight: 700; margin-top: 6px; text-transform: uppercase; letter-spacing: .5px; }
+.tile .sub { font-size: 12px; color: var(--ink-soft); margin-top: 3px; }
+.panel { background: #fff; border-radius: 14px; padding: 20px; box-shadow: 0 2px 6px rgba(9,40,53,.06), 0 10px 24px rgba(9,40,53,.07); }
+.bar-row { display: grid; grid-template-columns: minmax(110px, 200px) 1fr 46px; align-items: center; gap: 10px; padding: 6px 0; font-size: 14px; }
+.bar-row .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar { background: var(--sand); border-radius: 99px; height: 14px; overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--sunset); border-radius: 99px; }
+.bar-row .val { text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+.grid2 { display: grid; grid-template-columns: 1fr; gap: 20px; }
+@media (min-width: 760px) { .grid2 { grid-template-columns: 1fr 1fr; } }
+footer { text-align: center; font-size: 12.5px; color: var(--ink-soft); padding: 20px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>CCWheelers <span>Dashboard</span></h1>
+    <div class="sub">ccwheelers.com &middot; by Small Cove Media</div>
+  </div>
+  <div class="range"><b id="period">—</b><br>updated <span id="updated">—</span></div>
+</header>
+
+<main>
+  <div id="sampleBanner" hidden>Sample numbers — live hookup pending.</div>
+
+  <h2>The Big Picture</h2>
+  <p class="section-note">How many people used the site and what they did.</p>
+  <div class="tiles" id="tiles"></div>
+
+  <div class="grid2">
+    <div>
+      <h2>Where Visitors Are</h2>
+      <p class="section-note">Top cities (last 30 days).</p>
+      <div class="panel"><div id="cityBars"></div></div>
+    </div>
+    <div>
+      <h2>Phone or Computer</h2>
+      <p class="section-note">What they browse on.</p>
+      <div class="panel"><div id="deviceBars"></div></div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div>
+      <h2>Time on Page</h2>
+      <p class="section-note">Average minutes:seconds spent per page.</p>
+      <div class="panel"><div id="timeBars"></div></div>
+    </div>
+    <div>
+      <h2>Most-Visited Pages</h2>
+      <p class="section-note">What people come to check.</p>
+      <div class="panel"><div id="pageBars"></div></div>
+    </div>
+  </div>
+
+  <h2>Where Visitors Come From</h2>
+  <p class="section-note">Traffic sources.</p>
+  <div class="panel"><div id="sourceBars"></div></div>
+</main>
+
+<footer>CCWheelers site dashboard &middot; built &amp; maintained by Small Cove Media</footer>
+
+<script>
+fetch('/api/metrics')
+  .then(r => { if (!r.ok) throw 0; return r.json(); })
+  .then(d => { if (d.sample && d.reason) throw 0; return d; })
+  .catch(() => ({
+    sample: true, period: 'Last 30 days', updated: 'sample data',
+    totals: { visitors: 860, pageViews: 2400, plannerUses: 64, phoneCalls: 9, outboundClicks: 132, galleryOpens: 41, avgTimeSec: 95 },
+    topPages: [{path: '/', views: 900}, {path: '/tides', views: 420}, {path: '/creek', views: 310}, {path: '/planner', views: 240}, {path: '/camping', views: 180}],
+    sources: [{name: 'Organic Search', visitors: 520}, {name: 'Direct', visitors: 260}, {name: 'Referral', visitors: 80}],
+    locations: [{name: 'Fresno, California', visitors: 210}, {name: 'Bakersfield, California', visitors: 130}, {name: 'San Luis Obispo, California', visitors: 90}],
+    devices: [{name: 'Phone', visitors: 600}, {name: 'Computer', visitors: 230}, {name: 'Tablet', visitors: 30}],
+    pageTime: [{path: '/', seconds: 65}, {path: '/tides', seconds: 140}, {path: '/planner', seconds: 210}]
+  }))
+  .then(d => {
+    document.getElementById('period').textContent = d.period;
+    document.getElementById('updated').textContent = d.updated;
+    if (d.sample) document.getElementById('sampleBanner').hidden = false;
+    var t = d.totals;
+    function mmss(s) { s = Number(s) || 0; return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); }
+    var tiles = [
+      {n: t.visitors, l: 'Visitors', s: 'people who came to the site', hot: false},
+      {n: t.pageViews, l: 'Page Views', s: 'total pages looked at', hot: false},
+      {n: t.plannerUses, l: 'Planner Uses', s: 'used the trip planner', hot: true},
+      {n: t.outboundClicks, l: 'Outbound Clicks', s: 'clicked to reservations etc.', hot: false},
+      {n: t.galleryOpens, l: 'Gallery Views', s: 'opened dune photos', hot: false},
+      {n: t.phoneCalls, l: 'Phone Taps', s: 'tapped a phone number', hot: false},
+      {n: mmss(t.avgTimeSec), l: 'Avg. Visit Length', s: 'time spent per visit', hot: false, raw: true},
+    ];
+    document.getElementById('tiles').innerHTML = tiles.map(function (x) {
+      return '<div class="tile' + (x.hot ? ' hot' : '') + '"><div class="num">' + (x.raw ? x.n : Number(x.n).toLocaleString()) + '</div><div class="lbl">' + x.l + '</div><div class="sub">' + x.s + '</div></div>';
+    }).join('');
+    function bars(rowsEl, list, nameFn, valFn) {
+      var max = Math.max.apply(null, list.map(valFn).concat([1]));
+      document.getElementById(rowsEl).innerHTML = list.map(function (r) {
+        return '<div class="bar-row"><div class="name">' + nameFn(r) + '</div><div class="bar"><i style="width:' + Math.round(valFn(r) / max * 100) + '%"></i></div><div class="val">' + valFn(r) + '</div></div>';
+      }).join('');
+    }
+    bars('pageBars', d.topPages, function (p) { return p.path; }, function (p) { return p.views; });
+    bars('sourceBars', d.sources, function (s) { return s.name; }, function (s) { return s.visitors; });
+    bars('cityBars', d.locations || [], function (s) { return s.name; }, function (s) { return s.visitors; });
+    bars('deviceBars', d.devices || [], function (s) { return s.name; }, function (s) { return s.visitors; });
+    var pt = (d.pageTime || []).slice(0, 8);
+    var ptMax = Math.max.apply(null, pt.map(function (p) { return p.seconds; }).concat([1]));
+    document.getElementById('timeBars').innerHTML = pt.map(function (p) {
+      return '<div class="bar-row"><div class="name">' + p.path + '</div><div class="bar"><i style="width:' + Math.round(p.seconds / ptMax * 100) + '%"></i></div><div class="val">' + mmss(p.seconds) + '</div></div>';
+    }).join('');
+  });
+</script>
+</body>
+</html>

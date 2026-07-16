@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N9HPGB15V1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-N9HPGB15V1');
+// CCWheelers click events: money actions for an info site
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a, button');
+  if (!a || typeof gtag !== 'function') return;
+  var href = a.getAttribute && (a.getAttribute('href') || '');
+  if (href.indexOf('tel:') === 0) {
+    gtag('event', 'phone_call', { page_path: location.pathname });
+  } else if (/^https?:\/\//.test(href) && href.indexOf('ccwheelers.com') === -1) {
+    gtag('event', 'outbound_click', { link_domain: href.split('/')[2] || '', page_path: location.pathname });
+  } else if (location.pathname.indexOf('planner') > -1 && a.tagName === 'BUTTON') {
+    gtag('event', 'planner_use', { button_text: (a.textContent || '').trim().slice(0, 40) });
+  } else if (location.pathname.indexOf('gallery') > -1 && (a.closest('.gallery') || a.querySelector('img'))) {
+    gtag('event', 'gallery_open', {});
+  }
+}, { passive: true });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oceano Dunes Weather &amp; Wind | Live Beach Conditions | CCWheelers</title>
+<meta name="description" content="Live weather and wind at Oceano Dunes: current temperature, wind speed and direction, gusts, a 48-hour wind chart, and the 7-day forecast, measured right at the beach.">
+<link rel="canonical" href="https://ccwheelers.com/weather.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CCWheelers">
+<meta property="og:title" content="Oceano Dunes Weather &amp; Wind | Live Beach Conditions | CCWheelers">
+<meta property="og:description" content="Live weather and wind at Oceano Dunes: current temperature, wind speed and direction, gusts, a 48-hour wind chart, and the 7-day forecast, measured right at the beach.">
+<meta property="og:url" content="https://ccwheelers.com/weather.html">
+<meta property="og:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Oceano Dunes Weather &amp; Wind | Live Beach Conditions | CCWheelers">
+<meta name="twitter:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .now-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:18px;margin-top:-34px;position:relative;z-index:5}
+  .now-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 24px;text-align:center}
+  .now-card .lbl{font-size:11.5px;letter-spacing:1.8px;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:6px}
+  .now-card .big{font-family:'Barlow Condensed';font-size:44px;font-weight:800;color:var(--ocean);line-height:1}
+  .now-card .sub{font-size:13px;color:var(--ink-soft);margin-top:6px}
+  .now-card.hero-card{background:var(--ocean);color:#fff}
+  .now-card.hero-card .big{color:#fff;font-size:58px}
+  .now-card.hero-card .lbl{color:var(--dune)}
+  .now-card.hero-card .sub{color:rgba(255,255,255,.75)}
+  .warn-strip{margin-top:16px;background:#fdeae3;border-left:5px solid var(--sunset-hot);border-radius:0 10px 10px 0;padding:14px 18px;font-size:14.5px;display:none}
+  #windChart{width:100%;height:auto;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);margin-top:20px}
+  .chart-note{font-size:12.5px;color:var(--ink-soft);margin-top:8px}
+  .legend{display:flex;gap:20px;margin-top:14px;font-size:13px;color:var(--ink-soft);flex-wrap:wrap}
+  .legend span{display:inline-flex;align-items:center;gap:7px}
+  .swx{width:20px;height:4px;border-radius:2px;display:inline-block}
+  .days{display:grid;grid-template-columns:repeat(7,1fr);gap:12px;margin-top:24px}
+  .day{background:#fff;border-radius:12px;box-shadow:var(--shadow);padding:16px 10px;text-align:center}
+  .day .dn{font-family:'Barlow Condensed';font-weight:700;font-size:17px;text-transform:uppercase;color:var(--ocean)}
+  .day .sky{font-size:12px;color:var(--ink-soft);min-height:30px;margin:6px 0}
+  .hero-row{display:flex;align-items:center;justify-content:center;gap:14px}
+  .wx-ico svg{width:52px;height:52px;stroke:#ffd9a0;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;display:block}
+  .day .wx-ico svg{width:34px;height:34px;stroke:var(--ocean);margin:0 auto 4px}
+  .wind-arrow{display:inline-block;vertical-align:-2px;margin-right:4px}
+  .wind-arrow svg{width:14px;height:14px;stroke:var(--sunset-hot);fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+  .day .hi{font-weight:700;font-size:17px;color:var(--ink)}
+  .day .lo{font-size:14px;color:var(--ink-soft)}
+  .day .wnd{font-size:12px;color:var(--sunset-hot);font-weight:600;margin-top:6px}
+  @media(max-width:900px){
+    .now-grid{grid-template-columns:1fr 1fr}
+    .now-card.hero-card{grid-column:1/-1}
+    .days{grid-template-columns:repeat(4,1fr)}
+  }
+  @media(max-width:560px){.days{grid-template-columns:repeat(2,1fr)}}
+</style>
+<script src="nav.js" defer></script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html">
+      <span class="logo-chip"><img src="images/ccw-logo.png" alt="Central Coast Wheelers logo"></span>
+      <div class="logo-text">CCWheelers<small>Oceano Dunes Info Center</small></div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="camping.html">Camping</a></li>
+        <li><a href="creek.html">Creek</a></li>
+        <li><a href="tides.html">Tides</a></li>
+        <li><a href="planner.html">Planner</a></li>
+        <li><a href="dayuse.html">Day Use</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li><a href="news.html">News</a></li>
+        <li class="has-sub">
+          <button class="sub-toggle" aria-expanded="false" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+          <ul class="sub">
+            <li><a href="weather.html" class="active">Weather</a></li>
+            <li><a href="gas.html">Gas Prices</a></li>
+            <li><a href="fires.html">Campfires</a></li>
+            <li><a href="rules.html">Rules</a></li>
+            <li><a href="tips.html">Tips</a></li>
+            <li><a href="emergency.html">Emergency</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary nav-book" href="https://www.reservecalifornia.com" target="_blank" rel="noopener">Book a Campsite</a>
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main>
+<div class="page-head" style="padding-bottom:70px">
+  <div class="wrap">
+    <span class="eyebrow">Live From the Beach</span>
+    <h1>Weather &amp; Wind at the Dunes</h1>
+    <p>Measured at the sand, not in town. Wind is the ruler of the dunes: it builds the riding, sculpts the bowls, and sandblasts your camp when it feels like it. Know what it's doing before you go.</p>
+  </div>
+</div>
+
+<section style="padding-top:0;padding-bottom:56px">
+  <div class="wrap">
+    <div class="now-grid">
+      <div class="now-card hero-card">
+        <div class="lbl">Right Now at Oceano Dunes</div>
+        <div class="hero-row"><span class="wx-ico" id="nowIcon"></span><span class="big" id="nowTemp">—</span></div>
+        <div class="sub" id="nowSky">Loading current conditions…</div>
+      </div>
+      <div class="now-card">
+        <div class="lbl">Wind</div>
+        <div class="big" id="nowWind">—</div>
+        <div class="sub" id="nowWindDir">&nbsp;</div>
+      </div>
+      <div class="now-card">
+        <div class="lbl">Gusts</div>
+        <div class="big" id="nowGusts">—</div>
+        <div class="sub">peak right now</div>
+      </div>
+      <div class="now-card">
+        <div class="lbl">Feels Like</div>
+        <div class="big" id="nowFeels">—</div>
+        <div class="sub">wind chill counts out here</div>
+      </div>
+    </div>
+    <div class="warn-strip" id="windWarn"><strong style="color:var(--sunset-hot)">HEADS UP:</strong> <span id="windWarnText"></span></div>
+
+    <svg id="windChart" viewBox="0 0 1000 340" role="img" aria-label="48-hour temperature and wind chart"></svg>
+    <div class="legend">
+      <span><i class="swx" style="background:#d4552a"></i> Temperature °F</span>
+      <span><i class="swx" style="background:#0e3a4d"></i> Wind mph</span>
+      <span><i class="swx" style="background:#0e3a4d;opacity:.35"></i> Gusts mph</span>
+    </div>
+    <p class="chart-note">Next 48 hours at the dunes. Afternoons usually blow hardest from the west; mornings are the calm, glassy window riders love.</p>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2 class="display" style="font-size:28px;color:var(--ocean);margin-bottom:6px">7-Day Outlook</h2>
+    <p class="chart-note" style="margin-top:0">Daily highs, lows, sky, and peak wind.</p>
+    <div class="days" id="dayCards"></div>
+
+    <div class="callout" style="margin-top:36px">
+      <strong>Reading the wind like a local</strong>
+      Under 10 mph is a dream day. 10 to 20 mph is normal afternoon west wind: fine riding, keep camp doors facing east. 20 to 30 mph starts moving serious sand; goggles required and camp gets miserable. Over 30 mph is sandblasting: paint-stripping, visibility-killing wind. Morning rides beat the wind almost every day of the year.
+    </div>
+    <p class="chart-note" style="margin-top:14px">Data: Open-Meteo forecast for the beach at Oceano Dunes (35.089, -120.630), updated continuously. For official warnings see the <a href="https://forecast.weather.gov/MapClick.php?lat=35.0894&amp;lon=-120.6296" rel="noopener" target="_blank">National Weather Service forecast</a>.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>CCWheelers</h4>
+        <p>The Oceano Dunes Information Center. Built and maintained by Central Coast Wheelers, an OHV community keeping the dunes clean, safe, and open.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="camping.html">Camping</a></li>
+          <li><a href="creek.html">Creek Status</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="planner.html">Trip Planner</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="dayuse.html">Day Use</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ride</h4>
+        <ul>
+          <li><a href="map.html">Interactive Map</a></li>
+          <li><a href="weather.html">Weather &amp; Wind</a></li>
+          <li><a href="tips.html">Riding Tips</a></li>
+          <li><a href="emergency.html">Emergency Info</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Oceano Dunes SVRA<br>928 Pacific Blvd<br>Oceano, CA 93445</li>
+          <li>Ranger Station: (805) 473-7220</li>
+          <li>Reservations: (800) 444-7275</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 CCWheelers.com · Central Coast Wheelers</span>
+      <span>Not an official California State Parks website</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var DIRS = ['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW'];
+  var SKY = {0:'Clear',1:'Mostly clear',2:'Partly cloudy',3:'Overcast',45:'Fog',48:'Fog',51:'Light drizzle',53:'Drizzle',55:'Heavy drizzle',61:'Light rain',63:'Rain',65:'Heavy rain',66:'Freezing rain',67:'Freezing rain',71:'Snow',73:'Snow',75:'Heavy snow',80:'Showers',81:'Showers',82:'Heavy showers',95:'Thunderstorm',96:'Thunderstorm',99:'Thunderstorm'};
+  function dir(deg){ return DIRS[Math.round(((deg%360)+360)%360/22.5)%16]; }
+  function sky(c){ return SKY[c] || 'Mixed'; }
+
+  /* tiny inline weather icons: sun/moon for clear, clouds, rain, fog, storm */
+  var CLOUD = '<path d="M7 18h9a4 4 0 1 0-.8-7.9A5.5 5.5 0 0 0 4.6 12 3.5 3.5 0 0 0 7 18Z"/>';
+  function icon(code, isDay) {
+    var sun = '<circle cx="12" cy="12" r="4.2"/><path d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6"/>';
+    var moon = '<path d="M19 14.5A7.5 7.5 0 1 1 9.5 5a6.2 6.2 0 0 0 9.5 9.5Z"/>';
+    var partly = isDay
+      ? '<circle cx="8.5" cy="8.5" r="3"/><path d="M8.5 2.5v1.6M2.5 8.5h1.6M4.3 4.3l1.1 1.1M12.7 4.3l-1.1 1.1"/><path d="M9 19h8a3.5 3.5 0 1 0-.7-6.9A4.8 4.8 0 0 0 7 13.8 3 3 0 0 0 9 19Z"/>'
+      : '<path d="M12 6.5A4.5 4.5 0 1 1 6.3 2 3.8 3.8 0 0 0 12 6.5Z"/><path d="M9 19h8a3.5 3.5 0 1 0-.7-6.9A4.8 4.8 0 0 0 7 13.8 3 3 0 0 0 9 19Z"/>';
+    var rain = CLOUD + '<path d="M8.5 20.5l-.8 2M12.5 20.5l-.8 2M16.5 20.5l-.8 2"/>';
+    var fog = CLOUD + '<path d="M5 21h14M7 24h10"/>';
+    var storm = CLOUD + '<path d="M12.5 19.5l-2 3.5h3l-2 3.5"/>';
+    var snow = CLOUD + '<path d="M9 21v.01M12 22.5v.01M15 21v.01"/>';
+    var body;
+    if (code === 0) body = isDay ? sun : moon;
+    else if (code === 1 || code === 2) body = partly;
+    else if (code === 3) body = CLOUD;
+    else if (code === 45 || code === 48) body = fog;
+    else if (code >= 71 && code <= 77) body = snow;
+    else if (code >= 95) body = storm;
+    else if (code >= 51) body = rain;
+    else body = CLOUD;
+    return '<svg viewBox="0 0 24 27" aria-hidden="true" focusable="false">' + body + '</svg>';
+  }
+  function raining(code, precip) {
+    return (precip || 0) > 0 || (code >= 51 && code <= 67) || (code >= 80 && code <= 82) || code >= 95;
+  }
+
+  var url = 'https://api.open-meteo.com/v1/forecast?latitude=35.0894&longitude=-120.6296' +
+    '&current=temperature_2m,apparent_temperature,wind_speed_10m,wind_direction_10m,wind_gusts_10m,weather_code,is_day,precipitation' +
+    '&hourly=temperature_2m,wind_speed_10m,wind_gusts_10m' +
+    '&daily=weather_code,temperature_2m_max,temperature_2m_min,wind_speed_10m_max,wind_gusts_10m_max' +
+    '&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=America/Los_Angeles&forecast_days=7';
+
+  fetch(url).then(function (r) { return r.json(); }).then(function (d) {
+    /* ---- now cards ---- */
+    var c = d.current;
+    document.getElementById('nowTemp').textContent = Math.round(c.temperature_2m) + '°';
+    document.getElementById('nowIcon').innerHTML = icon(c.weather_code, c.is_day === 1);
+    var skyLine = sky(c.weather_code);
+    if (raining(c.weather_code, c.precipitation)) skyLine = 'Raining now · ' + skyLine.toLowerCase();
+    else if (c.weather_code <= 3) skyLine += ' · dry';
+    document.getElementById('nowSky').textContent = skyLine + ' · updated ' + new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+    document.getElementById('nowWind').textContent = dir(c.wind_direction_10m) + ' ' + Math.round(c.wind_speed_10m) + ' mph';
+    // arrow points the way the wind is blowing (out of the compass direction it comes from)
+    var rot = (c.wind_direction_10m + 180) % 360;
+    document.getElementById('nowWindDir').innerHTML =
+      '<span class="wind-arrow"><svg viewBox="0 0 24 24" style="transform:rotate(' + rot + 'deg)" aria-hidden="true"><path d="M12 20V4M12 4l-5 5M12 4l5 5"/></svg></span>' +
+      'blowing from the ' + dir(c.wind_direction_10m);
+    document.getElementById('nowGusts').textContent = Math.round(c.wind_gusts_10m) + ' mph';
+    document.getElementById('nowFeels').textContent = Math.round(c.apparent_temperature) + '°';
+    var g = Math.round(c.wind_gusts_10m);
+    if (g >= 30) {
+      document.getElementById('windWarn').style.display = 'block';
+      document.getElementById('windWarnText').textContent = 'Gusts to ' + g + ' mph right now. Expect heavy blowing sand: goggles on, secure camp, and give the slipfaces extra respect.';
+    } else if (g >= 20) {
+      document.getElementById('windWarn').style.display = 'block';
+      document.getElementById('windWarnText').textContent = 'Gusts to ' + g + ' mph. A stiff afternoon blow: fine for riding, but camp will get sandy. Face doors east.';
+    }
+
+    /* ---- 48h chart ---- */
+    var now = new Date();
+    var hrs = [], H = d.hourly;
+    for (var i = 0; i < H.time.length; i++) {
+      var t = new Date(H.time[i]);
+      if (t >= now && hrs.length < 48) hrs.push({ t: t, temp: H.temperature_2m[i], wind: H.wind_speed_10m[i], gust: H.wind_gusts_10m[i] });
+    }
+    var W = 1000, Hh = 340, padL = 46, padR = 14, padT = 18, padB = 40;
+    var vals = [];
+    hrs.forEach(function (h) { vals.push(h.temp, h.wind, h.gust); });
+    var vMax = Math.ceil(Math.max.apply(null, vals) / 10) * 10 + 5;
+    var vMin = 0;
+    function x(i){ return padL + i * (W - padL - padR) / (hrs.length - 1); }
+    function y(v){ return padT + (1 - (v - vMin) / (vMax - vMin)) * (Hh - padT - padB); }
+    function path(key){ return hrs.map(function (h, i) { return (i ? 'L' : 'M') + x(i).toFixed(1) + ',' + y(h[key]).toFixed(1); }).join(''); }
+    var s = '';
+    // grid + y labels
+    for (var v = 0; v <= vMax; v += 20) {
+      s += '<line x1="' + padL + '" y1="' + y(v) + '" x2="' + (W - padR) + '" y2="' + y(v) + '" stroke="#e8dcc8" stroke-width="1"/>';
+      s += '<text x="' + (padL - 8) + '" y="' + (y(v) + 4) + '" text-anchor="end" font-size="12" fill="#4a5b63" font-family="Inter">' + v + '</text>';
+    }
+    // x labels every 6 hours + midnight markers
+    hrs.forEach(function (h, i) {
+      if (h.t.getHours() % 6 === 0) {
+        var lab = h.t.getHours() === 0 ? h.t.toLocaleDateString('en-US', { weekday: 'short' }) : h.t.toLocaleTimeString('en-US', { hour: 'numeric' }).replace(' ', '').toLowerCase();
+        s += '<text x="' + x(i) + '" y="' + (Hh - 12) + '" text-anchor="middle" font-size="12" fill="' + (h.t.getHours() === 0 ? '#1d2a30' : '#4a5b63') + '" font-weight="' + (h.t.getHours() === 0 ? '700' : '400') + '" font-family="Inter">' + lab + '</text>';
+        if (h.t.getHours() === 0) s += '<line x1="' + x(i) + '" y1="' + padT + '" x2="' + x(i) + '" y2="' + (Hh - padB) + '" stroke="#e8dcc8" stroke-width="1.5"/>';
+      }
+    });
+    s += '<path d="' + path('gust') + '" fill="none" stroke="#0e3a4d" stroke-width="2" stroke-dasharray="5 5" opacity=".35"/>';
+    s += '<path d="' + path('wind') + '" fill="none" stroke="#0e3a4d" stroke-width="2.5"/>';
+    s += '<path d="' + path('temp') + '" fill="none" stroke="#d4552a" stroke-width="2.5"/>';
+    document.getElementById('windChart').innerHTML = s;
+
+    /* ---- 7 day cards ---- */
+    var D = d.daily, cards = '';
+    for (var k = 0; k < D.time.length; k++) {
+      var day = new Date(D.time[k] + 'T12:00:00');
+      cards += '<div class="day"><div class="dn">' + (k === 0 ? 'Today' : day.toLocaleDateString('en-US', { weekday: 'short' })) + '</div>' +
+        '<span class="wx-ico">' + icon(D.weather_code[k], true) + '</span>' +
+        '<div class="sky">' + sky(D.weather_code[k]) + '</div>' +
+        '<div class="hi">' + Math.round(D.temperature_2m_max[k]) + '°</div>' +
+        '<div class="lo">' + Math.round(D.temperature_2m_min[k]) + '°</div>' +
+        '<div class="wnd">' + Math.round(D.wind_speed_10m_max[k]) + ' mph</div></div>';
+    }
+    document.getElementById('dayCards').innerHTML = cards;
+  }).catch(function () {
+    document.getElementById('nowSky').textContent = 'Weather feed is down right now. Try the NWS link below.';
+  });
+})();
+</script>
+</body>
+</html>

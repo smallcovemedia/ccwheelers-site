@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N9HPGB15V1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-N9HPGB15V1');
+// CCWheelers click events: money actions for an info site
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a, button');
+  if (!a || typeof gtag !== 'function') return;
+  var href = a.getAttribute && (a.getAttribute('href') || '');
+  if (href.indexOf('tel:') === 0) {
+    gtag('event', 'phone_call', { page_path: location.pathname });
+  } else if (/^https?:\/\//.test(href) && href.indexOf('ccwheelers.com') === -1) {
+    gtag('event', 'outbound_click', { link_domain: href.split('/')[2] || '', page_path: location.pathname });
+  } else if (location.pathname.indexOf('planner') > -1 && a.tagName === 'BUTTON') {
+    gtag('event', 'planner_use', { button_text: (a.textContent || '').trim().slice(0, 40) });
+  } else if (location.pathname.indexOf('gallery') > -1 && (a.closest('.gallery') || a.querySelector('img'))) {
+    gtag('event', 'gallery_open', {});
+  }
+}, { passive: true });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oceano Dunes Day Use | Fees, Hours &amp; the Pismo Beach OHV Area | CCWheelers</title>
+<meta name="description" content="Day use at Oceano Dunes SVRA: entrance fees, driving on the beach, the OHV area at Post 2, beach wheelchairs, and activities beyond riding.">
+<link rel="canonical" href="https://ccwheelers.com/dayuse.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CCWheelers">
+<meta property="og:title" content="Oceano Dunes Day Use | Fees, Hours &amp; the Pismo Beach OHV Area | CCWheelers">
+<meta property="og:description" content="Day use at Oceano Dunes SVRA: entrance fees, driving on the beach, the OHV area at Post 2, beach wheelchairs, and activities beyond riding.">
+<meta property="og:url" content="https://ccwheelers.com/dayuse.html">
+<meta property="og:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Oceano Dunes Day Use | Fees, Hours &amp; the Pismo Beach OHV Area | CCWheelers">
+<meta name="twitter:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<script src="nav.js" defer></script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html">
+      <span class="logo-chip"><img src="images/ccw-logo.png" alt="Central Coast Wheelers logo"></span>
+      <div class="logo-text">CCWheelers<small>Oceano Dunes Info Center</small></div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="camping.html">Camping</a></li>
+        <li><a href="creek.html">Creek</a></li>
+        <li><a href="tides.html">Tides</a></li>
+        <li><a href="planner.html">Planner</a></li>
+        <li><a href="dayuse.html" class="active">Day Use</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li><a href="news.html">News</a></li>
+        <li class="has-sub">
+          <button class="sub-toggle" aria-expanded="false" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+          <ul class="sub">
+            <li><a href="weather.html">Weather</a></li>
+            <li><a href="gas.html">Gas Prices</a></li>
+            <li><a href="fires.html">Campfires</a></li>
+            <li><a href="rules.html">Rules</a></li>
+            <li><a href="tips.html">Tips</a></li>
+            <li><a href="emergency.html">Emergency</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary nav-book" href="https://www.reservecalifornia.com" target="_blank" rel="noopener">Book a Campsite</a>
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main>
+<div class="page-head">
+  <div class="wrap">
+    <span class="eyebrow">Day Use</span>
+    <h1>A Day at the Dunes</h1>
+    <p>You don't have to camp to experience the only California State Park where you can drive on the beach. Here's what a day visit looks like.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="stat-row">
+      <div class="stat"><div class="n">3,600</div><div class="l">Acres of Park</div></div>
+      <div class="stat"><div class="n">5½ mi</div><div class="l">Of Drivable Beach</div></div>
+      <div class="stat"><div class="n">1,500</div><div class="l">Acres Open to OHVs</div></div>
+      <div class="stat"><div class="n">Only 1</div><div class="l">CA State Park You Can Drive On</div></div>
+    </div>
+
+    <div class="split" style="margin-top:64px">
+      <div>
+        <span class="eyebrow">Getting In</span>
+        <h2 class="section-title">Entrances &amp; Fees</h2>
+        <p class="lede">Enter the beach at Grand Avenue (Grover Beach) or Pier Avenue (Oceano). A day use fee is charged per vehicle at the kiosk.</p>
+        <ul class="rules-list">
+          <li><strong>Day use fee:</strong> $5 per vehicle, sold first come first served at the Grand Avenue and Pier Avenue kiosks.</li>
+          <li><strong>Hours:</strong> vehicle day use runs 7 AM to 10 PM daily.</li>
+          <li><strong>Dogs:</strong> leashed dogs are welcome on the beach. They are prohibited at Oso Flaco Lake and the Pismo State Beach Dune Preserve.</li>
+          <li><strong>Restrooms and cold showers</strong> are available at both park entrances.</li>
+          <li><strong>Accessibility:</strong> sand wheelchairs are available first come, first served at all entrance stations, with ADA restrooms at both entrances. Details at <a href="https://access.parks.ca.gov" rel="noopener">access.parks.ca.gov</a> or (805) 773-7170.</li>
+          <li><strong>Parks passes accepted:</strong> Golden Bear, Senior Golden Bear, Golden Poppy, Explorer, OHV, Disabled Discount, Distinguished Veteran, and State Library passes all work here.</li>
+          <li><strong>Horses welcome:</strong> an equestrian staging area sits near the Grand Avenue beach entrance.</li>
+          <li><strong>RV dump station:</strong> fee-based station on Le Sage Drive, about 0.1 mile north of Grand Avenue.</li>
+          <li><strong>Passenger cars are fine up north.</strong> The northern portion of the beach is easy driving for ordinary cars on firm sand.</li>
+          <li><strong>4WD for the south end.</strong> Four-wheel drive is recommended for reaching the camping and OHV areas.</li>
+          <li><strong>Beach wheelchairs</strong> are available for loan at both the Pier Avenue and Grand Avenue entrances.</li>
+          <li><strong>Speed limit:</strong> 15 MPH on the beach and within 50 feet of any camp or group of people. Sand Highway follows Highway 1 rules up to Pole 11.</li>
+        </ul>
+      </div>
+      <div>
+        <span class="eyebrow">The OHV Area</span>
+        <h2 class="section-title">Post 2 Entrance</h2>
+        <p class="lede">Post 2 is one mile south on the beach from Pier Avenue and marks the beginning of the OHV area.</p>
+        <ul class="rules-list">
+          <li><strong>Transport OHVs to Post 2</strong> before off-loading; riding starts beyond that point.</li>
+          <li><strong>Respect the fences.</strong> Fenced and signed areas are closed either because the property beyond is private or because it holds sensitive plant and animal life.</li>
+          <li><strong>Check the creek.</strong> Arroyo Grande Creek sits between Pier Avenue and Post 2; <a href="creek.html">check its status</a> before heading south.</li>
+        </ul>
+        <div class="callout info">
+          <strong>Beyond the throttle</strong>
+          Surfing, wind surfing, swimming, surf fishing, horseback riding, and bird watching are all popular here. Lifeguard service runs June through Labor Day; if you swim, know how to escape a riptide: swim parallel to shore until you're out of it.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">The Quiet End of the Park</span>
+    <h2 class="section-title">Oso Flaco Lake</h2>
+    <p class="lede">At the southern end of the park, Oso Flaco Lake is a non-motorized day-use area with parking, restrooms, and a one-mile ADA-accessible boardwalk that crosses the lake and leads all the way to the beach. It is one of the best birdwatching spots on the Central Coast: the lake is a key stopover for waterfowl traveling the Pacific Flyway. No vehicles, no dogs, just trails, water, and wings.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--dune)">Posted at the Beach</span>
+    <h2 class="section-title">Surf Smarts &amp; Fishing the Tide</h2>
+    <div class="split" style="margin-top:36px">
+      <div>
+        <h3 style="font-size:26px;margin-bottom:10px">Surviving the Surf</h3>
+        <p style="color:rgba(255,255,255,.85);font-size:15.5px;margin-bottom:14px">This coast earns its warning sign. Three dangers put people in the water every year:</p>
+        <ol class="steps">
+          <li><p><strong>Sleeper waves.</strong> Huge waves that arrive without warning and crash far higher up the beach than normal. Never turn your back on the ocean, and keep kids away from the water's edge.</p></li>
+          <li><p><strong>Rip currents.</strong> Swift rivers of backwash surging out through the surf. Caught in one? Don't fight it: swim parallel to shore until you're free, then angle back in.</p></li>
+          <li><p><strong>Backwash.</strong> On steep beach days, even normal waves rush back toward the sea hard enough to pull you off your feet.</p></li>
+        </ol>
+      </div>
+      <div>
+        <h3 style="font-size:26px;margin-bottom:10px">Surf Fishing</h3>
+        <p style="color:rgba(255,255,255,.85);font-size:15.5px;margin-bottom:14px">A rod, a bucket, and a little tide knowledge is all it takes out here.</p>
+        <ol class="steps">
+          <li><p><strong>Fish the tide, not the clock.</strong> The bite runs from two hours before high tide to two hours after, when fish follow the water in to feed on sand crabs and worms washed out of the sand.</p></li>
+          <li><p><strong>Read the beach.</strong> Deep holes along the shoreline and the edges of rip currents hold fish.</p></li>
+          <li><p><strong>License up.</strong> Anglers 16 and over need a California fishing license. Typical limits: 10 of one species, 20 fish total — check current regulations.</p></li>
+          <li><p><strong>What you'll catch:</strong> barred and walleye surfperch, starry flounder, even California halibut.</p></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split">
+    <div class="panel">
+      <img src="images/rental-buggy.jpg" alt="Family in a rented yellow dune buggy" style="display:block;width:100%" loading="lazy">
+    </div>
+    <div>
+      <span class="eyebrow">No Toys? No Problem</span>
+      <h2 class="section-title">Rent Your Ride at the Dunes</h2>
+      <p class="lede">Four official park concessionaires rent quads, buggies, and side-by-sides right at the entrances — helmets, flags, and a quick lesson included. Show up empty-handed, leave with sand in your teeth.</p>
+      <ul class="rules-list">
+        <li><strong>Arnie's ATV Rentals</strong> · (805) 474-6060 · pismoatvrentals.com</li>
+        <li><strong>BJ's ATV Rentals</strong> · (805) 481-5411 · bjsatvrentals.com</li>
+        <li><strong>Steve's ATV Rentals</strong> · (805) 481-2597 · stevesatvrentals.com</li>
+        <li><strong>Sun Buggie Fun Rentals</strong> · (805) 473-8636 · sunbuggy.com</li>
+      </ul>
+      <div class="callout">
+        <strong>Renting with kids?</strong>
+        The under-18 rules still apply on rentals: safety certificate or direct adult supervision, and helmets always. The rental shops will walk you through it.
+      </div>
+    </div>
+  </div>
+</section>
+<div class="wrap" style="padding:0 24px 72px;text-align:center"><p style="font-size:15px;color:var(--ink-soft);margin-bottom:14px">Coming out? Get a personalized plan with tide windows, checklists, and local tricks.</p><a class="btn btn-primary" href="planner.html">Plan Your Trip</a></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>CCWheelers</h4>
+        <p>The Oceano Dunes Information Center. Built and maintained by Central Coast Wheelers, an OHV community keeping the dunes clean, safe, and open.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="camping.html">Camping</a></li>
+          <li><a href="creek.html">Creek Status</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="planner.html">Trip Planner</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="dayuse.html">Day Use</a></li>
+          <li><a href="rules.html">Rules</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ride</h4>
+        <ul>
+          <li><a href="map.html">Virtual Map</a></li>
+          <li><a href="tips.html">Riding Tips</a></li>
+          <li><a href="emergency.html">Emergency Info</a></li>
+          <li><a href="about.html">About CCW</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Oceano Dunes SVRA<br>928 Pacific Blvd<br>Oceano, CA 93445</li>
+          <li>Info: (805) 473-7220 (recorded)</li>
+          <li>Reservations: (800) 444-7275</li>
+          <li><a href="contact.html">Contact CCWheelers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 CCWheelers.com · Central Coast Wheelers</span>
+      <span>Not an official California State Parks website</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

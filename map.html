@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N9HPGB15V1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-N9HPGB15V1');
+// CCWheelers click events: money actions for an info site
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a, button');
+  if (!a || typeof gtag !== 'function') return;
+  var href = a.getAttribute && (a.getAttribute('href') || '');
+  if (href.indexOf('tel:') === 0) {
+    gtag('event', 'phone_call', { page_path: location.pathname });
+  } else if (/^https?:\/\//.test(href) && href.indexOf('ccwheelers.com') === -1) {
+    gtag('event', 'outbound_click', { link_domain: href.split('/')[2] || '', page_path: location.pathname });
+  } else if (location.pathname.indexOf('planner') > -1 && a.tagName === 'BUTTON') {
+    gtag('event', 'planner_use', { button_text: (a.textContent || '').trim().slice(0, 40) });
+  } else if (location.pathname.indexOf('gallery') > -1 && (a.closest('.gallery') || a.querySelector('img'))) {
+    gtag('event', 'gallery_open', {});
+  }
+}, { passive: true });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oceano Dunes Map | Interactive Riding Area, Camps &amp; GPS Points | CCWheelers</title>
+<meta name="description" content="Interactive satellite map of Oceano Dunes SVRA: camps, gates, Sand Highway, the OHV riding area, creek crossing, and GPS waypoints.">
+<link rel="canonical" href="https://ccwheelers.com/map.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CCWheelers">
+<meta property="og:title" content="Oceano Dunes Map | Interactive Riding Area, Camps &amp; GPS Points | CCWheelers">
+<meta property="og:description" content="Interactive satellite map of Oceano Dunes SVRA: camps, gates, Sand Highway, the OHV riding area, creek crossing, and GPS waypoints.">
+<meta property="og:url" content="https://ccwheelers.com/map.html">
+<meta property="og:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Oceano Dunes Map | Interactive Riding Area, Camps &amp; GPS Points | CCWheelers">
+<meta name="twitter:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="nav.js" defer></script>
+<style>
+  :root{
+    --sand:#f5ede0;
+    --sand-deep:#e8dcc8;
+    --dune:#d9a55b;
+    --dune-dark:#b57f3a;
+    --ocean:#0e3a4d;
+    --ocean-deep:#092835;
+    --sunset:#e26d3a;
+    --sunset-hot:#d4552a;
+    --ink:#1d2a30;
+    --ink-soft:#4a5b63;
+    --radius:14px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',-apple-system,sans-serif;color:var(--ink);background:var(--sand);line-height:1.5;display:flex;flex-direction:column;min-height:100vh}
+  h1,h2,h3{font-family:'Barlow Condensed','Inter',sans-serif;line-height:1.05;text-transform:uppercase;letter-spacing:.5px}
+  .wrap{max-width:1400px;margin:0 auto;padding:0 24px;width:100%}
+
+  header{position:sticky;top:0;z-index:1100;background:rgba(9,40,53,.95);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+  .logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+  .logo-mark{width:42px;height:42px;border-radius:10px;background:linear-gradient(135deg,var(--sunset) 0%,var(--dune) 100%);display:grid;place-items:center;font-family:'Barlow Condensed';font-weight:800;font-size:19px;color:#fff}
+  .logo-text{color:#fff;font-family:'Barlow Condensed';font-weight:700;font-size:22px;letter-spacing:1px;text-transform:uppercase}
+  .logo-text small{display:block;font-family:'Inter';font-size:10px;font-weight:500;letter-spacing:2px;color:var(--dune);text-transform:uppercase}
+  nav ul{display:flex;gap:19px;list-style:none;align-items:center}
+  nav a{color:rgba(255,255,255,.85);text-decoration:none;font-size:13.5px;font-weight:600}
+  nav a:hover{color:var(--dune)}
+  nav a.active{color:var(--dune)}
+  .menu-toggle{display:none;background:none;border:none;color:#fff;font-size:26px;cursor:pointer;padding:6px 10px;line-height:1}
+
+  .page-head{background:var(--ocean);color:#fff;padding:34px 0 30px}
+  .page-head h1{font-size:clamp(30px,4vw,44px);font-weight:800}
+  .page-head p{color:rgba(255,255,255,.78);font-size:15px;max-width:80ch;margin-top:8px}
+  .page-head .eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--dune);margin-bottom:8px}
+
+  .map-shell{flex:1;display:grid;grid-template-columns:330px 1fr;min-height:640px}
+  aside{background:#fff;border-right:1px solid var(--sand-deep);overflow-y:auto;max-height:calc(100vh - 70px)}
+  .side-section{padding:22px 22px 8px}
+  .side-section h3{font-size:17px;color:var(--ocean);letter-spacing:1px;margin-bottom:12px}
+  .zone-key{list-style:none;margin-bottom:14px}
+  .zone-key li{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--ink-soft);padding:7px 0}
+  .swatch{flex:0 0 22px;height:14px;border-radius:4px;margin-top:3px}
+  .poi-list{list-style:none;padding-bottom:20px}
+  .poi-list button{width:100%;text-align:left;background:none;border:none;cursor:pointer;display:flex;gap:10px;align-items:center;padding:9px 8px;border-radius:8px;font-family:'Inter';font-size:14px;color:var(--ink)}
+  .poi-list button:hover{background:var(--sand)}
+  .dot{flex:0 0 12px;height:12px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1.5px rgba(0,0,0,.25)}
+  .poi-list small{display:block;color:var(--ink-soft);font-size:11.5px}
+  .disclaimer{margin:0 22px 22px;background:var(--sand-deep);border-left:4px solid var(--sunset-hot);border-radius:0 8px 8px 0;padding:12px 14px;font-size:12.5px;color:var(--ink-soft)}
+
+  #map{width:100%;height:100%;min-height:640px;background:#cfe4e8}
+  .leaflet-popup-content-wrapper{border-radius:10px;font-family:'Inter'}
+  .leaflet-popup-content{margin:14px 16px}
+  .pop-img{width:100%;max-width:250px;border-radius:8px;margin-bottom:8px;display:block}
+  .pop-title{font-family:'Barlow Condensed';font-weight:700;font-size:19px;text-transform:uppercase;color:var(--ocean);margin-bottom:4px}
+  .pop-cat{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--sunset-hot);margin-bottom:6px}
+  .pop-body{font-size:13.5px;color:var(--ink-soft);line-height:1.5}
+  .pop-gps{margin-top:8px;font-size:11.5px;color:var(--ink-soft);font-family:monospace}
+
+  footer{background:var(--ocean-deep);color:rgba(255,255,255,.55);padding:22px 0;font-size:13px}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer a{color:rgba(255,255,255,.75);text-decoration:none}
+
+  @media(max-width:900px){
+    nav ul{display:none}
+    .menu-toggle{display:block}
+    .nav{position:relative}
+    .menu-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%)}
+    .logo-text{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;width:max-content}
+    .logo-text small{letter-spacing:1.5px}
+    header.nav-open nav>ul{display:flex;flex-direction:column;align-items:stretch;gap:0;position:absolute;top:70px;left:0;right:0;background:var(--ocean-deep);padding:10px 0 14px;border-bottom:1px solid rgba(255,255,255,.12);box-shadow:0 18px 30px rgba(0,0,0,.35);z-index:1200}
+    header.nav-open nav a{display:block;padding:13px 26px;font-size:16px;border-bottom:1px solid rgba(255,255,255,.06)}
+    .map-shell{grid-template-columns:1fr;min-height:0}
+    aside{max-height:none;order:2;border-right:none;border-top:1px solid var(--sand-deep)}
+    #map{min-height:70vh;order:1}
+  }
+  @media(min-width:901px) and (max-width:1250px){nav ul{gap:13px}nav a{font-size:12.5px}.logo-text small{display:none}}
+
+/* ---- v3: nav dropdown, emblems, button polish ---- */
+.btn{display:inline-flex;align-items:center;justify-content:center;line-height:1;text-align:center;padding:13px 26px;border-radius:999px;font-weight:700;font-size:15px;text-decoration:none;transition:transform .15s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--sunset-hot);color:#fff;box-shadow:0 6px 18px rgba(212,85,42,.35)}
+.nav .btn{padding:10px 20px;font-size:14px}
+.icon svg{width:26px;height:26px;stroke:var(--ocean);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.k svg,.cond-k svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:5px}
+.alert svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-2px;margin-right:4px}
+.has-sub{position:relative}
+.sub-toggle{background:none;border:none;color:rgba(255,255,255,.85);font-family:'Inter',sans-serif;font-size:13.5px;font-weight:600;cursor:pointer;padding:0;display:inline-flex;align-items:center;gap:5px}
+.sub-toggle:hover{color:var(--dune)}
+.sub{display:none;position:absolute;top:calc(100% + 18px);right:-14px;background:var(--ocean-deep);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:8px 0;min-width:172px;box-shadow:0 18px 40px rgba(0,0,0,.4);list-style:none;z-index:1300}
+.has-sub.open .sub{display:block}
+.sub li{display:block;margin:0}
+.sub a{display:block;padding:10px 20px;font-size:14px}
+.nav-book{margin-left:4px;white-space:nowrap}
+@media(max-width:1180px){.nav-book{display:none}}
+@media(max-width:900px){
+  nav ul .sub{display:block;position:static;background:none;border:none;box-shadow:none;padding:0;min-width:0}
+  .sub-toggle{display:none}
+  header.nav-open nav .sub a{padding:13px 26px;font-size:16px;color:rgba(255,255,255,.85);border-bottom:1px solid rgba(255,255,255,.06)}
+}
+
+/* ---- v4: real CCW logo ---- */
+.logo-chip{display:flex;align-items:center;flex:0 0 auto}
+.logo-chip img{height:30px;width:auto;display:block}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html">
+      <span class="logo-chip"><img src="images/ccw-logo.png" alt="Central Coast Wheelers logo"></span>
+      <div class="logo-text">CCWheelers<small>Oceano Dunes Info Center</small></div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="camping.html">Camping</a></li>
+        <li><a href="creek.html">Creek</a></li>
+        <li><a href="tides.html">Tides</a></li>
+        <li><a href="planner.html">Planner</a></li>
+        <li><a href="dayuse.html">Day Use</a></li>
+        <li><a href="map.html" class="active">Map</a></li>
+        <li><a href="news.html">News</a></li>
+        <li class="has-sub">
+          <button class="sub-toggle" aria-expanded="false" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+          <ul class="sub">
+            <li><a href="weather.html">Weather</a></li>
+            <li><a href="gas.html">Gas Prices</a></li>
+            <li><a href="fires.html">Campfires</a></li>
+            <li><a href="rules.html">Rules</a></li>
+            <li><a href="tips.html">Tips</a></li>
+            <li><a href="emergency.html">Emergency</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary nav-book" href="https://www.reservecalifornia.com" target="_blank" rel="noopener">Book a Campsite</a>
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<div class="page-head">
+  <div class="wrap">
+    <span class="eyebrow">Interactive Map</span>
+    <h1>Oceano Dunes Virtual Map</h1>
+    <p>Zoom the real satellite view of the dunes. Tap any marker for details, use the sidebar to jump to camps, gates, and landmarks, and toggle zone overlays with the layers control in the corner of the map.</p>
+  </div>
+</div>
+
+<div class="map-shell">
+  <aside>
+    <div class="side-section">
+      <h3>Zones</h3>
+      <ul class="zone-key">
+        <li><span class="swatch" style="background:#3f8ea6"></span><span><strong>Sand Highway:</strong> street-legal beach corridor from Grand Ave to Post 2. Highway 1 rules apply to Pole 11.</span></li>
+        <li><span class="swatch" style="background:rgba(226,109,58,.75)"></span><span><strong>OHV Riding Area:</strong> open riding from Post 2 south to the boundary fence. Green sticker required.</span></li>
+        <li><span class="swatch" style="background:rgba(63,142,70,.75)"></span><span><strong>Beach &amp; Dune Camping:</strong> primitive camping south of Post 2. Reserve at (800) 444-7275.</span></li>
+        <li><span class="swatch" style="background:rgba(180,40,40,.7)"></span><span><strong>Closed / Sensitive:</strong> no vehicles. Nesting exclosures for the snowy plover and least tern (Mar 1 to Sep 30).</span></li>
+      </ul>
+    </div>
+    <div class="side-section">
+      <h3>Points of Interest</h3>
+      <ul class="poi-list" id="poiList"></ul>
+    </div>
+    <div class="disclaimer">
+      Zone boundaries shown are approximate and for orientation only. Fenced and signed areas on the ground are the law: obey all posted signs, fencing, and ranger direction. GPS waypoints come from the original CCWheelers GPS list.
+    </div>
+  </aside>
+  <div id="map"></div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 CCWheelers.com · Central Coast Wheelers</span>
+    <span><a href="index.html">← Back to the Information Center</a></span>
+  </div>
+</footer>
+
+<script>
+const CAT = {
+  gate:     {label:'Gate / Access',   color:'#2f6db3'},
+  camp:     {label:'Named Camp',      color:'#3f8e46'},
+  landmark: {label:'Landmark',        color:'#e26d3a'},
+  safety:   {label:'Safety / Info',   color:'#c23434'},
+  restroom: {label:'Restrooms',       color:'#7a55b5'},
+  facility: {label:'Facilities',      color:'#b57f3a'}
+};
+
+const POINTS = [
+  {name:'Grand Ave Gate', cat:'gate', lat:35.122250, lng:-120.633917,
+   desc:'Northern beach entrance at Grand Avenue in Grover Beach. Street-legal vehicles enter the beach here.'},
+  {name:'Pier Ave Gate', cat:'gate', lat:35.105617, lng:-120.630617, photo:'images/kiosk.jpg',
+   desc:'Main Oceano entrance at Pier Avenue. Pay day use or show your camping reservation at the kiosk. Post 2 and the OHV area are one mile south along the beach.'},
+  {name:'Arroyo Grande Creek Crossing', cat:'safety', lat:35.095667, lng:-120.630517, photo:'images/truck-creek.jpg',
+   desc:'The creek can run deep after storms or Lopez Dam releases. If it is posted closed, crossing means a ticket, no exceptions. Check status before every trip. This photo is what "wait a few hours" prevents.'},
+  {name:'Post 2: OHV Area Begins', cat:'safety', lat:35.091417, lng:-120.630467, photo:'images/post2-speed.jpg',
+   desc:'Northern boundary of the OHV area. All OHVs must be transported to this point before off-loading. Camping is allowed south of here. 15 MPH on the beach, checked by radar.'},
+  {name:'Sand Hwy Info Center', cat:'safety', lat:35.073692, lng:-120.628228, photo:'images/info-center.jpg',
+   desc:'The Dunes Information Center on Sand Highway. The emergency solar-powered call box is on site: know where it is before you need it.'},
+  {name:'Restrooms: Pier Ave Entrance', cat:'restroom', lat:35.105900, lng:-120.629800,
+   desc:'Restrooms at the Pier Avenue entrance area, near the kiosk and boardwalk. Last plumbing before the sand.'},
+  {name:'Restrooms: Grand Ave Entrance', cat:'restroom', lat:35.122000, lng:-120.632900,
+   desc:'Restrooms at the Grand Avenue entrance area in Grover Beach, by the boardwalk.'},
+  {name:'Vault Toilets: Post 2 Area', cat:'restroom', lat:35.090900, lng:-120.629700, photo:'images/vault-toilet.jpg',
+   desc:'Vault toilets near the start of the OHV and camping area. No plumbing, but real walls and a door, and usually stocked with paper. Bring backup.'},
+  {name:'Vault Toilets: Camping Beach (mid)', cat:'restroom', lat:35.082000, lng:-120.629800, photo:'images/vault-toilet.jpg',
+   desc:'Vault and chemical toilets are placed along the camping beach. Chemical units move seasonally with use, so positions are approximate: you will spot the tan boxes from the beach lane.'},
+  {name:'Vault Toilets: Sand Hwy Info Center', cat:'restroom', lat:35.074100, lng:-120.627700, photo:'images/vault-toilet.jpg',
+   desc:'Facilities near the Dunes Information Center at Sand Highway.'},
+  {name:'Mid Ramps', cat:'landmark', lat:35.110342, lng:-120.631694,
+   desc:'Well-known ramp area on the northern stretch of the beach.'},
+  {name:'Worm Valley Camp', cat:'camp', lat:35.073536, lng:-120.623717,
+   desc:'Named camp in the open dunes east of the beach.'},
+  {name:'BBQ Flats Camp', cat:'camp', lat:35.071758, lng:-120.622558,
+   desc:'Popular flat camping area in the dunes, a short run from Sand Highway.'},
+  {name:'Cottonwood Camp', cat:'camp', lat:35.060206, lng:-120.621744,
+   desc:'Named dune camp on the way south toward Competition Hill.'},
+  {name:'Eucalyptus Camp', cat:'camp', lat:35.054464, lng:-120.622206,
+   desc:'Named dune camp just north of Competition Hill.'},
+  {name:'Boy Scout Camp', cat:'camp', lat:35.045789, lng:-120.614339,
+   desc:'Named camp in the southeastern dunes near the Tosco Gate.'},
+  {name:'Competition Hill', cat:'landmark', lat:35.047178, lng:-120.621128,
+   desc:'The famous hill climb at the south end of the riding area. Watch for other riders and know your slipfaces: they normally face east.'},
+  {name:'Vent Pipe', cat:'landmark', lat:35.042542, lng:-120.618486,
+   desc:'Longtime navigation landmark in the southern dunes.'},
+  {name:'Tosco Gate', cat:'gate', lat:35.041050, lng:-120.613075,
+   desc:'Pipeline service gate on the southeastern edge of the riding area. Closed to public vehicles.'},
+  {name:'Bone Yard Gate (to Oso Flaco Lake)', cat:'gate', lat:35.034747, lng:-120.629633,
+   desc:'Gate toward the Oso Flaco Lake area, named for the "skinny bear" of Portola\'s 1769 expedition. The area beyond is closed to vehicles.'},
+  {name:'South Boundary Fence', cat:'safety', lat:35.042217, lng:-120.632700,
+   desc:'Southern limit of the riding area, fence at the surf line. Everything beyond is closed to protect sensitive plant and animal life.'},
+  {name:'RV Dump Station (Le Sage Dr)', cat:'facility', lat:35.126600, lng:-120.620300,
+   desc:'Fee-based dump station on Le Sage Drive in Grover Beach, just north of the Grand Avenue entrance. Location approximate. Dumping gray water on the beach is prohibited by state law.'},
+  {name:'Oceano Dunes Visitor Center', cat:'facility', lat:35.108400, lng:-120.627000,
+   desc:'Park visitor center near Pier Avenue and the Oceano Campground. Location approximate.'},
+  {name:'Oso Flaco Lake Day Use', cat:'facility', lat:35.031700, lng:-120.620300,
+   desc:'Non-motorized day-use area at the south end of the park: parking, restrooms, birdwatching, and a 1-mile ADA-accessible boardwalk across the lake to the beach. No vehicles, no dogs.'},
+  {name:'Equestrian Staging Area', cat:'facility', lat:35.122100, lng:-120.631200,
+   desc:'Horse trailer staging near the Grand Avenue beach entrance. Horses share the beach and have the right of way. Location approximate.'},
+  {name:'Trash Receptacles at Post 2', cat:'facility', lat:35.091200, lng:-120.629900,
+   desc:'Deposit all trash in the designated receptacles at Post 2, or pack it out. Keeping the park clean keeps it open.'}
+];
+
+function toDMS(v, isLat){
+  const dir = isLat ? (v>=0?'N':'S') : (v>=0?'E':'W');
+  v = Math.abs(v);
+  const d = Math.floor(v), m = Math.floor((v-d)*60), s = ((v-d)*60-m)*60;
+  return `${d}°${String(m).padStart(2,'0')}'${s.toFixed(1)}"${dir}`;
+}
+
+const map = L.map('map', {scrollWheelZoom:true}).setView([35.076,-120.622], 13);
+
+const sat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+  maxZoom: 18,
+  attribution: 'Imagery © Esri, Maxar, Earthstar Geographics'
+}).addTo(map);
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}', {
+  maxZoom: 18, attribution: 'Labels © Esri'
+}).addTo(map);
+
+// ---- Zones (approximate, for orientation) ----
+const sandHwy = L.polyline([
+  [35.122250,-120.633917],[35.105617,-120.630617],[35.095667,-120.630517],[35.091417,-120.630467]
+], {color:'#3f8ea6', weight:6, opacity:.9, dashArray:'10 8'});
+sandHwy.bindPopup('<div class="pop-title">Sand Highway</div><div class="pop-cat">Street-Legal Corridor</div><div class="pop-body">A legal extension of Highway 1. Seatbelts, speed limits, helmet law, and DUI enforcement all apply up to Pole 11. Watch for pedestrians and camps.</div>');
+
+const ohvZone = L.polygon([
+  [35.091417,-120.6335],[35.091417,-120.6180],[35.0740,-120.6165],[35.0600,-120.6130],
+  [35.0470,-120.6080],[35.0420,-120.6125],[35.042217,-120.6335]
+], {color:'#e26d3a', weight:2, fillColor:'#e26d3a', fillOpacity:.16});
+ohvZone.bindPopup('<div class="pop-title">OHV Riding Area</div><div class="pop-cat">Post 2 South to the Boundary</div><div class="pop-body">Open riding begins at Post 2. Every OHV needs a current DMV green sticker. Fenced and signed areas inside the zone are closed to protect private property and sensitive habitat.</div>');
+
+const campZone = L.polygon([
+  [35.091417,-120.6320],[35.091417,-120.6215],[35.0725,-120.6195],[35.0530,-120.6190],
+  [35.0530,-120.6300]
+], {color:'#3f8e46', weight:2, dashArray:'6 6', fillColor:'#3f8e46', fillOpacity:.14});
+campZone.bindPopup('<div class="pop-title">Beach &amp; Dune Camping</div><div class="pop-cat">South of Post 2</div><div class="pop-body">Primitive camping on the beach and in the open dunes. Vault and chemical toilets provided; bring water and pack out trash. 4WD strongly recommended. Reservations: (800) 444-7275.</div>');
+
+const closedZone = L.polygon([
+  [35.042217,-120.6340],[35.0420,-120.6125],[35.0470,-120.6080],[35.0470,-120.6010],
+  [35.0250,-120.6010],[35.0250,-120.6360]
+], {color:'#b42828', weight:2, fillColor:'#b42828', fillOpacity:.18});
+closedZone.bindPopup('<div class="pop-title">Closed / Sensitive Area</div><div class="pop-cat">No Vehicles</div><div class="pop-body">Closed to vehicular use to protect the Oso Flaco area and habitat for the threatened snowy plover and endangered California least tern. Nesting exclosures go up March 1 through September 30.</div>');
+
+// ---- Markers ----
+const groups = {gate:L.layerGroup(), camp:L.layerGroup(), landmark:L.layerGroup(), safety:L.layerGroup(), restroom:L.layerGroup(), facility:L.layerGroup()};
+const markers = [];
+
+POINTS.forEach((p,i)=>{
+  const m = L.circleMarker([p.lat,p.lng], {
+    radius:9, color:'#ffffff', weight:2.5, fillColor:CAT[p.cat].color, fillOpacity:1
+  });
+  m.bindPopup(
+    (p.photo ? `<img class="pop-img" src="${p.photo}" alt="${p.name}" loading="lazy">` : '')+
+    `<div class="pop-title">${p.name}</div>`+
+    `<div class="pop-cat">${CAT[p.cat].label}</div>`+
+    `<div class="pop-body">${p.desc}</div>`+
+    `<div class="pop-gps">${toDMS(p.lat,true)} · ${toDMS(p.lng,false)}</div>`,
+    {maxWidth: 280}
+  );
+  m.addTo(groups[p.cat]);
+  markers[i] = m;
+});
+Object.values(groups).forEach(g=>g.addTo(map));
+sandHwy.addTo(map); ohvZone.addTo(map); campZone.addTo(map); closedZone.addTo(map);
+
+L.control.layers(null, {
+  'Sand Highway': sandHwy,
+  'OHV Riding Area': ohvZone,
+  'Camping Zone': campZone,
+  'Closed / Sensitive': closedZone,
+  'Gates & Access': groups.gate,
+  'Named Camps': groups.camp,
+  'Landmarks': groups.landmark,
+  'Safety & Info': groups.safety,
+  'Restrooms': groups.restroom,
+  'Facilities': groups.facility
+}, {collapsed:true, position:'topright'}).addTo(map);
+
+L.control.scale({imperial:true, metric:false}).addTo(map);
+
+// ---- Sidebar list ----
+const list = document.getElementById('poiList');
+POINTS.forEach((p,i)=>{
+  const li = document.createElement('li');
+  const btn = document.createElement('button');
+  btn.innerHTML = `<span class="dot" style="background:${CAT[p.cat].color}"></span><span>${p.name}<small>${CAT[p.cat].label}</small></span>`;
+  btn.addEventListener('click', ()=>{
+    map.flyTo([p.lat,p.lng], 16, {duration:.8});
+    setTimeout(()=>markers[i].openPopup(), 850);
+    if (window.innerWidth <= 900) document.getElementById('map').scrollIntoView({behavior:'smooth'});
+  });
+  li.appendChild(btn);
+  list.appendChild(li);
+});
+
+// Fit everything on first load
+const fitAll = () => map.fitBounds(L.featureGroup(markers).getBounds().pad(0.12));
+fitAll();
+// Re-validate after layout settles: a container that was 0-wide at init
+// (slow load, hidden tab, orientation change) leaves the map blank otherwise.
+window.addEventListener('load', () => { map.invalidateSize(); fitAll(); });
+setTimeout(() => { if (map.getSize().x === 0) { map.invalidateSize(); fitAll(); } }, 800);
+window.addEventListener('resize', () => map.invalidateSize());
+</script>
+
+</body>
+</html>

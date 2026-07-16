@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N9HPGB15V1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-N9HPGB15V1');
+// CCWheelers click events: money actions for an info site
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a, button');
+  if (!a || typeof gtag !== 'function') return;
+  var href = a.getAttribute && (a.getAttribute('href') || '');
+  if (href.indexOf('tel:') === 0) {
+    gtag('event', 'phone_call', { page_path: location.pathname });
+  } else if (/^https?:\/\//.test(href) && href.indexOf('ccwheelers.com') === -1) {
+    gtag('event', 'outbound_click', { link_domain: href.split('/')[2] || '', page_path: location.pathname });
+  } else if (location.pathname.indexOf('planner') > -1 && a.tagName === 'BUTTON') {
+    gtag('event', 'planner_use', { button_text: (a.textContent || '').trim().slice(0, 40) });
+  } else if (location.pathname.indexOf('gallery') > -1 && (a.closest('.gallery') || a.querySelector('img'))) {
+    gtag('event', 'gallery_open', {});
+  }
+}, { passive: true });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tips &amp; Tricks | CCWheelers Oceano Dunes</title>
+<meta name="description" content="Field-tested Oceano Dunes riding tips: dune driving for trucks and buggies, slipface safety, getting unstuck, and swimming safety.">
+<link rel="canonical" href="https://ccwheelers.com/tips.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CCWheelers">
+<meta property="og:title" content="Tips &amp; Tricks | CCWheelers Oceano Dunes">
+<meta property="og:description" content="Field-tested Oceano Dunes riding tips: dune driving for trucks and buggies, slipface safety, getting unstuck, and swimming safety.">
+<meta property="og:url" content="https://ccwheelers.com/tips.html">
+<meta property="og:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tips &amp; Tricks | CCWheelers Oceano Dunes">
+<meta name="twitter:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<script src="nav.js" defer></script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html">
+      <span class="logo-chip"><img src="images/ccw-logo.png" alt="Central Coast Wheelers logo"></span>
+      <div class="logo-text">CCWheelers<small>Oceano Dunes Info Center</small></div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="camping.html">Camping</a></li>
+        <li><a href="creek.html">Creek</a></li>
+        <li><a href="tides.html">Tides</a></li>
+        <li><a href="planner.html">Planner</a></li>
+        <li><a href="dayuse.html">Day Use</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li><a href="news.html">News</a></li>
+        <li class="has-sub">
+          <button class="sub-toggle" aria-expanded="false" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+          <ul class="sub">
+            <li><a href="weather.html">Weather</a></li>
+            <li><a href="gas.html">Gas Prices</a></li>
+            <li><a href="fires.html">Campfires</a></li>
+            <li><a href="rules.html">Rules</a></li>
+            <li><a href="tips.html" class="active">Tips</a></li>
+            <li><a href="emergency.html">Emergency</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary nav-book" href="https://www.reservecalifornia.com" target="_blank" rel="noopener">Book a Campsite</a>
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main>
+<div class="page-head">
+  <div class="wrap">
+    <span class="eyebrow">Local Knowledge</span>
+    <h1>Tips &amp; Tricks</h1>
+    <p>Decades of dune experience, condensed. Read this before your first trip in. It's cheaper than learning it the hard way.</p>
+  </div>
+</div>
+
+<section style="padding-bottom:0">
+  <div class="wrap">
+    <div class="callout" style="margin-top:0;font-size:17px">
+      <strong>The #1 rule</strong>
+      GO SLOW when you are going into the dunes. Most serious accidents happen on the way in.
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow">Every Rider</span>
+      <h2 class="section-title">Ride Smart</h2>
+      <ul class="rules-list">
+        <li><strong>Take a safety course.</strong> Formal ATV training under a certified instructor is recommended for everyone and mandatory for riders under 18.</li>
+        <li><strong>Gear up.</strong> Every ATV rider must wear a helmet and should wear proper protective clothing.</li>
+        <li><strong>Learn the terrain first.</strong> Know the telltale signs of a slipface before you need to. Avoid surprises.</li>
+        <li><strong>Be cautious heading east.</strong> Slipfaces normally face east; the steep drop is on the side you can't see coming.</li>
+        <li><strong>Know your controls</strong> cold before you open it up, and ride within your limits. When in doubt, stop and look it over.</li>
+        <li><strong>Ride with a buddy.</strong> Going off into the dunes alone is not recommended.</li>
+      </ul>
+    </div>
+    <div>
+      <span class="eyebrow">Trucks &amp; Buggies</span>
+      <h2 class="section-title">Four Wheels in the Dunes</h2>
+      <ul class="rules-list">
+        <li><strong>Focus on the short-term horizons.</strong> Drive in arcing right-hand turns to come parallel with them so you can see into the slipfaces. Some drop 100 feet straight down.</li>
+        <li><strong>Never drive straight up to a horizon.</strong> You can't see the conditions ahead, and stopping on an uphill (or hoping for the best) is how bad days start.</li>
+        <li><strong>Buggies: use angles.</strong> Trucks can usually take a dune slow and straight-on, but a lighter buggy will high-center and sink to the frame. Enter and exit dunes on a slight angle.</li>
+        <li><strong>Exit at an angle too</strong> so you don't high-center going up and out.</li>
+        <li><strong>Never brake or fully lift off the throttle</strong> while climbing a dune.</li>
+        <li><strong>Bring a tow rope.</strong> Most dune rescues take two.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow" style="color:var(--dune)">Recovery</span>
+      <h2 class="section-title">If You Get Stuck</h2>
+      <ol class="steps">
+        <li><p><strong>Air down.</strong> Drop tire pressure, but not below 15 PSI.</p></li>
+        <li><p><strong>Dig out</strong> the sand from around your tires.</p></li>
+        <li><p><strong>Push straight.</strong> Recruit friends, keep the front wheels straight, and drive gently forward or backward. Never spin the wheels; that only digs you deeper.</p></li>
+        <li><p><strong>Call for a tow</strong> if all else fails; beach towing is available.</p></li>
+      </ol>
+      <div class="callout" style="background:rgba(255,255,255,.08);color:#fff">
+        <strong>Before you enter the park</strong>
+        Find a real tow point on your vehicle. Most newer cars are wrapped in plastic below the frame, so a strap on a bumper cover rips panels off instead of recovering the car. If your vehicle has no safe towing access, don't drive it on the sand.
+      </div>
+    </div>
+    <div>
+      <span class="eyebrow" style="color:var(--dune)">In the Water</span>
+      <h2 class="section-title">Swimming &amp; Riptides</h2>
+      <p class="lede">Dangerous currents called riptides form from the combination of wave action and the shape of the shoreline.</p>
+      <ul class="rules-list warn">
+        <li><strong>Caught in a rip? Don't fight it.</strong> Never swim against the current.</li>
+        <li><strong>Swim parallel to the shore</strong> until you're out of the rip, then make your way in.</li>
+        <li><strong>Lifeguards are on duty</strong> at Oceano Dunes SVRA from June through Labor Day.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split">
+    <div class="panel">
+      <img src="images/dropoff-warning.jpg" alt="Warning sign: dune conditions are always changing, be prepared for sudden drop-offs" style="display:block;width:100%" loading="lazy">
+    </div>
+    <div>
+      <span class="eyebrow">The Sign Says It All</span>
+      <h2 class="section-title">Dune Conditions Are Always Changing</h2>
+      <p class="lede">The park posts exactly one warning in big letters: be prepared for sudden drop-offs. The wind rebuilds the dunes constantly, so the clean crest you launched last month may be a 30-foot slipface today.</p>
+      <ul class="rules-list warn">
+        <li><strong>Crest slow the first time, every time</strong> — even on lines you know.</li>
+        <li><strong>Ride with a buddy</strong> and always expect to meet someone on a blind crest or curve.</li>
+        <li><strong>Carry a small tool kit:</strong> spark plugs, first aid, and drinking water. Take breaks — fatigue is when people get hurt.</li>
+        <li><strong>Gasoline is for engines only.</strong> Not for starting campfires, not for cleaning parts.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+<div class="wrap" style="padding:0 24px 72px;text-align:center"><p style="font-size:15px;color:var(--ink-soft);margin-bottom:14px">Coming out? Get a personalized plan with tide windows, checklists, and local tricks.</p><a class="btn btn-primary" href="planner.html">Plan Your Trip</a></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>CCWheelers</h4>
+        <p>The Oceano Dunes Information Center. Built and maintained by Central Coast Wheelers, an OHV community keeping the dunes clean, safe, and open.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="camping.html">Camping</a></li>
+          <li><a href="creek.html">Creek Status</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="planner.html">Trip Planner</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="dayuse.html">Day Use</a></li>
+          <li><a href="rules.html">Rules</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ride</h4>
+        <ul>
+          <li><a href="map.html">Virtual Map</a></li>
+          <li><a href="tips.html">Riding Tips</a></li>
+          <li><a href="emergency.html">Emergency Info</a></li>
+          <li><a href="about.html">About CCW</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Oceano Dunes SVRA<br>928 Pacific Blvd<br>Oceano, CA 93445</li>
+          <li>Info: (805) 473-7220 (recorded)</li>
+          <li>Reservations: (800) 444-7275</li>
+          <li><a href="contact.html">Contact CCWheelers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 CCWheelers.com · Central Coast Wheelers</span>
+      <span>Not an official California State Parks website</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

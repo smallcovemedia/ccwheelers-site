@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N9HPGB15V1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-N9HPGB15V1');
+// CCWheelers click events: money actions for an info site
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a, button');
+  if (!a || typeof gtag !== 'function') return;
+  var href = a.getAttribute && (a.getAttribute('href') || '');
+  if (href.indexOf('tel:') === 0) {
+    gtag('event', 'phone_call', { page_path: location.pathname });
+  } else if (/^https?:\/\//.test(href) && href.indexOf('ccwheelers.com') === -1) {
+    gtag('event', 'outbound_click', { link_domain: href.split('/')[2] || '', page_path: location.pathname });
+  } else if (location.pathname.indexOf('planner') > -1 && a.tagName === 'BUTTON') {
+    gtag('event', 'planner_use', { button_text: (a.textContent || '').trim().slice(0, 40) });
+  } else if (location.pathname.indexOf('gallery') > -1 && (a.closest('.gallery') || a.querySelector('img'))) {
+    gtag('event', 'gallery_open', {});
+  }
+}, { passive: true });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trip Planner | Plan Your Oceano Dunes Trip | CCWheelers</title>
+<meta name="description" content="Free Oceano Dunes trip planner: pick your dates, vehicle, and gear, and get a personalized plan with tide-timed arrival windows, camp placement advice, a gear checklist, and local tips.">
+<link rel="canonical" href="https://ccwheelers.com/planner.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CCWheelers">
+<meta property="og:title" content="Trip Planner | Plan Your Oceano Dunes Trip | CCWheelers">
+<meta property="og:description" content="Free Oceano Dunes trip planner: pick your dates, vehicle, and gear, and get a personalized plan with tide-timed arrival windows, camp placement advice, a gear checklist, and local tips.">
+<meta property="og:url" content="https://ccwheelers.com/planner.html">
+<meta property="og:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Trip Planner | Plan Your Oceano Dunes Trip | CCWheelers">
+<meta name="twitter:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .plan-form{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:34px;margin-top:-34px;position:relative;z-index:5}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px 28px}
+  .field{min-width:0}
+  .field label{display:block;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-soft);margin-bottom:7px}
+  .field input[type=date],.field input[type=time],.field select{width:100%;min-width:0;max-width:100%;box-sizing:border-box;padding:12px 14px;border:2px solid var(--sand-deep);border-radius:10px;font-family:'Inter';font-size:15px;color:var(--ink);background:#fff}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--ocean)}
+  input[type=date]::-webkit-date-and-time-value,input[type=time]::-webkit-date-and-time-value{text-align:left}
+  .field .pair{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:10px}
+  fieldset{border:none;grid-column:1/-1}
+  fieldset legend{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px}
+  .checks{display:flex;flex-wrap:wrap;gap:10px}
+  .checks label{display:flex;align-items:center;gap:8px;background:var(--sand);border:2px solid transparent;border-radius:999px;padding:9px 18px;font-size:14.5px;font-weight:600;cursor:pointer;user-select:none}
+  .checks label:has(input:checked){background:var(--ocean);color:#fff;border-color:var(--ocean)}
+  .checks input{accent-color:var(--sunset-hot)}
+  .plan-form .btn{border:none;cursor:pointer;font-family:'Inter';font-size:16px;margin-top:24px}
+  .form-err{color:#c8401f;font-weight:600;font-size:14px;margin-top:12px;display:none}
+
+  /* ---- Generated plan ---- */
+  #planOut{display:none}
+  .plan-head{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap}
+  .print-btn{border:2px solid var(--ocean);background:#fff;color:var(--ocean);font-weight:700;font-size:14px;padding:10px 20px;border-radius:999px;cursor:pointer;font-family:'Inter'}
+  .print-btn:hover{background:var(--ocean);color:#fff}
+  .tide-day{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:24px 26px;margin-top:18px}
+  .tide-day h3{font-size:22px;color:var(--ocean);margin-bottom:8px}
+  .tide-day .evs{display:flex;flex-wrap:wrap;gap:14px;margin:10px 0 4px}
+  .ev{background:var(--sand);border-radius:10px;padding:8px 14px;font-size:13.5px;font-weight:600}
+  .ev.hi{border-left:4px solid var(--ocean)}
+  .ev.lo{border-left:4px solid var(--dune-dark)}
+  .advice{margin-top:10px;font-size:14.5px;color:var(--ink-soft)}
+  .advice strong{color:var(--ink)}
+  .warn-box{background:#fdeae3;border-left:5px solid var(--sunset-hot);border-radius:0 10px 10px 0;padding:14px 18px;margin-top:12px;font-size:14.5px}
+  .ok-box{background:#e8f5ec;border-left:5px solid #2e9e52;border-radius:0 10px 10px 0;padding:14px 18px;margin-top:12px;font-size:14.5px}
+
+  .check-group{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 28px;margin-top:18px}
+  .check-group h3{font-size:21px;color:var(--ocean);margin-bottom:12px}
+  .check-group ul{list-style:none}
+  .check-group li{padding:8px 0;border-bottom:1px solid var(--sand-deep)}
+  .check-group li:last-child{border-bottom:none}
+  .check-group label{display:flex;gap:12px;align-items:flex-start;cursor:pointer;font-size:15px}
+  .check-group input{margin-top:4px;width:17px;height:17px;accent-color:var(--sunset-hot);flex:0 0 17px}
+  .check-group label:has(input:checked) span{text-decoration:line-through;opacity:.5}
+
+  @media(max-width:760px){
+    .form-grid{grid-template-columns:minmax(0,1fr);gap:16px}
+    .plan-form{padding:20px 16px;margin-top:-24px}
+    .field .pair{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:10px}
+    .field input[type=date],.field input[type=time]{padding:12px 10px;font-size:14.5px}
+    .checks{gap:8px}
+    .checks label{padding:8px 13px;font-size:13.5px}
+    .plan-form .btn{width:100%;text-align:center}
+    .plan-head{flex-direction:column;align-items:stretch}
+    .print-btn{align-self:flex-start}
+    .tide-day{padding:18px 16px}
+    .tide-day .evs{gap:8px}
+    .ev{font-size:12.5px;padding:7px 10px}
+    .check-group{padding:18px 14px}
+    .warn-box,.ok-box{padding:12px 14px;font-size:13.5px}
+  }
+  @media print{
+    header,footer,.page-head,.plan-form,.print-btn,.cond-note{display:none !important}
+    body{background:#fff}
+    #planOut{display:block !important}
+    .tide-day,.check-group{box-shadow:none;border:1px solid #ddd;break-inside:avoid}
+  }
+</style>
+<script src="nav.js" defer></script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html">
+      <span class="logo-chip"><img src="images/ccw-logo.png" alt="Central Coast Wheelers logo"></span>
+      <div class="logo-text">CCWheelers<small>Oceano Dunes Info Center</small></div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="camping.html">Camping</a></li>
+        <li><a href="creek.html">Creek</a></li>
+        <li><a href="tides.html">Tides</a></li>
+        <li><a href="planner.html" class="active">Planner</a></li>
+        <li><a href="dayuse.html">Day Use</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li><a href="news.html">News</a></li>
+        <li class="has-sub">
+          <button class="sub-toggle" aria-expanded="false" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+          <ul class="sub">
+            <li><a href="weather.html">Weather</a></li>
+            <li><a href="gas.html">Gas Prices</a></li>
+            <li><a href="fires.html">Campfires</a></li>
+            <li><a href="rules.html">Rules</a></li>
+            <li><a href="tips.html">Tips</a></li>
+            <li><a href="emergency.html">Emergency</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary nav-book" href="https://www.reservecalifornia.com" target="_blank" rel="noopener">Book a Campsite</a>
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main>
+<div class="page-head" style="padding-bottom:80px">
+  <div class="wrap">
+    <span class="eyebrow">Free Trip Planner</span>
+    <h1>Plan Your Oceano Dunes Trip</h1>
+    <p>Tell us when you're coming, what you're driving, and what you're bringing. We'll build you a personalized plan: tide-timed arrival and departure windows, where to set camp so you don't wake up in the water, a gear checklist, and the tricks locals wish everyone knew.</p>
+  </div>
+</div>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <form class="plan-form" id="tripForm">
+      <div class="form-grid">
+        <div class="field">
+          <label for="arriveDate">Arriving</label>
+          <div class="pair">
+            <input type="date" id="arriveDate" required>
+            <input type="time" id="arriveTime" value="10:00">
+          </div>
+        </div>
+        <div class="field">
+          <label for="departDate">Leaving</label>
+          <div class="pair">
+            <input type="date" id="departDate" required>
+            <input type="time" id="departTime" value="14:00">
+          </div>
+        </div>
+        <div class="field">
+          <label for="vehicle">Your Vehicle</label>
+          <select id="vehicle">
+            <option value="4wd">4WD truck or SUV</option>
+            <option value="2wd">2WD vehicle</option>
+            <option value="rv">RV or trailer in tow</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="tripType">Trip Type</label>
+          <select id="tripType">
+            <option value="camp">Beach camping overnight</option>
+            <option value="offsite">Staying off-beach (RV park / hotel), riding days</option>
+            <option value="day">Day trip</option>
+          </select>
+        </div>
+        <fieldset>
+          <legend>Bringing Any Toys?</legend>
+          <div class="checks">
+            <label><input type="checkbox" id="bAtv">ATVs / quads</label>
+            <label><input type="checkbox" id="bSxs">Side-by-side / UTV</label>
+            <label><input type="checkbox" id="bBike">Dirt bikes</label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Crew &amp; Camp Plans</legend>
+          <div class="checks">
+            <label><input type="checkbox" id="bKids">Riders under 18</label>
+            <label><input type="checkbox" id="bFire">Campfire</label>
+            <label><input type="checkbox" id="bDog">Bringing a dog</label>
+            <label><input type="checkbox" id="bClam">Want to try clamming</label>
+          </div>
+        </fieldset>
+        <div class="field" style="grid-column:1/-1">
+          <label for="rideDesc">Describe Your Ride (Optional — We'll Tune the Plan to It)</label>
+          <textarea id="rideDesc" rows="2" placeholder="e.g. RZR Turbo on paddle tires, stock Tacoma, sand rail, Banshee, Jeep on 35s…" style="width:100%;padding:12px 14px;border:2px solid var(--sand-deep);border-radius:10px;font-family:'Inter';font-size:15px;color:var(--ink);resize:vertical"></textarea>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Build My Trip Plan</button>
+      <p class="cond-note" style="margin-top:10px">Your trip details are saved on this device, so your plan is one click away next time.</p>
+      <p class="form-err" id="formErr">Please pick an arrival and departure date (departure can't be before arrival).</p>
+    </form>
+  </div>
+</section>
+
+<section style="padding-top:0" id="planSection">
+  <div class="wrap" id="planOut">
+    <div class="plan-head">
+      <div>
+        <span class="eyebrow">Your Personalized Plan</span>
+        <h2 class="section-title" id="planTitle">Your Trip</h2>
+      </div>
+      <button class="print-btn" onclick="window.print()">🖨 Print / Save as PDF</button>
+    </div>
+    <p class="lede" id="planIntro"></p>
+    <div id="tideIntel"></div>
+    <div id="recs"></div>
+    <h2 class="section-title" style="margin-top:56px;font-size:34px">Your Checklist</h2>
+    <div id="checklists"></div>
+    <p class="cond-note" style="margin-top:20px">Tide predictions from NOAA station 9412110 (Port San Luis). Conditions change: check the <a href="creek.html">creek status</a> the morning you leave, and confirm fire rules at the entrance station. Reservations: (800) 444-7275.</p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>CCWheelers</h4>
+        <p>The Oceano Dunes Information Center. Built and maintained by Central Coast Wheelers, an OHV community keeping the dunes clean, safe, and open.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="camping.html">Camping</a></li>
+          <li><a href="creek.html">Creek Status</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="planner.html">Trip Planner</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="tides.html">Tides</a></li>
+          <li><a href="rules.html">Rules</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ride</h4>
+        <ul>
+          <li><a href="map.html">Virtual Map</a></li>
+          <li><a href="tips.html">Riding Tips</a></li>
+          <li><a href="emergency.html">Emergency Info</a></li>
+          <li><a href="about.html">About CCW</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Oceano Dunes SVRA<br>928 Pacific Blvd<br>Oceano, CA 93445</li>
+          <li>Info: (805) 473-7220 (recorded)</li>
+          <li>Reservations: (800) 444-7275</li>
+          <li><a href="contact.html">Contact CCWheelers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 CCWheelers.com · Central Coast Wheelers</span>
+      <span>Not an official California State Parks website</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var BASE = 'https://api.tidesandcurrents.noaa.gov/api/prod/datagetter' +
+    '?product=predictions&application=ccwheelers&datum=MLLW&station=9412110' +
+    '&time_zone=lst_ldt&units=english&interval=hilo&format=json';
+
+  function ymd(d){return ''+d.getFullYear()+('0'+(d.getMonth()+1)).slice(-2)+('0'+d.getDate()).slice(-2);}
+  function fmtT(d){return d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});}
+  function fmtD(d){return d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});}
+  function fmtDs(d){return d.toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});}
+  function parseT(t){return new Date(t.replace(' ','T'));}
+
+  /* default dates: this coming Friday->Sunday */
+  var today = new Date();
+  var fri = new Date(today); fri.setDate(fri.getDate() + ((5 - fri.getDay() + 7) % 7 || 7));
+  var sun = new Date(fri); sun.setDate(sun.getDate() + 2);
+  function iso(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
+  document.getElementById('arriveDate').value = iso(fri);
+  document.getElementById('departDate').value = iso(sun);
+
+  /* ---- save & recall trip details on this device ---- */
+  var FIELDS = ['arriveDate','arriveTime','departDate','departTime','vehicle','tripType','rideDesc'];
+  var BOXES = ['bAtv','bSxs','bBike','bKids','bFire','bDog','bClam'];
+  function saveTrip() {
+    try {
+      var d = {};
+      FIELDS.forEach(function (id) { d[id] = document.getElementById(id).value; });
+      BOXES.forEach(function (id) { d[id] = document.getElementById(id).checked; });
+      localStorage.setItem('ccw_trip', JSON.stringify(d));
+    } catch (e) {}
+  }
+  (function restoreTrip() {
+    try {
+      var d = JSON.parse(localStorage.getItem('ccw_trip') || 'null');
+      if (!d) return;
+      /* only restore dates if the saved trip is still in the future */
+      if (d.arriveDate && new Date(d.arriveDate) >= new Date(today.toDateString())) {
+        FIELDS.forEach(function (id) { if (d[id] !== undefined) document.getElementById(id).value = d[id]; });
+      } else {
+        ['vehicle','tripType','rideDesc'].forEach(function (id) { if (d[id] !== undefined) document.getElementById(id).value = d[id]; });
+      }
+      BOXES.forEach(function (id) { if (d[id] !== undefined) document.getElementById(id).checked = d[id]; });
+    } catch (e) {}
+  })();
+
+  /* ---- smart ride engine: tune recs to what they describe ---- */
+  function rideSmart(desc) {
+    if (!desc) return [];
+    var t = desc.toLowerCase(), out = [];
+    if (/paddle/.test(t)) out.push({ h: '🔧 Paddle tire game plan', p: 'Paddles transform the dunes but they\'re miserable on the hard pack — they dig on firm sand and wear fast on the beach drive. If you can, ride down on stock tires or trailer the machine to the open sand, then swap. And paddles punch way above their weight on climbs: you\'ll clear faces that stop everyone else, so watch your speed over blind crests.' });
+    if (/sand ?rail|buggy|long travel|longtravel/.test(t)) out.push({ h: '🔧 Rail & buggy notes', p: 'Rails live at Competition Hill and the open bowls south of Post 4. Full highway rules still apply on Sand Highway to Pole 11 — that includes seatbelts. Double-check your whip height (8 ft) and mount solid tow points front and rear; even rails get stuck, and a strap beats a shovel every time.' });
+    if (/rzr|razor|maverick|x3|talon|pro ?r|krx|can-?am|sxs|side.?by.?side|utv/.test(t)) out.push({ h: '🔧 SxS setup', p: 'Harnesses clicked, doors and nets latched, and keep a fire extinguisher mounted where the passenger can reach it. Stock belts slip in deep sand when they\'re hot — carry a spare belt and let the machine cool before you swap. 15 MPH near camps applies to you especially: SxS traffic is what rangers watch closest.' });
+    if (/raptor|trx|prerunner|pre-?runner|f-?150|tundra|tacoma|silverado|ram\b|truck/.test(t)) out.push({ h: '🔧 Truck strategy', p: 'Momentum is your friend, commitment is your rule: pick your line before the soft stuff and don\'t lift mid-climb. Air down to 15–18 PSI, 4-high for the beach, 4-low for the dunes. Never crest a dune straight-on at speed — square up slow the first pass, the backside might be a slipface with a 30-foot drop.' });
+    if (/jeep|wrangler|bronco|4runner|land ?cruiser/.test(t)) out.push({ h: '🔧 Short-wheelbase 4x4', p: 'Disconnect the sway bar if you have it, 4-low in the dunes, and be honest about approach angles on razorbacks — short wheelbase means you\'ll teeter where trucks bridge. Aired down to 15–18 you\'ll go almost anywhere the rails go, just slower.' });
+    if (/banshee|2 ?stroke|two ?stroke|yz|cr\d|kx|rm\d/.test(t)) out.push({ h: '🔧 Two-stroke duty', p: 'Spark arrester is mandatory and checked — a stock silencer usually isn\'t enough. Jet for sea level (you\'re AT zero). Paddle rear if you have it, and keep it pinned in the deep stuff: momentum is everything on a bike out here.' });
+    if (/stock|street tire|highway tire|all ?season/.test(t)) out.push({ h: '🔧 Running stock? Respect the sand', p: 'Stock vehicle on stock tires can absolutely do Oceano — at low tide, on the hard pack, aired down to 15–18. Skip the dry deep sand near the dunes, don\'t attempt climbs, and time your arrival and departure to the low tide windows above. The beach is the adventure; leave the bowls to the paddles.' });
+    return out;
+  }
+
+  document.getElementById('tripForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    var err = document.getElementById('formErr');
+    err.style.display = 'none';
+
+    var aD = document.getElementById('arriveDate').value;
+    var dD = document.getElementById('departDate').value;
+    var aT = document.getElementById('arriveTime').value || '10:00';
+    var dT = document.getElementById('departTime').value || '14:00';
+    if (!aD || !dD) { err.style.display = 'block'; return; }
+    var arrive = new Date(aD + 'T' + aT);
+    var depart = new Date(dD + 'T' + dT);
+    if (depart < arrive) { err.style.display = 'block'; return; }
+
+    var tripType = document.getElementById('tripType').value;
+    var opts = {
+      arrive: arrive, depart: depart,
+      vehicle: document.getElementById('vehicle').value,
+      camp: tripType === 'camp',
+      offsite: tripType === 'offsite',
+      atv: document.getElementById('bAtv').checked,
+      sxs: document.getElementById('bSxs').checked,
+      bike: document.getElementById('bBike').checked,
+      kids: document.getElementById('bKids').checked,
+      fire: document.getElementById('bFire').checked,
+      dog: document.getElementById('bDog').checked,
+      clam: document.getElementById('bClam').checked,
+      ride: document.getElementById('rideDesc').value.trim()
+    };
+    opts.toys = opts.atv || opts.sxs || opts.bike;
+    saveTrip();
+
+    buildStatic(opts);
+    document.getElementById('tideIntel').innerHTML = '<div class="tide-day"><h3>Tide Game Plan</h3><p class="advice">Pulling tide predictions for your dates…</p></div>';
+    document.getElementById('planOut').style.display = 'block';
+    document.getElementById('planSection').scrollIntoView({ behavior: 'smooth' });
+
+    fetch(BASE + '&begin_date=' + ymd(arrive) + '&end_date=' + ymd(new Date(depart.getTime() + 86400000)))
+      .then(function (r) { return r.json(); })
+      .then(function (data) { buildTides(data.predictions || [], opts); })
+      .catch(function () {
+        document.getElementById('tideIntel').innerHTML =
+          '<div class="tide-day"><h3>Tide Game Plan</h3><p class="advice">The tide feed is unavailable right now. Check the <a href="tides.html">tide page</a> before you leave: arrive and depart as close to low tide as you can, and set camp well above the evening high-tide line.</p></div>';
+      });
+  });
+
+  /* ---------- tide intelligence ---------- */
+  function buildTides(preds, opts) {
+    var evs = preds.map(function (p) { return { t: parseT(p.t), v: parseFloat(p.v), type: p.type }; });
+    if (!evs.length) return;
+    var out = ['<h2 class="section-title" style="margin-top:44px;font-size:34px">Tide Game Plan</h2>'];
+
+    /* arrival window */
+    var dayEvs = function (d) {
+      return evs.filter(function (e) { return e.t.toDateString() === d.toDateString(); });
+    };
+    var arrEvs = dayEvs(opts.arrive);
+    var lows = arrEvs.filter(function (e) { return e.type === 'L'; });
+    var bestLow = null, gap = Infinity;
+    lows.forEach(function (l) {
+      var g = Math.abs(l.t - opts.arrive);
+      if (g < gap) { gap = g; bestLow = l; }
+    });
+    var arrHtml = '<div class="tide-day"><h3>Arrival · ' + fmtD(opts.arrive) + '</h3>';
+    arrHtml += '<div class="evs">' + arrEvs.map(function (e) {
+      return '<span class="ev ' + (e.type === 'H' ? 'hi' : 'lo') + '">' + (e.type === 'H' ? 'High' : 'Low') + ' ' + fmtT(e.t) + ' · ' + e.v.toFixed(1) + ' ft</span>';
+    }).join('') + '</div>';
+    if (bestLow) {
+      var lo = new Date(bestLow.t.getTime() - 2 * 3600000), hi = new Date(bestLow.t.getTime() + 2 * 3600000);
+      var inWindow = opts.arrive >= lo && opts.arrive <= hi;
+      arrHtml += '<p class="advice">Best arrival window: <strong>' + fmtT(lo) + ' to ' + fmtT(hi) + '</strong> (around the ' + fmtT(bestLow.t) + ' low). Firm, wet, hard-packed sand and the easiest creek crossing of the day.</p>';
+      arrHtml += inWindow
+        ? '<div class="ok-box">Your ' + fmtT(opts.arrive) + ' arrival lands inside that window. Nice planning.</div>'
+        : '<div class="warn-box">Your planned ' + fmtT(opts.arrive) + ' arrival is outside that window. If you can shift toward ' + fmtT(bestLow.t) + ', the drive down the beach gets a lot easier' + (opts.vehicle !== '4wd' ? ' — and with your vehicle, timing the low tide isn\'t optional, it\'s the plan' : '') + '.</div>';
+    }
+    arrHtml += '</div>';
+    out.push(arrHtml);
+
+    /* overnight highs — don't wake up in the water */
+    if (opts.camp) {
+      var night = new Date(opts.arrive); night.setHours(0, 0, 0, 0);
+      var lastNight = new Date(opts.depart); lastNight.setHours(0, 0, 0, 0);
+      while (night < lastNight) {
+        var nStart = new Date(night); nStart.setHours(18, 0, 0, 0);
+        var nEnd = new Date(night.getTime() + 86400000); nEnd.setHours(10, 0, 0, 0);
+        var nightHighs = evs.filter(function (e) { return e.type === 'H' && e.t >= nStart && e.t <= nEnd; });
+        if (nightHighs.length) {
+          var peak = nightHighs.reduce(function (a, b) { return b.v > a.v ? b : a; });
+          var big = peak.v >= 6;
+          out.push('<div class="tide-day"><h3>Overnight · ' + fmtDs(night) + ' → ' + fmtDs(new Date(night.getTime() + 86400000)) + '</h3>' +
+            '<div class="evs">' + nightHighs.map(function (e) { return '<span class="ev hi">High ' + fmtT(e.t) + ' · ' + e.v.toFixed(1) + ' ft</span>'; }).join('') + '</div>' +
+            '<p class="advice">Peak overnight water: <strong>' + peak.v.toFixed(1) + ' ft at ' + fmtT(peak.t) + '</strong>. Before dark, find the line of wet sand and debris from the last high tide and set camp well above it — park rules say leave room for two lanes of traffic between camp and the water.</p>' +
+            (big ? '<div class="warn-box"><strong>Big tide alert:</strong> ' + peak.v.toFixed(1) + ' ft is a serious high. The water will come up well past where the beach looks "safe" at sunset. Camp high, and don\'t judge your spot by where the waterline is when you pull in.</div>'
+                 : '<div class="ok-box">A ' + peak.v.toFixed(1) + ' ft high is moderate — still camp above the debris line, but you won\'t need to hug the dunes.</div>') +
+            '</div>');
+        }
+        night = new Date(night.getTime() + 86400000);
+      }
+    }
+
+    /* departure */
+    var depEvs = dayEvs(opts.depart);
+    var depLows = depEvs.filter(function (e) { return e.type === 'L'; });
+    var bestDep = null; gap = Infinity;
+    depLows.forEach(function (l) {
+      var g = Math.abs(l.t - opts.depart);
+      if (g < gap) { gap = g; bestDep = l; }
+    });
+    var depHtml = '<div class="tide-day"><h3>Departure · ' + fmtD(opts.depart) + '</h3>';
+    depHtml += '<div class="evs">' + depEvs.map(function (e) {
+      return '<span class="ev ' + (e.type === 'H' ? 'hi' : 'lo') + '">' + (e.type === 'H' ? 'High' : 'Low') + ' ' + fmtT(e.t) + ' · ' + e.v.toFixed(1) + ' ft</span>';
+    }).join('') + '</div>';
+    if (bestDep) {
+      depHtml += '<p class="advice">Aim to tow out around the <strong>' + fmtT(bestDep.t) + ' low (' + bestDep.v.toFixed(1) + ' ft)</strong>. By late in a busy weekend the soft sand is churned up — the low tide gives you the firm lane out' + (opts.vehicle === 'rv' ? ', and with a trailer you want every bit of it' : '') + '.</p>';
+    }
+    depHtml += '</div>';
+    out.push(depHtml);
+
+    document.getElementById('tideIntel').innerHTML = out.join('');
+  }
+
+  /* ---------- recommendations + checklist ---------- */
+  function buildStatic(o) {
+    var days = Math.round((new Date(o.depart.toDateString()) - new Date(o.arrive.toDateString())) / 86400000);
+    document.getElementById('planTitle').textContent = fmtDs(o.arrive) + ' → ' + fmtDs(o.depart);
+    document.getElementById('planIntro').textContent = (o.camp
+      ? days + (days === 1 ? ' night' : ' nights') + ' of beach camping'
+      : o.offsite ? days + (days === 1 ? ' riding day' : ' riding days') + ' from an off-beach basecamp'
+      : 'Day trip') + (o.toys ? ' with toys in tow.' : '.') + ' Here is your game plan.';
+
+    /* --- recommendations (ride-specific first) --- */
+    var recs = rideSmart(o.ride);
+    if (o.offsite) recs.push({ h: 'Off-beach basecamp strategy', p: 'Staying at an RV park or hotel means a beach entry every riding day — so every morning is a mini tow-in. Hit the sand near the day\'s low tide, air down at the pavement each time, and pay day use at the kiosk (or grab an annual pass if you come often). Pro move: stage your toys and gear the night before so you roll at first light, when the beach is empty and the sand is firm.' });
+    recs.push({ h: 'Air down at the pavement, not in the sand', p: 'Drop to 15–20 PSI before you leave the hard surface (never below 15). Low pressure widens your footprint and is the single biggest difference between cruising and digging. Air back up before the highway home — bring a gauge and plan on the air station or your own compressor.' });
+    recs.push({ h: 'Stay on the hard pack', p: 'The firm, wet sand below the last high-tide line is your highway. The dry, deep, churned-up sand near the dunes is where 2WDs die and even 4WDs work hard. Follow the tracks of others down the beach, keep momentum in soft spots, and never stop pointed uphill in loose sand.' });
+    if (o.vehicle === '2wd') recs.push({ h: '2WD reality check', p: 'The park recommends 4WD past Post 2 — with 2WD, everything depends on tide timing and the hard pack. Arrive at low tide, stay off the dry sand entirely, don\'t stop on soft ground, and know that beach towing is available if it goes wrong. If conditions look sketchy when you arrive, camping north of Post 2 near the entrance beats a recovery bill.' });
+    if (o.vehicle === 'rv') recs.push({ h: 'Trailer strategy', p: 'Tow in on the morning low tide — Friday morning is gold, before the weekend chews up the beach. Drop the trailer above the high-tide line and level it before dark. Position so you can pull straight out; backing a trailer in soft sand is misery.' });
+    recs.push({ h: 'Speed rules', p: '15 MPH on the beach and within 50 feet of any camp. Sand Highway is a legal extension of Highway 1 down to Pole 11: seatbelts, helmet law, DUI, and speed limits all enforced.' });
+    if (o.toys) recs.push({ h: 'Green sticker & gear', p: 'Every OHV needs current DMV registration (green sticker) or a nonresident permit, an 8-foot whip with a 6"×12" orange/red flag, a working spark arrester, and lights if you ride between sunset and sunrise. Helmets required on ATVs — no passengers on single-seat quads.' });
+    if (o.kids) recs.push({ h: 'Young riders', p: 'Riders under 18 need an ATV safety certificate or direct supervision by a certificate-holding adult; under 14 also requires a parent or guardian supervising. Free training for ages 6–17: (800) 887-2887. Rangers do check.' });
+    if (o.toys) recs.push({ h: 'Read the dunes before you send it', p: 'Dune crests run north–south: gentle on the ocean side, steep drop (the slipface) on the east side. Riding east is where surprises live — crest slow the first time, every time. Walk Competition Hill before you climb it.' });
+    if (o.fire) recs.push({ h: 'Campfire the right way', p: 'Wood only — pallets or boards with nails earn tickets. Collect driftwood freely (after a storm there\'s plenty). Keep real distance between the fire and anything with a gas tank, and never bury a fire in sand: a hidden bed of coals is brutal for the next barefoot kid or parked tire. Let it burn out completely.' });
+    if (o.dog) recs.push({ h: 'Dogs on the beach', p: 'Dogs are welcome but must stay leashed — it protects them from traffic and protects the nesting snowy plovers. Bring shade and fresh water; summer sand gets hot enough to burn paws.' });
+    if (o.clam) recs.push({ h: 'Clamming basics', p: 'You need a California fishing license and a rigid measuring device. Pismo clams must be 4½ inches minimum, limit 10, from half an hour before sunrise to half an hour after sunset. Rebury the shorts right where you dug them.' });
+    recs.push({ h: 'Know the creek call', p: 'If Arroyo Grande Creek is posted closed, crossing is a ticket — no exceptions. Check the creek page the morning you leave. When it\'s open and running: cross slow, in the fresh water (not the surf line), and light cars should wait if it\'s over 2 feet deep.' });
+    if (o.camp) recs.push({ h: 'Camp setup, in order', p: 'Arrive → find the high-tide debris line → camp above it with two traffic lanes of room → level up and stake down before dark. The wind picks up in the afternoon; anything light (canopies especially) gets staked or it leaves.' });
+    recs.push({ h: 'Stock up before the gate', p: 'Last stops: Pier Liquor (393 Pier Ave, right by the Oceano gate) for beer, ice, and basics, or hit Vons / Beverage House / the Flyers station on W Grand Ave in Grover Beach for a full run. Already set up? Vendor trucks patrol the beach selling ice, firewood, water, and snacks — flag one down instead of breaking camp. And keep drinks at camp: open containers on an OHV and sand DUIs are both tickets.' });
+    recs.push({ h: 'If you get stuck', p: 'Air down more (to 15), dig out all four tires, keep the front wheels straight, and have friends push while you throttle gently. Never spin — spinning digs a grave. Old duner trick: pour water on the sand in front of your tires — wet sand packs hard and gives you a firm launch ramp, which is why the water\'s edge drives like pavement. Bring jugs or a bucket (ocean\'s right there). CB channel 9 reaches ranger base; a solar call box sits at the Sand Highway entrance.' });
+
+    document.getElementById('recs').innerHTML =
+      '<h2 class="section-title" style="margin-top:56px;font-size:34px">Tricks of the Trade</h2>' +
+      '<div class="cards" style="margin-top:24px">' + recs.map(function (r) {
+        return '<div class="card"><h3>' + r.h + '</h3><p>' + r.p + '</p></div>';
+      }).join('') + '</div>';
+
+    /* --- checklist --- */
+    var groups = [];
+    var before = ['Campsite reservation confirmed — (800) 444-7275' + (o.camp ? '' : ' (skip if just day use)'),
+      'Check creek status & weather the morning you leave',
+      'Check the tide chart for your dates',
+      'Tire pressure gauge + air compressor (or plan for the air station)',
+      'Tow strap, shovel, and a traction board if you have one',
+      'Water jugs or a bucket — soaking the sand ahead of your tires is the oldest unsticking trick on the dunes',
+      'Water — bring ALL you need, there is none on the beach',
+      'Cooler packed — last ice/beer stop is Pier Liquor (Pier Ave) or Vons / Flyers (W Grand Ave)',
+      'Trash bags — pack out everything',
+      'First aid kit'];
+    if (o.toys) before.push('Green stickers current on every OHV (or nonresident permit)', 'Whip flags on every machine (8 ft, orange/red flag)', 'Helmets for every rider', 'Spark arresters in working order');
+    if (o.kids) before.push('ATV safety certificates for riders under 18');
+    if (o.fire) before.push('Lighter/matches — firewood can be collected on the beach');
+    if (o.dog) before.push('Leash, dog water bowl, and shade for the dog');
+    if (o.clam) before.push('Fishing license + rigid clam measuring gauge');
+    if (o.camp) before.push('Headlamps/lanterns — it gets DARK', 'Stakes and guylines rated for wind');
+    groups.push({ h: '📋 Before You Leave Home', items: before });
+
+    groups.push({ h: '🚧 At the Entrance', items: [
+      (o.camp ? 'Reservation confirmation pulled up and ready to show at the kiosk'
+              : 'Pay the day-use fee at the kiosk' + (o.offsite ? ' — every riding day, so consider an annual pass' : '')),
+      'Air down to 15–20 PSI on the pavement',
+      'Confirm current fire rules with the entrance station' + (o.fire ? '' : ' (if plans change)'),
+      'Note the tide times for today on your phone',
+      'Radios set — CB channel 9 is ranger base'] });
+
+    if (o.camp) groups.push({ h: '⛺ Setting Camp', items: [
+      'Drive past Post 2 — camping is south of it',
+      'Find the last high-tide debris line',
+      'Set camp ABOVE it, leaving two lanes of traffic room',
+      'Stake everything before the afternoon wind',
+      'Walk your exit route while it\'s light',
+      'No gray water on the beach — it\'s state law'] });
+
+    groups.push({ h: (o.toys ? '🏁 Every Ride' : '🚗 On the Sand'), items: (o.toys ? [
+      'Helmets on, whips up, flags flying',
+      'Buddy system — never ride alone in the dunes',
+      'Crest every dune slow the first time (slipfaces face east)',
+      '15 MPH near camps and on the beach',
+      'Stay out of fenced/posted nesting areas'] : [
+      'Stay on the hard pack below the debris line',
+      '15 MPH near camps and on the beach',
+      'Watch for riders coming off the dunes',
+      'Stay out of fenced/posted nesting areas']) });
+
+    document.getElementById('checklists').innerHTML = groups.map(function (g, gi) {
+      return '<div class="check-group"><h3>' + g.h + '</h3><ul>' + g.items.map(function (it, i) {
+        return '<li><label><input type="checkbox"><span>' + it + '</span></label></li>';
+      }).join('') + '</ul></div>';
+    }).join('');
+  }
+})();
+</script>
+
+</body>
+</html>

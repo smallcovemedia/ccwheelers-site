@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N9HPGB15V1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-N9HPGB15V1');
+// CCWheelers click events: money actions for an info site
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a, button');
+  if (!a || typeof gtag !== 'function') return;
+  var href = a.getAttribute && (a.getAttribute('href') || '');
+  if (href.indexOf('tel:') === 0) {
+    gtag('event', 'phone_call', { page_path: location.pathname });
+  } else if (/^https?:\/\//.test(href) && href.indexOf('ccwheelers.com') === -1) {
+    gtag('event', 'outbound_click', { link_domain: href.split('/')[2] || '', page_path: location.pathname });
+  } else if (location.pathname.indexOf('planner') > -1 && a.tagName === 'BUTTON') {
+    gtag('event', 'planner_use', { button_text: (a.textContent || '').trim().slice(0, 40) });
+  } else if (location.pathname.indexOf('gallery') > -1 && (a.closest('.gallery') || a.querySelector('img'))) {
+    gtag('event', 'gallery_open', {});
+  }
+}, { passive: true });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oceano Dunes FAQ: Hours, Fees, Dogs, Camping &amp; Driving on the Beach | CCWheelers</title>
+<meta name="description" content="Quick answers about Oceano Dunes SVRA: park hours, day use fees, whether dogs are allowed, driving on the beach at Pismo, campfires, camping reservations, creek status, and clamming rules.">
+<link rel="canonical" href="https://ccwheelers.com/faq.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CCWheelers">
+<meta property="og:title" content="Oceano Dunes FAQ: Hours, Fees, Dogs, Camping &amp; Driving on the Beach | CCWheelers">
+<meta property="og:description" content="Quick answers about Oceano Dunes SVRA: park hours, day use fees, whether dogs are allowed, driving on the beach at Pismo, campfires, camping reservations, creek status, and clamming rules.">
+<meta property="og:url" content="https://ccwheelers.com/faq.html">
+<meta property="og:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Oceano Dunes FAQ: Hours, Fees, Dogs, Camping &amp; Driving on the Beach | CCWheelers">
+<meta name="twitter:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .faq-item{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 30px;margin-bottom:18px}
+  .faq-item h2{font-size:22px;color:var(--ocean);margin-bottom:10px}
+  .faq-item p{font-size:15.5px;color:var(--ink-soft)}
+  .faq-item a{font-weight:600}
+</style>
+<script src="nav.js" defer></script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"What are the hours at Oceano Dunes?","acceptedAnswer":{"@type":"Answer","text":"Vehicle day use at Oceano Dunes SVRA runs 7 AM to 10 PM daily. Registered campers can be on the beach overnight."}},
+{"@type":"Question","name":"How much does it cost to get into Oceano Dunes?","acceptedAnswer":{"@type":"Answer","text":"Day use is $5 per vehicle, paid at the beach entrance kiosks on Grand Avenue in Grover Beach or Pier Avenue in Oceano, first come first served."}},
+{"@type":"Question","name":"Are dogs allowed at Oceano Dunes?","acceptedAnswer":{"@type":"Answer","text":"Yes, on a maximum 6-foot leash at all times. Dogs are welcome on the beach and in camp but prohibited at Oso Flaco Lake and the Pismo State Beach Dune Preserve. Clean up after your dog."}},
+{"@type":"Question","name":"Can you still drive on the beach at Pismo?","acceptedAnswer":{"@type":"Answer","text":"Yes. Oceano Dunes is the last California state beach where street-legal vehicles can drive on the sand. The speed limit is 15 MPH on the beach, and the OHV riding area starts at Post 2, one mile south of Pier Avenue."}},
+{"@type":"Question","name":"Do I need 4-wheel drive at Oceano Dunes?","acceptedAnswer":{"@type":"Answer","text":"4WD is strongly recommended, and beach camping is recommended for 4-wheel drive vehicles only. Two-wheel drive vehicles get stuck regularly, especially once weekend traffic churns up the sand. Air down to 18 to 20 PSI before entering."}},
+{"@type":"Question","name":"Are campfires allowed at Oceano Dunes?","acceptedAnswer":{"@type":"Answer","text":"Yes. Wood fires are allowed on the sand south of Grand Avenue, up to 3 feet across and 2 feet tall. Burn only clean, untreated wood, never leave a fire unattended, and put it out by dousing with water, never by burying; buried coals stay hot for hours."}},
+{"@type":"Question","name":"How do I reserve camping at Oceano Dunes?","acceptedAnswer":{"@type":"Answer","text":"Book through ReserveCalifornia.com or call (800) 444-7275. Sites open 10 days to 6 months in advance, and holiday weekends sell out fast. Camping is primitive: bring all your water and pack out trash."}},
+{"@type":"Question","name":"Is the creek crossing at Oceano Dunes open?","acceptedAnswer":{"@type":"Answer","text":"Arroyo Grande Creek can close beach access after rain or Lopez Dam releases. When the creek is posted closed, crossing it earns you a ticket. Check the current creek status on CCWheelers before you tow out."}},
+{"@type":"Question","name":"What are the clamming rules at Pismo and Oceano?","acceptedAnswer":{"@type":"Answer","text":"You need a California fishing license and a rigid measuring gauge. Pismo clams must be at least 4.5 inches; the bag limit is 10, and undersized clams must be reburied where dug. Clamming hours are half an hour before sunrise to half an hour after sunset."}},
+{"@type":"Question","name":"Is Oceano Dunes wheelchair accessible?","acceptedAnswer":{"@type":"Answer","text":"Yes, more than most people expect. Sand wheelchairs are available first come first served at all entrance stations, ADA restrooms are at both beach entrances, and a one-mile accessible boardwalk crosses Oso Flaco Lake to the beach. Some concessionaires offer accessible OHV rentals and Hummer tours. Call (805) 773-7170 for accommodations."}},
+{"@type":"Question","name":"Can I rent an ATV at Oceano Dunes?","acceptedAnswer":{"@type":"Answer","text":"Yes. Four official park concessionaires rent quads, buggies, and side-by-sides at the entrances: Arnie's, BJ's, Steve's, and Sun Buggie. Helmets and whip flags are included."}}
+]}
+</script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html">
+      <span class="logo-chip"><img src="images/ccw-logo.png" alt="Central Coast Wheelers logo"></span>
+      <div class="logo-text">CCWheelers<small>Oceano Dunes Info Center</small></div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="camping.html">Camping</a></li>
+        <li><a href="creek.html">Creek</a></li>
+        <li><a href="tides.html">Tides</a></li>
+        <li><a href="planner.html">Planner</a></li>
+        <li><a href="dayuse.html">Day Use</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li><a href="news.html">News</a></li>
+        <li class="has-sub">
+          <button class="sub-toggle" aria-expanded="false" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+          <ul class="sub">
+            <li><a href="weather.html">Weather</a></li>
+            <li><a href="gas.html">Gas Prices</a></li>
+            <li><a href="fires.html">Campfires</a></li>
+            <li><a href="rules.html">Rules</a></li>
+            <li><a href="tips.html">Tips</a></li>
+            <li><a href="emergency.html">Emergency</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="faq.html" class="active">FAQ</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary nav-book" href="https://www.reservecalifornia.com" target="_blank" rel="noopener">Book a Campsite</a>
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main>
+<div class="page-head">
+  <div class="wrap">
+    <span class="eyebrow">Quick Answers</span>
+    <h1>Oceano Dunes FAQ</h1>
+    <p>The questions everyone asks before their first trip: hours, fees, dogs, driving on the beach, fires, and reservations. Straight answers, no runaround.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap" style="max-width:860px">
+
+    <div class="faq-item">
+      <h2>What are the hours at Oceano Dunes?</h2>
+      <p>Vehicle day use runs <strong>7 AM to 10 PM daily</strong>. Registered campers can be on the beach overnight.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>How much does it cost to get in?</h2>
+      <p>Day use is <strong>$5 per vehicle</strong>, paid at the beach entrance kiosks on Grand Avenue (Grover Beach) or Pier Avenue (Oceano), first come first served. Walking and biking in is free. Full details on our <a href="dayuse.html">Day Use page</a>.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>Are dogs allowed?</h2>
+      <p>Yes, on a <strong>maximum 6-foot leash at all times</strong>. Two exceptions: dogs are prohibited at Oso Flaco Lake and the Pismo State Beach Dune Preserve. Clean up after your dog, and bring shade and water; summer sand gets hot.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>Can you still drive on the beach at Pismo?</h2>
+      <p>Yes. Oceano Dunes is <strong>the last California state beach where you can drive on the sand</strong> in a street-legal vehicle. The speed limit is 15 MPH on the beach, and the OHV riding area starts at Post 2, one mile south of Pier Avenue. New to it? Read our <a href="tips.html">first-timer tips</a>.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>Do I need 4-wheel drive?</h2>
+      <p><strong>4WD is strongly recommended</strong>, and beach camping is recommended for 4WD only. Two-wheel drives get stuck every single weekend. Whatever you drive, air down to 18 to 20 PSI before you hit the sand.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>Are campfires allowed?</h2>
+      <p>Yes. <strong>Wood fires are allowed on the sand south of Grand Avenue</strong>, up to 3 feet across and 2 feet tall. Burn clean, untreated wood only (no nails, metal, or pallets), never leave a fire unattended, and put it out by dousing with water, never by burying; buried coals stay hot for hours and burn feet.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>How do I reserve camping?</h2>
+      <p>Through <a href="https://www.reservecalifornia.com" rel="noopener">ReserveCalifornia</a> or by phone at (800) 444-7275, from 10 days to 6 months ahead. Holiday weekends sell out fast. It's primitive camping: bring all your water, pack out your trash. Our <a href="camping.html">Camping guide</a> covers the rest.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>Is the creek open?</h2>
+      <p>It changes with rain and Lopez Dam releases. When Arroyo Grande Creek is posted closed, crossing gets you a ticket, no exceptions. Check our <a href="creek.html">live creek status</a> before you tow out.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>What are the clamming rules?</h2>
+      <p>California fishing license plus a rigid measuring gauge. Pismo clams must measure <strong>at least 4½ inches</strong>, the bag limit is 10, and undersized clams go back in the hole where you dug them. Hours run half an hour before sunrise to half an hour after sunset. More on the <a href="dayuse.html">Day Use page</a>.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>Is the park wheelchair accessible?</h2>
+      <p>More than most people expect. <strong>Sand wheelchairs are available first come, first served at all entrance stations.</strong> ADA restrooms sit at both beach entrances, a one-mile accessible boardwalk crosses Oso Flaco Lake to the beach, and another accessible boardwalk with viewing platforms runs north from Grand Avenue. Some concessionaires offer accessible OHV rentals and Hummer tours. Details at <a href="https://access.parks.ca.gov" rel="noopener">access.parks.ca.gov</a> or call (805) 773-7170.</p>
+    </div>
+
+    <div class="faq-item">
+      <h2>Can I rent an ATV or buggy?</h2>
+      <p>Yes. Four official concessionaires rent quads, buggies, and side-by-sides right at the entrances: Arnie's, BJ's, Steve's, and Sun Buggie. Helmets and flags included. Numbers are on our <a href="dayuse.html#rentals">Day Use page</a>.</p>
+    </div>
+
+    <div class="callout">
+      <strong>Didn't find your answer?</strong>
+      Try the <a href="planner.html">Trip Planner</a> for a personalized trip plan, or <a href="contact.html">ask us directly</a>. Rules change; when in doubt, confirm with rangers at (805) 473-7220.
+    </div>
+
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>CCWheelers</h4>
+        <p>The Oceano Dunes Information Center. Built and maintained by Central Coast Wheelers, an OHV community keeping the dunes clean, safe, and open.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="camping.html">Camping</a></li>
+          <li><a href="creek.html">Creek Status</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="dayuse.html">Day Use</a></li>
+          <li><a href="rules.html">Rules</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ride</h4>
+        <ul>
+          <li><a href="map.html">Interactive Map</a></li>
+          <li><a href="tips.html">Riding Tips</a></li>
+          <li><a href="emergency.html">Emergency Info</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Oceano Dunes SVRA<br>928 Pacific Blvd<br>Oceano, CA 93445</li>
+          <li>Ranger Station: (805) 473-7220</li>
+          <li>Reservations: (800) 444-7275</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 CCWheelers.com · Central Coast Wheelers</span>
+      <span>Not an official California State Parks website</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N9HPGB15V1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-N9HPGB15V1');
+// CCWheelers click events: money actions for an info site
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a, button');
+  if (!a || typeof gtag !== 'function') return;
+  var href = a.getAttribute && (a.getAttribute('href') || '');
+  if (href.indexOf('tel:') === 0) {
+    gtag('event', 'phone_call', { page_path: location.pathname });
+  } else if (/^https?:\/\//.test(href) && href.indexOf('ccwheelers.com') === -1) {
+    gtag('event', 'outbound_click', { link_domain: href.split('/')[2] || '', page_path: location.pathname });
+  } else if (location.pathname.indexOf('planner') > -1 && a.tagName === 'BUTTON') {
+    gtag('event', 'planner_use', { button_text: (a.textContent || '').trim().slice(0, 40) });
+  } else if (location.pathname.indexOf('gallery') > -1 && (a.closest('.gallery') || a.querySelector('img'))) {
+    gtag('event', 'gallery_open', {});
+  }
+}, { passive: true });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oceano Dunes News &amp; Events | Park Releases &amp; Local Coverage | CCWheelers</title>
+<meta name="description" content="The latest Oceano Dunes news in one place: official State Parks releases, advance pass announcements, local events, and Central Coast coverage that affects riders and campers.">
+<link rel="canonical" href="https://ccwheelers.com/news.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CCWheelers">
+<meta property="og:title" content="Oceano Dunes News &amp; Events | Park Releases &amp; Local Coverage | CCWheelers">
+<meta property="og:description" content="The latest Oceano Dunes news in one place: official State Parks releases, advance pass announcements, local events, and Central Coast coverage that affects riders and campers.">
+<meta property="og:url" content="https://ccwheelers.com/news.html">
+<meta property="og:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Oceano Dunes News &amp; Events | Park Releases &amp; Local Coverage | CCWheelers">
+<meta name="twitter:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .news-filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
+  .news-filters button{border:2px solid var(--sand-deep);background:#fff;border-radius:999px;padding:9px 20px;font-family:'Inter';font-size:14px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:.15s}
+  .news-filters button.on{background:var(--ocean);border-color:var(--ocean);color:#fff}
+  .news-item{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 30px;margin-bottom:18px;display:block}
+  .news-meta{display:flex;gap:12px;align-items:center;margin-bottom:8px;flex-wrap:wrap}
+  .news-date{font-size:13px;color:var(--ink-soft);font-weight:600}
+  .news-tag{font-size:10.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+  .news-tag.park{background:#e3edf5;color:#2f6db3}
+  .news-tag.event{background:#efe7f7;color:#7a55b5}
+  .news-tag.community{background:#fdeae3;color:var(--sunset-hot)}
+  .news-item h2{font-size:24px;color:var(--ocean);margin-bottom:8px}
+  .news-item p{font-size:15px;color:var(--ink-soft)}
+  .news-src{margin-top:12px;font-size:13.5px;font-weight:700}
+  .news-empty{text-align:center;color:var(--ink-soft);padding:40px 0;display:none}
+</style>
+<script src="nav.js" defer></script>
+<script src="news-data.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html">
+      <span class="logo-chip"><img src="images/ccw-logo.png" alt="Central Coast Wheelers logo"></span>
+      <div class="logo-text">CCWheelers<small>Oceano Dunes Info Center</small></div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="camping.html">Camping</a></li>
+        <li><a href="creek.html">Creek</a></li>
+        <li><a href="tides.html">Tides</a></li>
+        <li><a href="planner.html">Planner</a></li>
+        <li><a href="dayuse.html">Day Use</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li><a href="news.html" class="active">News</a></li>
+        <li class="has-sub">
+          <button class="sub-toggle" aria-expanded="false" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+          <ul class="sub">
+            <li><a href="weather.html">Weather</a></li>
+            <li><a href="gas.html">Gas Prices</a></li>
+            <li><a href="fires.html">Campfires</a></li>
+            <li><a href="rules.html">Rules</a></li>
+            <li><a href="tips.html">Tips</a></li>
+            <li><a href="emergency.html">Emergency</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary nav-book" href="https://www.reservecalifornia.com" target="_blank" rel="noopener">Book a Campsite</a>
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main>
+<div class="page-head">
+  <div class="wrap">
+    <span class="eyebrow">News &amp; Events</span>
+    <h1>What's Happening at the Dunes</h1>
+    <p>Official State Parks releases, advance pass alerts, local events, and the Central Coast coverage that actually affects riders and campers. Checked daily, no fluff.</p>
+  </div>
+</div>
+
+<section>
+  <div class="wrap" style="max-width:860px">
+    <div class="news-filters" role="group" aria-label="Filter news">
+      <button class="on" data-f="all">All</button>
+      <button data-f="park">Park News</button>
+      <button data-f="event">Events</button>
+      <button data-f="community">Community</button>
+    </div>
+    <div id="newsList"></div>
+    <p class="news-empty" id="newsEmpty">Nothing in this category right now. Check back soon.</p>
+    <div class="callout info">
+      <strong>Straight from the source</strong>
+      Official releases come from <a href="https://ohv.parks.ca.gov/?page_id=1207" rel="noopener">State Parks' Oceano Dunes page</a>. We check park and local sources daily and post anything that affects your trip.
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>CCWheelers</h4>
+        <p>The Oceano Dunes Information Center. Built and maintained by Central Coast Wheelers, an OHV community keeping the dunes clean, safe, and open.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="camping.html">Camping</a></li>
+          <li><a href="creek.html">Creek Status</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="planner.html">Trip Planner</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="dayuse.html">Day Use</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ride</h4>
+        <ul>
+          <li><a href="map.html">Interactive Map</a></li>
+          <li><a href="tips.html">Riding Tips</a></li>
+          <li><a href="emergency.html">Emergency Info</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Oceano Dunes SVRA<br>928 Pacific Blvd<br>Oceano, CA 93445</li>
+          <li>Ranger Station: (805) 473-7220</li>
+          <li>Reservations: (800) 444-7275</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 CCWheelers.com · Central Coast Wheelers</span>
+      <span>Not an official California State Parks website</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var TAGS = { park: 'Park News', event: 'Event', community: 'Community' };
+  var list = document.getElementById('newsList');
+  var empty = document.getElementById('newsEmpty');
+
+  function fmtDate(iso) {
+    var d = new Date(iso + 'T12:00:00');
+    return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  }
+
+  function render(filter) {
+    var items = (window.CCW_NEWS || []).slice().sort(function (a, b) { return b.date < a.date ? -1 : 1; });
+    if (filter !== 'all') items = items.filter(function (n) { return n.tag === filter; });
+    list.innerHTML = items.map(function (n) {
+      return '<article class="news-item">' +
+        '<div class="news-meta"><span class="news-tag ' + n.tag + '">' + (TAGS[n.tag] || n.tag) + '</span>' +
+        '<span class="news-date">' + fmtDate(n.date) + '</span></div>' +
+        '<h2>' + n.title + '</h2>' +
+        '<p>' + n.summary + '</p>' +
+        '<p class="news-src"><a href="' + n.url + '" rel="noopener" target="_blank">Read at ' + n.source + ' →</a></p>' +
+        '</article>';
+    }).join('');
+    empty.style.display = items.length ? 'none' : 'block';
+  }
+
+  document.querySelectorAll('.news-filters button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('.news-filters button').forEach(function (x) { x.classList.remove('on'); });
+      b.classList.add('on');
+      render(b.dataset.f);
+    });
+  });
+
+  render('all');
+})();
+</script>
+
+</body>
+</html>

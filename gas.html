@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N9HPGB15V1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-N9HPGB15V1');
+// CCWheelers click events: money actions for an info site
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a, button');
+  if (!a || typeof gtag !== 'function') return;
+  var href = a.getAttribute && (a.getAttribute('href') || '');
+  if (href.indexOf('tel:') === 0) {
+    gtag('event', 'phone_call', { page_path: location.pathname });
+  } else if (/^https?:\/\//.test(href) && href.indexOf('ccwheelers.com') === -1) {
+    gtag('event', 'outbound_click', { link_domain: href.split('/')[2] || '', page_path: location.pathname });
+  } else if (location.pathname.indexOf('planner') > -1 && a.tagName === 'BUTTON') {
+    gtag('event', 'planner_use', { button_text: (a.textContent || '').trim().slice(0, 40) });
+  } else if (location.pathname.indexOf('gallery') > -1 && (a.closest('.gallery') || a.querySelector('img'))) {
+    gtag('event', 'gallery_open', {});
+  }
+}, { passive: true });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gas Prices Near Oceano Dunes | SLO County Fuel Averages | CCWheelers</title>
+<meta name="description" content="Current average gas and diesel prices for San Luis Obispo County near Oceano Dunes, with trends versus last week, last month, and last year. Plus the smart places to fill up before the sand.">
+<link rel="canonical" href="https://ccwheelers.com/gas.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CCWheelers">
+<meta property="og:title" content="Gas Prices Near Oceano Dunes | SLO County Fuel Averages | CCWheelers">
+<meta property="og:description" content="Current average gas and diesel prices for San Luis Obispo County near Oceano Dunes, with trends versus last week, last month, and last year. Plus the smart places to fill up before the sand.">
+<meta property="og:url" content="https://ccwheelers.com/gas.html">
+<meta property="og:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Gas Prices Near Oceano Dunes | SLO County Fuel Averages | CCWheelers">
+<meta name="twitter:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .price-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:-34px;position:relative;z-index:5}
+  .price-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 20px;text-align:center}
+  .price-card .lbl{font-size:11.5px;letter-spacing:1.8px;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:6px}
+  .price-card .big{font-family:'Barlow Condensed';font-size:46px;font-weight:800;color:var(--ocean);line-height:1}
+  .price-card .delta{font-size:13px;font-weight:600;margin-top:8px}
+  .price-card.reg{background:var(--ocean)}
+  .price-card.reg .big{color:#fff}
+  .price-card.reg .lbl{color:var(--dune)}
+  .price-card.reg .delta{color:rgba(255,255,255,.8)}
+  .down{color:#2e9e52}.up{color:#c8401f}
+  table.trend{width:100%;border-collapse:collapse;margin-top:24px;background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+  table.trend th{background:var(--ocean);color:#fff;font-family:'Barlow Condensed';font-size:16px;text-transform:uppercase;letter-spacing:1px;text-align:left;padding:12px 18px}
+  table.trend td{padding:12px 18px;border-bottom:1px solid var(--sand-deep);font-size:15px;color:var(--ink-soft)}
+  table.trend td:first-child{font-weight:600;color:var(--ink)}
+  table.trend tr:last-child td{border-bottom:none}
+  .chart-note{font-size:12.5px;color:var(--ink-soft);margin-top:10px}
+  .table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  @media(max-width:900px){.price-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:600px){
+    table.trend th{padding:10px 8px;font-size:13px;letter-spacing:.5px}
+    table.trend td{padding:10px 8px;font-size:12.5px;white-space:nowrap}
+    .price-card .big{font-size:38px}
+    .price-card{padding:18px 12px}
+    .price-card .delta{font-size:12px}
+  }
+</style>
+<script src="nav.js" defer></script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html">
+      <span class="logo-chip"><img src="images/ccw-logo.png" alt="Central Coast Wheelers logo"></span>
+      <div class="logo-text">CCWheelers<small>Oceano Dunes Info Center</small></div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="camping.html">Camping</a></li>
+        <li><a href="creek.html">Creek</a></li>
+        <li><a href="tides.html">Tides</a></li>
+        <li><a href="planner.html">Planner</a></li>
+        <li><a href="dayuse.html">Day Use</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li><a href="news.html">News</a></li>
+        <li class="has-sub">
+          <button class="sub-toggle" aria-expanded="false" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+          <ul class="sub">
+            <li><a href="weather.html">Weather</a></li>
+            <li><a href="gas.html" class="active">Gas Prices</a></li>
+            <li><a href="fires.html">Campfires</a></li>
+            <li><a href="rules.html">Rules</a></li>
+            <li><a href="tips.html">Tips</a></li>
+            <li><a href="emergency.html">Emergency</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary nav-book" href="https://www.reservecalifornia.com" target="_blank" rel="noopener">Book a Campsite</a>
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main>
+<div class="page-head" style="padding-bottom:70px">
+  <div class="wrap">
+    <span class="eyebrow">Fuel Up Smart</span>
+    <h1>Gas Prices Near the Dunes</h1>
+    <p>San Luis Obispo County averages, updated a few times daily from AAA. Tow rigs are thirsty and the last stops before the sand run above average, so know the number before the pump surprises you.</p>
+  </div>
+</div>
+
+<section style="padding-top:0;padding-bottom:56px">
+  <div class="wrap">
+    <div class="price-grid" id="priceGrid">
+      <div class="price-card reg"><div class="lbl">Regular</div><div class="big" id="pReg">—</div><div class="delta" id="dReg">&nbsp;</div></div>
+      <div class="price-card"><div class="lbl">Mid-Grade</div><div class="big" id="pMid">—</div><div class="delta" id="dMid">&nbsp;</div></div>
+      <div class="price-card"><div class="lbl">Premium</div><div class="big" id="pPre">—</div><div class="delta" id="dPre">&nbsp;</div></div>
+      <div class="price-card"><div class="lbl">Diesel</div><div class="big" id="pDie">—</div><div class="delta" id="dDie">&nbsp;</div></div>
+    </div>
+    <p class="chart-note" id="fetchedNote">Loading current averages…</p>
+
+    <div class="table-wrap">
+      <table class="trend" id="trendTable" style="display:none">
+        <tr><th></th><th>Regular</th><th>Mid</th><th>Premium</th><th>Diesel</th></tr>
+      </table>
+    </div>
+    <p class="chart-note">County-wide averages for the San Luis Obispo–Atascadero–Paso Robles area from <a href="https://gasprices.aaa.com/?state=CA" rel="noopener" target="_blank">AAA Gas Prices</a>. Individual stations vary; the pumps closest to the beach typically run above these averages.</p>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2 class="display" style="font-size:28px;color:var(--ocean);margin-bottom:6px">Where to Fill Up</h2>
+    <div class="cards" style="margin-top:20px">
+      <div class="card">
+        <div class="icon">⛽</div>
+        <h3>Best Bet: Fill Before the 101</h3>
+        <p>Prices drop the further you get from the beach. Coming down the 101, top off in Santa Maria or Arroyo Grande before heading west; beach-adjacent stations know they're your last chance and price like it.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🛣️</div>
+        <h3>Last Stop With Fuel + Supplies</h3>
+        <p>The <strong>Flyers station at 684 W Grand Ave</strong> in Grover Beach is fuel plus a full liquor store in one stop, about a mile from the sand. Pair it with Vons down the street for the full grocery run. More on the <a href="camping.html#supplies">supplies guide</a>.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🏍️</div>
+        <h3>Don't Forget the Toys</h3>
+        <p>There is no fuel on the beach. Fill your quads, cans, and the tow rig before you air down; a supply run off the sand means airing up, driving out, and airing back down. Budget one gallon of spare fuel per machine per day minimum.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>CCWheelers</h4>
+        <p>The Oceano Dunes Information Center. Built and maintained by Central Coast Wheelers, an OHV community keeping the dunes clean, safe, and open.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="camping.html">Camping</a></li>
+          <li><a href="creek.html">Creek Status</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="planner.html">Trip Planner</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="dayuse.html">Day Use</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ride</h4>
+        <ul>
+          <li><a href="map.html">Interactive Map</a></li>
+          <li><a href="weather.html">Weather &amp; Wind</a></li>
+          <li><a href="tips.html">Riding Tips</a></li>
+          <li><a href="emergency.html">Emergency Info</a></li>
+          <li><a href="gallery.html">Gallery</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Oceano Dunes SVRA<br>928 Pacific Blvd<br>Oceano, CA 93445</li>
+          <li>Ranger Station: (805) 473-7220</li>
+          <li>Reservations: (800) 444-7275</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 CCWheelers.com · Central Coast Wheelers</span>
+      <span>Not an official California State Parks website</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  function money(v){ return '$' + v.toFixed(2); }
+  fetch('/api/gas').then(function (r) { return r.json(); }).then(function (d) {
+    if (!d || !d.current) throw new Error(d && d.error || 'no data');
+    var c = d.current;
+    document.getElementById('pReg').textContent = money(c.regular);
+    document.getElementById('pMid').textContent = money(c.mid);
+    document.getElementById('pPre').textContent = money(c.premium);
+    document.getElementById('pDie').textContent = money(c.diesel);
+
+    function delta(id, cur, ref, label) {
+      var el = document.getElementById(id);
+      if (!ref) { el.innerHTML = '&nbsp;'; return; }
+      var diff = cur - ref;
+      var cls = diff <= 0 ? 'down' : 'up';
+      var arrow = diff <= 0 ? '▼' : '▲';
+      el.innerHTML = '<span class="' + cls + '">' + arrow + ' ' + Math.abs(diff).toFixed(2) + '</span> vs ' + label;
+    }
+    if (d.monthAgo) {
+      delta('dReg', c.regular, d.monthAgo.regular, 'last month');
+      delta('dMid', c.mid, d.monthAgo.mid, 'last month');
+      delta('dPre', c.premium, d.monthAgo.premium, 'last month');
+      delta('dDie', c.diesel, d.monthAgo.diesel, 'last month');
+    }
+
+    var rows = [['Today', d.current], ['Yesterday', d.yesterday], ['A week ago', d.weekAgo], ['A month ago', d.monthAgo], ['A year ago', d.yearAgo]];
+    var t = document.getElementById('trendTable');
+    rows.forEach(function (r) {
+      if (!r[1]) return;
+      var tr = document.createElement('tr');
+      tr.innerHTML = '<td>' + r[0] + '</td><td>' + money(r[1].regular) + '</td><td>' + money(r[1].mid) + '</td><td>' + money(r[1].premium) + '</td><td>' + money(r[1].diesel) + '</td>';
+      t.appendChild(tr);
+    });
+    t.style.display = 'table';
+
+    document.getElementById('fetchedNote').textContent = 'San Luis Obispo County average · updated ' + new Date(d.fetched).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) + ' · source: AAA';
+  }).catch(function () {
+    document.getElementById('fetchedNote').innerHTML = 'The price feed is down right now. Check <a href="https://gasprices.aaa.com/?state=CA" rel="noopener">AAA Gas Prices</a> directly.';
+  });
+})();
+</script>
+</body>
+</html>

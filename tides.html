@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N9HPGB15V1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-N9HPGB15V1');
+// CCWheelers click events: money actions for an info site
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a, button');
+  if (!a || typeof gtag !== 'function') return;
+  var href = a.getAttribute && (a.getAttribute('href') || '');
+  if (href.indexOf('tel:') === 0) {
+    gtag('event', 'phone_call', { page_path: location.pathname });
+  } else if (/^https?:\/\//.test(href) && href.indexOf('ccwheelers.com') === -1) {
+    gtag('event', 'outbound_click', { link_domain: href.split('/')[2] || '', page_path: location.pathname });
+  } else if (location.pathname.indexOf('planner') > -1 && a.tagName === 'BUTTON') {
+    gtag('event', 'planner_use', { button_text: (a.textContent || '').trim().slice(0, 40) });
+  } else if (location.pathname.indexOf('gallery') > -1 && (a.closest('.gallery') || a.querySelector('img'))) {
+    gtag('event', 'gallery_open', {});
+  }
+}, { passive: true });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oceano Dunes Tide Chart &amp; Monthly Tide Schedule | CCWheelers</title>
+<meta name="description" content="Live tide chart and full monthly tide schedule for Oceano Dunes and Pismo Beach. Real NOAA data: today's tide curve, current water level, and every high and low tide this month.">
+<link rel="canonical" href="https://ccwheelers.com/tides.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CCWheelers">
+<meta property="og:title" content="Oceano Dunes Tide Chart &amp; Monthly Tide Schedule | CCWheelers">
+<meta property="og:description" content="Live tide chart and full monthly tide schedule for Oceano Dunes and Pismo Beach. Real NOAA data: today's tide curve, current water level, and every high and low tide this month.">
+<meta property="og:url" content="https://ccwheelers.com/tides.html">
+<meta property="og:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Oceano Dunes Tide Chart &amp; Monthly Tide Schedule | CCWheelers">
+<meta name="twitter:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  /* ---- Today panel ---- */
+  .tide-now{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:30px;margin-top:-34px;position:relative;z-index:5}
+  .tide-now-top{display:flex;gap:28px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+  .tide-big{flex:1;min-width:200px}
+  .tide-big .h{font-family:'Barlow Condensed';font-size:54px;font-weight:800;color:var(--ocean);line-height:1}
+  .tide-big .trend{font-size:15px;font-weight:600;color:var(--ink-soft)}
+  .trend .up{color:#2e9e52}
+  .trend .down{color:#c8401f}
+  .tide-chip{background:var(--sand);border-radius:12px;padding:14px 20px;text-align:center;min-width:130px}
+  .tide-chip .k{font-size:11px;letter-spacing:1.8px;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
+  .tide-chip .t{font-family:'Barlow Condensed';font-size:24px;font-weight:800;color:var(--ocean);margin-top:2px}
+  .tide-chip small{color:var(--ink-soft);font-size:12.5px}
+  #tideChart{width:100%;height:auto;display:block;margin-top:8px}
+  .chart-note{font-size:12.5px;color:var(--ink-soft);margin-top:8px}
+
+  /* ---- Month schedule ---- */
+  .month-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 22px;flex-wrap:wrap}
+  .month-bar h2{font-size:34px;color:var(--ocean)}
+  .month-nav{display:flex;gap:10px}
+  .month-nav button{border:2px solid var(--ocean);background:#fff;color:var(--ocean);font-family:'Inter';font-weight:700;font-size:14px;padding:9px 18px;border-radius:999px;cursor:pointer}
+  .month-nav button:hover:not(:disabled){background:var(--ocean);color:#fff}
+  .month-nav button:disabled{opacity:.35;cursor:default}
+  .tide-table-wrap{overflow-x:auto;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow)}
+  table.tides{width:100%;border-collapse:collapse;font-size:14.5px;min-width:640px}
+  table.tides th{background:var(--ocean);color:#fff;font-family:'Barlow Condensed';font-size:16px;letter-spacing:1px;text-transform:uppercase;padding:12px 16px;text-align:left}
+  table.tides td{padding:11px 16px;border-bottom:1px solid var(--sand-deep);color:var(--ink);vertical-align:top}
+  table.tides tr:last-child td{border-bottom:none}
+  table.tides tr.today{background:#fdf3df}
+  table.tides tr.past{opacity:.45}
+  .day-cell{white-space:nowrap;font-weight:600}
+  .today-tag{display:inline-block;background:var(--sunset-hot);color:#fff;font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-radius:99px;padding:2px 9px;margin-left:8px;vertical-align:middle}
+  .tide-ev{display:inline-block;margin-right:18px;white-space:nowrap}
+  .tide-ev .tag{display:inline-block;width:20px;height:20px;border-radius:50%;color:#fff;font-size:11px;font-weight:800;text-align:center;line-height:20px;margin-right:6px}
+  .tide-ev .tag.H{background:var(--ocean)}
+  .tide-ev .tag.L{background:var(--dune-dark)}
+  .tide-ev small{color:var(--ink-soft)}
+  .tide-loading{padding:40px;text-align:center;color:var(--ink-soft)}
+  @media(max-width:760px){
+    .tide-now{padding:18px 14px;margin-top:-24px}
+    .tide-now-top{gap:12px}
+    .tide-big{min-width:140px}
+    .tide-big .h{font-size:40px}
+    .tide-chip{flex:1;min-width:104px;padding:10px 10px}
+    .tide-chip .t{font-size:20px}
+    .month-bar h2{font-size:25px}
+    table.tides{min-width:0}
+    table.tides td{padding:9px 12px}
+    .tide-ev{display:block;margin:3px 0}
+    .day-cell{white-space:normal}
+  }
+</style>
+<script src="nav.js" defer></script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html">
+      <span class="logo-chip"><img src="images/ccw-logo.png" alt="Central Coast Wheelers logo"></span>
+      <div class="logo-text">CCWheelers<small>Oceano Dunes Info Center</small></div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="camping.html">Camping</a></li>
+        <li><a href="creek.html">Creek</a></li>
+        <li><a href="tides.html" class="active">Tides</a></li>
+        <li><a href="planner.html">Planner</a></li>
+        <li><a href="dayuse.html">Day Use</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li><a href="news.html">News</a></li>
+        <li class="has-sub">
+          <button class="sub-toggle" aria-expanded="false" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+          <ul class="sub">
+            <li><a href="weather.html">Weather</a></li>
+            <li><a href="gas.html">Gas Prices</a></li>
+            <li><a href="fires.html">Campfires</a></li>
+            <li><a href="rules.html">Rules</a></li>
+            <li><a href="tips.html">Tips</a></li>
+            <li><a href="emergency.html">Emergency</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary nav-book" href="https://www.reservecalifornia.com" target="_blank" rel="noopener">Book a Campsite</a>
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main>
+<div class="page-head" style="padding-bottom:80px">
+  <div class="wrap">
+    <span class="eyebrow">Live NOAA Data · Port San Luis Station</span>
+    <h1>Tide Chart &amp; Monthly Schedule</h1>
+    <p>The tide decides when you cross the creek, when you tow in, and how much beach you get. This page pulls live predictions straight from NOAA, so it is always current. Times are local, heights in feet above MLLW.</p>
+  </div>
+</div>
+
+<section style="padding-top:0;padding-bottom:56px">
+  <div class="wrap">
+    <div class="tide-now">
+      <div class="tide-now-top">
+        <div class="tide-big">
+          <span class="eyebrow" style="margin-bottom:2px">Right Now</span>
+          <div class="h" id="nowHeight">—</div>
+          <div class="trend" id="nowTrend">Loading current tide…</div>
+        </div>
+        <div class="tide-chip">
+          <div class="k">Next High</div>
+          <div class="t" id="nextHigh">—</div>
+          <small id="nextHighFt">&nbsp;</small>
+        </div>
+        <div class="tide-chip">
+          <div class="k">Next Low</div>
+          <div class="t" id="nextLow">—</div>
+          <small id="nextLowFt">&nbsp;</small>
+        </div>
+      </div>
+      <svg id="tideChart" viewBox="0 0 1000 340" role="img" aria-label="Today's tide curve"></svg>
+      <p class="chart-note">Today's predicted tide curve. The orange marker is where the tide is right now. H = high tide, L = low tide.</p>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="month-bar">
+      <h2 class="display" id="monthTitle">Tide Schedule</h2>
+      <div class="month-nav">
+        <button id="prevMonth" aria-label="Previous month">← Prev</button>
+        <button id="nextMonth" aria-label="Next month">Next →</button>
+      </div>
+    </div>
+    <div class="tide-table-wrap">
+      <table class="tides" id="tideTable">
+        <thead><tr><th style="width:180px">Date</th><th>High &amp; Low Tides</th></tr></thead>
+        <tbody><tr><td colspan="2" class="tide-loading">Loading the monthly schedule…</td></tr></tbody>
+      </table>
+    </div>
+    <p class="chart-note" style="margin-top:12px">Predictions from NOAA station 9412110 (Port San Luis), the closest official tide station to Oceano Dunes. Actual water levels can vary with storms and surf. Plan creek crossings and beach towing around low tide.</p>
+  </div>
+</section>
+<div class="wrap" style="padding:0 24px 72px;text-align:center"><p style="font-size:15px;color:var(--ink-soft);margin-bottom:14px">Coming out? Get a personalized plan with tide windows, checklists, and local tricks.</p><a class="btn btn-primary" href="planner.html">Plan Your Trip</a></div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>CCWheelers</h4>
+        <p>The Oceano Dunes Information Center. Built and maintained by Central Coast Wheelers, an OHV community keeping the dunes clean, safe, and open.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="camping.html">Camping</a></li>
+          <li><a href="creek.html">Creek Status</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="planner.html">Trip Planner</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="dayuse.html">Day Use</a></li>
+          <li><a href="rules.html">Rules</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ride</h4>
+        <ul>
+          <li><a href="map.html">Virtual Map</a></li>
+          <li><a href="tips.html">Riding Tips</a></li>
+          <li><a href="emergency.html">Emergency Info</a></li>
+          <li><a href="about.html">About CCW</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Oceano Dunes SVRA<br>928 Pacific Blvd<br>Oceano, CA 93445</li>
+          <li>Info: (805) 473-7220 (recorded)</li>
+          <li>Reservations: (800) 444-7275</li>
+          <li><a href="contact.html">Contact CCWheelers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 CCWheelers.com · Central Coast Wheelers</span>
+      <span>Not an official California State Parks website</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var STATION = '9412110';
+  var BASE = 'https://api.tidesandcurrents.noaa.gov/api/prod/datagetter' +
+    '?product=predictions&application=ccwheelers&datum=MLLW&station=' + STATION +
+    '&time_zone=lst_ldt&units=english&format=json';
+
+  function ymd(d) {
+    return '' + d.getFullYear() + ('0' + (d.getMonth() + 1)).slice(-2) + ('0' + d.getDate()).slice(-2);
+  }
+  function parseT(t) { return new Date(t.replace(' ', 'T')); }
+  function fmtTime(d) { return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }); }
+
+  /* ================= TODAY'S CURVE ================= */
+  var now = new Date();
+  var start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  var end = new Date(start.getTime() + 24 * 3600 * 1000);
+
+  fetch(BASE + '&begin_date=' + ymd(start) + '&end_date=' + ymd(end))
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      var pts = (data.predictions || []).map(function (p) {
+        return { t: parseT(p.t), v: parseFloat(p.v) };
+      }).filter(function (p) { return p.t >= start && p.t <= end; });
+      if (pts.length < 10) throw new Error('no data');
+      drawChart(pts);
+      updateNow(pts);
+    })
+    .catch(function () {
+      document.getElementById('nowTrend').textContent = 'Tide feed is unavailable right now. Try again shortly.';
+    });
+
+  function interp(pts, when) {
+    for (var i = 1; i < pts.length; i++) {
+      if (pts[i].t >= when) {
+        var a = pts[i - 1], b = pts[i];
+        var f = (when - a.t) / (b.t - a.t || 1);
+        return a.v + (b.v - a.v) * f;
+      }
+    }
+    return pts[pts.length - 1].v;
+  }
+
+  function updateNow(pts) {
+    var h = interp(pts, now);
+    var soon = interp(pts, new Date(now.getTime() + 30 * 60000));
+    var rising = soon > h;
+    document.getElementById('nowHeight').textContent = h.toFixed(1) + ' ft';
+    document.getElementById('nowTrend').innerHTML = rising
+      ? 'Tide is <span class="up">rising ▲</span>'
+      : 'Tide is <span class="down">falling ▼</span>';
+    /* local highs/lows for next-chip fallback come from the month fetch below */
+  }
+
+  function drawChart(pts) {
+    var W = 1000, H = 340, padL = 46, padR = 16, padT = 26, padB = 40;
+    var vs = pts.map(function (p) { return p.v; });
+    var vMin = Math.floor(Math.min.apply(null, vs) - 0.5);
+    var vMax = Math.ceil(Math.max.apply(null, vs) + 0.5);
+    var t0 = start.getTime(), t1 = end.getTime();
+    function X(t) { return padL + (t - t0) / (t1 - t0) * (W - padL - padR); }
+    function Y(v) { return padT + (vMax - v) / (vMax - vMin) * (H - padT - padB); }
+
+    var svg = ['<defs><linearGradient id="tg" x1="0" y1="0" x2="0" y2="1">',
+      '<stop offset="0" stop-color="#0e3a4d" stop-opacity=".35"/>',
+      '<stop offset="1" stop-color="#0e3a4d" stop-opacity=".04"/></linearGradient></defs>'];
+
+    /* grid + axis labels */
+    for (var v = vMin; v <= vMax; v++) {
+      svg.push('<line x1="' + padL + '" y1="' + Y(v) + '" x2="' + (W - padR) + '" y2="' + Y(v) + '" stroke="#e8dcc8" stroke-width="1"/>');
+      svg.push('<text x="' + (padL - 8) + '" y="' + (Y(v) + 4) + '" text-anchor="end" font-size="12" fill="#4a5b63">' + v + '</text>');
+    }
+    for (var hr = 0; hr <= 24; hr += 6) {
+      var tx = X(t0 + hr * 3600000);
+      var lbl = hr === 0 || hr === 24 ? '12 AM' : hr === 12 ? '12 PM' : hr < 12 ? hr + ' AM' : (hr - 12) + ' PM';
+      svg.push('<text x="' + tx + '" y="' + (H - 14) + '" text-anchor="middle" font-size="12" fill="#4a5b63">' + lbl + '</text>');
+    }
+
+    /* area + line */
+    var line = pts.map(function (p, i) { return (i ? 'L' : 'M') + X(p.t.getTime()).toFixed(1) + ',' + Y(p.v).toFixed(1); }).join('');
+    svg.push('<path d="' + line + 'L' + X(t1) + ',' + Y(vMin) + 'L' + X(t0) + ',' + Y(vMin) + 'Z" fill="url(#tg)"/>');
+    svg.push('<path d="' + line + '" fill="none" stroke="#0e3a4d" stroke-width="3" stroke-linecap="round"/>');
+
+    /* mark local highs & lows */
+    for (var i = 1; i < pts.length - 1; i++) {
+      var isHi = pts[i].v > pts[i - 1].v && pts[i].v >= pts[i + 1].v;
+      var isLo = pts[i].v < pts[i - 1].v && pts[i].v <= pts[i + 1].v;
+      if (isHi || isLo) {
+        var cx = X(pts[i].t.getTime()), cy = Y(pts[i].v);
+        svg.push('<circle cx="' + cx + '" cy="' + cy + '" r="5" fill="' + (isHi ? '#0e3a4d' : '#b57f3a') + '"/>');
+        var ty = isHi ? cy - 24 : cy + 20;
+        svg.push('<text x="' + cx + '" y="' + ty + '" text-anchor="middle" font-size="13" font-weight="700" fill="' + (isHi ? '#0e3a4d' : '#b57f3a') + '">' +
+          (isHi ? 'H' : 'L') + ' ' + fmtTime(pts[i].t) + '</text>');
+        svg.push('<text x="' + cx + '" y="' + (ty + 14) + '" text-anchor="middle" font-size="11.5" fill="#4a5b63">' + pts[i].v.toFixed(1) + ' ft</text>');
+      }
+    }
+
+    /* now marker */
+    if (now >= start && now <= end) {
+      var nx = X(now.getTime()), ny = Y(interp(pts, now));
+      svg.push('<line x1="' + nx + '" y1="' + padT + '" x2="' + nx + '" y2="' + (H - padB) + '" stroke="#d4552a" stroke-width="1.5" stroke-dasharray="5 4"/>');
+      svg.push('<circle cx="' + nx + '" cy="' + ny + '" r="8" fill="#d4552a" stroke="#fff" stroke-width="2.5"/>');
+      svg.push('<text x="' + nx + '" y="' + (padT - 8) + '" text-anchor="middle" font-size="12" font-weight="800" fill="#d4552a">NOW</text>');
+    }
+
+    document.getElementById('tideChart').innerHTML = svg.join('');
+  }
+
+  /* ================= MONTHLY SCHEDULE ================= */
+  var shown = new Date(now.getFullYear(), now.getMonth(), 1);
+  var MIN = new Date(now.getFullYear(), now.getMonth() - 3, 1);
+  var MAX = new Date(now.getFullYear(), now.getMonth() + 11, 1);
+  var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+  function loadMonth() {
+    var first = new Date(shown.getFullYear(), shown.getMonth(), 1);
+    var last = new Date(shown.getFullYear(), shown.getMonth() + 1, 0);
+    document.getElementById('monthTitle').textContent = MONTHS[shown.getMonth()] + ' ' + shown.getFullYear() + ' Tide Schedule';
+    document.getElementById('prevMonth').disabled = shown <= MIN;
+    document.getElementById('nextMonth').disabled = shown >= MAX;
+    var tbody = document.querySelector('#tideTable tbody');
+    tbody.innerHTML = '<tr><td colspan="2" class="tide-loading">Loading the monthly schedule…</td></tr>';
+
+    fetch(BASE + '&interval=hilo&begin_date=' + ymd(first) + '&end_date=' + ymd(last))
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var byDay = {};
+        (data.predictions || []).forEach(function (p) {
+          var d = parseT(p.t);
+          var key = d.getDate();
+          (byDay[key] = byDay[key] || []).push({ t: d, v: parseFloat(p.v), type: p.type });
+        });
+        var todayKey = (now.getFullYear() === shown.getFullYear() && now.getMonth() === shown.getMonth()) ? now.getDate() : -1;
+        var rows = [];
+        for (var day = 1; day <= last.getDate(); day++) {
+          var evs = byDay[day] || [];
+          var d = new Date(shown.getFullYear(), shown.getMonth(), day);
+          var cls = day === todayKey ? ' class="today"' : (todayKey > 0 && day < todayKey ? ' class="past"' : '');
+          var dateLabel = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+          var cells = evs.map(function (e) {
+            return '<span class="tide-ev"><span class="tag ' + e.type + '">' + e.type + '</span>' +
+              fmtTime(e.t) + ' <small>' + e.v.toFixed(1) + ' ft</small></span>';
+          }).join('');
+          rows.push('<tr' + cls + '><td class="day-cell">' + dateLabel +
+            (day === todayKey ? '<span class="today-tag">Today</span>' : '') +
+            '</td><td>' + (cells || '<small>No data</small>') + '</td></tr>');
+        }
+        tbody.innerHTML = rows.join('');
+
+        /* fill Next High / Next Low chips from this data when showing the current month */
+        if (todayKey > 0) {
+          var future = [];
+          Object.keys(byDay).forEach(function (k) {
+            byDay[k].forEach(function (e) { if (e.t > now) future.push(e); });
+          });
+          future.sort(function (a, b) { return a.t - b.t; });
+          var nh = future.find(function (e) { return e.type === 'H'; });
+          var nl = future.find(function (e) { return e.type === 'L'; });
+          if (nh) { document.getElementById('nextHigh').textContent = fmtTime(nh.t); document.getElementById('nextHighFt').textContent = nh.v.toFixed(1) + ' ft'; }
+          if (nl) { document.getElementById('nextLow').textContent = fmtTime(nl.t); document.getElementById('nextLowFt').textContent = nl.v.toFixed(1) + ' ft'; }
+        }
+      })
+      .catch(function () {
+        tbody.innerHTML = '<tr><td colspan="2" class="tide-loading">The tide feed is unavailable right now. Please try again shortly.</td></tr>';
+      });
+  }
+
+  document.getElementById('prevMonth').addEventListener('click', function () {
+    shown = new Date(shown.getFullYear(), shown.getMonth() - 1, 1); loadMonth();
+  });
+  document.getElementById('nextMonth').addEventListener('click', function () {
+    shown = new Date(shown.getFullYear(), shown.getMonth() + 1, 1); loadMonth();
+  });
+
+  loadMonth();
+})();
+</script>
+
+</body>
+</html>
