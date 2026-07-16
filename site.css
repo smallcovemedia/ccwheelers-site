@@ -148,9 +148,9 @@ footer a:hover{color:var(--dune)}
 .logo-chip img{height:30px;width:auto;display:block}
 
 /* ---- v5: planner CTA card ---- */
-.plan-cta-band{padding:0 0 88px}
+.plan-cta-band{padding:72px 0 88px}
 .plan-cta{background:linear-gradient(135deg,var(--ocean) 0%,var(--ocean-deep) 100%);border-radius:var(--radius);padding:58px 44px;text-align:center;color:#fff;box-shadow:var(--shadow)}
 .plan-cta .eyebrow{color:var(--dune);margin-bottom:10px}
 .plan-cta h2{font-size:clamp(30px,4vw,42px);font-weight:800;margin-bottom:12px;color:#fff}
 .plan-cta p{color:rgba(255,255,255,.82);font-size:16px;max-width:54ch;margin:0 auto 30px}
-@media(max-width:600px){.plan-cta{padding:40px 22px}.plan-cta-band{padding:0 0 64px}}
+@media(max-width:600px){.plan-cta{padding:40px 22px}.plan-cta-band{padding:48px 0 64px}}
