@@ -18,6 +18,19 @@
     X-Robots-Tag = "noindex, nofollow"
 
 # ---- Legacy-site URLs (old backlinks + Google index) -> new pages, permanent ----
+# Legacy mobile subdomain -> main site (host-based, must come first)
+[[redirects]]
+  from = "https://mobile.ccwheelers.com/*"
+  to = "https://ccwheelers.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://mobile.ccwheelers.com/*"
+  to = "https://ccwheelers.com/:splat"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/GPS.htm"
   to = "/map.html"
