@@ -177,102 +177,29 @@ document.addEventListener('click', function (e) {
 
 <script>
 (function () {
-  var STORE = 'https://ccwheelers-oceano-dunes.printful.me';
-  // Quick Store catalog: name, price, and each product's own page.
-  // To refresh after adding products, ask Claude to "refresh the merch catalog".
+  // CCWheelers Quick Store catalog. Images are self-hosted in images/merch/.
+  // When Dad adds or updates products, ask Claude to "refresh the merch catalog".
   var CATALOG = [
-  {
-    "name": "CCWheelers Distressed Dad Hat",
-    "price": "From $19.10",
-    "href": "/product/ccwheelers-distressed-dad-hat"
-  },
-  {
-    "name": "CCWheelers Vintage Cotton Twill Cap",
-    "price": "From $20.79",
-    "href": "/product/ccwheelers-vintage-cotton-twill-cap"
-  },
-  {
-    "name": "Old School Duner vinyl decals",
-    "price": "From $1.57",
-    "href": "/product/old-school-duner-vinyl-decals"
-  },
-  {
-    "name": "Old School Duner vinyl decals",
-    "price": "From $1.57",
-    "href": "/product/old-school-duner-vinyl-decals-6a59dfa4bba8b"
-  },
-  {
-    "name": "CCWheelers Unisex Hoodie",
-    "price": "From $35.48",
-    "href": "/product/ccwheelers-unisex-hoodie"
-  },
-  {
-    "name": "CCWheelers Unisex Hoodie",
-    "price": "From $28.85",
-    "href": "/product/ccwheelers-unisex-hoodie-6a59dff32fdf7"
-  },
-  {
-    "name": "Unisex Hoodie",
-    "price": "From $35.48",
-    "href": "/product/unisex-hoodie"
-  },
-  {
-    "name": "CCWheelers Premium full zip hoodie",
-    "price": "From $35.04",
-    "href": "/product/ccwheelers-premium-full-zip-hoodie"
-  },
-  {
-    "name": "CCWheelers Crop Hoodie",
-    "price": "From $43.10",
-    "href": "/product/ccwheelers-crop-hoodie"
-  },
-  {
-    "name": "CCWheelers Crop Hoodie",
-    "price": "From $43.10",
-    "href": "/product/ccwheelers-crop-hoodie-6a59dfdf35d4e"
-  },
-  {
-    "name": "Crop Hoodie",
-    "price": "From $43.10",
-    "href": "/product/crop-hoodie-6a59dfb529d80"
-  },
-  {
-    "name": "Crop Hoodie",
-    "price": "From $51.00",
-    "href": "/product/crop-hoodie"
-  }
-];
-
-  var grid = document.getElementById('merchGrid');
-  function render(imgFor) {
-    grid.innerHTML = CATALOG.map(function (c) {
-      var img = imgFor(c.name);
-      return '<a class="pcard" href="' + STORE + c.href + '" target="_blank" rel="noopener">' +
-        '<div class="shot">' + (img ? '<img src="' + img + '" alt="' + c.name.replace(/"/g, '') + '" loading="lazy">' : '<img src="images/ccw-logo.png" alt="" style="max-width:60%;opacity:.35">') + '</div>' +
-        '<div class="info"><h3>' + c.name + '</h3>' +
-        '<p class="price">' + c.price + '</p>' +
-        '<span class="go">View Product &rarr;</span></div></a>';
-    }).join('');
-  }
-  render(function () { return null; });
-
-  fetch('/api/merch').then(function (r) { return r.json(); }).then(function (d) {
-    if (!d || !d.products) return;
-    var pools = {};
-    d.products.forEach(function (p) {
-      var k = p.name.toLowerCase().trim();
-      (pools[k] = pools[k] || []).push(p.thumbnail);
-    });
-    render(function (name) {
-      var k = name.toLowerCase().trim();
-      // exact name match first, then partial
-      if (pools[k] && pools[k].length) return pools[k].shift();
-      for (var key in pools) {
-        if (pools[key].length && (key.indexOf(k) > -1 || k.indexOf(key) > -1)) return pools[key].shift();
-      }
-      return null;
-    });
-  }).catch(function () {});
+  {"name": "Unisex Hoodie", "price": "From $35.48", "url": "https://ccwheelers-oceano-dunes.printful.me/product/unisex-hoodie", "img": "images/merch/unisex-hoodie.jpg"},
+  {"name": "CCWheelers Unisex Hoodie", "price": "From $28.85", "url": "https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-unisex-hoodie-6a59dff32fdf7", "img": "images/merch/ccwheelers-unisex-hoodie-6a59dff32fdf7.jpg"},
+  {"name": "CCWheelers Crop Hoodie", "price": "From $43.10", "url": "https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-crop-hoodie-6a59dfdf35d4e", "img": "images/merch/ccwheelers-crop-hoodie-6a59dfdf35d4e.jpg"},
+  {"name": "CCWheelers Vintage Cotton Twill Cap", "price": "From $20.79", "url": "https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-vintage-cotton-twill-cap", "img": "images/merch/ccwheelers-vintage-cotton-twill-cap.jpg"},
+  {"name": "CCWheelers Premium Full Zip Hoodie", "price": "From $35.04", "url": "https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-premium-full-zip-hoodie", "img": "images/merch/ccwheelers-premium-full-zip-hoodie.jpg"},
+  {"name": "Crop Hoodie", "price": "From $43.10", "url": "https://ccwheelers-oceano-dunes.printful.me/product/crop-hoodie-6a59dfb529d80", "img": "images/merch/crop-hoodie-6a59dfb529d80.jpg"},
+  {"name": "Old School Duner Vinyl Decals", "price": "From $1.57", "url": "https://ccwheelers-oceano-dunes.printful.me/product/old-school-duner-vinyl-decals-6a59dfa4bba8b", "img": "images/merch/old-school-duner-vinyl-decals-6a59dfa4bba8b.jpg"},
+  {"name": "CCWheelers Distressed Dad Hat", "price": "From $19.10", "url": "https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-distressed-dad-hat", "img": "images/merch/ccwheelers-distressed-dad-hat.jpg"},
+  {"name": "CCWheelers Unisex Hoodie", "price": "From $35.48", "url": "https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-unisex-hoodie", "img": "images/merch/ccwheelers-unisex-hoodie.jpg"},
+  {"name": "CCWheelers Crop Hoodie", "price": "From $43.10", "url": "https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-crop-hoodie", "img": "images/merch/ccwheelers-crop-hoodie.jpg"},
+  {"name": "Old School Duner Vinyl Decals", "price": "From $1.57", "url": "https://ccwheelers-oceano-dunes.printful.me/product/old-school-duner-vinyl-decals", "img": "images/merch/old-school-duner-vinyl-decals.jpg"},
+  {"name": "Crop Hoodie", "price": "From $51.00", "url": "https://ccwheelers-oceano-dunes.printful.me/product/crop-hoodie", "img": "images/merch/crop-hoodie.jpg"}
+  ];
+  document.getElementById('merchGrid').innerHTML = CATALOG.map(function (c) {
+    return '<a class="pcard" href="' + c.url + '" target="_blank" rel="noopener">' +
+      '<div class="shot"><img src="' + c.img + '" alt="' + c.name.replace(/"/g, '') + '" loading="lazy"></div>' +
+      '<div class="info"><h3>' + c.name + '</h3>' +
+      '<p class="price">' + c.price + '</p>' +
+      '<span class="go">View Product &rarr;</span></div></a>';
+  }).join('');
 })();
 </script>
 </body>
