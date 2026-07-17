@@ -91,12 +91,6 @@
   to = "/gallery.html"
   status = 301
 
-# Proxy Quick Store product images (cdn.printful.me blocks direct hotlinks)
-[[redirects]]
-  from = "/qsimg/*"
-  to = "https://cdn.printful.me/:splat"
-  status = 200
-
 # Proxy Printful product thumbnails through our own domain so
 # ad blockers and strict privacy settings don't hide them
 [[redirects]]

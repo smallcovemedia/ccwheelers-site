@@ -47,12 +47,15 @@ document.addEventListener('click', function (e) {
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
 <style>
-  .soon-tag{display:inline-block;margin-top:14px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ocean);background:var(--sand-deep);border-radius:999px;padding:5px 14px}
-  .merch-shot{height:150px;border-radius:10px;margin-bottom:18px;background:linear-gradient(135deg,var(--sand-deep),var(--sand));display:grid;place-items:center}
-  .merch-shot svg{width:52px;height:52px;stroke:var(--ocean);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
-  .merch-shot img{width:100%;height:100%;object-fit:contain;border-radius:10px}
-  .merch-shot.live{height:230px;background:#fff}
-  .price{font-weight:700;color:var(--sunset-hot);font-size:15px;margin-top:6px}
+  a.pcard{display:flex;flex-direction:column;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;text-decoration:none;color:var(--ink);transition:transform .18s ease,box-shadow .18s ease}
+  a.pcard:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(14,58,77,.16)}
+  .pcard .shot{height:240px;background:linear-gradient(180deg,#fff 0%,var(--sand) 100%);border-bottom:1px solid var(--sand-deep);display:grid;place-items:center;padding:18px}
+  .pcard .shot img{max-width:100%;max-height:100%;object-fit:contain}
+  .pcard .info{padding:18px 20px 20px;display:flex;flex-direction:column;gap:4px;flex:1}
+  .pcard .info h3{font-size:21px;color:var(--ocean);line-height:1.1}
+  .pcard .price{font-weight:700;color:var(--sunset-hot);font-size:15px}
+  .pcard .go{margin-top:auto;padding-top:10px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink-soft)}
+  a.pcard:hover .go{color:var(--sunset-hot)}
 </style>
 <script src="nav.js" defer></script>
 </head>
@@ -111,32 +114,7 @@ document.addEventListener('click', function (e) {
     <h2 class="section-title">The First Drop Is Live</h2>
     <p class="lede">Hats, hoodies, and Old School Duner decals, live in the shop now. Checkout is handled securely by Printful; most orders ship within a week.</p>
     <p style="margin-top:18px"><a class="btn btn-primary" href="https://ccwheelers-oceano-dunes.printful.me/" target="_blank" rel="noopener">Shop All Gear</a></p>
-    <div class="cards" id="merchGrid">
-      <div class="card">
-        <div class="merch-shot"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4 4 7l2 3 2-1.5V20h8V8.5L18 10l2-3-4-3-2 1.5h-4L8 4Z"/></svg></div>
-        <h3>CCWheelers Tee</h3>
-        <p>Classic logo tee for riding, camping, or everyday wear.</p>
-        <div class="buy-slot"><a class="btn btn-primary" style="margin-top:14px;font-size:14px;padding:11px 22px" href="https://ccwheelers-oceano-dunes.printful.me/" target="_blank" rel="noopener">Buy in the CCW Shop</a></div>
-      </div>
-      <div class="card">
-        <div class="merch-shot"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 3 4 6l2 3 2-1.5V21h8V7.5L18 9l2-3-4-3-2 1.5h-4L8 3Z"/><path d="M9 3.5a3 3 0 0 0 6 0"/></svg></div>
-        <h3>CCWheelers Hoodie</h3>
-        <p>Heavyweight hoodie for cold mornings at Post 2.</p>
-        <div class="buy-slot"><a class="btn btn-primary" style="margin-top:14px;font-size:14px;padding:11px 22px" href="https://ccwheelers-oceano-dunes.printful.me/" target="_blank" rel="noopener">Buy in the CCW Shop</a></div>
-      </div>
-      <div class="card">
-        <div class="merch-shot"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 15c0-5 3.5-9 8-9s8 4 8 9" /><path d="M3 15h18l-1.5 3a2 2 0 0 1-1.8 1.1H6.3A2 2 0 0 1 4.5 18Z"/></svg></div>
-        <h3>Dune Cap</h3>
-        <p>Structured cap with the CCWheelers emblem up front.</p>
-        <div class="buy-slot"><a class="btn btn-primary" style="margin-top:14px;font-size:14px;padding:11px 22px" href="https://ccwheelers-oceano-dunes.printful.me/" target="_blank" rel="noopener">Buy in the CCW Shop</a></div>
-      </div>
-      <div class="card">
-        <div class="merch-shot"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 4.5h9L19.5 10v9.5h-15Z"/><path d="M13.5 4.5V10h6"/></svg></div>
-        <h3>Sticker Pack</h3>
-        <p>A set of CCWheelers stickers for your rig, cooler, or tailgate.</p>
-        <div class="buy-slot"><a class="btn btn-primary" style="margin-top:14px;font-size:14px;padding:11px 22px" href="https://ccwheelers-oceano-dunes.printful.me/" target="_blank" rel="noopener">Buy in the CCW Shop</a></div>
-      </div>
-    </div>
+    <div class="cards" id="merchGrid"></div>
   </div>
 </section>
 
@@ -199,18 +177,102 @@ document.addEventListener('click', function (e) {
 
 <script>
 (function () {
-  fetch('/api/merch').then(function (r) { return r.json(); }).then(function (d) {
-    if (!d || !d.products || !d.products.length) return;
-    var grid = document.getElementById('merchGrid');
-    grid.innerHTML = d.products.map(function (p) {
-      return '<div class="card">' +
-        '<div class="merch-shot live">' + (p.thumbnail ? '<img src="' + p.thumbnail + '" alt="' + p.name.replace(/"/g, '') + '" loading="lazy">' : '') + '</div>' +
-        '<h3>' + p.name + '</h3>' +
-        (p.price_min ? '<p class="price">From $' + p.price_min.toFixed(2) + '</p>' : '') +
-        '<div class="buy-slot"><a class="btn btn-primary" style="margin-top:14px;font-size:14px;padding:11px 22px" href="https://ccwheelers-oceano-dunes.printful.me/" target="_blank" rel="noopener">Buy in the CCW Shop</a></div>' +
-        '</div>';
+  var STORE = 'https://ccwheelers-oceano-dunes.printful.me';
+  // Quick Store catalog: name, price, and each product's own page.
+  // To refresh after adding products, ask Claude to "refresh the merch catalog".
+  var CATALOG = [
+  {
+    "name": "CCWheelers Distressed Dad Hat",
+    "price": "From $19.10",
+    "href": "/product/ccwheelers-distressed-dad-hat"
+  },
+  {
+    "name": "CCWheelers Vintage Cotton Twill Cap",
+    "price": "From $20.79",
+    "href": "/product/ccwheelers-vintage-cotton-twill-cap"
+  },
+  {
+    "name": "Old School Duner vinyl decals",
+    "price": "From $1.57",
+    "href": "/product/old-school-duner-vinyl-decals"
+  },
+  {
+    "name": "Old School Duner vinyl decals",
+    "price": "From $1.57",
+    "href": "/product/old-school-duner-vinyl-decals-6a59dfa4bba8b"
+  },
+  {
+    "name": "CCWheelers Unisex Hoodie",
+    "price": "From $35.48",
+    "href": "/product/ccwheelers-unisex-hoodie"
+  },
+  {
+    "name": "CCWheelers Unisex Hoodie",
+    "price": "From $28.85",
+    "href": "/product/ccwheelers-unisex-hoodie-6a59dff32fdf7"
+  },
+  {
+    "name": "Unisex Hoodie",
+    "price": "From $35.48",
+    "href": "/product/unisex-hoodie"
+  },
+  {
+    "name": "CCWheelers Premium full zip hoodie",
+    "price": "From $35.04",
+    "href": "/product/ccwheelers-premium-full-zip-hoodie"
+  },
+  {
+    "name": "CCWheelers Crop Hoodie",
+    "price": "From $43.10",
+    "href": "/product/ccwheelers-crop-hoodie"
+  },
+  {
+    "name": "CCWheelers Crop Hoodie",
+    "price": "From $43.10",
+    "href": "/product/ccwheelers-crop-hoodie-6a59dfdf35d4e"
+  },
+  {
+    "name": "Crop Hoodie",
+    "price": "From $43.10",
+    "href": "/product/crop-hoodie-6a59dfb529d80"
+  },
+  {
+    "name": "Crop Hoodie",
+    "price": "From $51.00",
+    "href": "/product/crop-hoodie"
+  }
+];
+
+  var grid = document.getElementById('merchGrid');
+  function render(imgFor) {
+    grid.innerHTML = CATALOG.map(function (c) {
+      var img = imgFor(c.name);
+      return '<a class="pcard" href="' + STORE + c.href + '" target="_blank" rel="noopener">' +
+        '<div class="shot">' + (img ? '<img src="' + img + '" alt="' + c.name.replace(/"/g, '') + '" loading="lazy">' : '<img src="images/ccw-logo.png" alt="" style="max-width:60%;opacity:.35">') + '</div>' +
+        '<div class="info"><h3>' + c.name + '</h3>' +
+        '<p class="price">' + c.price + '</p>' +
+        '<span class="go">View Product &rarr;</span></div></a>';
     }).join('');
-  }).catch(function () { /* static cards remain */ });
+  }
+  render(function () { return null; });
+
+  fetch('/api/merch').then(function (r) { return r.json(); }).then(function (d) {
+    if (!d || !d.products) return;
+    var pools = {};
+    d.products.forEach(function (p) {
+      var k = p.name.toLowerCase().trim();
+      (pools[k] = pools[k] || []).push(p.thumbnail);
+    });
+    render(function (name) {
+      var k = name.toLowerCase().trim();
+      // exact name match first, then partial
+      if (pools[k] && pools[k].length) return pools[k].shift();
+      for (var key in pools) {
+        if (pools[key].length && (key.indexOf(k) > -1 || k.indexOf(key) > -1)) return pools[key].shift();
+      }
+      return null;
+    });
+  }).catch(function () {});
 })();
 </script>
 </body>
