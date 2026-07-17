@@ -34,7 +34,8 @@
    "price": "From $35.48",
    "slug": "unisex-hoodie",
    "url": "https://ccwheelers-oceano-dunes.printful.me/product/unisex-hoodie",
-   "img": "images/merch/unisex-hoodie.jpg"
+   "img": "images/merch/unisex-hoodie.jpg",
+   "img2": "images/merch/unisex-hoodie-back.jpg"
   },
   {
    "name": "CCWheelers Unisex Hoodie",
@@ -109,7 +110,8 @@
    "price": "From $51.00",
    "slug": "crop-hoodie",
    "url": "https://ccwheelers-oceano-dunes.printful.me/product/crop-hoodie",
-   "img": "images/merch/crop-hoodie.jpg"
+   "img": "images/merch/crop-hoodie.jpg",
+   "img2": "images/merch/crop-hoodie-back.jpg"
   }
  ]
 }
