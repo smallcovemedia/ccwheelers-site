@@ -8,6 +8,15 @@
    ============================================================ */
 window.CCW_NEWS = [
   {
+    date: '2026-07-17',
+    tag: 'community',
+    title: 'The CCWheelers Merch Shop Is Open',
+    summary: 'First drop is live: Old School Duner decals, distressed dad hats, vintage caps, and a full hoodie lineup, all printed on demand and shipped to your door. Every purchase helps keep the site running.',
+    source: 'CCWheelers',
+    url: 'merch.html'
+  },
+
+  {
     date: '2026-07-10',
     tag: 'park',
     title: 'Presale Passes Expanding, No Kiosk Sales on Busy Days',
