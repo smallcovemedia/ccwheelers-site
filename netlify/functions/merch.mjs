@@ -1,9 +1,17 @@
 // Lists the store's synced products from Printful so the merch page can
 // render real products. The API key stays server-side; this returns only
 // public-safe fields. Cached at the CDN for 10 minutes.
-export default async () => {
+export default async (req) => {
   const key = process.env.PRINTFUL_API_KEY;
   if (!key) return err('PRINTFUL_API_KEY not configured', 500);
+
+  const url = new URL(req.url);
+  if (url.searchParams.get('diag') === 'stores') {
+    const sr = await fetch('https://api.printful.com/stores', { headers: { authorization: `Bearer ${key}` } });
+    const sd = await sr.json();
+    return Response.json({ stores: (sd.result || []).map(s => ({ id: s.id, name: s.name, type: s.type })) },
+      { headers: { 'access-control-allow-origin': '*' } });
+  }
 
   try {
     // store metadata (type tells us which checkout route exists)
@@ -19,7 +27,8 @@ export default async () => {
       }
     } catch {}
 
-    const res = await fetch('https://api.printful.com/store/products?limit=50', {
+    const sid = url.searchParams.get('sid');
+    const res = await fetch('https://api.printful.com/store/products?limit=50' + (sid ? '&store_id=' + encodeURIComponent(sid) : ''), {
       headers: { authorization: `Bearer ${key}` }
     });
     if (!res.ok) return err('Printful returned ' + res.status, 502);
