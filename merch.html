@@ -49,9 +49,9 @@ document.addEventListener('click', function (e) {
 <style>
   a.pcard{display:flex;flex-direction:column;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;text-decoration:none;color:var(--ink);transition:transform .18s ease,box-shadow .18s ease}
   a.pcard:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(14,58,77,.16)}
-  .pcard .shot{height:240px;background:linear-gradient(180deg,#fff 0%,var(--sand) 100%);border-bottom:1px solid var(--sand-deep);display:grid;place-items:center;padding:18px}
-  .pcard .shot img{max-width:100%;max-height:100%;object-fit:contain}
-  .pcard .info{padding:18px 20px 20px;display:flex;flex-direction:column;gap:4px;flex:1}
+  .pcard .shot{height:240px;background:linear-gradient(180deg,#fff 0%,var(--sand) 100%);border-bottom:1px solid var(--sand-deep);display:flex;align-items:center;justify-content:center;padding:16px;overflow:hidden}
+  .pcard .shot img{display:block;max-width:100%;max-height:208px;width:auto;height:auto;object-fit:contain}
+  .pcard .info{position:relative;z-index:2;background:#fff;padding:18px 20px 20px;display:flex;flex-direction:column;gap:4px;flex:1}
   .pcard .info h3{font-size:21px;color:var(--ocean);line-height:1.1}
   .pcard .price{font-weight:700;color:var(--sunset-hot);font-size:15px}
   .pcard .go{margin-top:auto;padding-top:10px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink-soft)}
