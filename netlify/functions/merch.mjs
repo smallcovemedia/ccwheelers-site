@@ -56,7 +56,11 @@ export default async () => {
 };
 
 function base(p) {
-  return { id: p.id, name: p.name, thumbnail: p.thumbnail_url || null };
+  // serve thumbnails through our own domain (see /pfimg proxy in netlify.toml)
+  const thumb = p.thumbnail_url
+    ? p.thumbnail_url.replace('https://files.cdn.printful.com/', '/pfimg/')
+    : null;
+  return { id: p.id, name: p.name, thumbnail: thumb };
 }
 function err(msg, status) {
   return Response.json({ error: msg }, { status, headers: { 'access-control-allow-origin': '*' } });
