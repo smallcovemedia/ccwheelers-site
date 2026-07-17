@@ -2,7 +2,35 @@
  "store": "https://ccwheelers-oceano-dunes.printful.me",
  "products": [
   {
-   "name": "Unisex Hoodie",
+   "name": "Love the Dunes Vinyl Decals",
+   "price": "From $2.00",
+   "slug": "love-the-dunes-vinyl-decals",
+   "url": "https://ccwheelers-oceano-dunes.printful.me/product/love-the-dunes-vinyl-decals",
+   "img": "images/merch/love-the-dunes-vinyl-decals.jpg"
+  },
+  {
+   "name": "CCWheelers Vinyl Decals",
+   "price": "From $2.00",
+   "slug": "ccwheelers-vinyl-decals",
+   "url": "https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-vinyl-decals",
+   "img": "images/merch/ccwheelers-vinyl-decals.jpg"
+  },
+  {
+   "name": "The Last Beach Vinyl Decals",
+   "price": "From $2.00",
+   "slug": "the-last-beach-vinyl-decals",
+   "url": "https://ccwheelers-oceano-dunes.printful.me/product/the-last-beach-vinyl-decals",
+   "img": "images/merch/the-last-beach-vinyl-decals.jpg"
+  },
+  {
+   "name": "Oceano Dunes Vinyl Decals",
+   "price": "From $2.00",
+   "slug": "oceano-dunes-vinyl-decals",
+   "url": "https://ccwheelers-oceano-dunes.printful.me/product/oceano-dunes-vinyl-decals",
+   "img": "images/merch/oceano-dunes-vinyl-decals.jpg"
+  },
+  {
+   "name": "CCWheelers Hoodie",
    "price": "From $35.48",
    "slug": "unisex-hoodie",
    "url": "https://ccwheelers-oceano-dunes.printful.me/product/unisex-hoodie",
@@ -13,14 +41,16 @@
    "price": "From $28.85",
    "slug": "ccwheelers-unisex-hoodie-6a59dff32fdf7",
    "url": "https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-unisex-hoodie-6a59dff32fdf7",
-   "img": "images/merch/ccwheelers-unisex-hoodie-6a59dff32fdf7.jpg"
+   "img": "images/merch/ccwheelers-unisex-hoodie-6a59dff32fdf7.jpg",
+   "img2": "images/merch/ccwheelers-unisex-hoodie-6a59dff32fdf7-back.jpg"
   },
   {
    "name": "CCWheelers Crop Hoodie",
    "price": "From $43.10",
    "slug": "ccwheelers-crop-hoodie-6a59dfdf35d4e",
    "url": "https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-crop-hoodie-6a59dfdf35d4e",
-   "img": "images/merch/ccwheelers-crop-hoodie-6a59dfdf35d4e.jpg"
+   "img": "images/merch/ccwheelers-crop-hoodie-6a59dfdf35d4e.jpg",
+   "img2": "images/merch/ccwheelers-crop-hoodie-6a59dfdf35d4e-back.jpg"
   },
   {
    "name": "CCWheelers Vintage Cotton Twill Cap",
@@ -34,14 +64,8 @@
    "price": "From $35.04",
    "slug": "ccwheelers-premium-full-zip-hoodie",
    "url": "https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-premium-full-zip-hoodie",
-   "img": "images/merch/ccwheelers-premium-full-zip-hoodie.jpg"
-  },
-  {
-   "name": "Crop Hoodie",
-   "price": "From $43.10",
-   "slug": "crop-hoodie-6a59dfb529d80",
-   "url": "https://ccwheelers-oceano-dunes.printful.me/product/crop-hoodie-6a59dfb529d80",
-   "img": "images/merch/crop-hoodie-6a59dfb529d80.jpg"
+   "img": "images/merch/ccwheelers-premium-full-zip-hoodie.jpg",
+   "img2": "images/merch/ccwheelers-premium-full-zip-hoodie-back.jpg"
   },
   {
    "name": "Old School Duner Vinyl Decals",
@@ -62,14 +86,16 @@
    "price": "From $35.48",
    "slug": "ccwheelers-unisex-hoodie",
    "url": "https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-unisex-hoodie",
-   "img": "images/merch/ccwheelers-unisex-hoodie.jpg"
+   "img": "images/merch/ccwheelers-unisex-hoodie.jpg",
+   "img2": "images/merch/ccwheelers-unisex-hoodie-back.jpg"
   },
   {
    "name": "CCWheelers Crop Hoodie",
    "price": "From $43.10",
    "slug": "ccwheelers-crop-hoodie",
    "url": "https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-crop-hoodie",
-   "img": "images/merch/ccwheelers-crop-hoodie.jpg"
+   "img": "images/merch/ccwheelers-crop-hoodie.jpg",
+   "img2": "images/merch/ccwheelers-crop-hoodie-back.jpg"
   },
   {
    "name": "Old School Duner Vinyl Decals",
@@ -79,7 +105,7 @@
    "img": "images/merch/old-school-duner-vinyl-decals.jpg"
   },
   {
-   "name": "Crop Hoodie",
+   "name": "Oceano Love Crop Hoodie",
    "price": "From $51.00",
    "slug": "crop-hoodie",
    "url": "https://ccwheelers-oceano-dunes.printful.me/product/crop-hoodie",
