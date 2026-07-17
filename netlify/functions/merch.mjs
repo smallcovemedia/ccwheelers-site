@@ -6,6 +6,19 @@ export default async () => {
   if (!key) return err('PRINTFUL_API_KEY not configured', 500);
 
   try {
+    // store metadata (type tells us which checkout route exists)
+    let store = null;
+    try {
+      const sr = await fetch('https://api.printful.com/stores', {
+        headers: { authorization: `Bearer ${key}` }
+      });
+      if (sr.ok) {
+        const sd = await sr.json();
+        const s = (sd.result || [])[0];
+        if (s) store = { name: s.name, type: s.type, website: s.website || null };
+      }
+    } catch {}
+
     const res = await fetch('https://api.printful.com/store/products?limit=50', {
       headers: { authorization: `Bearer ${key}` }
     });
@@ -34,7 +47,7 @@ export default async () => {
     }));
 
     return Response.json(
-      { count: detailed.length, products: detailed, fetched: new Date().toISOString() },
+      { store, count: detailed.length, products: detailed, fetched: new Date().toISOString() },
       { headers: { 'cache-control': 'public, max-age=0, s-maxage=600', 'access-control-allow-origin': '*' } }
     );
   } catch (e) {
