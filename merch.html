@@ -306,6 +306,26 @@ document.addEventListener('click', function (e) {
 
 <script>
 (function () {
+  // NOTE FOR LOGAN (2026-07-17): replaced the live Printful-catalog grid
+  // with this hand-curated version. Dad's original complaint: Printful's
+  // garment mockups make the actual artwork hard to see, so each tile
+  // below shows a full-size close-up of the design instead, with the
+  // card background matched to the real garment color for readability.
+  //
+  // Each of the 4 tiles (Women/Men/Kids/Pets) is a mini carousel driven
+  // by the MERCH_TILES data below -- add another object to a tile's
+  // array to add another design/product to page through (image,
+  // background color class, name, price, description, product link).
+  // "front" + "frontAlt" are optional, for garments with a small front
+  // print alongside a bigger back print (see the Women/Men tiles).
+  // Sticker strip below just auto-scrolls a plain list of decal cards.
+  //
+  // Your old catalog-grid version (netlify/functions/merch.mjs,
+  // quickstore-products.json, images/merch/*) is still in the repo,
+  // untouched and unused, in case we want to revisit that approach or
+  // merge ideas from both later. Ask Claude to "refresh the merch
+  // catalog" still works if you want to go back to auto-pulling every
+  // Printful product live instead of curating a few by hand.
   var BASE = 'https://ccwheelers-oceano-dunes.printful.me/product/';
   var MERCH_TILES = {
     women: [
