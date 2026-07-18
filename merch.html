@@ -47,9 +47,43 @@ document.addEventListener('click', function (e) {
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
 <style>
-  .soon-tag{display:inline-block;margin-top:14px;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ocean);background:var(--sand-deep);border-radius:999px;padding:5px 14px}
-  .merch-shot{height:150px;border-radius:10px;margin-bottom:18px;background:linear-gradient(135deg,var(--sand-deep),var(--sand));display:grid;place-items:center}
-  .merch-shot svg{width:52px;height:52px;stroke:var(--ocean);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  .merch-hero-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:40px}
+  .merch-hero-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:26px;display:flex;flex-direction:column}
+  .merch-hero-cat{font-size:12px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--sunset-hot);margin-bottom:12px}
+  .merch-hero-art{background:linear-gradient(135deg,var(--sand-deep),var(--sand));border-radius:10px;padding:18px;display:flex;align-items:center;justify-content:center;gap:16px;min-height:220px}
+  .merch-hero-art.bg-green{background:linear-gradient(135deg,#46583f,#2d3a29)}
+  .merch-hero-art.bg-black{background:linear-gradient(135deg,#2b2b2b,#161616)}
+  .merch-hero-art.bg-pink{background:linear-gradient(135deg,#f0b4cb,#e895b5)}
+  .merch-hero-art > img{flex:1 1 0;min-width:0;max-width:100%;max-height:260px;object-fit:contain;display:block}
+  .merch-hero-front-wrap{flex:0 0 auto;width:76px;border-left:1px solid var(--sand-deep);padding-left:16px}
+  .merch-hero-art.bg-green .merch-hero-front-wrap,
+  .merch-hero-art.bg-black .merch-hero-front-wrap{border-left-color:rgba(255,255,255,.25)}
+  .merch-hero-front-wrap img{width:100%;height:auto;max-height:120px;object-fit:contain;display:block}
+  .merch-hero-shot-label{font-size:11px;color:var(--ink-soft);text-align:center;margin-top:6px;text-transform:uppercase;letter-spacing:1px}
+  .merch-hero-art.bg-green .merch-hero-shot-label,
+  .merch-hero-art.bg-black .merch-hero-shot-label{color:rgba(255,255,255,.65)}
+  .merch-hero-card h3{font-size:23px;color:var(--ocean);margin-top:18px}
+  .merch-hero-card .price{font-family:'Barlow Condensed';font-weight:800;color:var(--sunset-hot);font-size:20px;margin:4px 0 10px}
+  .merch-hero-card p{font-size:15px;color:var(--ink-soft);margin-bottom:16px}
+  .merch-hero-card .btn{margin-top:auto;align-self:flex-start}
+
+  .sticker-strip{overflow:hidden;margin-top:40px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+  .sticker-track{display:flex;width:max-content;gap:22px;animation:sticker-scroll 32s linear infinite}
+  .sticker-strip:hover .sticker-track{animation-play-state:paused}
+  .sticker-card{width:170px;flex:none;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;text-align:center;text-decoration:none;display:block}
+  .sticker-card img{width:100%;height:120px;object-fit:contain;display:block;margin-bottom:10px}
+  .sticker-card .name{font-size:13.5px;font-weight:700;color:var(--ink);line-height:1.25}
+  .sticker-card .price{font-size:12.5px;color:var(--sunset-hot);font-weight:700;margin-top:4px}
+  @keyframes sticker-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  @media(max-width:760px){
+    .merch-hero-grid{grid-template-columns:1fr}
+    .merch-hero-art{min-height:180px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .sticker-track{animation:none}
+    .sticker-strip{overflow-x:auto}
+  }
 </style>
 <script src="nav.js" defer></script>
 </head>
@@ -96,60 +130,104 @@ document.addEventListener('click', function (e) {
 <main>
 <div class="page-head">
   <div class="wrap">
-    <span class="eyebrow">New</span>
+    <span class="eyebrow">The Shop Is Live</span>
     <h1>CCWheelers Merch</h1>
-    <p>Gear for people who love these dunes. Printed on demand and shipped straight to your door, new designs are on the way.</p>
+    <p>Gear for people who love these dunes. Printed on demand and shipped straight to your door. Here's a close look at a few of our favorite designs.</p>
   </div>
 </div>
 
 <section>
   <div class="wrap">
-    <span class="eyebrow">Coming Soon</span>
-    <h2 class="section-title">First Drop In The Works</h2>
-    <p class="lede">We're setting up the shop now. Check back soon, or watch our Facebook page for the announcement when it goes live.</p>
+    <span class="eyebrow">A Few Favorites</span>
+    <h2 class="section-title">See The Art Up Close</h2>
+    <p class="lede">Our store shows the garment first and the artwork small. Here's the design itself, full size, so you know exactly what you're getting before you click through to order.</p>
 
-    <!--
-      INTEGRATION NOTE (remove once live):
-      Each card below is a placeholder for one product. To finish the shop:
-        1. Create the product in Printful and sync it to a connected sales
-           channel that supports embeddable buy buttons (Shopify's "Buy
-           Button" channel is the standard route for a plain static site
-           like this one -- Printful does not host its own checkout).
-        2. In that channel, generate the product's Buy Button embed script.
-        3. Paste the embed script into the matching <div class="buy-slot">
-           below, in place of the "Coming Soon" tag.
-      Repeat per product, then delete this comment.
-    -->
-    <div class="cards">
-      <div class="card">
-        <div class="merch-shot"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 4 4 7l2 3 2-1.5V20h8V8.5L18 10l2-3-4-3-2 1.5h-4L8 4Z"/></svg></div>
-        <h3>CCWheelers Tee</h3>
-        <p>Classic logo tee for riding, camping, or everyday wear.</p>
-        <div class="buy-slot"><span class="soon-tag">Coming Soon</span></div>
+    <div class="merch-hero-grid">
+      <div class="merch-hero-card">
+        <span class="merch-hero-cat">Women</span>
+        <div class="merch-hero-art bg-green"><img src="images/merch-hero-women.png" alt="Heart-shaped Oceano Dunes sunset design on the back of the Oceano Love Crop Hoodie" loading="lazy"></div>
+        <h3>Oceano Love Crop Hoodie</h3>
+        <div class="price">From $51.00</div>
+        <p>A heart-shaped dune sunset scene across the back.</p>
+        <a class="btn btn-primary" href="https://ccwheelers-oceano-dunes.printful.me/product/crop-hoodie" target="_blank" rel="noopener">Shop This Design</a>
       </div>
-      <div class="card">
-        <div class="merch-shot"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 3 4 6l2 3 2-1.5V21h8V7.5L18 9l2-3-4-3-2 1.5h-4L8 3Z"/><path d="M9 3.5a3 3 0 0 0 6 0"/></svg></div>
-        <h3>CCWheelers Hoodie</h3>
-        <p>Heavyweight hoodie for cold mornings at Post 2.</p>
-        <div class="buy-slot"><span class="soon-tag">Coming Soon</span></div>
+
+      <div class="merch-hero-card">
+        <span class="merch-hero-cat">Men</span>
+        <div class="merch-hero-art bg-black">
+          <img src="images/merch-hero-men-back.png" alt="Old School Duner rail buggy design on the back of the CCWheelers Premium full zip hoodie" loading="lazy">
+          <div class="merch-hero-front-wrap">
+            <img src="images/merch-hero-men-front.png" alt="Smaller Old School Duner oval badge on the front of the hoodie" loading="lazy">
+            <div class="merch-hero-shot-label">Front</div>
+          </div>
+        </div>
+        <h3>CCWheelers Premium Full Zip Hoodie</h3>
+        <div class="price">From $35.04</div>
+        <p>Old School Duner rail buggy on the back, a smaller badge up front.</p>
+        <a class="btn btn-primary" href="https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-premium-full-zip-hoodie" target="_blank" rel="noopener">Shop This Design</a>
       </div>
-      <div class="card">
-        <div class="merch-shot"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 15c0-5 3.5-9 8-9s8 4 8 9" /><path d="M3 15h18l-1.5 3a2 2 0 0 1-1.8 1.1H6.3A2 2 0 0 1 4.5 18Z"/></svg></div>
-        <h3>Dune Cap</h3>
-        <p>Structured cap with the CCWheelers emblem up front.</p>
-        <div class="buy-slot"><span class="soon-tag">Coming Soon</span></div>
+
+      <div class="merch-hero-card">
+        <span class="merch-hero-cat">Kids</span>
+        <div class="merch-hero-art bg-pink"><img src="images/merch-hero-kids.png" alt="Mom and Dad is Raising a Duner design, pink girl version" loading="lazy"></div>
+        <h3>Duner Girl Jersey Bodysuit</h3>
+        <div class="price">From $15.00</div>
+        <p>"Mom &amp; Dad Is Raising A Duner," pink helmet-and-buggy art for your littlest rider.</p>
+        <a class="btn btn-primary" href="https://ccwheelers-oceano-dunes.printful.me/product/duner-baby-jersey-bodysuit" target="_blank" rel="noopener">Shop This Design</a>
       </div>
-      <div class="card">
-        <div class="merch-shot"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4.5 4.5h9L19.5 10v9.5h-15Z"/><path d="M13.5 4.5V10h6"/></svg></div>
-        <h3>Sticker Pack</h3>
-        <p>A set of CCWheelers stickers for your rig, cooler, or tailgate.</p>
-        <div class="buy-slot"><span class="soon-tag">Coming Soon</span></div>
+
+      <div class="merch-hero-card">
+        <span class="merch-hero-cat">Pets</span>
+        <div class="merch-hero-art"><img src="images/merch-hero-pets.png" alt="Ruff Riders corgi driving a dune buggy design" loading="lazy"></div>
+        <h3>Pet Bandana Collar</h3>
+        <div class="price">From $21.00</div>
+        <p>Ruff Riders: a corgi behind the wheel, bandana and all.</p>
+        <a class="btn btn-primary" href="https://ccwheelers-oceano-dunes.printful.me/product/pet-bandana-collar" target="_blank" rel="noopener">Shop This Design</a>
       </div>
     </div>
   </div>
 </section>
 
-<div class="wrap" style="padding:0 24px 72px;text-align:center"><p style="font-size:15px;color:var(--ink-soft);margin-bottom:14px">Want to know the second the shop opens?</p><a class="btn btn-primary" href="contact.html">Contact Us</a></div>
+<section style="padding-top:0">
+  <div class="wrap">
+    <span class="eyebrow">Cheap And Easy</span>
+    <h2 class="section-title">Add A Sticker</h2>
+    <p class="lede">Vinyl decals start at $2. Since a sticker is basically just the artwork, what you see here is what you get. Already grabbing a hoodie? Might as well toss one on your rig, cooler, or tailgate.</p>
+
+    <div class="sticker-strip">
+      <div class="sticker-track">
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/the-last-beach-vinyl-decals-6a5ae61c36388" target="_blank" rel="noopener"><img src="images/merch-sticker-last-beach.png" alt="The Last Beach vinyl decal" loading="lazy"><div class="name">The Last Beach</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/svra-badge-vinyl-decals" target="_blank" rel="noopener"><img src="images/merch-sticker-svra.png" alt="SVRA Badge vinyl decal" loading="lazy"><div class="name">SVRA Badge</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/ruff-rider-vinyl-decals" target="_blank" rel="noopener"><img src="images/merch-sticker-ruff-rider.png" alt="Ruff Rider vinyl decal" loading="lazy"><div class="name">Ruff Rider</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/duner-vinyl-decals" target="_blank" rel="noopener"><img src="images/merch-sticker-duner-boy.png" alt="Duner Boy vinyl decal" loading="lazy"><div class="name">Duner Boy</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/girls-duner-vinyl-decals" target="_blank" rel="noopener"><img src="images/merch-sticker-girls-duner.png" alt="Girls Duner vinyl decal" loading="lazy"><div class="name">Girls Duner</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/love-the-dunes-vinyl-decals" target="_blank" rel="noopener"><img src="images/merch-sticker-love-the-dunes.png" alt="Love the Dunes vinyl decal" loading="lazy"><div class="name">Love the Dunes</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-vinyl-decals" target="_blank" rel="noopener"><img src="images/merch-sticker-ccwheelers-sunset.png" alt="CCWheelers Sunset vinyl decal" loading="lazy"><div class="name">CCWheelers Sunset</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/oceano-dunes-vinyl-decals" target="_blank" rel="noopener"><img src="images/merch-sticker-oceano-heritage.png" alt="Oceano Dunes Heritage vinyl decal" loading="lazy"><div class="name">Oceano Dunes Heritage</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/old-school-duner-vinyl-decals" target="_blank" rel="noopener"><img src="images/merch-sticker-old-school-duner.png" alt="Old School Duner vinyl decal" loading="lazy"><div class="name">Old School Duner</div><div class="price">From $1.57</div></a>
+
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/the-last-beach-vinyl-decals-6a5ae61c36388" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="images/merch-sticker-last-beach.png" alt="" loading="lazy"><div class="name">The Last Beach</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/svra-badge-vinyl-decals" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="images/merch-sticker-svra.png" alt="" loading="lazy"><div class="name">SVRA Badge</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/ruff-rider-vinyl-decals" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="images/merch-sticker-ruff-rider.png" alt="" loading="lazy"><div class="name">Ruff Rider</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/duner-vinyl-decals" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="images/merch-sticker-duner-boy.png" alt="" loading="lazy"><div class="name">Duner Boy</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/girls-duner-vinyl-decals" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="images/merch-sticker-girls-duner.png" alt="" loading="lazy"><div class="name">Girls Duner</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/love-the-dunes-vinyl-decals" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="images/merch-sticker-love-the-dunes.png" alt="" loading="lazy"><div class="name">Love the Dunes</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-vinyl-decals" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="images/merch-sticker-ccwheelers-sunset.png" alt="" loading="lazy"><div class="name">CCWheelers Sunset</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/oceano-dunes-vinyl-decals" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="images/merch-sticker-oceano-heritage.png" alt="" loading="lazy"><div class="name">Oceano Dunes Heritage</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/old-school-duner-vinyl-decals" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="images/merch-sticker-old-school-duner.png" alt="" loading="lazy"><div class="name">Old School Duner</div><div class="price">From $1.57</div></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band" style="padding-top:0">
+  <div class="wrap" style="text-align:center">
+    <span class="eyebrow">And There's More</span>
+    <h2 class="section-title">This Is Just A Taste</h2>
+    <p class="lede" style="margin:0 auto 24px">Hoodies, hats, sweatshirts, kids' gear, and more designs live in the full shop.</p>
+    <a class="btn btn-primary" href="https://ccwheelers-oceano-dunes.printful.me/" target="_blank" rel="noopener">Shop The Full Lineup</a>
+  </div>
+</section>
 </main>
 
 <footer>
