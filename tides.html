@@ -252,10 +252,7 @@ document.addEventListener('click', function (e) {
 
 <script>
 (function () {
-  var STATION = '9412110';
-  var BASE = 'https://api.tidesandcurrents.noaa.gov/api/prod/datagetter' +
-    '?product=predictions&application=ccwheelers&datum=MLLW&station=' + STATION +
-    '&time_zone=lst_ldt&units=english&format=json';
+  var BASE = '/api/tides';
 
   function ymd(d) {
     return '' + d.getFullYear() + ('0' + (d.getMonth() + 1)).slice(-2) + ('0' + d.getDate()).slice(-2);
@@ -268,7 +265,7 @@ document.addEventListener('click', function (e) {
   var start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   var end = new Date(start.getTime() + 24 * 3600 * 1000);
 
-  fetch(BASE + '&begin_date=' + ymd(start) + '&end_date=' + ymd(end))
+  fetch(BASE + '?begin_date=' + ymd(start) + '&end_date=' + ymd(end))
     .then(function (r) { return r.json(); })
     .then(function (data) {
       var pts = (data.predictions || []).map(function (p) {
@@ -373,7 +370,7 @@ document.addEventListener('click', function (e) {
     var tbody = document.querySelector('#tideTable tbody');
     tbody.innerHTML = '<tr><td colspan="2" class="tide-loading">Loading the monthly schedule…</td></tr>';
 
-    fetch(BASE + '&interval=hilo&begin_date=' + ymd(first) + '&end_date=' + ymd(last))
+    fetch(BASE + '?interval=hilo&begin_date=' + ymd(first) + '&end_date=' + ymd(last))
       .then(function (r) { return r.json(); })
       .then(function (data) {
         var byDay = {};
