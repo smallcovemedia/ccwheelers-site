@@ -92,10 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var now = new Date();
     var start = new Date(now.getTime() - 24 * 3600 * 1000);
     var end = new Date(now.getTime() + 36 * 3600 * 1000);
-    var url = 'https://api.tidesandcurrents.noaa.gov/api/prod/datagetter' +
-      '?product=predictions&application=ccwheelers&datum=MLLW&station=9412110' +
-      '&time_zone=lst_ldt&units=english&interval=hilo&format=json' +
-      '&begin_date=' + fmtDate(start) + '&end_date=' + fmtDate(end);
+    var url = '/api/tides?interval=hilo&begin_date=' + fmtDate(start) + '&end_date=' + fmtDate(end);
 
     fetch(url).then(function (r) { return r.json(); }).then(function (data) {
       if (!data || !data.predictions || !data.predictions.length) { tideFallback(); return; }

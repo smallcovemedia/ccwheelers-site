@@ -292,9 +292,7 @@ document.addEventListener('click', function (e) {
 
 <script>
 (function () {
-  var BASE = 'https://api.tidesandcurrents.noaa.gov/api/prod/datagetter' +
-    '?product=predictions&application=ccwheelers&datum=MLLW&station=9412110' +
-    '&time_zone=lst_ldt&units=english&interval=hilo&format=json';
+  var BASE = '/api/tides?interval=hilo';
 
   function ymd(d){return ''+d.getFullYear()+('0'+(d.getMonth()+1)).slice(-2)+('0'+d.getDate()).slice(-2);}
   function fmtT(d){return d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});}
