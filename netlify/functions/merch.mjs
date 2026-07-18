@@ -65,6 +65,21 @@ export default async (req) => {
     }, { headers: { 'access-control-allow-origin': '*' } });
   }
 
+  // Full variant list (id, color, size) for a catalog product, e.g. the
+  // Crop Hoodie (317). Research helper for building product-creation
+  // payloads, not used by the live merch page.
+  const catalogProductId = url.searchParams.get('catalogFull');
+  if (catalogProductId) {
+    const pr = await fetch('https://api.printful.com/products/' + encodeURIComponent(catalogProductId), {
+      headers: { authorization: `Bearer ${key}` }
+    });
+    if (!pr.ok) return err('Printful returned ' + pr.status, 502);
+    const pd = await pr.json();
+    const variants = (pd.result?.variants || []).map(v => ({ id: v.id, color: v.color, size: v.size, price: v.price }));
+    return Response.json({ product: pd.result?.product?.title, variants },
+      { headers: { 'access-control-allow-origin': '*' } });
+  }
+
   try {
     // store metadata (type tells us which checkout route exists)
     let store = null;
