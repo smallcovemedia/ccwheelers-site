@@ -84,6 +84,9 @@ document.addEventListener('click', function (e) {
   .tide-ev .tag.L{background:var(--dune-dark)}
   .tide-ev small{color:var(--ink-soft)}
   .tide-loading{padding:40px;text-align:center;color:var(--ink-soft)}
+  .feed-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--sand-deep);box-shadow:0 0 0 3px rgba(123,138,146,.15);margin-left:8px;vertical-align:middle}
+  .feed-dot.live{background:#2e9e52;box-shadow:0 0 0 3px rgba(46,158,82,.18)}
+  .feed-dot.down{background:#c8401f;box-shadow:0 0 0 3px rgba(200,64,31,.18)}
   @media(max-width:760px){
     .tide-now{padding:18px 14px;margin-top:-24px}
     .tide-now-top{gap:12px}
@@ -154,7 +157,7 @@ document.addEventListener('click', function (e) {
     <div class="tide-now">
       <div class="tide-now-top">
         <div class="tide-big">
-          <span class="eyebrow" style="margin-bottom:2px">Right Now</span>
+          <span class="eyebrow" style="margin-bottom:2px">Right Now<span class="feed-dot" id="feedDot" title="Checking NOAA feed…"></span></span>
           <div class="h" id="nowHeight">—</div>
           <div class="trend" id="nowTrend">Loading current tide…</div>
         </div>
@@ -259,6 +262,23 @@ document.addEventListener('click', function (e) {
   }
   function parseT(t) { return new Date(t.replace(' ', 'T')); }
   function fmtTime(d) { return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }); }
+
+  /* ================= FEED LIGHT ================= */
+  function checkFeed() {
+    fetch(BASE + '?probe=1')
+      .then(function (r) { return r.json(); })
+      .then(function (d) { setFeedLight(!!d.live); })
+      .catch(function () { setFeedLight(false); });
+  }
+  function setFeedLight(live) {
+    var dot = document.getElementById('feedDot');
+    if (!dot) return;
+    dot.classList.remove('live', 'down');
+    dot.classList.add(live ? 'live' : 'down');
+    dot.title = live ? 'Live: connected to NOAA right now' : 'Showing cached tide data, NOAA’s feed is temporarily down';
+  }
+  checkFeed();
+  setInterval(checkFeed, 5 * 60 * 1000);
 
   /* ================= TODAY'S CURVE ================= */
   var now = new Date();
