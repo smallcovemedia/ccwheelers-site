@@ -264,6 +264,14 @@ document.addEventListener('click', function (e) {
   function fmtTime(d) { return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }); }
 
   /* ================= FEED LIGHT ================= */
+  /* NOTE FOR LOGAN (2026-07-18): the dot next to "Right Now" is green
+     when NOAA is actually answering right now, red when it's down and
+     you're looking at a cached response (see netlify/functions/tides.mjs
+     -- the main data fetch below is CDN-cached so it can keep serving
+     good numbers during a NOAA outage, but that also means a 200 from
+     it doesn't tell you whether NOAA is currently up). This dot calls
+     the ?probe=1 mode instead, which is never cached and always checks
+     NOAA fresh, purely so you have an honest signal at a glance. */
   function checkFeed() {
     fetch(BASE + '?probe=1')
       .then(function (r) { return r.json(); })

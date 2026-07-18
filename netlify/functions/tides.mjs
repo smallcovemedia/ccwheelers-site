@@ -1,3 +1,6 @@
+// NOTE FOR LOGAN (2026-07-18): see the matching note in tides.html for
+// what the green/red dot next to "Right Now" means.
+//
 // Proxies NOAA tide predictions (Port San Luis, station 9412110) through
 // our own domain so the CDN can keep serving the last successful response
 // if NOAA's predictions API has an outage, instead of every visitor
