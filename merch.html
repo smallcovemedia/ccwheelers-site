@@ -47,19 +47,58 @@ document.addEventListener('click', function (e) {
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
 <style>
-  a.pcard{display:flex;flex-direction:column;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;text-decoration:none;color:var(--ink);transition:transform .18s ease,box-shadow .18s ease}
-  a.pcard:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(14,58,77,.16)}
-  .pcard .shot{height:240px;background:linear-gradient(180deg,#fff 0%,var(--sand) 100%);border-bottom:1px solid var(--sand-deep);display:flex;align-items:center;justify-content:center;padding:16px;overflow:hidden}
-  .pcard .shot{position:relative}
-  .pcard .shot img{display:block;max-width:100%;max-height:208px;width:auto;height:auto;object-fit:contain;transition:opacity .28s ease}
-  .pcard .shot img.back{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);max-width:calc(100% - 32px);opacity:0}
-  a.pcard:hover .shot img.back,a.pcard:focus-visible .shot img.back{opacity:1}
-  a.pcard:hover .shot img.front.has-back,a.pcard:focus-visible .shot img.front.has-back{opacity:0}
-  .pcard .info{position:relative;z-index:2;background:#fff;padding:18px 20px 20px;display:flex;flex-direction:column;gap:4px;flex:1}
-  .pcard .info h3{font-size:21px;color:var(--ocean);line-height:1.1}
-  .pcard .price{font-weight:700;color:var(--sunset-hot);font-size:15px}
-  .pcard .go{margin-top:auto;padding-top:10px;font-size:13px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--ink-soft)}
-  a.pcard:hover .go{color:var(--sunset-hot)}
+  .merch-hero-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:40px}
+  .merch-hero-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:26px;display:flex;flex-direction:column}
+  .merch-hero-cat{font-size:12px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--sunset-hot);margin-bottom:12px}
+  .merch-hero-art{background:linear-gradient(135deg,var(--sand-deep),var(--sand));border-radius:10px;padding:18px;display:flex;align-items:center;justify-content:center;gap:16px;min-height:220px}
+  .merch-hero-art.bg-green{background:linear-gradient(135deg,#46583f,#2d3a29)}
+  .merch-hero-art.bg-black{background:linear-gradient(135deg,#2b2b2b,#161616)}
+  .merch-hero-art.bg-stone{background:linear-gradient(135deg,#9a9488,#79746a)}
+  .merch-hero-art.bg-pink{background:linear-gradient(135deg,#f0b4cb,#e895b5)}
+  .merch-hero-art.bg-blue{background:linear-gradient(135deg,#3c5199,#26356b)}
+  .merch-hero-art.bg-dark .merch-hero-front-wrap,
+  .merch-hero-art.bg-green .merch-hero-front-wrap,
+  .merch-hero-art.bg-black .merch-hero-front-wrap,
+  .merch-hero-art.bg-blue .merch-hero-front-wrap{border-left-color:rgba(255,255,255,.25)}
+  .merch-hero-art.bg-dark .merch-hero-shot-label,
+  .merch-hero-art.bg-green .merch-hero-shot-label,
+  .merch-hero-art.bg-black .merch-hero-shot-label,
+  .merch-hero-art.bg-blue .merch-hero-shot-label{color:rgba(255,255,255,.65)}
+  .merch-hero-art{position:relative}
+  .merch-hero-imgwrap{display:flex;align-items:center;justify-content:center;gap:16px;width:100%;padding:0 52px}
+  .merch-hero-imgwrap > img{flex:1 1 0;min-width:0;max-width:100%;max-height:260px;object-fit:contain;display:block}
+  .merch-hero-front-wrap{flex:0 0 auto;width:124px;border-left:1px solid var(--sand-deep);padding-left:16px}
+  .merch-hero-front-wrap img{width:100%;height:auto;max-height:170px;object-fit:contain;display:block}
+  .merch-hero-shot-label{font-size:11px;color:var(--ink-soft);text-align:center;margin-top:6px;text-transform:uppercase;letter-spacing:1px}
+  .merch-hero-nav{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;border:none;background:#fff;box-shadow:var(--shadow);color:var(--ocean);font-size:16px;line-height:1;cursor:pointer;display:grid;place-items:center}
+  .merch-hero-nav:hover{background:var(--sand)}
+  .merch-hero-nav.prev{left:10px}
+  .merch-hero-nav.next{right:10px}
+  .merch-hero-dots{display:flex;justify-content:center;gap:8px;margin-top:12px}
+  .merch-hero-dots button{width:8px;height:8px;border-radius:50%;border:none;background:var(--sand-deep);padding:0;cursor:pointer}
+  .merch-hero-dots button.active{background:var(--sunset-hot)}
+  .merch-hero-card h3{font-size:23px;color:var(--ocean);margin-top:18px}
+  .merch-hero-card .price{font-family:'Barlow Condensed';font-weight:800;color:var(--sunset-hot);font-size:20px;margin:4px 0 10px}
+  .merch-hero-card p{font-size:15px;color:var(--ink-soft);margin-bottom:16px}
+  .merch-hero-card .btn{margin-top:auto;align-self:flex-start}
+
+  .sticker-strip{overflow:hidden;margin-top:40px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+  .sticker-track{display:flex;width:max-content;gap:22px;animation:sticker-scroll 32s linear infinite}
+  .sticker-strip:hover .sticker-track{animation-play-state:paused}
+  .sticker-card{width:170px;flex:none;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;text-align:center;text-decoration:none;display:block}
+  .sticker-card img{width:100%;height:120px;object-fit:contain;display:block;margin-bottom:10px}
+  .sticker-card .name{font-size:13.5px;font-weight:700;color:var(--ink);line-height:1.25}
+  .sticker-card .price{font-size:12.5px;color:var(--sunset-hot);font-weight:700;margin-top:4px}
+  @keyframes sticker-scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  @media(max-width:760px){
+    .merch-hero-grid{grid-template-columns:1fr}
+    .merch-hero-art{min-height:180px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .sticker-track{animation:none}
+    .sticker-strip{overflow-x:auto}
+  }
 </style>
 <script src="nav.js" defer></script>
 </head>
@@ -106,30 +145,116 @@ document.addEventListener('click', function (e) {
 <main>
 <div class="page-head">
   <div class="wrap">
-    <span class="eyebrow">Shop Open</span>
+    <span class="eyebrow">The Shop Is Live</span>
     <h1>CCWheelers Merch</h1>
-    <p>Gear for people who love these dunes. Printed on demand and shipped straight to your door. Every purchase helps keep this site running and the dunes open.</p>
+    <p>Gear for people who love these dunes. Printed on demand and shipped straight to your door. Here's a close look at a few of our favorite designs.</p>
   </div>
 </div>
 
 <section>
   <div class="wrap">
-    <span class="eyebrow">First Drop</span>
-    <h2 class="section-title">The First Drop Is Live</h2>
-    <p class="lede">Hats, hoodies, and Old School Duner decals, live in the shop now. Checkout is handled securely by Printful; most orders ship within a week.</p>
-    <p style="margin-top:18px"><a class="btn btn-primary" href="https://ccwheelers-oceano-dunes.printful.me/" target="_blank" rel="noopener">Shop All Gear</a></p>
-    <div class="cards" id="merchGrid"></div>
+    <span class="eyebrow">A Few Favorites</span>
+    <h2 class="section-title">See The Art Up Close</h2>
+    <p class="lede">Our store shows the garment first and the artwork small. Here's the design itself, full size, so you know exactly what you're getting before you click through to order.</p>
+
+    <div class="merch-hero-grid">
+      <div class="merch-hero-card" data-tile="women">
+        <span class="merch-hero-cat">Women</span>
+        <div class="merch-hero-art">
+          <button class="merch-hero-nav prev" aria-label="Previous design">&#10094;</button>
+          <div class="merch-hero-imgwrap"></div>
+          <button class="merch-hero-nav next" aria-label="Next design">&#10095;</button>
+        </div>
+        <div class="merch-hero-dots"></div>
+        <h3 class="mh-name"></h3>
+        <div class="price mh-price"></div>
+        <p class="mh-desc"></p>
+        <a class="btn btn-primary mh-link" target="_blank" rel="noopener">Shop This Design</a>
+      </div>
+
+      <div class="merch-hero-card" data-tile="men">
+        <span class="merch-hero-cat">Men</span>
+        <div class="merch-hero-art">
+          <button class="merch-hero-nav prev" aria-label="Previous design">&#10094;</button>
+          <div class="merch-hero-imgwrap"></div>
+          <button class="merch-hero-nav next" aria-label="Next design">&#10095;</button>
+        </div>
+        <div class="merch-hero-dots"></div>
+        <h3 class="mh-name"></h3>
+        <div class="price mh-price"></div>
+        <p class="mh-desc"></p>
+        <a class="btn btn-primary mh-link" target="_blank" rel="noopener">Shop This Design</a>
+      </div>
+
+      <div class="merch-hero-card" data-tile="kids">
+        <span class="merch-hero-cat">Kids</span>
+        <div class="merch-hero-art">
+          <button class="merch-hero-nav prev" aria-label="Previous design">&#10094;</button>
+          <div class="merch-hero-imgwrap"></div>
+          <button class="merch-hero-nav next" aria-label="Next design">&#10095;</button>
+        </div>
+        <div class="merch-hero-dots"></div>
+        <h3 class="mh-name"></h3>
+        <div class="price mh-price"></div>
+        <p class="mh-desc"></p>
+        <a class="btn btn-primary mh-link" target="_blank" rel="noopener">Shop This Design</a>
+      </div>
+
+      <div class="merch-hero-card" data-tile="pets">
+        <span class="merch-hero-cat">Pets</span>
+        <div class="merch-hero-art">
+          <button class="merch-hero-nav prev" aria-label="Previous design">&#10094;</button>
+          <div class="merch-hero-imgwrap"></div>
+          <button class="merch-hero-nav next" aria-label="Next design">&#10095;</button>
+        </div>
+        <div class="merch-hero-dots"></div>
+        <h3 class="mh-name"></h3>
+        <div class="price mh-price"></div>
+        <p class="mh-desc"></p>
+        <a class="btn btn-primary mh-link" target="_blank" rel="noopener">Shop This Design</a>
+      </div>
+    </div>
   </div>
 </section>
 
-<section class="plan-cta-band">
+<section style="padding-top:0">
   <div class="wrap">
-    <div class="plan-cta">
-      <span class="eyebrow">Rep the Dunes</span>
-      <h2>Wear It Like a Local</h2>
-      <p>Every hat, hoodie, and decal is printed on demand and shipped to your door. New designs drop as fast as we can dream them up.</p>
-      <a class="btn btn-primary" href="https://ccwheelers-oceano-dunes.printful.me/" target="_blank" rel="noopener">Visit the CCW Shop</a>
+    <span class="eyebrow">Cheap And Easy</span>
+    <h2 class="section-title">Add A Sticker</h2>
+    <p class="lede">Vinyl decals start at $2. Since a sticker is basically just the artwork, what you see here is what you get. Already grabbing a hoodie? Might as well toss one on your rig, cooler, or tailgate.</p>
+
+    <div class="sticker-strip">
+      <div class="sticker-track">
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/the-last-beach-vinyl-decals-6a5ae61c36388" target="_blank" rel="noopener"><img src="images/merch-sticker-last-beach.png" alt="The Last Beach vinyl decal" loading="lazy"><div class="name">The Last Beach</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/svra-badge-vinyl-decals" target="_blank" rel="noopener"><img src="images/merch-sticker-svra.png" alt="SVRA Badge vinyl decal" loading="lazy"><div class="name">SVRA Badge</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/ruff-rider-vinyl-decals" target="_blank" rel="noopener"><img src="images/merch-sticker-ruff-rider.png" alt="Ruff Rider vinyl decal" loading="lazy"><div class="name">Ruff Rider</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/duner-vinyl-decals" target="_blank" rel="noopener"><img src="images/merch-sticker-duner-boy.png" alt="Duner Boy vinyl decal" loading="lazy"><div class="name">Duner Boy</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/girls-duner-vinyl-decals" target="_blank" rel="noopener"><img src="images/merch-sticker-girls-duner.png" alt="Girls Duner vinyl decal" loading="lazy"><div class="name">Girls Duner</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/love-the-dunes-vinyl-decals" target="_blank" rel="noopener"><img src="images/merch-sticker-love-the-dunes.png" alt="Love the Dunes vinyl decal" loading="lazy"><div class="name">Love the Dunes</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-vinyl-decals" target="_blank" rel="noopener"><img src="images/merch-sticker-ccwheelers-sunset.png" alt="CCWheelers Sunset vinyl decal" loading="lazy"><div class="name">CCWheelers Sunset</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/oceano-dunes-vinyl-decals" target="_blank" rel="noopener"><img src="images/merch-sticker-oceano-heritage.png" alt="Oceano Dunes Heritage vinyl decal" loading="lazy"><div class="name">Oceano Dunes Heritage</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/old-school-duner-vinyl-decals" target="_blank" rel="noopener"><img src="images/merch-sticker-old-school-duner.png" alt="Old School Duner vinyl decal" loading="lazy"><div class="name">Old School Duner</div><div class="price">From $1.57</div></a>
+
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/the-last-beach-vinyl-decals-6a5ae61c36388" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="images/merch-sticker-last-beach.png" alt="" loading="lazy"><div class="name">The Last Beach</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/svra-badge-vinyl-decals" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="images/merch-sticker-svra.png" alt="" loading="lazy"><div class="name">SVRA Badge</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/ruff-rider-vinyl-decals" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="images/merch-sticker-ruff-rider.png" alt="" loading="lazy"><div class="name">Ruff Rider</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/duner-vinyl-decals" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="images/merch-sticker-duner-boy.png" alt="" loading="lazy"><div class="name">Duner Boy</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/girls-duner-vinyl-decals" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="images/merch-sticker-girls-duner.png" alt="" loading="lazy"><div class="name">Girls Duner</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/love-the-dunes-vinyl-decals" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="images/merch-sticker-love-the-dunes.png" alt="" loading="lazy"><div class="name">Love the Dunes</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-vinyl-decals" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="images/merch-sticker-ccwheelers-sunset.png" alt="" loading="lazy"><div class="name">CCWheelers Sunset</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/oceano-dunes-vinyl-decals" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="images/merch-sticker-oceano-heritage.png" alt="" loading="lazy"><div class="name">Oceano Dunes Heritage</div><div class="price">From $2.00</div></a>
+        <a class="sticker-card" href="https://ccwheelers-oceano-dunes.printful.me/product/old-school-duner-vinyl-decals" target="_blank" rel="noopener" aria-hidden="true" tabindex="-1"><img src="images/merch-sticker-old-school-duner.png" alt="" loading="lazy"><div class="name">Old School Duner</div><div class="price">From $1.57</div></a>
+      </div>
     </div>
+  </div>
+</section>
+
+<section class="band" style="padding-top:0">
+  <div class="wrap" style="text-align:center">
+    <span class="eyebrow">And There's More</span>
+    <h2 class="section-title">This Is Just A Taste</h2>
+    <p class="lede" style="margin:0 auto 24px">Hoodies, hats, sweatshirts, kids' gear, and more designs live in the full shop.</p>
+    <a class="btn btn-primary" href="https://ccwheelers-oceano-dunes.printful.me/" target="_blank" rel="noopener">Shop The Full Lineup</a>
   </div>
 </section>
 </main>
@@ -181,38 +306,143 @@ document.addEventListener('click', function (e) {
 
 <script>
 (function () {
-  // CCWheelers Quick Store catalog. Images self-hosted in images/merch/.
-  // Products with "img2" show their back view on hover.
-  // When Dad adds or updates products, ask Claude to "refresh the merch catalog".
-  var CATALOG = [
-  {"name": "Love the Dunes Vinyl Decals", "price": "From $2.00", "slug": "love-the-dunes-vinyl-decals", "url": "https://ccwheelers-oceano-dunes.printful.me/product/love-the-dunes-vinyl-decals", "img": "images/merch/love-the-dunes-vinyl-decals.jpg"},
-  {"name": "CCWheelers Vinyl Decals", "price": "From $2.00", "slug": "ccwheelers-vinyl-decals", "url": "https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-vinyl-decals", "img": "images/merch/ccwheelers-vinyl-decals.jpg"},
-  {"name": "The Last Beach Vinyl Decals", "price": "From $2.00", "slug": "the-last-beach-vinyl-decals", "url": "https://ccwheelers-oceano-dunes.printful.me/product/the-last-beach-vinyl-decals", "img": "images/merch/the-last-beach-vinyl-decals.jpg"},
-  {"name": "Oceano Dunes Vinyl Decals", "price": "From $2.00", "slug": "oceano-dunes-vinyl-decals", "url": "https://ccwheelers-oceano-dunes.printful.me/product/oceano-dunes-vinyl-decals", "img": "images/merch/oceano-dunes-vinyl-decals.jpg"},
-  {"name": "CCWheelers Hoodie", "price": "From $35.48", "slug": "unisex-hoodie", "url": "https://ccwheelers-oceano-dunes.printful.me/product/unisex-hoodie", "img": "images/merch/unisex-hoodie.jpg", "img2": "images/merch/unisex-hoodie-back.jpg"},
-  {"name": "CCWheelers Unisex Hoodie", "price": "From $28.85", "slug": "ccwheelers-unisex-hoodie-6a59dff32fdf7", "url": "https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-unisex-hoodie-6a59dff32fdf7", "img": "images/merch/ccwheelers-unisex-hoodie-6a59dff32fdf7.jpg", "img2": "images/merch/ccwheelers-unisex-hoodie-6a59dff32fdf7-back.jpg"},
-  {"name": "CCWheelers Crop Hoodie", "price": "From $43.10", "slug": "ccwheelers-crop-hoodie-6a59dfdf35d4e", "url": "https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-crop-hoodie-6a59dfdf35d4e", "img": "images/merch/ccwheelers-crop-hoodie-6a59dfdf35d4e.jpg", "img2": "images/merch/ccwheelers-crop-hoodie-6a59dfdf35d4e-back.jpg"},
-  {"name": "CCWheelers Vintage Cotton Twill Cap", "price": "From $20.79", "slug": "ccwheelers-vintage-cotton-twill-cap", "url": "https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-vintage-cotton-twill-cap", "img": "images/merch/ccwheelers-vintage-cotton-twill-cap.jpg"},
-  {"name": "CCWheelers Premium Full Zip Hoodie", "price": "From $35.04", "slug": "ccwheelers-premium-full-zip-hoodie", "url": "https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-premium-full-zip-hoodie", "img": "images/merch/ccwheelers-premium-full-zip-hoodie.jpg", "img2": "images/merch/ccwheelers-premium-full-zip-hoodie-back.jpg"},
-  {"name": "Old School Duner Vinyl Decals", "price": "From $1.57", "slug": "old-school-duner-vinyl-decals-6a59dfa4bba8b", "url": "https://ccwheelers-oceano-dunes.printful.me/product/old-school-duner-vinyl-decals-6a59dfa4bba8b", "img": "images/merch/old-school-duner-vinyl-decals-6a59dfa4bba8b.jpg"},
-  {"name": "CCWheelers Distressed Dad Hat", "price": "From $19.10", "slug": "ccwheelers-distressed-dad-hat", "url": "https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-distressed-dad-hat", "img": "images/merch/ccwheelers-distressed-dad-hat.jpg"},
-  {"name": "CCWheelers Unisex Hoodie", "price": "From $35.48", "slug": "ccwheelers-unisex-hoodie", "url": "https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-unisex-hoodie", "img": "images/merch/ccwheelers-unisex-hoodie.jpg", "img2": "images/merch/ccwheelers-unisex-hoodie-back.jpg"},
-  {"name": "CCWheelers Crop Hoodie", "price": "From $43.10", "slug": "ccwheelers-crop-hoodie", "url": "https://ccwheelers-oceano-dunes.printful.me/product/ccwheelers-crop-hoodie", "img": "images/merch/ccwheelers-crop-hoodie.jpg", "img2": "images/merch/ccwheelers-crop-hoodie-back.jpg"},
-  {"name": "Old School Duner Vinyl Decals", "price": "From $1.57", "slug": "old-school-duner-vinyl-decals", "url": "https://ccwheelers-oceano-dunes.printful.me/product/old-school-duner-vinyl-decals", "img": "images/merch/old-school-duner-vinyl-decals.jpg"},
-  {"name": "Oceano Love Crop Hoodie", "price": "From $51.00", "slug": "crop-hoodie", "url": "https://ccwheelers-oceano-dunes.printful.me/product/crop-hoodie", "img": "images/merch/crop-hoodie.jpg", "img2": "images/merch/crop-hoodie-back.jpg"}
-  ];
-  document.getElementById('merchGrid').innerHTML = CATALOG.map(function (c) {
-    var alt = c.name.replace(/"/g, '');
-    return '<a class="pcard" href="' + c.url + '" target="_blank" rel="noopener">' +
-      '<div class="shot">' +
-      '<img class="front' + (c.img2 ? ' has-back' : '') + '" src="' + c.img + '" alt="' + alt + '" loading="lazy">' +
-      (c.img2 ? '<img class="back" src="' + c.img2 + '" alt="' + alt + ' back view" loading="lazy">' : '') +
-      '</div>' +
-      '<div class="info"><h3>' + c.name + '</h3>' +
-      '<p class="price">' + c.price + '</p>' +
-      '<span class="go">View Product &rarr;</span></div></a>';
-  }).join('');
+  var BASE = 'https://ccwheelers-oceano-dunes.printful.me/product/';
+  var MERCH_TILES = {
+    women: [
+      {
+        img: 'images/merch-hero-women.png',
+        alt: 'Heart-shaped Oceano Dunes sunset design on the back of the Oceano Love Crop Hoodie',
+        front: 'images/merch-hero-women-front.png',
+        frontAlt: 'Smaller Oceano Heart badge on the front of the hoodie',
+        bg: 'bg-green',
+        name: 'Oceano Love Crop Hoodie',
+        price: 'From $51.00',
+        desc: 'A heart-shaped dune sunset scene across the back, a smaller heart badge up front.',
+        url: BASE + 'crop-hoodie'
+      },
+      {
+        img: 'images/merch-hero-women.png',
+        alt: 'Heart-shaped Oceano Dunes sunset design on the Oceano Love Premium Sweatshirt',
+        bg: 'bg-black',
+        name: 'Oceano Love Premium Sweatshirt',
+        price: 'From $31.50',
+        desc: 'The same heart-shaped dune sunset scene, on a classic crew sweatshirt.',
+        url: BASE + 'unisex-premium-sweatshirt'
+      }
+    ],
+    men: [
+      {
+        img: 'images/merch-hero-men-back.png',
+        alt: 'Old School Duner rail buggy design on the back of the CCWheelers Premium full zip hoodie',
+        front: 'images/merch-hero-men-front.png',
+        frontAlt: 'Smaller Old School Duner oval badge on the front of the hoodie',
+        bg: 'bg-black',
+        name: 'CCWheelers Premium Full Zip Hoodie',
+        price: 'From $35.04',
+        desc: 'Old School Duner rail buggy on the back, a smaller badge up front.',
+        url: BASE + 'ccwheelers-premium-full-zip-hoodie'
+      },
+      {
+        img: 'images/merch-hero-men-cap.png',
+        alt: 'SVRA Badge design embroidered on the CCWheelers Vintage Cotton Twill Cap',
+        bg: 'bg-stone',
+        name: 'CCWheelers Vintage Cotton Twill Cap',
+        price: 'From $20.79',
+        desc: 'The SVRA badge on a washed vintage twill dad cap.',
+        url: BASE + 'ccwheelers-vintage-cotton-twill-cap'
+      }
+    ],
+    kids: [
+      {
+        img: 'images/merch-hero-kids.png',
+        alt: 'Mom and Dad is Raising a Duner design, pink girl version',
+        bg: 'bg-pink',
+        name: 'Duner Girl Jersey Bodysuit',
+        price: 'From $15.00',
+        desc: '"Mom &amp; Dad Is Raising A Duner," pink helmet-and-buggy art for your littlest rider.',
+        url: BASE + 'duner-baby-jersey-bodysuit'
+      },
+      {
+        img: 'images/merch-hero-kids-boy.png',
+        alt: 'Mom and Dad is Raising a Duner design, blue boy version',
+        bg: 'bg-blue',
+        name: 'Boys Duner Jersey Bodysuit',
+        price: 'From $15.00',
+        desc: '"Mom &amp; Dad Is Raising A Duner," blue helmet-and-buggy art for your littlest rider.',
+        url: BASE + 'boys-duner-jersey-bodysuit'
+      }
+    ],
+    pets: [
+      {
+        img: 'images/merch-hero-pets.png',
+        alt: 'Ruff Riders corgi driving a dune buggy design',
+        bg: '',
+        name: 'Pet Bandana Collar',
+        price: 'From $21.00',
+        desc: 'Ruff Riders: a corgi behind the wheel, bandana and all.',
+        url: BASE + 'pet-bandana-collar'
+      }
+    ]
+  };
+
+  document.querySelectorAll('.merch-hero-card[data-tile]').forEach(function (card) {
+    var slides = MERCH_TILES[card.dataset.tile] || [];
+    if (!slides.length) return;
+    var index = 0;
+
+    var art = card.querySelector('.merch-hero-art');
+    var imgwrap = card.querySelector('.merch-hero-imgwrap');
+    var prevBtn = card.querySelector('.merch-hero-nav.prev');
+    var nextBtn = card.querySelector('.merch-hero-nav.next');
+    var dotsWrap = card.querySelector('.merch-hero-dots');
+    var nameEl = card.querySelector('.mh-name');
+    var priceEl = card.querySelector('.mh-price');
+    var descEl = card.querySelector('.mh-desc');
+    var linkEl = card.querySelector('.mh-link');
+
+    slides.forEach(function (s, i) {
+      var dot = document.createElement('button');
+      dot.setAttribute('aria-label', 'Show design ' + (i + 1));
+      dot.addEventListener('click', function () { render(i); });
+      dotsWrap.appendChild(dot);
+    });
+
+    function render(i) {
+      index = (i + slides.length) % slides.length;
+      var s = slides[index];
+
+      art.className = 'merch-hero-art' + (s.bg ? ' ' + s.bg : '');
+
+      var html = '<img src="' + s.img + '" alt="' + s.alt + '" loading="lazy">';
+      if (s.front) {
+        html += '<div class="merch-hero-front-wrap"><img src="' + s.front + '" alt="' + s.frontAlt + '" loading="lazy">' +
+          '<div class="merch-hero-shot-label">Front</div></div>';
+      }
+      imgwrap.innerHTML = html;
+
+      nameEl.textContent = s.name;
+      priceEl.textContent = s.price;
+      descEl.innerHTML = s.desc;
+      linkEl.href = s.url;
+
+      dotsWrap.querySelectorAll('button').forEach(function (d, di) {
+        d.classList.toggle('active', di === index);
+      });
+    }
+
+    if (slides.length > 1) {
+      prevBtn.addEventListener('click', function () { render(index - 1); });
+      nextBtn.addEventListener('click', function () { render(index + 1); });
+    } else {
+      prevBtn.style.display = 'none';
+      nextBtn.style.display = 'none';
+    }
+    if (slides.length <= 1) dotsWrap.style.display = 'none';
+
+    render(0);
+  });
 })();
 </script>
+
 </body>
 </html>
