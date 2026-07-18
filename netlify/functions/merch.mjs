@@ -38,6 +38,33 @@ export default async (req) => {
       { headers: { 'access-control-allow-origin': '*' } });
   }
 
+  // Catalog lookup: given a Printful *catalog* variant_id (from the detail
+  // view above), find the parent catalog product and every color/size
+  // option it offers. Research helper, not used by the live merch page.
+  const catalogVariantId = url.searchParams.get('catalog');
+  if (catalogVariantId) {
+    const vr = await fetch('https://api.printful.com/products/variant/' + encodeURIComponent(catalogVariantId), {
+      headers: { authorization: `Bearer ${key}` }
+    });
+    if (!vr.ok) return err('Printful returned ' + vr.status, 502);
+    const vd = await vr.json();
+    const productId = vd.result?.product?.id;
+    if (!productId) return err('no product id for that variant', 502);
+
+    const pr = await fetch('https://api.printful.com/products/' + productId, {
+      headers: { authorization: `Bearer ${key}` }
+    });
+    const pd = await pr.json();
+    const colors = [...new Set((pd.result?.variants || []).map(v => v.color))];
+    const sizes = [...new Set((pd.result?.variants || []).map(v => v.size))];
+    return Response.json({
+      product: { id: pd.result?.product?.id, title: pd.result?.product?.title },
+      colors,
+      sizes,
+      variant_count: (pd.result?.variants || []).length
+    }, { headers: { 'access-control-allow-origin': '*' } });
+  }
+
   try {
     // store metadata (type tells us which checkout route exists)
     let store = null;
