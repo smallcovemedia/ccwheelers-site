@@ -13,6 +13,31 @@ export default async (req) => {
       { headers: { 'access-control-allow-origin': '*' } });
   }
 
+  // Raw sync_variant detail for one store product -- research helper for
+  // setting up new products (variant IDs, colors/sizes, print files), not
+  // used by the live merch page. Not cached, since it's diagnostic only.
+  const detailId = url.searchParams.get('detail');
+  if (detailId) {
+    const r = await fetch('https://api.printful.com/store/products/' + encodeURIComponent(detailId), {
+      headers: { authorization: `Bearer ${key}` }
+    });
+    if (!r.ok) return err('Printful returned ' + r.status, 502);
+    const d = await r.json();
+    const sp = d.result?.sync_product;
+    const variants = (d.result?.sync_variants || []).map(v => ({
+      id: v.id,
+      variant_id: v.variant_id,
+      name: v.name,
+      size: v.size,
+      color: v.color,
+      retail_price: v.retail_price,
+      sku: v.sku,
+      files: (v.files || []).map(f => ({ type: f.type, preview_url: f.preview_url }))
+    }));
+    return Response.json({ product: sp ? { id: sp.id, name: sp.name } : null, variants },
+      { headers: { 'access-control-allow-origin': '*' } });
+  }
+
   try {
     // store metadata (type tells us which checkout route exists)
     let store = null;
