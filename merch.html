@@ -94,6 +94,13 @@ document.addEventListener('click', function (e) {
   @media(max-width:760px){
     .merch-hero-grid{grid-template-columns:1fr}
     .merch-hero-art{min-height:180px}
+    .merch-hero-imgwrap{flex-direction:column;padding:0 20px;gap:10px}
+    .merch-hero-imgwrap > img{max-height:150px}
+    .merch-hero-front-wrap{width:auto;max-width:150px;border-left:none;border-top:1px solid var(--sand-deep);padding-left:0;padding-top:10px;margin:0 auto}
+    .merch-hero-front-wrap img{max-height:110px;margin:0 auto}
+    .merch-hero-nav{width:30px;height:30px;font-size:14px}
+    .merch-hero-nav.prev{left:6px}
+    .merch-hero-nav.next{right:6px}
   }
   @media(prefers-reduced-motion:reduce){
     .sticker-track{animation:none}
