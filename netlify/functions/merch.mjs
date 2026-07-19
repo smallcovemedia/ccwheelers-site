@@ -7,6 +7,68 @@ export default async (req) => {
 
   const url = new URL(req.url);
 
+  // Research helpers for setting up new products (variant IDs, colors/sizes,
+  // print files, catalog options). Not used by the live merch page. Re-added
+  // per HANDOFF.md for the Ruff Riders + stickers batch; removed again once
+  // that ships (see HANDOFF.md for the standing agreement on this).
+  const detailId = url.searchParams.get('detail');
+  if (detailId) {
+    const r = await fetch('https://api.printful.com/store/products/' + encodeURIComponent(detailId), {
+      headers: { authorization: `Bearer ${key}` }
+    });
+    if (!r.ok) return err('Printful returned ' + r.status, 502);
+    const d = await r.json();
+    const sp = d.result?.sync_product;
+    const variants = (d.result?.sync_variants || []).map(v => ({
+      id: v.id,
+      variant_id: v.variant_id,
+      name: v.name,
+      size: v.size,
+      color: v.color,
+      retail_price: v.retail_price,
+      sku: v.sku,
+      files: (v.files || []).map(f => ({ type: f.type, preview_url: f.preview_url }))
+    }));
+    return Response.json({ product: sp ? { id: sp.id, name: sp.name } : null, variants },
+      { headers: { 'access-control-allow-origin': '*' } });
+  }
+
+  const catalogVariantId = url.searchParams.get('catalog');
+  if (catalogVariantId) {
+    const vr = await fetch('https://api.printful.com/products/variant/' + encodeURIComponent(catalogVariantId), {
+      headers: { authorization: `Bearer ${key}` }
+    });
+    if (!vr.ok) return err('Printful returned ' + vr.status, 502);
+    const vd = await vr.json();
+    const productId = vd.result?.product?.id;
+    if (!productId) return err('no product id for that variant', 502);
+
+    const pr = await fetch('https://api.printful.com/products/' + productId, {
+      headers: { authorization: `Bearer ${key}` }
+    });
+    const pd = await pr.json();
+    const colors = [...new Set((pd.result?.variants || []).map(v => v.color))];
+    const sizes = [...new Set((pd.result?.variants || []).map(v => v.size))];
+    return Response.json({
+      product: { id: pd.result?.product?.id, title: pd.result?.product?.title },
+      colors,
+      sizes,
+      variant_count: (pd.result?.variants || []).length
+    }, { headers: { 'access-control-allow-origin': '*' } });
+  }
+
+  const catalogProductId = url.searchParams.get('catalogFull');
+  if (catalogProductId) {
+    const pr = await fetch('https://api.printful.com/products/' + encodeURIComponent(catalogProductId), {
+      headers: { authorization: `Bearer ${key}` }
+    });
+    if (!pr.ok) return err('Printful returned ' + pr.status, 502);
+    const pd = await pr.json();
+    const variants = (pd.result?.variants || []).map(v => ({ id: v.id, color: v.color, size: v.size, price: v.price }));
+    return Response.json({ product: pd.result?.product?.title, variants },
+      { headers: { 'access-control-allow-origin': '*' } });
+  }
+
   try {
     // store metadata (type tells us which checkout route exists)
     let store = null;
