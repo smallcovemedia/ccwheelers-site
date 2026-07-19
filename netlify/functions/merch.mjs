@@ -33,6 +33,19 @@ export default async (req) => {
       { headers: { 'access-control-allow-origin': '*' } });
   }
 
+  // Raw, unfiltered sync_variant payload for one product. Used to compare a
+  // dashboard-created product against an API-created one when a product will
+  // not transfer to the Quick Store.
+  const rawId = url.searchParams.get('raw');
+  if (rawId) {
+    const r = await fetch('https://api.printful.com/store/products/' + encodeURIComponent(rawId), {
+      headers: { authorization: `Bearer ${key}` }
+    });
+    if (!r.ok) return err('Printful returned ' + r.status, 502);
+    const d = await r.json();
+    return Response.json(d.result || d, { headers: { 'access-control-allow-origin': '*' } });
+  }
+
   const catalogVariantId = url.searchParams.get('catalog');
   if (catalogVariantId) {
     const vr = await fetch('https://api.printful.com/products/variant/' + encodeURIComponent(catalogVariantId), {
