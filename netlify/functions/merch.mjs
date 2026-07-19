@@ -6,79 +6,6 @@ export default async (req) => {
   if (!key) return err('PRINTFUL_API_KEY not configured', 500);
 
   const url = new URL(req.url);
-  if (url.searchParams.get('diag') === 'stores') {
-    const sr = await fetch('https://api.printful.com/stores', { headers: { authorization: `Bearer ${key}` } });
-    const sd = await sr.json();
-    return Response.json({ stores: (sd.result || []).map(s => ({ id: s.id, name: s.name, type: s.type })) },
-      { headers: { 'access-control-allow-origin': '*' } });
-  }
-
-  // Raw sync_variant detail for one store product -- research helper for
-  // setting up new products (variant IDs, colors/sizes, print files), not
-  // used by the live merch page. Not cached, since it's diagnostic only.
-  const detailId = url.searchParams.get('detail');
-  if (detailId) {
-    const r = await fetch('https://api.printful.com/store/products/' + encodeURIComponent(detailId), {
-      headers: { authorization: `Bearer ${key}` }
-    });
-    if (!r.ok) return err('Printful returned ' + r.status, 502);
-    const d = await r.json();
-    const sp = d.result?.sync_product;
-    const variants = (d.result?.sync_variants || []).map(v => ({
-      id: v.id,
-      variant_id: v.variant_id,
-      name: v.name,
-      size: v.size,
-      color: v.color,
-      retail_price: v.retail_price,
-      sku: v.sku,
-      files: (v.files || []).map(f => ({ type: f.type, preview_url: f.preview_url }))
-    }));
-    return Response.json({ product: sp ? { id: sp.id, name: sp.name } : null, variants },
-      { headers: { 'access-control-allow-origin': '*' } });
-  }
-
-  // Catalog lookup: given a Printful *catalog* variant_id (from the detail
-  // view above), find the parent catalog product and every color/size
-  // option it offers. Research helper, not used by the live merch page.
-  const catalogVariantId = url.searchParams.get('catalog');
-  if (catalogVariantId) {
-    const vr = await fetch('https://api.printful.com/products/variant/' + encodeURIComponent(catalogVariantId), {
-      headers: { authorization: `Bearer ${key}` }
-    });
-    if (!vr.ok) return err('Printful returned ' + vr.status, 502);
-    const vd = await vr.json();
-    const productId = vd.result?.product?.id;
-    if (!productId) return err('no product id for that variant', 502);
-
-    const pr = await fetch('https://api.printful.com/products/' + productId, {
-      headers: { authorization: `Bearer ${key}` }
-    });
-    const pd = await pr.json();
-    const colors = [...new Set((pd.result?.variants || []).map(v => v.color))];
-    const sizes = [...new Set((pd.result?.variants || []).map(v => v.size))];
-    return Response.json({
-      product: { id: pd.result?.product?.id, title: pd.result?.product?.title },
-      colors,
-      sizes,
-      variant_count: (pd.result?.variants || []).length
-    }, { headers: { 'access-control-allow-origin': '*' } });
-  }
-
-  // Full variant list (id, color, size) for a catalog product, e.g. the
-  // Crop Hoodie (317). Research helper for building product-creation
-  // payloads, not used by the live merch page.
-  const catalogProductId = url.searchParams.get('catalogFull');
-  if (catalogProductId) {
-    const pr = await fetch('https://api.printful.com/products/' + encodeURIComponent(catalogProductId), {
-      headers: { authorization: `Bearer ${key}` }
-    });
-    if (!pr.ok) return err('Printful returned ' + pr.status, 502);
-    const pd = await pr.json();
-    const variants = (pd.result?.variants || []).map(v => ({ id: v.id, color: v.color, size: v.size, price: v.price }));
-    return Response.json({ product: pd.result?.product?.title, variants },
-      { headers: { 'access-control-allow-origin': '*' } });
-  }
 
   try {
     // store metadata (type tells us which checkout route exists)
@@ -94,8 +21,7 @@ export default async (req) => {
       }
     } catch {}
 
-    const sid = url.searchParams.get('sid');
-    const res = await fetch('https://api.printful.com/store/products?limit=50' + (sid ? '&store_id=' + encodeURIComponent(sid) : ''), {
+    const res = await fetch('https://api.printful.com/store/products?limit=50', {
       headers: { authorization: `Bearer ${key}` }
     });
     if (!res.ok) return err('Printful returned ' + res.status, 502);

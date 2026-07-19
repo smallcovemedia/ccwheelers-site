@@ -110,7 +110,10 @@ document.addEventListener('click', function (e) {
   /* ---- Sunset Collection preview ---- */
   .sunset-band{background:linear-gradient(180deg,var(--sand),var(--sand-deep))}
   .sunset-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:36px}
-  .sunset-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;text-align:center}
+  a.sunset-card{display:block;text-decoration:none;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;text-align:center;transition:transform .18s ease}
+  a.sunset-card:hover{transform:translateY(-5px)}
+  .sunset-price{font-family:'Barlow Condensed';font-weight:800;color:var(--sunset-hot);font-size:19px;margin-top:8px}
+  .sunset-view{font-size:12.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--ocean);margin-top:4px}
   .sunset-frame{background:linear-gradient(135deg,var(--sand-deep),var(--sand));border-radius:10px;padding:18px;display:flex;align-items:center;justify-content:center;min-height:170px}
   .sunset-frame img{max-width:100%;max-height:260px;object-fit:contain}
   .sunset-edition{display:inline-block;background:var(--sunset-hot);color:#fff;font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-radius:99px;padding:3px 11px;margin-top:16px}
@@ -273,58 +276,70 @@ document.addEventListener('click', function (e) {
 
 <section class="sunset-band">
   <div class="wrap">
-    <span class="eyebrow">Coming Soon &middot; A New Line</span>
+    <span class="eyebrow">Now Available &middot; A New Line</span>
     <h2 class="section-title">CC Wheelers &middot; The Sunset Collection</h2>
-    <p class="lede">Six designs, one story. Not another rail buggy shirt, this line is about the couple watching the sunset, the campfire after the ride, the walk on the beach. Same dune grass, same sun, same ribbon banner, same heart, every time, so once you've seen one you'll know the whole collection on sight.</p>
+    <p class="lede">Six designs, one story. Not another rail buggy shirt, this line is about the couple watching the sunset, the campfire after the ride, the walk on the beach. Same dune grass, same sun, same ribbon banner, same heart, every time, so once you've seen one you'll know the whole collection on sight. All six are live in the shop now, printed on the crop hoodie in your choice of colors.</p>
 
     <div class="sunset-grid">
-      <div class="sunset-card">
+      <a class="sunset-card" href="https://ccwheelers-oceano-dunes.printful.me/product/cc-wheelers-sunset-collection-hidden-treasure" target="_blank" rel="noopener">
         <div class="sunset-frame">
-          <img src="images/merch-sunset-01-hidden-treasure.png" alt="Hidden Treasure: a dune buggy, a heart drawn in the sand, and a treasure chest at sunset, Oceano Dunes California, No. 1" loading="lazy">
+          <img src="images/merch/sunset-hidden-treasure-art.jpg" alt="Hidden Treasure: a dune buggy, a heart drawn in the sand, and a treasure chest at sunset, Oceano Dunes California, No. 1" loading="lazy">
         </div>
         <span class="sunset-edition">No. 1 of 6</span>
         <div class="tagline">Hidden Treasure</div>
-      </div>
+        <div class="sunset-price">$53.35</div>
+        <div class="sunset-view">View Product &rarr;</div>
+      </a>
 
-      <div class="sunset-card">
+      <a class="sunset-card" href="https://ccwheelers-oceano-dunes.printful.me/product/cc-wheelers-sunset-collection-sunset-together" target="_blank" rel="noopener">
         <div class="sunset-frame">
-          <img src="images/merch-sunset-02-sunset-together.png" alt="Sunset Together: a couple sitting on a dune buggy watching the sunset, Oceano Dunes California, No. 2" loading="lazy">
+          <img src="images/merch/sunset-together-art.jpg" alt="Sunset Together: a couple sitting on a dune buggy watching the sunset, Oceano Dunes California, No. 2" loading="lazy">
         </div>
         <span class="sunset-edition">No. 2 of 6</span>
         <div class="tagline">Sunset Together</div>
-      </div>
+        <div class="sunset-price">$53.35</div>
+        <div class="sunset-view">View Product &rarr;</div>
+      </a>
 
-      <div class="sunset-card">
+      <a class="sunset-card" href="https://ccwheelers-oceano-dunes.printful.me/product/cc-wheelers-sunset-collection-just-us" target="_blank" rel="noopener">
         <div class="sunset-frame">
-          <img src="images/merch-sunset-03-just-us.png" alt="Just Us: a couple riding a dune buggy together over the dunes at sunset, Oceano Dunes California, No. 3" loading="lazy">
+          <img src="images/merch/sunset-just-us-art.jpg" alt="Just Us: a couple riding a dune buggy together over the dunes at sunset, Oceano Dunes California, No. 3" loading="lazy">
         </div>
         <span class="sunset-edition">No. 3 of 6</span>
         <div class="tagline">Just Us</div>
-      </div>
+        <div class="sunset-price">$53.35</div>
+        <div class="sunset-view">View Product &rarr;</div>
+      </a>
 
-      <div class="sunset-card">
+      <a class="sunset-card" href="https://ccwheelers-oceano-dunes.printful.me/product/cc-wheelers-sunset-collection-our-escape" target="_blank" rel="noopener">
         <div class="sunset-frame">
-          <img src="images/merch-sunset-04-our-escape.png" alt="Our Escape: a beach campfire, camp chairs, and coffee mugs with a dune buggy at sunset, Oceano Dunes California, No. 4" loading="lazy">
+          <img src="images/merch/sunset-our-escape-art.jpg" alt="Our Escape: a beach campfire, camp chairs, and coffee mugs with a dune buggy at sunset, Oceano Dunes California, No. 4" loading="lazy">
         </div>
         <span class="sunset-edition">No. 4 of 6</span>
         <div class="tagline">Our Escape</div>
-      </div>
+        <div class="sunset-price">$53.35</div>
+        <div class="sunset-view">View Product &rarr;</div>
+      </a>
 
-      <div class="sunset-card">
+      <a class="sunset-card" href="https://ccwheelers-oceano-dunes.printful.me/product/cc-wheelers-sunset-collection-better-together" target="_blank" rel="noopener">
         <div class="sunset-frame">
-          <img src="images/merch-sunset-05-better-together.png" alt="Better Together: a couple walking the beach hand in hand with their dune buggy, Oceano Dunes California, No. 5" loading="lazy">
+          <img src="images/merch/sunset-better-together-art.jpg" alt="Better Together: a couple walking the beach hand in hand with their dune buggy, Oceano Dunes California, No. 5" loading="lazy">
         </div>
         <span class="sunset-edition">No. 5 of 6</span>
         <div class="tagline">Better Together</div>
-      </div>
+        <div class="sunset-price">$53.35</div>
+        <div class="sunset-view">View Product &rarr;</div>
+      </a>
 
-      <div class="sunset-card">
+      <a class="sunset-card" href="https://ccwheelers-oceano-dunes.printful.me/product/cc-wheelers-sunset-collection-love-runs-on-sand" target="_blank" rel="noopener">
         <div class="sunset-frame">
-          <img src="images/merch-sunset-06-love-runs-on-sand.png" alt="Love Runs on Sand: a truck and camper trailer parked at a beach campfire at sunset, Oceano Dunes California, No. 6" loading="lazy">
+          <img src="images/merch/sunset-love-runs-on-sand-art.jpg" alt="Love Runs on Sand: a truck and camper trailer parked at a beach campfire at sunset, Oceano Dunes California, No. 6" loading="lazy">
         </div>
         <span class="sunset-edition">No. 6 of 6</span>
         <div class="tagline">Love Runs on Sand</div>
-      </div>
+        <div class="sunset-price">$53.35</div>
+        <div class="sunset-view">View Product &rarr;</div>
+      </a>
     </div>
   </div>
 </section>

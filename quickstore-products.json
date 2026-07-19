@@ -2,6 +2,54 @@
  "store": "https://ccwheelers-oceano-dunes.printful.me",
  "products": [
   {
+   "slug": "cc-wheelers-sunset-collection-hidden-treasure",
+   "name": "Sunset Collection: Hidden Treasure",
+   "price": "$53.35",
+   "img": "images/merch/sunset-hidden-treasure-art.jpg",
+   "img2": "images/merch/sunset-hidden-treasure.jpg",
+   "url": "https://ccwheelers-oceano-dunes.printful.me/product/cc-wheelers-sunset-collection-hidden-treasure"
+  },
+  {
+   "slug": "cc-wheelers-sunset-collection-sunset-together",
+   "name": "Sunset Collection: Sunset Together",
+   "price": "$53.35",
+   "img": "images/merch/sunset-together-art.jpg",
+   "img2": "images/merch/sunset-together.jpg",
+   "url": "https://ccwheelers-oceano-dunes.printful.me/product/cc-wheelers-sunset-collection-sunset-together"
+  },
+  {
+   "slug": "cc-wheelers-sunset-collection-just-us",
+   "name": "Sunset Collection: Just Us",
+   "price": "$53.35",
+   "img": "images/merch/sunset-just-us-art.jpg",
+   "img2": "images/merch/sunset-just-us.jpg",
+   "url": "https://ccwheelers-oceano-dunes.printful.me/product/cc-wheelers-sunset-collection-just-us"
+  },
+  {
+   "slug": "cc-wheelers-sunset-collection-our-escape",
+   "name": "Sunset Collection: Our Escape",
+   "price": "$53.35",
+   "img": "images/merch/sunset-our-escape-art.jpg",
+   "img2": "images/merch/sunset-our-escape.jpg",
+   "url": "https://ccwheelers-oceano-dunes.printful.me/product/cc-wheelers-sunset-collection-our-escape"
+  },
+  {
+   "slug": "cc-wheelers-sunset-collection-better-together",
+   "name": "Sunset Collection: Better Together",
+   "price": "$53.35",
+   "img": "images/merch/sunset-better-together-art.jpg",
+   "img2": "images/merch/sunset-better-together.jpg",
+   "url": "https://ccwheelers-oceano-dunes.printful.me/product/cc-wheelers-sunset-collection-better-together"
+  },
+  {
+   "slug": "cc-wheelers-sunset-collection-love-runs-on-sand",
+   "name": "Sunset Collection: Love Runs on Sand",
+   "price": "$53.35",
+   "img": "images/merch/sunset-love-runs-on-sand-art.jpg",
+   "img2": "images/merch/sunset-love-runs-on-sand.jpg",
+   "url": "https://ccwheelers-oceano-dunes.printful.me/product/cc-wheelers-sunset-collection-love-runs-on-sand"
+  },
+  {
    "name": "Love the Dunes Vinyl Decals",
    "price": "From $2.00",
    "slug": "love-the-dunes-vinyl-decals",
