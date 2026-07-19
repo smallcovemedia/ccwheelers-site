@@ -124,6 +124,24 @@ document.addEventListener('click', function (e) {
   @media(max-width:600px){
     .sunset-grid{grid-template-columns:1fr}
   }
+
+  /* ---- Ruff Riders preview ---- */
+  .ruff-band{background:linear-gradient(180deg,var(--ocean-deep),var(--ocean))}
+  .ruff-band .eyebrow,.ruff-band .section-title{color:#fff}
+  .ruff-band .lede{color:rgba(255,255,255,.82)}
+  .ruff-hero{width:100%;border-radius:var(--radius);box-shadow:var(--shadow);margin-top:28px;display:block}
+  .ruff-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:32px}
+  .ruff-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;text-align:center}
+  .ruff-frame{background:linear-gradient(135deg,var(--sand-deep),var(--sand));border-radius:10px;padding:14px;display:flex;align-items:center;justify-content:center;min-height:140px}
+  .ruff-frame img{max-width:100%;max-height:200px;object-fit:contain}
+  .ruff-card .name{font-family:'Barlow Condensed';font-weight:800;color:var(--ocean);font-size:19px;margin-top:12px}
+  .ruff-soon{font-size:10.5px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ink-soft);margin-top:4px}
+  @media(max-width:900px){
+    .ruff-grid{grid-template-columns:repeat(2,1fr)}
+  }
+  @media(max-width:600px){
+    .ruff-grid{grid-template-columns:1fr}
+  }
 </style>
 <script src="nav.js" defer></script>
 </head>
@@ -340,6 +358,50 @@ document.addEventListener('click', function (e) {
         <div class="sunset-price">$53.35</div>
         <div class="sunset-view">View Product &rarr;</div>
       </a>
+    </div>
+  </div>
+</section>
+
+<section class="ruff-band">
+  <div class="wrap">
+    <span class="eyebrow">Coming Soon &middot; For Good Dogs</span>
+    <h2 class="section-title">Ruff Riders</h2>
+    <p class="lede">Every good co-pilot deserves their own gear. Ruff Riders is the dog-and-buggy lineup: same sunset, same dunes, same "Ruff Riders" bandana on every design, just a different good boy (or girl) behind the wheel each time.</p>
+
+    <img class="ruff-hero" src="images/merch-ruffriders-hero.jpg" alt="Seven dogs wearing Ruff Riders bandanas lined up on the beach in front of a row of dune buggies at sunset, Oceano Dunes California">
+
+    <div class="ruff-grid">
+      <div class="ruff-card">
+        <div class="ruff-frame">
+          <img src="images/merch-ruffriders-beach-bum.png" alt="Ruff Riders Beach Bum: a corgi in sunglasses riding in a Jeep with a surfboard at the beach" loading="lazy">
+        </div>
+        <div class="name">Beach Bum</div>
+        <div class="ruff-soon">Coming Soon</div>
+      </div>
+
+      <div class="ruff-card">
+        <div class="ruff-frame">
+          <img src="images/merch-ruffriders-camp-pup.png" alt="Ruff Riders Camp Pup: a golden retriever wearing a bandana in front of a tent and campfire at sunset" loading="lazy">
+        </div>
+        <div class="name">Camp Pup</div>
+        <div class="ruff-soon">Coming Soon</div>
+      </div>
+
+      <div class="ruff-card">
+        <div class="ruff-frame">
+          <img src="images/merch-ruffriders-sand-patrol.png" alt="Ruff Riders Sand Patrol: a German Shepherd in goggles driving a dune buggy numbered 11" loading="lazy">
+        </div>
+        <div class="name">Sand Patrol</div>
+        <div class="ruff-soon">Coming Soon</div>
+      </div>
+
+      <div class="ruff-card">
+        <div class="ruff-frame">
+          <img src="images/merch-ruffriders-trail-boss.png" alt="Ruff Riders Trail Boss: a German Shepherd driving a dune buggy past the Sand Highway signpost, campfire and chairs behind" loading="lazy">
+        </div>
+        <div class="name">Trail Boss</div>
+        <div class="ruff-soon">Coming Soon</div>
+      </div>
     </div>
   </div>
 </section>
