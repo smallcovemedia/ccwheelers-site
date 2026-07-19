@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N9HPGB15V1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-N9HPGB15V1');
+// CCWheelers click events: money actions for an info site
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a, button');
+  if (!a || typeof gtag !== 'function') return;
+  var href = a.getAttribute && (a.getAttribute('href') || '');
+  if (href.indexOf('tel:') === 0) {
+    gtag('event', 'phone_call', { page_path: location.pathname });
+  } else if (/^https?:\/\//.test(href) && href.indexOf('ccwheelers.com') === -1) {
+    gtag('event', 'outbound_click', { link_domain: href.split('/')[2] || '', page_path: location.pathname });
+  }
+}, { passive: true });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Sunset Collection | Oceano Dunes Apparel | CCWheelers</title>
+<meta name="description" content="Six designs, one story. The CC Wheelers Sunset Collection is about the couple watching the sunset, the campfire after the ride, and the walk on the beach at Oceano Dunes.">
+<link rel="canonical" href="https://ccwheelers.com/sunset-collection.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CCWheelers">
+<meta property="og:title" content="The Sunset Collection | Oceano Dunes Apparel | CCWheelers">
+<meta property="og:description" content="Six designs, one story. The CC Wheelers Sunset Collection is about the couple watching the sunset, the campfire after the ride, and the walk on the beach at Oceano Dunes.">
+<meta property="og:url" content="https://ccwheelers.com/sunset-collection.html">
+<meta property="og:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Sunset Collection | Oceano Dunes Apparel | CCWheelers">
+<meta name="twitter:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<link rel="icon" type="image/png" href="images/favicon.png?v=4">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  /* ---- Sunset Collection ---- */
+  .sc-band{background:linear-gradient(180deg,var(--sand),var(--sand-deep))}
+  .sc-intro{display:grid;grid-template-columns:340px 1fr;gap:48px;align-items:center}
+  .sc-badge-wrap{background:linear-gradient(135deg,var(--sand-deep),var(--sand));border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
+  .sc-badge-wrap img{width:100%;height:auto;display:block;border-radius:8px}
+
+  /* picker: big viewer on the left, design list on the right */
+  .sc-picker{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:start;margin-top:8px}
+  .sc-stage{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+  .sc-view{background:linear-gradient(135deg,var(--sand-deep),var(--sand));border-radius:10px;overflow:hidden;position:relative;aspect-ratio:1/1;display:grid;place-items:center}
+  .sc-view img{width:100%;height:100%;object-fit:contain;display:block}
+  .sc-shots{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+  .sc-shot{width:62px;height:62px;border-radius:8px;overflow:hidden;border:2px solid transparent;background:var(--sand);padding:0;cursor:pointer;transition:border-color .15s ease}
+  .sc-shot img{width:100%;height:100%;object-fit:cover;display:block}
+  .sc-shot[aria-current="true"]{border-color:var(--sunset-hot)}
+
+  .sc-info .sc-edition{display:inline-block;background:var(--sunset-hot);color:#fff;font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-radius:99px;padding:4px 12px}
+  .sc-info h2{font-family:'Barlow Condensed';font-size:clamp(30px,4vw,42px);font-weight:800;color:var(--ocean);margin:14px 0 6px;line-height:1.05}
+  .sc-info .sc-tag{font-size:16px;color:var(--ink-soft);max-width:46ch}
+  .sc-price{font-family:'Barlow Condensed';font-weight:800;color:var(--sunset-hot);font-size:30px;margin-top:18px}
+  .sc-price small{display:block;font-family:'Inter';font-size:12.5px;font-weight:500;color:var(--ink-soft);letter-spacing:0}
+  .sc-buy{margin-top:18px}
+  .sc-note{font-size:13px;color:var(--ink-soft);margin-top:12px}
+
+  .sc-list{margin-top:26px;border-top:1px solid rgba(14,58,77,.12);padding-top:18px}
+  .sc-list h3{font-size:12.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:12px}
+  .sc-thumbs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .sc-thumb{border:2px solid transparent;background:#fff;border-radius:10px;padding:6px;cursor:pointer;text-align:center;box-shadow:var(--shadow);transition:transform .15s ease,border-color .15s ease}
+  .sc-thumb:hover{transform:translateY(-3px)}
+  .sc-thumb[aria-current="true"]{border-color:var(--sunset-hot)}
+  .sc-thumb img{width:100%;height:auto;border-radius:6px;display:block;background:var(--sand)}
+  .sc-thumb span{display:block;font-family:'Barlow Condensed';font-weight:700;font-size:14px;color:var(--ocean);margin-top:6px;line-height:1.15}
+
+  .sc-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:34px}
+
+  @media(max-width:980px){
+    .sc-intro{grid-template-columns:1fr;gap:28px}
+    .sc-badge-wrap{max-width:320px;margin:0 auto}
+    .sc-picker{grid-template-columns:1fr;gap:26px}
+    .sc-facts{grid-template-columns:1fr}
+  }
+  @media(max-width:520px){
+    .sc-thumbs{grid-template-columns:repeat(2,1fr)}
+  }
+</style>
+<script src="nav.js" defer></script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html">
+      <span class="logo-chip"><img src="images/ccw-logo.png" alt="Central Coast Wheelers logo"></span>
+      <div class="logo-text">CCWheelers<small>Oceano Dunes Info Center</small></div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="camping.html">Camping</a></li>
+        <li><a href="creek.html">Creek</a></li>
+        <li><a href="tides.html">Tides</a></li>
+        <li><a href="planner.html">Planner</a></li>
+        <li><a href="dayuse.html">Day Use</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="merch.html" class="active">Merch</a></li>
+        <li class="has-sub">
+          <button class="sub-toggle" aria-expanded="false" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+          <ul class="sub">
+            <li><a href="weather.html">Weather</a></li>
+            <li><a href="gas.html">Gas Prices</a></li>
+            <li><a href="fires.html">Campfires</a></li>
+            <li><a href="rules.html">Rules</a></li>
+            <li><a href="tips.html">Tips</a></li>
+            <li><a href="emergency.html">Emergency</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary nav-book" href="https://www.reservecalifornia.com" target="_blank" rel="noopener">Book a Campsite</a>
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main>
+<div class="page-head">
+  <div class="wrap">
+    <span class="eyebrow">Now Available &middot; A New Line</span>
+    <h1>The Sunset Collection</h1>
+    <p>Six designs, one story. Not another rail buggy shirt. This line is about the couple watching the sunset, the campfire after the ride, and the walk on the beach when the wind finally lays down.</p>
+  </div>
+</div>
+
+<section class="sc-band">
+  <div class="wrap">
+    <div class="sc-intro">
+      <div class="sc-badge-wrap">
+        <img src="images/merch/sc-front-badge.jpg" alt="CC Wheelers Sunset Collection badge: a heart shaped dune sunset scene with two buggies above a ribbon banner, the shared front print on every shirt in the collection" width="760" height="1140">
+      </div>
+      <div>
+        <span class="eyebrow">The Same Front, Six Backs</span>
+        <h2 class="section-title">One Badge Up Front. Your Story On The Back.</h2>
+        <p class="lede">Every shirt in the collection carries the same badge on the front, so the line reads as one set. The back is where each design goes its own way. Same dune grass, same sun, same ribbon banner, same heart, every time. Once you have seen one, you will know the whole collection on sight.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">Pick Your Design</span>
+    <h2 class="section-title">All Six, Side By Side</h2>
+    <p class="lede">Tap through the collection below. Every design is printed on the crop hoodie in your choice of colors, and each one is numbered as part of the set of six.</p>
+
+    <div class="sc-picker">
+      <div class="sc-stage">
+        <div class="sc-view">
+          <img id="scView" src="images/merch/sc-01-hidden-treasure-lg.jpg" alt="Hidden Treasure: a dune buggy, a heart drawn in the sand, and a treasure chest at sunset, Oceano Dunes California" width="880" height="880">
+        </div>
+        <div class="sc-shots" id="scShots" role="group" aria-label="Views of this design"></div>
+      </div>
+
+      <div class="sc-info">
+        <span class="sc-edition" id="scEdition">No. 1 of 6</span>
+        <h2 id="scName">Hidden Treasure</h2>
+        <p class="sc-tag" id="scTag">A buggy parked at the water line, a heart drawn in the sand, and whatever it is you came out here to find.</p>
+        <div class="sc-price" id="scPrice">$53.35<small>Crop hoodie &middot; multiple colors and sizes</small></div>
+        <div class="sc-buy">
+          <a class="btn btn-primary" id="scBuy" href="https://ccwheelers-oceano-dunes.printful.me/product/cc-wheelers-sunset-collection-hidden-treasure" target="_blank" rel="noopener">Pick Size &amp; Color</a>
+        </div>
+        <p class="sc-note">Sizes and colors are chosen at checkout. Printed and shipped by our print partner, usually within a week.</p>
+
+        <div class="sc-list">
+          <h3>The Collection</h3>
+          <div class="sc-thumbs" id="scThumbs"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sc-facts">
+      <div class="card">
+        <h3>What You Get</h3>
+        <p>A crop hoodie with the Sunset Collection badge printed on the front and your chosen design printed large across the back. Both prints are included on every shirt.</p>
+      </div>
+      <div class="card">
+        <h3>Sizes &amp; Colors</h3>
+        <p>Multiple colors and a full size run, all chosen on the product page at checkout. Pricing is the same across the collection regardless of which design you pick.</p>
+      </div>
+      <div class="card">
+        <h3>Made To Order</h3>
+        <p>Nothing sits in a warehouse. Each shirt is printed after you order it, which keeps the run small and means we can add designs without guessing at inventory.</p>
+      </div>
+    </div>
+
+    <p class="lede" style="margin-top:34px"><a href="merch.html">Back to all CCWheelers merch</a></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>CCWheelers</h4>
+        <p>The Oceano Dunes Information Center. Built and maintained by Central Coast Wheelers, an OHV community keeping the dunes clean, safe, and open.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="camping.html">Camping</a></li>
+          <li><a href="creek.html">Creek Status</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="planner.html">Trip Planner</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="dayuse.html">Day Use</a></li>
+          <li><a href="rules.html">Rules</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ride</h4>
+        <ul>
+          <li><a href="map.html">Virtual Map</a></li>
+          <li><a href="tips.html">Riding Tips</a></li>
+          <li><a href="emergency.html">Emergency Info</a></li>
+          <li><a href="about.html">About CCW</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Oceano Dunes SVRA<br>928 Pacific Blvd<br>Oceano, CA 93445</li>
+          <li>Info: (805) 473-7220 (recorded)</li>
+          <li>Reservations: (800) 444-7275</li>
+          <li><a href="contact.html">Contact CCWheelers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 CCWheelers.com · Central Coast Wheelers</span>
+      <span>Not an official California State Parks website</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var BASE = 'https://ccwheelers-oceano-dunes.printful.me/product/';
+  var BADGE = 'images/merch/sc-front-badge.jpg';
+
+  // Each design can carry several shots. "shots" is the gallery inside the
+  // viewer: back artwork first, then the shared front badge, then any model
+  // photos added later. Drop new entries into shots and nothing else changes.
+  var DESIGNS = [
+    {
+      n: 1, name: 'Hidden Treasure', slug: 'cc-wheelers-sunset-collection-hidden-treasure',
+      tag: 'A buggy parked at the water line, a heart drawn in the sand, and whatever it is you came out here to find.',
+      art: 'images/merch/sc-01-hidden-treasure-lg.jpg', th: 'images/merch/sc-01-hidden-treasure-th.jpg',
+      alt: 'Hidden Treasure: a dune buggy, a heart drawn in the sand, and a treasure chest at sunset, Oceano Dunes California'
+    },
+    {
+      n: 2, name: 'Sunset Together', slug: 'cc-wheelers-sunset-collection-sunset-together',
+      tag: 'Two people on the tailgate of a buggy, watching the sun go down over the water. The reason most of us come back.',
+      art: 'images/merch/sc-02-sunset-together-lg.jpg', th: 'images/merch/sc-02-sunset-together-th.jpg',
+      alt: 'Sunset Together: a couple sitting on a dune buggy watching the sunset, Oceano Dunes California'
+    },
+    {
+      n: 3, name: 'Just Us', slug: 'cc-wheelers-sunset-collection-just-us',
+      tag: 'Out past the crowds with one other person and a full tank. No plan, no schedule, no one else around.',
+      art: 'images/merch/sc-03-just-us-lg.jpg', th: 'images/merch/sc-03-just-us-th.jpg',
+      alt: 'Just Us: a couple riding a dune buggy together over the dunes at sunset, Oceano Dunes California'
+    },
+    {
+      n: 4, name: 'Our Escape', slug: 'cc-wheelers-sunset-collection-our-escape',
+      tag: 'Camp chairs, a fire ring, and two mugs going cold while nobody gets up to fix it.',
+      art: 'images/merch/sc-04-our-escape-lg.jpg', th: 'images/merch/sc-04-our-escape-th.jpg',
+      alt: 'Our Escape: a beach campfire, camp chairs, and coffee mugs with a dune buggy at sunset, Oceano Dunes California'
+    },
+    {
+      n: 5, name: 'Better Together', slug: 'cc-wheelers-sunset-collection-better-together',
+      tag: 'The walk down the beach after the riding is done and the buggy is parked for the night.',
+      art: 'images/merch/sc-05-better-together-lg.jpg', th: 'images/merch/sc-05-better-together-th.jpg',
+      alt: 'Better Together: a couple walking the beach hand in hand with their dune buggy, Oceano Dunes California'
+    },
+    {
+      n: 6, name: 'Love Runs on Sand', slug: 'cc-wheelers-sunset-collection-love-runs-on-sand',
+      tag: 'Truck, trailer, fire going, nowhere to be in the morning. A whole weekend in one picture.',
+      art: 'images/merch/sc-06-love-runs-on-sand-lg.jpg', th: 'images/merch/sc-06-love-runs-on-sand-th.jpg',
+      alt: 'Love Runs on Sand: a truck and camper trailer parked at a beach campfire at sunset, Oceano Dunes California'
+    }
+  ];
+
+  var view = document.getElementById('scView');
+  var shotsEl = document.getElementById('scShots');
+  var thumbsEl = document.getElementById('scThumbs');
+  var edition = document.getElementById('scEdition');
+  var nameEl = document.getElementById('scName');
+  var tagEl = document.getElementById('scTag');
+  var buy = document.getElementById('scBuy');
+  if (!view || !thumbsEl) return;
+
+  var current = 0;
+
+  function shotsFor(d) {
+    return [
+      { src: d.art, alt: d.alt, label: 'Back print' },
+      { src: BADGE, alt: 'The Sunset Collection badge printed on the front of every shirt', label: 'Front badge' }
+    ].concat(d.shots || []);
+  }
+
+  function showShot(list, i) {
+    view.src = list[i].src;
+    view.alt = list[i].alt;
+    Array.prototype.forEach.call(shotsEl.children, function (b, k) {
+      b.setAttribute('aria-current', k === i ? 'true' : 'false');
+    });
+  }
+
+  function select(i) {
+    var d = DESIGNS[i];
+    current = i;
+    edition.textContent = 'No. ' + d.n + ' of 6';
+    nameEl.textContent = d.name;
+    tagEl.textContent = d.tag;
+    buy.href = BASE + d.slug;
+    buy.setAttribute('aria-label', 'Pick size and color for ' + d.name);
+
+    var list = shotsFor(d);
+    shotsEl.innerHTML = '';
+    list.forEach(function (s, k) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'sc-shot';
+      b.title = s.label;
+      b.setAttribute('aria-label', s.label + ' of ' + d.name);
+      b.innerHTML = '<img src="' + s.src + '" alt="" loading="lazy">';
+      b.addEventListener('click', function () { showShot(list, k); });
+      shotsEl.appendChild(b);
+    });
+    showShot(list, 0);
+
+    Array.prototype.forEach.call(thumbsEl.children, function (t, k) {
+      t.setAttribute('aria-current', k === i ? 'true' : 'false');
+    });
+
+    if (typeof gtag === 'function') {
+      gtag('event', 'sunset_design_view', { design: d.name });
+    }
+  }
+
+  DESIGNS.forEach(function (d, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'sc-thumb';
+    b.setAttribute('aria-current', i === 0 ? 'true' : 'false');
+    b.innerHTML = '<img src="' + d.th + '" alt="" loading="lazy"><span>' + d.name + '</span>';
+    b.addEventListener('click', function () { select(i); });
+    thumbsEl.appendChild(b);
+  });
+
+  select(0);
+})();
+</script>
+
+</body>
+</html>
