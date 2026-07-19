@@ -33,6 +33,13 @@ Public info site for Oceano Dunes SVRA, run by Central Coast Wheelers (a father-
 - Facts about park rules (fees, hours, fire rules, creek policy) must match official State Parks info; when unsure, say "confirm with rangers at (805) 473-7220" rather than guessing.
 - Every page keeps its `<title>`, meta description, canonical link, and og: tags. New pages need all of these plus an entry in `sitemap.xml` and the footer/nav.
 
+## AI-to-AI coordination
+
+Two AI assistants work on this repo (Logan's and Mike's). **Check HANDOFF.md at
+the start of every session** — it is the message board between them. When you
+complete work the other side must act on, or need something only the other
+side can do, append a dated entry there and push. Never put credentials in it.
+
 ## Workflow rules
 
 - Pull before you start. Small text fixes can go straight to `main`.
