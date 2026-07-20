@@ -129,7 +129,8 @@ document.addEventListener('click', function (e) {
   .sunset-enter-note{display:block;font-size:13.5px;color:var(--ink-soft);margin-top:12px}
 
   /* ---- Ruff Riders preview ---- */
-  .ruff-band{background:linear-gradient(180deg,var(--ocean-deep),var(--ocean))}
+  .ruff-band{background:linear-gradient(180deg,var(--ocean-deep),var(--ocean));position:relative;padding-bottom:130px}
+  .ruff-band .wave-bottom{position:absolute;bottom:0;left:0;width:100%;height:90px;display:block}
   .ruff-band .eyebrow,.ruff-band .section-title{color:#fff}
   .ruff-band .lede{color:rgba(255,255,255,.82)}
   .ruff-hero{width:100%;border-radius:var(--radius);box-shadow:var(--shadow);margin-top:28px;display:block}
@@ -297,6 +298,10 @@ document.addEventListener('click', function (e) {
       </div>
     </div>
   </div>
+  <svg class="wave-bottom" viewBox="0 0 1440 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M0,120 C240,40 420,150 720,100 C980,58 1180,150 1440,90 L1440,220 L0,220 Z" fill="#e8dcc8" opacity=".55"/>
+    <path d="M0,160 C300,90 560,190 860,140 C1120,98 1300,180 1440,140 L1440,220 L0,220 Z" fill="#efe5d2" opacity=".8"/>
+  </svg>
 </section>
 
 <section>
