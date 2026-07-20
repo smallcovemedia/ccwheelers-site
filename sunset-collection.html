@@ -42,9 +42,66 @@ document.addEventListener('click', function (e) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://ccwheelers.com/sunset-collection.html",
+      "url": "https://ccwheelers.com/sunset-collection.html",
+      "name": "The Sunset Collection",
+      "headline": "Oceano Dunes Apparel. Six Designs, One Story.",
+      "description": "Six designs, one story. The CC Wheelers Sunset Collection is about the couple watching the sunset, the campfire after the ride, and the walk on the beach at Oceano Dunes.",
+      "isPartOf": { "@type": "WebSite", "name": "CCWheelers", "url": "https://ccwheelers.com/" },
+      "about": { "@type": "Place", "name": "Oceano Dunes SVRA", "address": { "@type": "PostalAddress", "addressLocality": "Oceano", "addressRegion": "CA", "addressCountry": "US" } },
+      "primaryImageOfPage": { "@id": "https://ccwheelers.com/images/merch/sunset-collection-oceano-dunes-hero-banner.jpg" }
+    },
+    {
+      "@type": "ImageObject",
+      "@id": "https://ccwheelers.com/images/merch/sunset-collection-oceano-dunes-hero-banner.jpg",
+      "contentUrl": "https://ccwheelers.com/images/merch/sunset-collection-oceano-dunes-hero-banner.jpg",
+      "width": 1600, "height": 656,
+      "name": "CCWheelers Sunset Collection, Oceano Dunes California",
+      "caption": "A couple in Oceano Dunes crop hoodies sitting by a beach campfire at sunset with a UTV parked on the sand, Oceano Dunes California",
+      "creditText": "Central Coast Wheelers",
+      "copyrightNotice": "© CCWheelers.com"
+    },
+    {
+      "@type": "ImageObject",
+      "@id": "https://ccwheelers.com/images/merch/sunset-collection-oceano-dunes-campfire-couple.jpg",
+      "contentUrl": "https://ccwheelers.com/images/merch/sunset-collection-oceano-dunes-campfire-couple.jpg",
+      "width": 1400, "height": 933,
+      "name": "Beach campfire at sunset, Oceano Dunes California",
+      "caption": "Two riders in CCWheelers Sunset Collection crop hoodies by a beach campfire at sunset, Oceano Dunes California",
+      "creditText": "Central Coast Wheelers",
+      "copyrightNotice": "© CCWheelers.com"
+    },
+    {
+      "@type": "ImageObject",
+      "@id": "https://ccwheelers.com/images/merch/sunset-collection-oceano-dunes-crop-hoodie-campfire.jpg",
+      "contentUrl": "https://ccwheelers.com/images/merch/sunset-collection-oceano-dunes-crop-hoodie-campfire.jpg",
+      "width": 1200, "height": 801,
+      "name": "CCWheelers Sunset Collection crop hoodie, Oceano Dunes California",
+      "caption": "A rider wearing a black CCWheelers Sunset Collection crop hoodie beside a beach campfire at sunset, Oceano Dunes California",
+      "creditText": "Central Coast Wheelers",
+      "copyrightNotice": "© CCWheelers.com"
+    }
+  ]
+}
+</script>
 <style>
   /* ---- Sunset Collection ---- */
+  .sc-hero{background:var(--ocean-deep);line-height:0}
+  .sc-hero img{width:100%;height:auto;display:block;max-height:none}
   .sc-band{background:linear-gradient(180deg,var(--sand),var(--sand-deep))}
+  .sc-band h1.section-title{margin-bottom:14px}
+  .sc-band .sc-intro{margin-top:38px}
+
+  /* full width atmosphere band */
+  .sc-scene{position:relative;line-height:0}
+  .sc-scene img{width:100%;height:auto;display:block}
+  .sc-scene figcaption{position:absolute;left:0;right:0;bottom:0;line-height:1.4;padding:26px 24px 18px;background:linear-gradient(180deg,rgba(9,40,53,0) 0%,rgba(9,40,53,.78) 65%);color:#fff;font-size:14px;text-align:center}
   .sc-intro{display:grid;grid-template-columns:340px 1fr;gap:48px;align-items:center}
   .sc-badge-wrap{background:linear-gradient(135deg,var(--sand-deep),var(--sand));border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
   .sc-badge-wrap img{width:100%;height:auto;display:block;border-radius:8px}
@@ -131,19 +188,21 @@ document.addEventListener('click', function (e) {
 </header>
 
 <main>
-<div class="page-head">
-  <div class="wrap">
-    <span class="eyebrow">Now Available &middot; A New Line</span>
-    <h1>The Sunset Collection</h1>
-    <p>Six designs, one story. Not another rail buggy shirt. This line is about the couple watching the sunset, the campfire after the ride, and the walk on the beach when the wind finally lays down.</p>
-  </div>
+<div class="sc-hero">
+  <img src="images/merch/sunset-collection-oceano-dunes-hero-banner.jpg"
+       alt="CCWheelers presents The Sunset Collection: a couple in Oceano Dunes crop hoodies sitting by a beach campfire at sunset, a UTV parked on the sand behind them, Oceano Dunes California"
+       width="1600" height="656" fetchpriority="high">
 </div>
 
 <section class="sc-band">
   <div class="wrap">
+    <span class="eyebrow">Now Available &middot; A New Line</span>
+    <h1 class="section-title">Oceano Dunes Apparel. Six Designs, One Story.</h1>
+    <p class="lede">Not another rail buggy shirt. The Sunset Collection is about the couple watching the sun go down over the water, the campfire after the ride, and the walk on the beach when the wind finally lays down. Printed on the crop hoodie and made for the people who come back to Oceano Dunes every season.</p>
+
     <div class="sc-intro">
       <div class="sc-badge-wrap">
-        <img src="images/merch/sc-front-badge.jpg" alt="CC Wheelers Sunset Collection badge: a heart shaped dune sunset scene with two buggies above a ribbon banner, the shared front print on every shirt in the collection" width="760" height="1140">
+        <img src="images/merch/sc-front-badge.jpg" alt="The CC Wheelers Sunset Collection badge: a heart shaped dune sunset scene with two buggies above a ribbon banner, the shared front print on every shirt in the collection, Oceano Dunes California" width="760" height="1140" loading="lazy">
       </div>
       <div>
         <span class="eyebrow">The Same Front, Six Backs</span>
@@ -185,6 +244,18 @@ document.addEventListener('click', function (e) {
       </div>
     </div>
 
+  </div>
+</section>
+
+<figure class="sc-scene">
+  <img src="images/merch/sunset-collection-oceano-dunes-campfire-couple.jpg"
+       alt="Two riders in CCWheelers Sunset Collection crop hoodies sitting together on a blanket by a beach campfire, watching the sun set over the water with their UTV parked on the sand, Oceano Dunes California"
+       width="1400" height="933" loading="lazy">
+  <figcaption>The end of a day on the sand at Oceano Dunes, which is the whole idea behind the collection.</figcaption>
+</figure>
+
+<section>
+  <div class="wrap">
     <div class="sc-facts">
       <div class="card">
         <h3>What You Get</h3>
@@ -254,6 +325,14 @@ document.addEventListener('click', function (e) {
 (function () {
   var BASE = 'https://ccwheelers-oceano-dunes.printful.me/product/';
   var BADGE = 'images/merch/sc-front-badge.jpg';
+  // Shared "in the wild" shot. Shown on every design because it is the garment,
+  // not any one design's artwork, so it must not read as a product image for
+  // whichever design happens to be selected.
+  var WORN = {
+    src: 'images/merch/sunset-collection-oceano-dunes-crop-hoodie-campfire.jpg',
+    alt: 'A rider wearing a black CCWheelers Sunset Collection crop hoodie beside a beach campfire at sunset, Oceano Dunes California',
+    label: 'The crop hoodie'
+  };
 
   // Each design can carry several shots. "shots" is the gallery inside the
   // viewer: back artwork first, then the shared front badge, then any model
@@ -311,7 +390,8 @@ document.addEventListener('click', function (e) {
   function shotsFor(d) {
     return [
       { src: d.art, alt: d.alt, label: 'Back print' },
-      { src: BADGE, alt: 'The Sunset Collection badge printed on the front of every shirt', label: 'Front badge' }
+      { src: BADGE, alt: 'The Sunset Collection badge printed on the front of every shirt', label: 'Front badge' },
+      WORN
     ].concat(d.shots || []);
   }
 
