@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-N9HPGB15V1"></script>
@@ -34,12 +34,12 @@ document.addEventListener('click', function (e) {
 <meta property="og:title" content="CCWheelers Merch | Dune Gear from Central Coast Wheelers">
 <meta property="og:description" content="Official CCWheelers apparel and gear for Oceano Dunes riders, printed on demand and shipped to your door. New designs coming soon.">
 <meta property="og:url" content="https://ccwheelers.com/merch.html">
-<meta property="og:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<meta property="og:image" content="https://ccwheelers.com/images/merch/oceano-dunes-gift-shop-og-share.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="CCWheelers Merch | Dune Gear from Central Coast Wheelers">
-<meta name="twitter:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<meta name="twitter:image" content="https://ccwheelers.com/images/merch/oceano-dunes-gift-shop-og-share.jpg">
 <link rel="icon" type="image/png" href="images/favicon.png?v=4">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -47,6 +47,20 @@ document.addEventListener('click', function (e) {
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
 <style>
+  .shop-hero{background:var(--ocean-deep);line-height:0;overflow:hidden}
+  .shop-hero img{width:100%;height:clamp(190px,26vw,340px);object-fit:cover;object-position:center 42%;display:block}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .shop-note{font-size:13.5px;color:var(--ink-soft);margin-top:12px}
+  .share-row{margin-top:22px;display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+  .share-label{font-size:14px;color:var(--ink-soft);font-weight:600}
+  .share-links{display:flex;flex-wrap:wrap;gap:8px}
+  .share-btn{display:inline-flex;align-items:center;padding:8px 16px;border-radius:999px;border:1.5px solid var(--ocean);color:var(--ocean);font-size:13px;font-weight:700;text-decoration:none;background:none;cursor:pointer;transition:background .15s ease,color .15s ease;font-family:inherit}
+  .share-btn:hover{background:var(--ocean);color:#fff}
+  .sticker-band{position:relative;background:linear-gradient(180deg,var(--ocean) 0%,var(--ocean-deep) 100%);padding-top:56px;overflow:hidden}
+  .sticker-band .wave-top{position:absolute;top:0;left:0;width:100%;height:auto;display:block}
+  .sticker-band .eyebrow{color:var(--dune)}
+  .sticker-band h2.section-title{color:#fff}
+  .sticker-band p.lede{color:rgba(255,255,255,.85)}
   .merch-hero-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:40px}
   .merch-hero-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:26px;display:flex;flex-direction:column}
   .merch-hero-cat{font-size:12px;font-weight:700;letter-spacing:1.8px;text-transform:uppercase;color:var(--sunset-hot);margin-bottom:12px}
@@ -65,9 +79,13 @@ document.addEventListener('click', function (e) {
   .merch-hero-art.bg-black .merch-hero-shot-label,
   .merch-hero-art.bg-blue .merch-hero-shot-label{color:rgba(255,255,255,.65)}
   .merch-hero-art{position:relative}
-  .merch-hero-imgwrap{display:flex;align-items:center;justify-content:center;gap:16px;width:100%;padding:0 52px}
-  .merch-hero-imgwrap > img{flex:1 1 0;min-width:0;max-width:100%;max-height:260px;object-fit:contain;display:block}
-  .merch-hero-front-wrap{flex:0 0 auto;width:124px;border-left:1px solid var(--sand-deep);padding-left:16px}
+  /* main image gets a floor via min-width so it can never be squeezed to
+     nothing by the fixed-width thumbnail; that's what was happening in the
+     two-column grid between 760-1140px, where 52px side padding + a 124px
+     thumbnail left almost no room and min-width:0 let it collapse to ~14px */
+  .merch-hero-imgwrap{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;padding:0 24px}
+  .merch-hero-imgwrap > img{flex:1 1 120px;min-width:100px;max-width:100%;max-height:260px;object-fit:contain;display:block}
+  .merch-hero-front-wrap{flex:0 0 auto;width:100px;border-left:1px solid var(--sand-deep);padding-left:14px}
   .merch-hero-front-wrap img{width:100%;height:auto;max-height:170px;object-fit:contain;display:block}
   .merch-hero-shot-label{font-size:11px;color:var(--ink-soft);text-align:center;margin-top:6px;text-transform:uppercase;letter-spacing:1px}
   .merch-hero-nav{position:absolute;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:50%;border:none;background:#fff;box-shadow:var(--shadow);color:var(--ocean);font-size:16px;line-height:1;cursor:pointer;display:grid;place-items:center}
@@ -116,7 +134,8 @@ document.addEventListener('click', function (e) {
   .sunset-enter-note{display:block;font-size:13.5px;color:var(--ink-soft);margin-top:12px}
 
   /* ---- Ruff Riders preview ---- */
-  .ruff-band{background:linear-gradient(180deg,var(--ocean-deep),var(--ocean))}
+  .ruff-band{background:linear-gradient(180deg,var(--ocean-deep),var(--ocean));position:relative;padding-bottom:130px}
+  .ruff-band .wave-bottom{position:absolute;bottom:0;left:0;width:100%;height:90px;display:block}
   .ruff-band .eyebrow,.ruff-band .section-title{color:#fff}
   .ruff-band .lede{color:rgba(255,255,255,.82)}
   .ruff-hero{width:100%;border-radius:var(--radius);box-shadow:var(--shadow);margin-top:28px;display:block}
@@ -171,90 +190,45 @@ document.addEventListener('click', function (e) {
       </ul>
     </nav>
     <a class="btn btn-primary nav-book" href="https://www.reservecalifornia.com" target="_blank" rel="noopener">Book a Campsite</a>
-    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">â˜°</button>
   </div>
 </header>
 
 <main>
-<div class="page-head">
-  <div class="wrap">
-    <span class="eyebrow">The Shop Is Live</span>
-    <h1>CCWheelers Merch</h1>
-    <p>Gear for people who love these dunes. Printed on demand and shipped straight to your door. Here's a close look at a few of our favorite designs.</p>
-  </div>
+<div class="shop-hero">
+  <img src="images/merch/oceano-dunes-gift-shop-ccwheelers-sign.jpg"
+       alt="Wooden trail sign for the CCWheelers Gift Shop at Oceano Dunes, California, standing in the sand dunes at sunset"
+       width="1600" height="640" fetchpriority="high">
+  <h1 class="sr-only">CCWheelers Merch</h1>
 </div>
 
-<section>
+<section style="padding-top:0">
   <div class="wrap">
-    <span class="eyebrow">A Few Favorites</span>
-    <h2 class="section-title">See The Art Up Close</h2>
-    <p class="lede">Our store shows the garment first and the artwork small. Here's the design itself, full size, so you know exactly what you're getting before you click through to order.</p>
+    <span class="eyebrow">For The Ones Who Keep Coming Back</span>
+    <h2 class="section-title">Bring The Dunes Home With You</h2>
+    <p class="lede">The sand still in your boots on the drive home. The fire down to coals while nobody wants to be the first to call it a night. Your kid asleep before you hit the highway. This is for holding onto that, long after the tires are clean.</p>
+    <p class="shop-note">Our artists are always working on new collections, for every rider in the family.</p>
 
-    <div class="merch-hero-grid">
-      <div class="merch-hero-card" data-tile="women">
-        <span class="merch-hero-cat">Women</span>
-        <div class="merch-hero-art">
-          <button class="merch-hero-nav prev" aria-label="Previous design">&#10094;</button>
-          <div class="merch-hero-imgwrap"></div>
-          <button class="merch-hero-nav next" aria-label="Next design">&#10095;</button>
-        </div>
-        <div class="merch-hero-dots"></div>
-        <h3 class="mh-name"></h3>
-        <div class="price mh-price"></div>
-        <p class="mh-desc"></p>
-        <a class="btn btn-primary mh-link" target="_blank" rel="noopener">Shop This Design</a>
-      </div>
-
-      <div class="merch-hero-card" data-tile="men">
-        <span class="merch-hero-cat">Men</span>
-        <div class="merch-hero-art">
-          <button class="merch-hero-nav prev" aria-label="Previous design">&#10094;</button>
-          <div class="merch-hero-imgwrap"></div>
-          <button class="merch-hero-nav next" aria-label="Next design">&#10095;</button>
-        </div>
-        <div class="merch-hero-dots"></div>
-        <h3 class="mh-name"></h3>
-        <div class="price mh-price"></div>
-        <p class="mh-desc"></p>
-        <a class="btn btn-primary mh-link" target="_blank" rel="noopener">Shop This Design</a>
-      </div>
-
-      <div class="merch-hero-card" data-tile="kids">
-        <span class="merch-hero-cat">Kids</span>
-        <div class="merch-hero-art">
-          <button class="merch-hero-nav prev" aria-label="Previous design">&#10094;</button>
-          <div class="merch-hero-imgwrap"></div>
-          <button class="merch-hero-nav next" aria-label="Next design">&#10095;</button>
-        </div>
-        <div class="merch-hero-dots"></div>
-        <h3 class="mh-name"></h3>
-        <div class="price mh-price"></div>
-        <p class="mh-desc"></p>
-        <a class="btn btn-primary mh-link" target="_blank" rel="noopener">Shop This Design</a>
-      </div>
-
-      <div class="merch-hero-card" data-tile="pets">
-        <span class="merch-hero-cat">Accessories</span>
-        <div class="merch-hero-art">
-          <button class="merch-hero-nav prev" aria-label="Previous design">&#10094;</button>
-          <div class="merch-hero-imgwrap"></div>
-          <button class="merch-hero-nav next" aria-label="Next design">&#10095;</button>
-        </div>
-        <div class="merch-hero-dots"></div>
-        <h3 class="mh-name"></h3>
-        <div class="price mh-price"></div>
-        <p class="mh-desc"></p>
-        <a class="btn btn-primary mh-link" target="_blank" rel="noopener">Shop This Design</a>
+    <div class="share-row">
+      <span class="share-label">Know a fellow rider who'd love this?</span>
+      <div class="share-links">
+        <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fccwheelers.com%2Fmerch.html" target="_blank" rel="noopener" aria-label="Share on Facebook">Facebook</a>
+        <a class="share-btn" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fccwheelers.com%2Fmerch.html&amp;text=Check%20out%20the%20CCWheelers%20Gift%20Shop" target="_blank" rel="noopener" aria-label="Share on X">X</a>
+        <a class="share-btn" href="https://www.snapchat.com/scan?attachmentUrl=https%3A%2F%2Fccwheelers.com%2Fmerch.html" target="_blank" rel="noopener" aria-label="Share on Snapchat">Snapchat</a>
+        <button class="share-btn" type="button" id="copyLinkBtn">Copy Link</button>
       </div>
     </div>
   </div>
 </section>
 
-<section style="padding-top:0">
+<section class="sticker-band">
+  <svg class="wave-top" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M0,0 L1440,0 L1440,30 C1320,50 1200,10 1080,30 C960,50 840,10 720,30 C600,50 480,10 360,30 C240,50 120,10 0,30 Z" fill="#f5ede0"/>
+  </svg>
   <div class="wrap">
-    <span class="eyebrow">Cheap And Easy</span>
-    <h2 class="section-title">Add A Sticker</h2>
-    <p class="lede">Vinyl decals start at $2. Since a sticker is basically just the artwork, what you see here is what you get. Already grabbing a hoodie? Might as well toss one on your rig, cooler, or tailgate.</p>
+    <span class="eyebrow">Heavy Duty Vinyl</span>
+    <h2 class="section-title">Let Everyone Know Where You've Been</h2>
+    <p class="lede">Made for the truck, the trailer, the cooler, the toys. Put it on once and it stays on.</p>
 
     <div class="sticker-strip">
       <div class="sticker-track">
@@ -339,13 +313,82 @@ document.addEventListener('click', function (e) {
       </div>
     </div>
   </div>
+  <svg class="wave-bottom" viewBox="0 0 1440 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M0,120 C240,40 420,150 720,100 C980,58 1180,150 1440,90 L1440,220 L0,220 Z" fill="#e8dcc8" opacity=".55"/>
+    <path d="M0,160 C300,90 560,190 860,140 C1120,98 1300,180 1440,140 L1440,220 L0,220 Z" fill="#efe5d2" opacity=".8"/>
+  </svg>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">Take A Closer Look</span>
+    <h2 class="section-title">See The Art Up Close</h2>
+
+    <div class="merch-hero-grid">
+      <div class="merch-hero-card" data-tile="women">
+        <span class="merch-hero-cat">Women</span>
+        <div class="merch-hero-art">
+          <button class="merch-hero-nav prev" aria-label="Previous design">&#10094;</button>
+          <div class="merch-hero-imgwrap"></div>
+          <button class="merch-hero-nav next" aria-label="Next design">&#10095;</button>
+        </div>
+        <div class="merch-hero-dots"></div>
+        <h3 class="mh-name"></h3>
+        <div class="price mh-price"></div>
+        <p class="mh-desc"></p>
+        <a class="btn btn-primary mh-link" target="_blank" rel="noopener">Shop This Design</a>
+      </div>
+
+      <div class="merch-hero-card" data-tile="men">
+        <span class="merch-hero-cat">Men</span>
+        <div class="merch-hero-art">
+          <button class="merch-hero-nav prev" aria-label="Previous design">&#10094;</button>
+          <div class="merch-hero-imgwrap"></div>
+          <button class="merch-hero-nav next" aria-label="Next design">&#10095;</button>
+        </div>
+        <div class="merch-hero-dots"></div>
+        <h3 class="mh-name"></h3>
+        <div class="price mh-price"></div>
+        <p class="mh-desc"></p>
+        <a class="btn btn-primary mh-link" target="_blank" rel="noopener">Shop This Design</a>
+      </div>
+
+      <div class="merch-hero-card" data-tile="kids">
+        <span class="merch-hero-cat">Kids</span>
+        <div class="merch-hero-art">
+          <button class="merch-hero-nav prev" aria-label="Previous design">&#10094;</button>
+          <div class="merch-hero-imgwrap"></div>
+          <button class="merch-hero-nav next" aria-label="Next design">&#10095;</button>
+        </div>
+        <div class="merch-hero-dots"></div>
+        <h3 class="mh-name"></h3>
+        <div class="price mh-price"></div>
+        <p class="mh-desc"></p>
+        <a class="btn btn-primary mh-link" target="_blank" rel="noopener">Shop This Design</a>
+      </div>
+
+      <div class="merch-hero-card" data-tile="pets">
+        <span class="merch-hero-cat">Accessories</span>
+        <div class="merch-hero-art">
+          <button class="merch-hero-nav prev" aria-label="Previous design">&#10094;</button>
+          <div class="merch-hero-imgwrap"></div>
+          <button class="merch-hero-nav next" aria-label="Next design">&#10095;</button>
+        </div>
+        <div class="merch-hero-dots"></div>
+        <h3 class="mh-name"></h3>
+        <div class="price mh-price"></div>
+        <p class="mh-desc"></p>
+        <a class="btn btn-primary mh-link" target="_blank" rel="noopener">Shop This Design</a>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section class="band" style="padding-top:0">
   <div class="wrap" style="text-align:center">
     <span class="eyebrow">And There's More</span>
     <h2 class="section-title">This Is Just A Taste</h2>
-    <p class="lede" style="margin:0 auto 24px">Hoodies, hats, sweatshirts, kids' gear, and more designs live in the full shop.</p>
+    <p class="lede" style="margin:0 auto 24px">Hoodies, hats, sweatshirts, kids' gear, and more designs live in the full shop. New items go up all the time, and if you don't see what you're picturing, <a href="contact.html">tell us</a> and we'll make it for you.</p>
     <a class="btn btn-primary" href="https://ccwheelers-oceano-dunes.printful.me/" target="_blank" rel="noopener">Shop The Full Lineup</a>
   </div>
 </section>
@@ -390,7 +433,7 @@ document.addEventListener('click', function (e) {
       </div>
     </div>
     <div class="foot-bottom">
-      <span>© 2026 CCWheelers.com · Central Coast Wheelers</span>
+      <span>Â© 2026 CCWheelers.com Â· Central Coast Wheelers</span>
       <span>Not an official California State Parks website</span>
     </div>
   </div>
@@ -572,6 +615,33 @@ document.addEventListener('click', function (e) {
     if (slides.length <= 1) dotsWrap.style.display = 'none';
 
     render(0);
+  });
+})();
+</script>
+
+<script>
+(function () {
+  var copyBtn = document.getElementById('copyLinkBtn');
+  if (!copyBtn) return;
+  var pageUrl = 'https://ccwheelers.com/merch.html';
+  var original = copyBtn.textContent;
+  copyBtn.addEventListener('click', function () {
+    var done = function () {
+      copyBtn.textContent = 'Copied!';
+      setTimeout(function () { copyBtn.textContent = original; }, 2000);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(pageUrl).then(done, done);
+    } else {
+      var tmp = document.createElement('input');
+      tmp.value = pageUrl;
+      document.body.appendChild(tmp);
+      tmp.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(tmp);
+      done();
+    }
+    if (typeof gtag === 'function') { gtag('event', 'merch_share_copy_link', {}); }
   });
 })();
 </script>
