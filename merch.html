@@ -107,22 +107,13 @@ document.addEventListener('click', function (e) {
     .sticker-strip{overflow-x:auto}
   }
 
-  /* ---- Sunset Collection preview ---- */
+  /* ---- Sunset Collection: single banner into the dedicated page ---- */
   .sunset-band{background:linear-gradient(180deg,var(--sand),var(--sand-deep))}
-  .sunset-badge{display:block;width:100%;max-width:440px;height:auto;margin:30px auto 0}
-  /* single entry point into the collection page */
-  a.sunset-enter{display:block;text-decoration:none;margin-top:32px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;transition:transform .18s ease}
+  a.sunset-enter{display:block;text-decoration:none;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;transition:transform .18s ease}
   a.sunset-enter:hover{transform:translateY(-5px)}
-  .sunset-strip{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
-  .sunset-strip img{width:100%;height:auto;border-radius:9px;display:block;background:linear-gradient(135deg,var(--sand-deep),var(--sand))}
-  .sunset-enter-cta{text-align:center;margin-top:22px}
+  .sunset-enter-banner{width:100%;height:auto;display:block}
+  .sunset-enter-cta{text-align:center;padding:26px 22px}
   .sunset-enter-note{display:block;font-size:13.5px;color:var(--ink-soft);margin-top:12px}
-  @media(max-width:900px){
-    .sunset-strip{grid-template-columns:repeat(3,1fr)}
-  }
-  @media(max-width:600px){
-    .sunset-strip{grid-template-columns:repeat(2,1fr);gap:9px}
-  }
 
   /* ---- Ruff Riders preview ---- */
   .ruff-band{background:linear-gradient(180deg,var(--ocean-deep),var(--ocean))}
@@ -293,24 +284,14 @@ document.addEventListener('click', function (e) {
 
 <section class="sunset-band">
   <div class="wrap">
-    <span class="eyebrow">Now Available &middot; A New Line</span>
-    <h2 class="section-title">CC Wheelers &middot; The Sunset Collection</h2>
-    <p class="lede">Six designs, one story. Not another rail buggy shirt, this line is about the couple watching the sunset, the campfire after the ride, the walk on the beach. Same dune grass, same sun, same ribbon banner, same heart, every time, so once you've seen one you'll know the whole collection on sight. All six are live in the shop now, printed on the crop hoodie in your choice of colors.</p>
-
-    <img class="sunset-badge" src="images/merch-sunset-collection-badge.png" alt="CC Wheelers Sunset Collection badge: a heart-shaped dune sunset scene with two buggies above a ribbon banner, the shared front print on every shirt in the collection">
-
     <a class="sunset-enter" href="sunset-collection.html">
-      <div class="sunset-strip">
-        <img src="images/merch/sc-01-hidden-treasure-th.jpg" alt="Hidden Treasure, No. 1 of 6" loading="lazy">
-        <img src="images/merch/sc-02-sunset-together-th.jpg" alt="Sunset Together, No. 2 of 6" loading="lazy">
-        <img src="images/merch/sc-03-just-us-th.jpg" alt="Just Us, No. 3 of 6" loading="lazy">
-        <img src="images/merch/sc-04-our-escape-th.jpg" alt="Our Escape, No. 4 of 6" loading="lazy">
-        <img src="images/merch/sc-05-better-together-th.jpg" alt="Better Together, No. 5 of 6" loading="lazy">
-        <img src="images/merch/sc-06-love-runs-on-sand-th.jpg" alt="Love Runs on Sand, No. 6 of 6" loading="lazy">
-      </div>
+      <img class="sunset-enter-banner"
+           src="images/merch/sunset-collection-oceano-dunes-hero-banner.jpg"
+           alt="CCWheelers presents The Sunset Collection: a couple in Oceano Dunes crop hoodies sitting by a beach campfire at sunset, a UTV parked on the sand behind them, Oceano Dunes California"
+           width="1600" height="656" loading="lazy">
       <div class="sunset-enter-cta">
-        <span class="btn btn-primary">See All Six Designs</span>
-        <span class="sunset-enter-note">Compare the collection, then pick your size and color</span>
+        <span class="btn btn-primary">Shop The Sunset Collection</span>
+        <span class="sunset-enter-note">Six designs, one story &middot; crop hoodie in four colors</span>
       </div>
     </a>
   </div>

@@ -56,34 +56,9 @@
     <lastmod>2026-07-19</lastmod>
     <priority>0.6</priority>
     <image:image>
-      <image:loc>https://ccwheelers.com/images/merch/sc-01-hidden-treasure-th.jpg</image:loc>
-      <image:title>Hidden Treasure</image:title>
-      <image:caption>Hidden Treasure, No. 1 of 6</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ccwheelers.com/images/merch/sc-02-sunset-together-th.jpg</image:loc>
-      <image:title>Sunset Together</image:title>
-      <image:caption>Sunset Together, No. 2 of 6</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ccwheelers.com/images/merch/sc-03-just-us-th.jpg</image:loc>
-      <image:title>Just Us</image:title>
-      <image:caption>Just Us, No. 3 of 6</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ccwheelers.com/images/merch/sc-04-our-escape-th.jpg</image:loc>
-      <image:title>Our Escape</image:title>
-      <image:caption>Our Escape, No. 4 of 6</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ccwheelers.com/images/merch/sc-05-better-together-th.jpg</image:loc>
-      <image:title>Better Together</image:title>
-      <image:caption>Better Together, No. 5 of 6</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ccwheelers.com/images/merch/sc-06-love-runs-on-sand-th.jpg</image:loc>
-      <image:title>Love Runs on Sand</image:title>
-      <image:caption>Love Runs on Sand, No. 6 of 6</image:caption>
+      <image:loc>https://ccwheelers.com/images/merch/sunset-collection-oceano-dunes-hero-banner.jpg</image:loc>
+      <image:title>CCWheelers presents The Sunset Collection: a couple in Oceano Dunes crop hoodies sittin...</image:title>
+      <image:caption>CCWheelers presents The Sunset Collection: a couple in Oceano Dunes crop hoodies sitting by a beach campfire at sunset, a UTV parked on the sand behind them, Oceano Dunes California</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://ccwheelers.com/images/merch-hero-kids.png</image:loc>
@@ -102,8 +77,8 @@
     </image:image>
     <image:image>
       <image:loc>https://ccwheelers.com/images/merch-hero-men-front.png</image:loc>
-      <image:title>Smaller Old School Duner oval badge on the front of the hoodie</image:title>
-      <image:caption>Smaller Old School Duner oval badge on the front of the hoodie</image:caption>
+      <image:title>Old School Duner badge embroidered on the CCWheelers Distressed Dad Hat</image:title>
+      <image:caption>Old School Duner badge embroidered on the CCWheelers Distressed Dad Hat</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://ccwheelers.com/images/merch-hero-men-hoodie2-front.png</image:loc>
@@ -194,11 +169,6 @@
       <image:loc>https://ccwheelers.com/images/merch-sticker-svra.png</image:loc>
       <image:title>SVRA Badge vinyl decal</image:title>
       <image:caption>SVRA Badge vinyl decal</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://ccwheelers.com/images/merch-sunset-collection-badge.png</image:loc>
-      <image:title>CC Wheelers Sunset Collection badge: a heart-shaped dune sunset scene with two buggies...</image:title>
-      <image:caption>CC Wheelers Sunset Collection badge: a heart-shaped dune sunset scene with two buggies above a ribbon banner, the shared front print on every shirt in the collection</image:caption>
     </image:image>
   </url>
   <url>
