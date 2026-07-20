@@ -1,43 +1,469 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  <url><loc>https://ccwheelers.com/</loc><lastmod>2026-07-12</lastmod><priority>1.0</priority></url>
-  <url><loc>https://ccwheelers.com/camping.html</loc><lastmod>2026-07-12</lastmod><priority>0.9</priority></url>
-  <url><loc>https://ccwheelers.com/faq.html</loc><lastmod>2026-07-12</lastmod><priority>0.9</priority></url>
-  <url><loc>https://ccwheelers.com/news.html</loc><lastmod>2026-07-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://ccwheelers.com/merch.html</loc><lastmod>2026-07-19</lastmod><priority>0.6</priority></url>
+  <url>
+    <loc>https://ccwheelers.com/</loc>
+    <lastmod>2026-07-12</lastmod>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/fire-camp.jpg</image:loc>
+      <image:title>Driftwood campfire burning on the sand in front of a fifth-wheel trailer</image:title>
+      <image:caption>Driftwood campfire burning on the sand in front of a fifth-wheel trailer</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/food-logo.jpg</image:loc>
+      <image:title>Friends of Oceano Dunes logo</image:title>
+      <image:caption>Friends of Oceano Dunes logo</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/history.jpg</image:loc>
+      <image:title>Painting of Oceano Dunes history: Spanish explorers on a dune ridge</image:title>
+      <image:caption>Painting of Oceano Dunes history: Spanish explorers on a dune ridge, a skinny bear at the water, and a lantern-lit Dunites driftwood cabin</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/rv-dusk.jpg</image:loc>
+      <image:title>Fifth wheel trailer camped on the beach at dusk</image:title>
+      <image:caption>Fifth wheel trailer camped on the beach at dusk</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/truck-creek.jpg</image:loc>
+      <image:title>Pickup truck stuck in the flooded Arroyo Grande Creek</image:title>
+      <image:caption>Pickup truck stuck in the flooded Arroyo Grande Creek</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ccwheelers.com/camping.html</loc>
+    <lastmod>2026-07-12</lastmod>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/beach-panorama.jpg</image:loc>
+      <image:title>Wide view of RVs and campers along the beach with Pismo hills behind</image:title>
+      <image:caption>Wide view of RVs and campers along the beach with Pismo hills behind</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ccwheelers.com/faq.html</loc>
+    <lastmod>2026-07-12</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://ccwheelers.com/news.html</loc>
+    <lastmod>2026-07-13</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ccwheelers.com/merch.html</loc>
+    <lastmod>2026-07-19</lastmod>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch/sc-01-hidden-treasure-th.jpg</image:loc>
+      <image:title>Hidden Treasure</image:title>
+      <image:caption>Hidden Treasure, No. 1 of 6</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch/sc-02-sunset-together-th.jpg</image:loc>
+      <image:title>Sunset Together</image:title>
+      <image:caption>Sunset Together, No. 2 of 6</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch/sc-03-just-us-th.jpg</image:loc>
+      <image:title>Just Us</image:title>
+      <image:caption>Just Us, No. 3 of 6</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch/sc-04-our-escape-th.jpg</image:loc>
+      <image:title>Our Escape</image:title>
+      <image:caption>Our Escape, No. 4 of 6</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch/sc-05-better-together-th.jpg</image:loc>
+      <image:title>Better Together</image:title>
+      <image:caption>Better Together, No. 5 of 6</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch/sc-06-love-runs-on-sand-th.jpg</image:loc>
+      <image:title>Love Runs on Sand</image:title>
+      <image:caption>Love Runs on Sand, No. 6 of 6</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch-ruffriders-beach-bum.png</image:loc>
+      <image:title>Ruff Riders Beach Bum: a corgi in sunglasses riding in a Jeep with a surfboard at the b...</image:title>
+      <image:caption>Ruff Riders Beach Bum: a corgi in sunglasses riding in a Jeep with a surfboard at the beach</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch-ruffriders-camp-pup.png</image:loc>
+      <image:title>Ruff Riders Camp Pup: a golden retriever wearing a bandana in front of a tent and campf...</image:title>
+      <image:caption>Ruff Riders Camp Pup: a golden retriever wearing a bandana in front of a tent and campfire at sunset</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch-ruffriders-hero.jpg</image:loc>
+      <image:title>Seven dogs wearing Ruff Riders bandanas lined up on the beach in front of a row of dune...</image:title>
+      <image:caption>Seven dogs wearing Ruff Riders bandanas lined up on the beach in front of a row of dune buggies at sunset, Oceano Dunes California</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch-ruffriders-sand-patrol.png</image:loc>
+      <image:title>Ruff Riders Sand Patrol: a German Shepherd in goggles driving a dune buggy numbered 11</image:title>
+      <image:caption>Ruff Riders Sand Patrol: a German Shepherd in goggles driving a dune buggy numbered 11</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch-ruffriders-trail-boss.png</image:loc>
+      <image:title>Ruff Riders Trail Boss: a German Shepherd driving a dune buggy past the Sand Highway si...</image:title>
+      <image:caption>Ruff Riders Trail Boss: a German Shepherd driving a dune buggy past the Sand Highway signpost, campfire and chairs behind</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch-sticker-ccwheelers-sunset.png</image:loc>
+      <image:title>CCWheelers Sunset vinyl decal</image:title>
+      <image:caption>CCWheelers Sunset vinyl decal</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch-sticker-duner-boy.png</image:loc>
+      <image:title>Duner Boy vinyl decal</image:title>
+      <image:caption>Duner Boy vinyl decal</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch-sticker-girls-duner.png</image:loc>
+      <image:title>Girls Duner vinyl decal</image:title>
+      <image:caption>Girls Duner vinyl decal</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch-sticker-last-beach.png</image:loc>
+      <image:title>The Last Beach vinyl decal</image:title>
+      <image:caption>The Last Beach vinyl decal</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch-sticker-love-the-dunes.png</image:loc>
+      <image:title>Love the Dunes vinyl decal</image:title>
+      <image:caption>Love the Dunes vinyl decal</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch-sticker-oceano-heritage.png</image:loc>
+      <image:title>Oceano Dunes Heritage vinyl decal</image:title>
+      <image:caption>Oceano Dunes Heritage vinyl decal</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch-sticker-old-school-duner.png</image:loc>
+      <image:title>Old School Duner vinyl decal</image:title>
+      <image:caption>Old School Duner vinyl decal</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch-sticker-ruff-rider.png</image:loc>
+      <image:title>Ruff Rider vinyl decal</image:title>
+      <image:caption>Ruff Rider vinyl decal</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch-sticker-svra.png</image:loc>
+      <image:title>SVRA Badge vinyl decal</image:title>
+      <image:caption>SVRA Badge vinyl decal</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch-sunset-collection-badge.png</image:loc>
+      <image:title>CC Wheelers Sunset Collection badge: a heart-shaped dune sunset scene with two buggies...</image:title>
+      <image:caption>CC Wheelers Sunset Collection badge: a heart-shaped dune sunset scene with two buggies above a ribbon banner, the shared front print on every shirt in the collection</image:caption>
+    </image:image>
+  </url>
   <url>
     <loc>https://ccwheelers.com/sunset-collection.html</loc>
     <lastmod>2026-07-19</lastmod>
     <priority>0.6</priority>
     <image:image>
-      <image:loc>https://ccwheelers.com/images/merch/sunset-collection-oceano-dunes-hero-banner.jpg</image:loc>
-      <image:title>CCWheelers Sunset Collection, Oceano Dunes California</image:title>
-      <image:caption>A couple in Oceano Dunes crop hoodies sitting by a beach campfire at sunset with a UTV parked on the sand, Oceano Dunes California</image:caption>
+      <image:loc>https://ccwheelers.com/images/merch/sc-01-hidden-treasure-lg.jpg</image:loc>
+      <image:title>Hidden Treasure: a dune buggy</image:title>
+      <image:caption>Hidden Treasure: a dune buggy, a heart drawn in the sand, and a treasure chest at sunset, Oceano Dunes California</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch/sc-front-badge.jpg</image:loc>
+      <image:title>The CC Wheelers Sunset Collection badge: a heart shaped dune sunset scene with two bugg...</image:title>
+      <image:caption>The CC Wheelers Sunset Collection badge: a heart shaped dune sunset scene with two buggies above a ribbon banner, the shared front print on every shirt in the collection, Oceano Dunes California</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch/sc-life-01-black-crop-hoodie-campfire-oceano-dunes.jpg</image:loc>
+      <image:title>A rider in a black CCWheelers Sunset Collection crop hoodie sitting by a beach campfire...</image:title>
+      <image:caption>A rider in a black CCWheelers Sunset Collection crop hoodie sitting by a beach campfire at sunset with a UTV parked on the sand, Oceano Dunes California</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch/sc-life-02-couple-sunset-military-green-peach-oceano-dunes.jpg</image:loc>
+      <image:title>A couple in military green and peach CCWheelers Sunset Collection crop hoodies watching...</image:title>
+      <image:caption>A couple in military green and peach CCWheelers Sunset Collection crop hoodies watching the sun set over the water, Oceano Dunes California</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch/sc-life-03-charcoal-crop-hoodie-dunes-oceano-dunes.jpg</image:loc>
+      <image:title>A rider in a charcoal CCWheelers Sunset Collection crop hoodie standing in the dune gra...</image:title>
+      <image:caption>A rider in a charcoal CCWheelers Sunset Collection crop hoodie standing in the dune grass at sunset, Oceano Dunes California</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch/sc-life-04-couple-walking-beach-helmets-oceano-dunes.jpg</image:loc>
+      <image:title>A couple walking the beach carrying helmets</image:title>
+      <image:caption>A couple walking the beach carrying helmets, wearing CCWheelers Sunset Collection crop hoodies at sunset, Oceano Dunes California</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch/sc-life-05-couple-tailgate-dog-front-badge-oceano-dunes.jpg</image:loc>
+      <image:title>A couple sitting on a tailgate with a golden retriever</image:title>
+      <image:caption>A couple sitting on a tailgate with a golden retriever, showing the Sunset Collection badge on the front of their hoodies, Oceano Dunes California</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch/sc-life-06-peach-crop-hoodie-sunset-oceano-dunes.jpg</image:loc>
+      <image:title>A rider in a peach CCWheelers Sunset Collection crop hoodie sitting on the sand watchin...</image:title>
+      <image:caption>A rider in a peach CCWheelers Sunset Collection crop hoodie sitting on the sand watching the sunset, Oceano Dunes California</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/merch/sc-life-07-golden-retriever-trailer-campfire-oceano-dunes.jpg</image:loc>
+      <image:title>A rider in a military green Sunset Collection crop hoodie with a golden retriever besid...</image:title>
+      <image:caption>A rider in a military green Sunset Collection crop hoodie with a golden retriever beside a trailer and campfire at dusk, Oceano Dunes California</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://ccwheelers.com/images/merch/sunset-collection-oceano-dunes-campfire-couple.jpg</image:loc>
-      <image:title>Beach campfire at sunset, Oceano Dunes California</image:title>
-      <image:caption>Two riders in CCWheelers Sunset Collection crop hoodies by a beach campfire at sunset, Oceano Dunes California</image:caption>
+      <image:title>Two riders in CCWheelers Sunset Collection crop hoodies sitting together on a blanket b...</image:title>
+      <image:caption>Two riders in CCWheelers Sunset Collection crop hoodies sitting together on a blanket by a beach campfire, watching the sun set over the water with their UTV parked on the sand, Oceano Dunes California</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ccwheelers.com/images/merch/sunset-collection-oceano-dunes-crop-hoodie-campfire.jpg</image:loc>
-      <image:title>CCWheelers Sunset Collection crop hoodie, Oceano Dunes California</image:title>
-      <image:caption>A rider wearing a black CCWheelers Sunset Collection crop hoodie beside a beach campfire at sunset, Oceano Dunes California</image:caption>
+      <image:loc>https://ccwheelers.com/images/merch/sunset-collection-oceano-dunes-hero-banner.jpg</image:loc>
+      <image:title>CCWheelers presents The Sunset Collection: a couple in Oceano Dunes crop hoodies sittin...</image:title>
+      <image:caption>CCWheelers presents The Sunset Collection: a couple in Oceano Dunes crop hoodies sitting by a beach campfire at sunset, a UTV parked on the sand behind them, Oceano Dunes California</image:caption>
     </image:image>
   </url>
-  <url><loc>https://ccwheelers.com/weather.html</loc><lastmod>2026-07-13</lastmod><priority>0.8</priority></url>
-  <url><loc>https://ccwheelers.com/gas.html</loc><lastmod>2026-07-13</lastmod><priority>0.7</priority></url>
-  <url><loc>https://ccwheelers.com/fires.html</loc><lastmod>2026-07-13</lastmod><priority>0.7</priority></url>
-  <url><loc>https://ccwheelers.com/creek.html</loc><lastmod>2026-07-12</lastmod><priority>0.8</priority></url>
-  <url><loc>https://ccwheelers.com/tides.html</loc><lastmod>2026-07-12</lastmod><priority>0.8</priority></url>
-  <url><loc>https://ccwheelers.com/planner.html</loc><lastmod>2026-07-12</lastmod><priority>0.8</priority></url>
-  <url><loc>https://ccwheelers.com/dayuse.html</loc><lastmod>2026-07-12</lastmod><priority>0.8</priority></url>
-  <url><loc>https://ccwheelers.com/map.html</loc><lastmod>2026-07-12</lastmod><priority>0.8</priority></url>
-  <url><loc>https://ccwheelers.com/rules.html</loc><lastmod>2026-07-12</lastmod><priority>0.7</priority></url>
-  <url><loc>https://ccwheelers.com/tips.html</loc><lastmod>2026-07-12</lastmod><priority>0.7</priority></url>
-  <url><loc>https://ccwheelers.com/emergency.html</loc><lastmod>2026-07-12</lastmod><priority>0.7</priority></url>
-  <url><loc>https://ccwheelers.com/gallery.html</loc><lastmod>2026-07-12</lastmod><priority>0.6</priority></url>
-  <url><loc>https://ccwheelers.com/about.html</loc><lastmod>2026-07-12</lastmod><priority>0.5</priority></url>
-  <url><loc>https://ccwheelers.com/contact.html</loc><lastmod>2026-07-12</lastmod><priority>0.5</priority></url>
+  <url>
+    <loc>https://ccwheelers.com/weather.html</loc>
+    <lastmod>2026-07-13</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ccwheelers.com/gas.html</loc>
+    <lastmod>2026-07-13</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ccwheelers.com/fires.html</loc>
+    <lastmod>2026-07-13</lastmod>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/fire-camp.jpg</image:loc>
+      <image:title>Driftwood campfire burning on the sand in front of a fifth-wheel trailer</image:title>
+      <image:caption>Driftwood campfire burning on the sand in front of a fifth-wheel trailer</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ccwheelers.com/creek.html</loc>
+    <lastmod>2026-07-12</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ccwheelers.com/tides.html</loc>
+    <lastmod>2026-07-12</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ccwheelers.com/planner.html</loc>
+    <lastmod>2026-07-12</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ccwheelers.com/dayuse.html</loc>
+    <lastmod>2026-07-12</lastmod>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/rental-buggy.jpg</image:loc>
+      <image:title>Family in a rented yellow dune buggy</image:title>
+      <image:caption>Family in a rented yellow dune buggy</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ccwheelers.com/map.html</loc>
+    <lastmod>2026-07-12</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://ccwheelers.com/rules.html</loc>
+    <lastmod>2026-07-12</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ccwheelers.com/tips.html</loc>
+    <lastmod>2026-07-12</lastmod>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/dropoff-warning.jpg</image:loc>
+      <image:title>Warning sign: dune conditions are always changing</image:title>
+      <image:caption>Warning sign: dune conditions are always changing, be prepared for sudden drop-offs</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ccwheelers.com/emergency.html</loc>
+    <lastmod>2026-07-12</lastmod>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/ambulance.jpg</image:loc>
+      <image:title>San Luis Ambulance and ranger truck on the beach</image:title>
+      <image:caption>San Luis Ambulance and ranger truck on the beach</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/callbox.jpg</image:loc>
+      <image:title>Yellow solar-powered emergency call box</image:title>
+      <image:caption>Yellow solar-powered emergency call box</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/helicopter.jpg</image:loc>
+      <image:title>CALSTAR medical helicopter on the dunes</image:title>
+      <image:caption>CALSTAR medical helicopter on the dunes</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ccwheelers.com/gallery.html</loc>
+    <lastmod>2026-07-12</lastmod>
+    <priority>0.6</priority>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/ambulance.jpg</image:loc>
+      <image:title>Ambulance and ranger truck on the beach</image:title>
+      <image:caption>Ambulance and ranger truck on the beach</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/beach-panorama.jpg</image:loc>
+      <image:title>Panorama of campers and RVs along the beach</image:title>
+      <image:caption>Panorama of campers and RVs along the beach</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/bike-jump.jpg</image:loc>
+      <image:title>Dirt bike jumping off a dune</image:title>
+      <image:caption>Dirt bike jumping off a dune</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/callbox.jpg</image:loc>
+      <image:title>Yellow emergency call box on wooden posts</image:title>
+      <image:caption>Yellow emergency call box on wooden posts</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/dropoff-warning.jpg</image:loc>
+      <image:title>Warning sign about sudden drop-offs</image:title>
+      <image:caption>Warning sign about sudden drop-offs</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/dunes-pristine.jpg</image:loc>
+      <image:title>Open sand dunes under a blue sky</image:title>
+      <image:caption>Open sand dunes under a blue sky</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/entrance-sign.jpg</image:loc>
+      <image:title>Oceano Dunes State Vehicular Recreation Area sign</image:title>
+      <image:caption>Oceano Dunes State Vehicular Recreation Area sign</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/fire-camp.jpg</image:loc>
+      <image:title>Campfire burning on the sand in front of a trailer</image:title>
+      <image:caption>Campfire burning on the sand in front of a trailer</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/fishing-sign.jpg</image:loc>
+      <image:title>Surf fishing information sign</image:title>
+      <image:caption>Surf fishing information sign</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/gear-sign.jpg</image:loc>
+      <image:title>Protective riding gear safety sign</image:title>
+      <image:caption>Protective riding gear safety sign</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/helicopter.jpg</image:loc>
+      <image:title>CALSTAR medical helicopter landed on the dunes</image:title>
+      <image:caption>CALSTAR medical helicopter landed on the dunes</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/horseback.jpg</image:loc>
+      <image:title>Horseback riders on the beach</image:title>
+      <image:caption>Horseback riders on the beach</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/info-center.jpg</image:loc>
+      <image:title>Dunes Information Center structure with call box</image:title>
+      <image:caption>Dunes Information Center structure with call box</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/kids-dune.jpg</image:loc>
+      <image:title>Two kids running down a sand dune</image:title>
+      <image:caption>Two kids running down a sand dune</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/kiosk.jpg</image:loc>
+      <image:title>Park entrance kiosk</image:title>
+      <image:caption>Park entrance kiosk</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/noise-sign.jpg</image:loc>
+      <image:title>Mufflers and OHV noise regulations sign</image:title>
+      <image:caption>Mufflers and OHV noise regulations sign</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/plover-sign.jpg</image:loc>
+      <image:title>Snowy plover seasonal closure sign</image:title>
+      <image:caption>Snowy plover seasonal closure sign</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/post2-speed.jpg</image:loc>
+      <image:title>Post 2 with 15 MPH speed limit sign</image:title>
+      <image:caption>Post 2 with 15 MPH speed limit sign</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/rental-buggy.jpg</image:loc>
+      <image:title>Family in a rented yellow dune buggy</image:title>
+      <image:caption>Family in a rented yellow dune buggy</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/rules-sign.jpg</image:loc>
+      <image:title>Other rules and regulations safety sign</image:title>
+      <image:caption>Other rules and regulations safety sign</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/rv-dusk.jpg</image:loc>
+      <image:title>Fifth wheel trailer camped on the beach at dusk</image:title>
+      <image:caption>Fifth wheel trailer camped on the beach at dusk</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/rv-ridge.jpg</image:loc>
+      <image:title>RVs and trucks camped along a dune ridge</image:title>
+      <image:caption>RVs and trucks camped along a dune ridge</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/sandrail.jpg</image:loc>
+      <image:title>Sand rail with a family aboard</image:title>
+      <image:caption>Sand rail with a family aboard</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/stuck-2wd.jpg</image:loc>
+      <image:title>Lowered two wheel drive truck stuck in the sand</image:title>
+      <image:caption>Lowered two wheel drive truck stuck in the sand</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/surf-safety-sign.jpg</image:loc>
+      <image:title>Surviving the Surf ocean safety sign</image:title>
+      <image:caption>Surviving the Surf ocean safety sign</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/trail-sign.jpg</image:loc>
+      <image:title>Grand Dunes Trail sign among dune vegetation</image:title>
+      <image:caption>Grand Dunes Trail sign among dune vegetation</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/truck-creek.jpg</image:loc>
+      <image:title>Pickup truck stuck in the flooded creek</image:title>
+      <image:caption>Pickup truck stuck in the flooded creek</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/vault-toilet.jpg</image:loc>
+      <image:title>Interior of a vault toilet restroom</image:title>
+      <image:caption>Interior of a vault toilet restroom</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/wildlife-sign.jpg</image:loc>
+      <image:title>Sensitive wildlife area do not enter sign on fence</image:title>
+      <image:caption>Sensitive wildlife area do not enter sign on fence</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ccwheelers.com/about.html</loc>
+    <lastmod>2026-07-12</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://ccwheelers.com/contact.html</loc>
+    <lastmod>2026-07-12</lastmod>
+    <priority>0.5</priority>
+  </url>
 </urlset>

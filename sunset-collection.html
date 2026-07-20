@@ -102,6 +102,38 @@ document.addEventListener('click', function (e) {
   .sc-scene{position:relative;line-height:0}
   .sc-scene img{width:100%;height:auto;display:block}
   .sc-scene figcaption{position:absolute;left:0;right:0;bottom:0;line-height:1.4;padding:26px 24px 18px;background:linear-gradient(180deg,rgba(9,40,53,0) 0%,rgba(9,40,53,.78) 65%);color:#fff;font-size:14px;text-align:center}
+
+  /* half and half: image bleeds to one edge, copy sits on the other */
+  .sc-halves{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;background:var(--ocean-deep);color:#fff}
+  .sc-halves .sc-half-img{position:relative;min-height:420px;overflow:hidden}
+  .sc-halves .sc-half-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .sc-halves .sc-half-copy{display:flex;flex-direction:column;justify-content:center;padding:56px clamp(24px,5vw,64px)}
+  .sc-halves .eyebrow{color:var(--dune)}
+  .sc-halves h2{font-size:clamp(26px,3.4vw,38px);font-weight:800;color:#fff;margin-bottom:14px;line-height:1.1}
+  .sc-halves p{color:rgba(255,255,255,.84);font-size:16.5px;max-width:46ch}
+  .sc-halves .sc-half-note{margin-top:18px;font-size:14px;color:rgba(255,255,255,.62)}
+
+  /* lifestyle carousel */
+  .sc-gal{margin-top:34px;position:relative}
+  .sc-gal-track{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding-bottom:8px;-webkit-overflow-scrolling:touch}
+  .sc-gal-track::-webkit-scrollbar{height:6px}
+  .sc-gal-track::-webkit-scrollbar-thumb{background:var(--sand-deep);border-radius:99px}
+  .sc-gal-item{flex:0 0 auto;width:min(340px,72vw);scroll-snap-align:start;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:10px}
+  .sc-gal-item img{width:100%;height:auto;border-radius:9px;display:block;background:var(--sand)}
+  .sc-gal-item figcaption{font-size:13px;color:var(--ink-soft);padding:10px 4px 4px;line-height:1.35}
+  .sc-gal-nav{position:absolute;top:38%;width:40px;height:40px;border-radius:50%;border:none;background:#fff;box-shadow:var(--shadow);color:var(--ocean);font-size:17px;cursor:pointer;display:grid;place-items:center;z-index:2}
+  .sc-gal-nav.prev{left:-6px}
+  .sc-gal-nav.next{right:-6px}
+  .sc-gal-nav:hover{background:var(--sand)}
+
+  @media(max-width:860px){
+    .sc-halves{grid-template-columns:1fr}
+    .sc-halves .sc-half-img{min-height:300px}
+    .sc-halves .sc-half-copy{padding:38px 24px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .sc-gal-track{scroll-behavior:auto}
+  }
   .sc-intro{display:grid;grid-template-columns:340px 1fr;gap:48px;align-items:center}
   .sc-badge-wrap{background:linear-gradient(135deg,var(--sand-deep),var(--sand));border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
   .sc-badge-wrap img{width:100%;height:auto;display:block;border-radius:8px}
@@ -247,15 +279,61 @@ document.addEventListener('click', function (e) {
   </div>
 </section>
 
-<figure class="sc-scene">
-  <img src="images/merch/sunset-collection-oceano-dunes-campfire-couple.jpg"
-       alt="Two riders in CCWheelers Sunset Collection crop hoodies sitting together on a blanket by a beach campfire, watching the sun set over the water with their UTV parked on the sand, Oceano Dunes California"
-       width="1400" height="933" loading="lazy">
-  <figcaption>The end of a day on the sand at Oceano Dunes, which is the whole idea behind the collection.</figcaption>
-</figure>
+<div class="sc-halves">
+  <div class="sc-half-img">
+    <img src="images/merch/sunset-collection-oceano-dunes-campfire-couple.jpg"
+         alt="Two riders in CCWheelers Sunset Collection crop hoodies sitting together on a blanket by a beach campfire, watching the sun set over the water with their UTV parked on the sand, Oceano Dunes California"
+         width="1400" height="933" loading="lazy">
+  </div>
+  <div class="sc-half-copy">
+    <span class="eyebrow">Why We Made It</span>
+    <h2>The Ride Is Only Half Of It</h2>
+    <p>Anybody can put a buggy on a shirt. What we kept coming back to was everything around the riding. Setting up camp before the fog burns off. The fire going while somebody digs out the marshmallows. Walking down to the water when the wind finally lays down and the whole beach turns orange.</p>
+    <p class="sc-half-note">That is what the six designs are about, and why the same sunset shows up on every one of them.</p>
+  </div>
+</div>
 
 <section>
   <div class="wrap">
+    <span class="eyebrow">Out On The Sand</span>
+    <h2 class="section-title">The Collection In The Wild</h2>
+    <p class="lede">The crop hoodie in every color, worn where it is meant to be worn. Swipe through, or use the arrows.</p>
+
+    <div class="sc-gal">
+      <button class="sc-gal-nav prev" type="button" aria-label="Previous photos">&#8249;</button>
+      <div class="sc-gal-track" id="scGal" tabindex="0" role="group" aria-label="Sunset Collection lifestyle photos">
+        <figure class="sc-gal-item">
+          <img src="images/merch/sc-life-01-black-crop-hoodie-campfire-oceano-dunes.jpg" alt="A rider in a black CCWheelers Sunset Collection crop hoodie sitting by a beach campfire at sunset with a UTV parked on the sand, Oceano Dunes California" width="508" height="511" loading="lazy">
+          <figcaption>Black, by the fire after a day on the sand.</figcaption>
+        </figure>
+        <figure class="sc-gal-item">
+          <img src="images/merch/sc-life-02-couple-sunset-military-green-peach-oceano-dunes.jpg" alt="A couple in military green and peach CCWheelers Sunset Collection crop hoodies watching the sun set over the water, Oceano Dunes California" width="513" height="511" loading="lazy">
+          <figcaption>Military green and peach, watching it go down.</figcaption>
+        </figure>
+        <figure class="sc-gal-item">
+          <img src="images/merch/sc-life-03-charcoal-crop-hoodie-dunes-oceano-dunes.jpg" alt="A rider in a charcoal CCWheelers Sunset Collection crop hoodie standing in the dune grass at sunset, Oceano Dunes California" width="509" height="511" loading="lazy">
+          <figcaption>Charcoal, up in the dune grass.</figcaption>
+        </figure>
+        <figure class="sc-gal-item">
+          <img src="images/merch/sc-life-04-couple-walking-beach-helmets-oceano-dunes.jpg" alt="A couple walking the beach carrying helmets, wearing CCWheelers Sunset Collection crop hoodies at sunset, Oceano Dunes California" width="508" height="511" loading="lazy">
+          <figcaption>Helmets off, walking back down the beach.</figcaption>
+        </figure>
+        <figure class="sc-gal-item">
+          <img src="images/merch/sc-life-05-couple-tailgate-dog-front-badge-oceano-dunes.jpg" alt="A couple sitting on a tailgate with a golden retriever, showing the Sunset Collection badge on the front of their hoodies, Oceano Dunes California" width="512" height="511" loading="lazy">
+          <figcaption>The front badge, and a co-pilot who came along.</figcaption>
+        </figure>
+        <figure class="sc-gal-item">
+          <img src="images/merch/sc-life-06-peach-crop-hoodie-sunset-oceano-dunes.jpg" alt="A rider in a peach CCWheelers Sunset Collection crop hoodie sitting on the sand watching the sunset, Oceano Dunes California" width="509" height="511" loading="lazy">
+          <figcaption>Peach, waiting on the last of the light.</figcaption>
+        </figure>
+        <figure class="sc-gal-item">
+          <img src="images/merch/sc-life-07-golden-retriever-trailer-campfire-oceano-dunes.jpg" alt="A rider in a military green Sunset Collection crop hoodie with a golden retriever beside a trailer and campfire at dusk, Oceano Dunes California" width="497" height="361" loading="lazy">
+          <figcaption>Back at camp with the fire going.</figcaption>
+        </figure>
+      </div>
+      <button class="sc-gal-nav next" type="button" aria-label="More photos">&#8250;</button>
+    </div>
+
     <div class="sc-facts">
       <div class="card">
         <h3>What You Get</h3>
@@ -446,6 +524,28 @@ document.addEventListener('click', function (e) {
   });
 
   select(0);
+
+  // lifestyle carousel: native scroll snapping, arrows just nudge it along
+  var gal = document.getElementById('scGal');
+  if (gal) {
+    var step = function () {
+      var first = gal.querySelector('.sc-gal-item');
+      return first ? first.getBoundingClientRect().width + 16 : 340;
+    };
+    var prev = document.querySelector('.sc-gal-nav.prev');
+    var next = document.querySelector('.sc-gal-nav.next');
+    if (prev) prev.addEventListener('click', function () { gal.scrollBy({ left: -step(), behavior: 'smooth' }); });
+    if (next) next.addEventListener('click', function () { gal.scrollBy({ left: step(), behavior: 'smooth' }); });
+
+    var sync = function () {
+      var max = gal.scrollWidth - gal.clientWidth - 2;
+      if (prev) prev.style.visibility = gal.scrollLeft <= 2 ? 'hidden' : 'visible';
+      if (next) next.style.visibility = gal.scrollLeft >= max ? 'hidden' : 'visible';
+    };
+    gal.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
+  }
 })();
 </script>
 
