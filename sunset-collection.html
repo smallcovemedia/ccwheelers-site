@@ -438,37 +438,49 @@ document.addEventListener('click', function (e) {
       n: 1, name: 'Hidden Treasure', slug: 'cc-wheelers-sunset-collection-hidden-treasure',
       tag: 'A buggy parked at the water line, a heart drawn in the sand, and whatever it is you came out here to find.',
       art: 'images/merch/sc-01-hidden-treasure-lg.jpg', th: 'images/merch/sc-01-hidden-treasure-th.jpg',
-      alt: 'Hidden Treasure: a dune buggy, a heart drawn in the sand, and a treasure chest at sunset, Oceano Dunes California'
+      alt: 'Hidden Treasure: a dune buggy, a heart drawn in the sand, and a treasure chest at sunset, Oceano Dunes California',
+      worn: 'images/merch/sc-back-hidden-treasure-charcoal-oceano-dunes.jpg',
+      wornAlt: 'The Hidden Treasure design printed on the back of a charcoal CCWheelers crop hoodie, worn on the beach at sunset, Oceano Dunes California'
     },
     {
       n: 2, name: 'Sunset Together', slug: 'cc-wheelers-sunset-collection-sunset-together',
       tag: 'Two people on the tailgate of a buggy, watching the sun go down over the water. The reason most of us come back.',
       art: 'images/merch/sc-02-sunset-together-lg.jpg', th: 'images/merch/sc-02-sunset-together-th.jpg',
-      alt: 'Sunset Together: a couple sitting on a dune buggy watching the sunset, Oceano Dunes California'
+      alt: 'Sunset Together: a couple sitting on a dune buggy watching the sunset, Oceano Dunes California',
+      worn: 'images/merch/sc-back-sunset-together-charcoal-oceano-dunes.jpg',
+      wornAlt: 'The Sunset Together design printed on the back of a charcoal CCWheelers crop hoodie, worn on the beach at sunset, Oceano Dunes California'
     },
     {
       n: 3, name: 'Just Us', slug: 'cc-wheelers-sunset-collection-just-us',
       tag: 'Out past the crowds with one other person and a full tank. No plan, no schedule, no one else around.',
       art: 'images/merch/sc-03-just-us-lg.jpg', th: 'images/merch/sc-03-just-us-th.jpg',
-      alt: 'Just Us: a couple riding a dune buggy together over the dunes at sunset, Oceano Dunes California'
+      alt: 'Just Us: a couple riding a dune buggy together over the dunes at sunset, Oceano Dunes California',
+      worn: 'images/merch/sc-back-just-us-charcoal-oceano-dunes.jpg',
+      wornAlt: 'The Just Us design printed on the back of a charcoal CCWheelers crop hoodie, worn on the beach at sunset, Oceano Dunes California'
     },
     {
       n: 4, name: 'Our Escape', slug: 'cc-wheelers-sunset-collection-our-escape',
       tag: 'Camp chairs, a fire ring, and two mugs going cold while nobody gets up to fix it.',
       art: 'images/merch/sc-04-our-escape-lg.jpg', th: 'images/merch/sc-04-our-escape-th.jpg',
-      alt: 'Our Escape: a beach campfire, camp chairs, and coffee mugs with a dune buggy at sunset, Oceano Dunes California'
+      alt: 'Our Escape: a beach campfire, camp chairs, and coffee mugs with a dune buggy at sunset, Oceano Dunes California',
+      worn: 'images/merch/sc-back-our-escape-charcoal-oceano-dunes.jpg',
+      wornAlt: 'The Our Escape design printed on the back of a charcoal CCWheelers crop hoodie, worn on the beach at sunset, Oceano Dunes California'
     },
     {
       n: 5, name: 'Better Together', slug: 'cc-wheelers-sunset-collection-better-together',
       tag: 'The walk down the beach after the riding is done and the buggy is parked for the night.',
       art: 'images/merch/sc-05-better-together-lg.jpg', th: 'images/merch/sc-05-better-together-th.jpg',
-      alt: 'Better Together: a couple walking the beach hand in hand with their dune buggy, Oceano Dunes California'
+      alt: 'Better Together: a couple walking the beach hand in hand with their dune buggy, Oceano Dunes California',
+      worn: 'images/merch/sc-back-better-together-charcoal-oceano-dunes.jpg',
+      wornAlt: 'The Better Together design printed on the back of a charcoal CCWheelers crop hoodie, worn on the beach at sunset, Oceano Dunes California'
     },
     {
       n: 6, name: 'Love Runs on Sand', slug: 'cc-wheelers-sunset-collection-love-runs-on-sand',
       tag: 'Truck, trailer, fire going, nowhere to be in the morning. A whole weekend in one picture.',
       art: 'images/merch/sc-06-love-runs-on-sand-lg.jpg', th: 'images/merch/sc-06-love-runs-on-sand-th.jpg',
-      alt: 'Love Runs on Sand: a truck and camper trailer parked at a beach campfire at sunset, Oceano Dunes California'
+      alt: 'Love Runs on Sand: a truck and camper trailer parked at a beach campfire at sunset, Oceano Dunes California',
+      worn: 'images/merch/sc-back-love-runs-on-sand-charcoal-oceano-dunes.jpg',
+      wornAlt: 'The Love Runs on Sand design printed on the back of a charcoal CCWheelers crop hoodie, worn on the beach at sunset, Oceano Dunes California'
     }
   ];
 
@@ -484,10 +496,13 @@ document.addEventListener('click', function (e) {
   var current = 0;
 
   function shotsFor(d) {
-    return [
-      { src: d.art, alt: d.alt, label: 'Back print' },
-      { src: BADGE, alt: 'The Sunset Collection badge printed on the front of every shirt', label: 'Front badge' }
-    ].concat(SHARED).concat(d.shots || []);
+    var list = [];
+    if (d.worn) {
+      list.push({ src: d.worn, alt: d.wornAlt, label: 'Worn, charcoal' });
+    }
+    list.push({ src: d.art, alt: d.alt, label: 'Back print' });
+    list.push({ src: BADGE, alt: 'The Sunset Collection badge printed on the front of every shirt', label: 'Front badge' });
+    return list.concat(SHARED).concat(d.shots || []);
   }
 
   function showShot(list, i) {

@@ -55,14 +55,31 @@ function Get-PageImages([string]$htmlPath){
 
   # 2. images declared in page JavaScript, e.g. a picker or carousel that
   #    injects its own <img>. Without this they are invisible to image search.
-  #    Matches  src: 'images/...'  or  art: 'images/...'  followed by an
-  #    alt: '...' within the same object literal.
-  foreach($m in [regex]::Matches($html,"(?:src|art)\s*:\s*'(images/[^']+)'\s*,\s*(?:[a-zA-Z]+\s*:\s*'[^']*'\s*,\s*)*?alt\s*:\s*'([^']*)'")){
-    Add-Image $out $m.Groups[1].Value $m.Groups[2].Value
-  }
-  #    and the reverse order, alt first then src
-  foreach($m in [regex]::Matches($html,"alt\s*:\s*'([^']*)'\s*,\s*(?:[a-zA-Z]+\s*:\s*'[^']*'\s*,\s*)*?(?:src|art)\s*:\s*'(images/[^']+)'")){
-    Add-Image $out $m.Groups[2].Value $m.Groups[1].Value
+  #    Object literals here are flat (no nested {}), so each { ... } block is
+  #    scanned for any "<key>: 'images/...'" plus its matching "<key>Alt: '...'"
+  #    (or the generic "alt:" for src/art). This is key-name agnostic, so a
+  #    future field like "worn"/"wornAlt" is picked up without editing this
+  #    script -- that gap bit us once already (worn/wornAlt shipped invisible
+  #    to image search until this was generalised).
+  foreach($blk in [regex]::Matches($html,'\{[^{}]*\}')){
+    $block = $blk.Value
+    $imgKeys = [regex]::Matches($block,"(\w+)\s*:\s*'(images/[^']+)'")
+    if($imgKeys.Count -eq 0){ continue }
+    $altKeys = [regex]::Matches($block,"(\w*[Aa]lt)\s*:\s*'([^']*)'")
+    foreach($ik in $imgKeys){
+      $key = $ik.Groups[1].Value
+      $url = $ik.Groups[2].Value
+      $wantAlt = ($key + 'Alt').ToLower()
+      $alt = $null
+      foreach($ak in $altKeys){
+        $an = $ak.Groups[1].Value.ToLower()
+        if($an -eq $wantAlt -or (($key -eq 'src' -or $key -eq 'art') -and $an -eq 'alt')){
+          $alt = $ak.Groups[2].Value; break
+        }
+      }
+      if(-not $alt -and $altKeys.Count -eq 1 -and $imgKeys.Count -eq 1){ $alt = $altKeys[0].Groups[2].Value }
+      if($alt){ Add-Image $out $url $alt }
+    }
   }
 
   # de-duplicate: the same image can appear twice (carousel clones, JS + markup)
