@@ -263,7 +263,7 @@ document.addEventListener('click', function (e) {
         <span class="sc-edition" id="scEdition">No. 1 of 6</span>
         <h2 id="scName">Hidden Treasure</h2>
         <p class="sc-tag" id="scTag">A buggy parked at the water line, a heart drawn in the sand, and whatever it is you came out here to find.</p>
-        <div class="sc-price" id="scPrice">$53.35<small>Crop hoodie &middot; multiple colors and sizes</small></div>
+        <div class="sc-price" id="scPrice">$53.35<small>Crop hoodie &middot; black, charcoal, military green or peach</small></div>
         <div class="sc-buy">
           <a class="btn btn-primary" id="scBuy" href="https://ccwheelers-oceano-dunes.printful.me/product/cc-wheelers-sunset-collection-hidden-treasure" target="_blank" rel="noopener">Pick Size &amp; Color</a>
         </div>
@@ -341,7 +341,7 @@ document.addEventListener('click', function (e) {
       </div>
       <div class="card">
         <h3>Sizes &amp; Colors</h3>
-        <p>Multiple colors and a full size run, all chosen on the product page at checkout. Pricing is the same across the collection regardless of which design you pick.</p>
+        <p>Four colors: black, charcoal, military green and peach. Sizes and color are chosen on the product page at checkout. Pricing is the same across the collection no matter which design you pick.</p>
       </div>
       <div class="card">
         <h3>Made To Order</h3>
@@ -403,14 +403,32 @@ document.addEventListener('click', function (e) {
 (function () {
   var BASE = 'https://ccwheelers-oceano-dunes.printful.me/product/';
   var BADGE = 'images/merch/sc-front-badge.jpg';
-  // Shared "in the wild" shot. Shown on every design because it is the garment,
-  // not any one design's artwork, so it must not read as a product image for
-  // whichever design happens to be selected.
-  var WORN = {
-    src: 'images/merch/sunset-collection-oceano-dunes-crop-hoodie-campfire.jpg',
-    alt: 'A rider wearing a black CCWheelers Sunset Collection crop hoodie beside a beach campfire at sunset, Oceano Dunes California',
-    label: 'The crop hoodie'
-  };
+  // Shared shots, appended to every design. These show the garment and the
+  // front badge, which are identical across the collection, so they must not
+  // read as a product image for whichever design happens to be selected.
+  // Colours here are only the four actually sold.
+  var SHARED = [
+    {
+      src: 'images/merch/sc-front-charcoal-oceano-dunes.jpg',
+      alt: 'The Sunset Collection badge on the front of a charcoal crop hoodie, worn on the beach at sunset, Oceano Dunes California',
+      label: 'Front, charcoal'
+    },
+    {
+      src: 'images/merch/sc-front-military-green-oceano-dunes.jpg',
+      alt: 'The Sunset Collection badge on the front of a military green crop hoodie, worn on the beach at sunset, Oceano Dunes California',
+      label: 'Front, military green'
+    },
+    {
+      src: 'images/merch/sc-front-black-oceano-dunes.jpg',
+      alt: 'The Sunset Collection badge on the front of a black crop hoodie, worn on the beach at sunset, Oceano Dunes California',
+      label: 'Front, black'
+    },
+    {
+      src: 'images/merch/sc-front-peach-oceano-dunes.jpg',
+      alt: 'The Sunset Collection badge on the front of a peach crop hoodie, worn on the beach at sunset, Oceano Dunes California',
+      label: 'Front, peach'
+    }
+  ];
 
   // Each design can carry several shots. "shots" is the gallery inside the
   // viewer: back artwork first, then the shared front badge, then any model
@@ -468,9 +486,8 @@ document.addEventListener('click', function (e) {
   function shotsFor(d) {
     return [
       { src: d.art, alt: d.alt, label: 'Back print' },
-      { src: BADGE, alt: 'The Sunset Collection badge printed on the front of every shirt', label: 'Front badge' },
-      WORN
-    ].concat(d.shots || []);
+      { src: BADGE, alt: 'The Sunset Collection badge printed on the front of every shirt', label: 'Front badge' }
+    ].concat(SHARED).concat(d.shots || []);
   }
 
   function showShot(list, i) {

@@ -29,25 +29,43 @@ if(-not (Test-Path $sitemapPath)){ throw "sitemap.xml not found at $sitemapPath"
 # Chrome and decorative assets that should never appear in image search.
 $skip = @('ccw-logo','favicon','apple-touch-icon','og-image')
 
+function Add-Image([System.Collections.ArrayList]$list,[string]$src,[string]$alt){
+  if(-not $src){ return }
+  if($src -notmatch '^images/'){ return }
+  if([string]::IsNullOrWhiteSpace($alt)){ return }   # decorative or unlabelled
+  $leaf = [System.IO.Path]::GetFileNameWithoutExtension($src)
+  if($script:skip | Where-Object { $leaf -like "*$_*" }){ return }
+  if(-not (Test-Path (Join-Path $script:Root $src))){
+    Write-Warning "missing file, skipped: $src"
+    return
+  }
+  [void]$list.Add([pscustomobject]@{ Src = $src; Alt = $alt })
+}
+
 function Get-PageImages([string]$htmlPath){
   $html = Get-Content $htmlPath -Raw
-  $out = @()
+  $out = New-Object System.Collections.ArrayList
+
+  # 1. plain <img> tags
   foreach($m in [regex]::Matches($html,'<img\b[^>]*>')){
     $tag = $m.Value
-    $src = [regex]::Match($tag,'src\s*=\s*"([^"]+)"').Groups[1].Value
-    $alt = [regex]::Match($tag,'alt\s*=\s*"([^"]*)"').Groups[1].Value
-    if(-not $src){ continue }
-    if($src -notmatch '^images/'){ continue }
-    if([string]::IsNullOrWhiteSpace($alt)){ continue }   # decorative, skip
-    $leaf = [System.IO.Path]::GetFileNameWithoutExtension($src)
-    if($skip | Where-Object { $leaf -like "*$_*" }){ continue }
-    if(-not (Test-Path (Join-Path $Root $src))){
-      Write-Warning "missing file, skipped: $src"
-      continue
-    }
-    $out += [pscustomobject]@{ Src = $src; Alt = $alt }
+    Add-Image $out ([regex]::Match($tag,'src\s*=\s*"([^"]+)"').Groups[1].Value) `
+                   ([regex]::Match($tag,'alt\s*=\s*"([^"]*)"').Groups[1].Value)
   }
-  # de-duplicate: the same image can appear twice on a page (carousel clones)
+
+  # 2. images declared in page JavaScript, e.g. a picker or carousel that
+  #    injects its own <img>. Without this they are invisible to image search.
+  #    Matches  src: 'images/...'  or  art: 'images/...'  followed by an
+  #    alt: '...' within the same object literal.
+  foreach($m in [regex]::Matches($html,"(?:src|art)\s*:\s*'(images/[^']+)'\s*,\s*(?:[a-zA-Z]+\s*:\s*'[^']*'\s*,\s*)*?alt\s*:\s*'([^']*)'")){
+    Add-Image $out $m.Groups[1].Value $m.Groups[2].Value
+  }
+  #    and the reverse order, alt first then src
+  foreach($m in [regex]::Matches($html,"alt\s*:\s*'([^']*)'\s*,\s*(?:[a-zA-Z]+\s*:\s*'[^']*'\s*,\s*)*?(?:src|art)\s*:\s*'(images/[^']+)'")){
+    Add-Image $out $m.Groups[2].Value $m.Groups[1].Value
+  }
+
+  # de-duplicate: the same image can appear twice (carousel clones, JS + markup)
   return $out | Sort-Object Src -Unique
 }
 
