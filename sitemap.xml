@@ -55,11 +55,26 @@
     <loc>https://ccwheelers.com/faq.html</loc>
     <lastmod>2026-07-12</lastmod>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/dunes-pristine.jpg</image:loc>
+      <image:title>Open sand dunes under a blue sky at Oceano Dunes</image:title>
+      <image:caption>Open sand dunes under a blue sky at Oceano Dunes, California</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/rv-ridge.jpg</image:loc>
+      <image:title>RVs and trucks camped along a dune ridge at Oceano Dunes</image:title>
+      <image:caption>RVs and trucks camped along a dune ridge at Oceano Dunes, California</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://ccwheelers.com/news.html</loc>
     <lastmod>2026-07-13</lastmod>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/oceano-dunes-entrance-gate-lineup.jpg</image:loc>
+      <image:title>Vehicles lined up at the entrance gate with a park ranger at Oceano Dunes</image:title>
+      <image:caption>Vehicles lined up at the entrance gate with a park ranger at Oceano Dunes</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://ccwheelers.com/merch.html</loc>
@@ -325,11 +340,21 @@
     <loc>https://ccwheelers.com/weather.html</loc>
     <lastmod>2026-07-13</lastmod>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/oceano-dunes-beach-sunset-ocean.jpg</image:loc>
+      <image:title>Sunset over the ocean from the beach at Oceano Dunes</image:title>
+      <image:caption>Sunset over the ocean from the beach at Oceano Dunes</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://ccwheelers.com/gas.html</loc>
     <lastmod>2026-07-13</lastmod>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/entrance-sign.jpg</image:loc>
+      <image:title>Oceano Dunes State Vehicular Recreation Area entrance sign</image:title>
+      <image:caption>Oceano Dunes State Vehicular Recreation Area entrance sign</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://ccwheelers.com/fires.html</loc>
@@ -395,20 +420,45 @@
     <loc>https://ccwheelers.com/map.html</loc>
     <lastmod>2026-07-12</lastmod>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/sandrail.jpg</image:loc>
+      <image:title>Sand rail with a family aboard at Oceano Dunes</image:title>
+      <image:caption>Sand rail with a family aboard at Oceano Dunes, California</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://ccwheelers.com/rules.html</loc>
     <lastmod>2026-07-12</lastmod>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/oceano-dunes-closed-area-no-motor-vehicles-sign.jpg</image:loc>
+      <image:title>Closed area no motor vehicles sign posted in a restricted dune area at Oceano Dunes</image:title>
+      <image:caption>Closed area no motor vehicles sign posted in a restricted dune area at Oceano Dunes</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/rules-sign.jpg</image:loc>
+      <image:title>Other rules and regulations safety sign posted at Oceano Dunes</image:title>
+      <image:caption>Other rules and regulations safety sign posted at Oceano Dunes, California</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://ccwheelers.com/tips.html</loc>
     <lastmod>2026-07-12</lastmod>
     <priority>0.7</priority>
     <image:image>
+      <image:loc>https://ccwheelers.com/images/bike-jump.jpg</image:loc>
+      <image:title>Dirt bike jumping off a dune at Oceano Dunes</image:title>
+      <image:caption>Dirt bike jumping off a dune at Oceano Dunes, California</image:caption>
+    </image:image>
+    <image:image>
       <image:loc>https://ccwheelers.com/images/dropoff-warning.jpg</image:loc>
       <image:title>Warning sign: dune conditions are always changing</image:title>
       <image:caption>Warning sign: dune conditions are always changing, be prepared for sudden drop-offs</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/stuck-2wd.jpg</image:loc>
+      <image:title>Lowered two wheel drive truck stuck in the sand at Oceano Dunes</image:title>
+      <image:caption>Lowered two wheel drive truck stuck in the sand at Oceano Dunes</image:caption>
     </image:image>
   </url>
   <url>
@@ -442,8 +492,8 @@
     </image:image>
     <image:image>
       <image:loc>https://ccwheelers.com/images/beach-panorama.jpg</image:loc>
-      <image:title>Panorama of campers and RVs along the beach</image:title>
-      <image:caption>Panorama of campers and RVs along the beach</image:caption>
+      <image:title>Panorama of campers and RVs along the beach at Oceano Dunes</image:title>
+      <image:caption>Panorama of campers and RVs along the beach at Oceano Dunes, California</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://ccwheelers.com/images/bike-jump.jpg</image:loc>
@@ -650,10 +700,20 @@
     <loc>https://ccwheelers.com/about.html</loc>
     <lastmod>2026-07-12</lastmod>
     <priority>0.5</priority>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/oceano-dunes-quad-riders-whip-flags-group.jpg</image:loc>
+      <image:title>Group of quad riders with whip flags gathered on the dunes at Oceano Dunes</image:title>
+      <image:caption>Group of quad riders with whip flags gathered on the dunes at Oceano Dunes, California</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://ccwheelers.com/contact.html</loc>
     <lastmod>2026-07-12</lastmod>
     <priority>0.5</priority>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/horseback.jpg</image:loc>
+      <image:title>Horseback riders on the wet sand beach at Oceano Dunes</image:title>
+      <image:caption>Horseback riders on the wet sand beach at Oceano Dunes, California</image:caption>
+    </image:image>
   </url>
 </urlset>

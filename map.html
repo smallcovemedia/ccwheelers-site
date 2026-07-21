@@ -160,6 +160,10 @@ document.addEventListener('click', function (e) {
 .share-links{display:flex;flex-wrap:wrap;gap:8px}
 .share-btn{display:inline-flex;align-items:center;padding:8px 16px;border-radius:999px;border:1.5px solid var(--ocean);color:var(--ocean);font-size:13px;font-weight:700;text-decoration:none;background:none;cursor:pointer;transition:background .15s ease,color .15s ease;font-family:inherit}
 .share-btn:hover{background:var(--ocean);color:#fff}
+
+/* ---- v7: generic page hero banner ---- */
+.page-hero{background:var(--ocean-deep);line-height:0;overflow:hidden}
+.page-hero img{width:100%;height:clamp(190px,26vw,340px);object-fit:cover;object-position:center 50%;display:block}
 </style>
 </head>
 <body>
@@ -201,6 +205,10 @@ document.addEventListener('click', function (e) {
     <button class="menu-toggle" aria-label="Menu" aria-expanded="false">☰</button>
   </div>
 </header>
+
+<div class="page-hero">
+  <img src="images/sandrail.jpg" alt="Sand rail with a family aboard at Oceano Dunes, California" width="900" height="654" fetchpriority="high">
+</div>
 
 <div class="page-head">
   <div class="wrap">
