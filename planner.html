@@ -115,6 +115,7 @@ document.addEventListener('click', function (e) {
   }
 </style>
 <script src="nav.js" defer></script>
+<script src="conditions.js"></script>
 </head>
 <body>
 
@@ -171,7 +172,30 @@ document.addEventListener('click', function (e) {
   </div>
 </div>
 
-<section style="padding-top:0">
+<section style="padding-top:0;padding-bottom:0">
+  <div class="wrap">
+    <div class="cards two" style="margin-top:0">
+      <div class="card">
+        <h3>Check the creek before anything else</h3>
+        <p>If Arroyo Grande Creek is posted closed, it's closed, no exceptions. Confirm the <a href="creek.html">current creek status</a> the morning you leave, not the night before.</p>
+      </div>
+      <div class="card">
+        <h3>Time your drive to the tide, not the clock</h3>
+        <p>Arrive and depart near low tide for the firmest sand and easiest creek crossing. The plan below will find your exact windows once you enter your dates.</p>
+      </div>
+      <div class="card">
+        <h3>Reservations move fast</h3>
+        <p>Beach camping fills up, especially holiday weekends. Book at <a href="https://www.reservecalifornia.com" target="_blank" rel="noopener">ReserveCalifornia</a> or (800) 444-7275 before you plan around a spot.</p>
+      </div>
+      <div class="card">
+        <h3>Confirm fire rules at the gate</h3>
+        <p>Fire restrictions change with conditions. Check <a href="fires.html">current campfire rules</a> so you're not caught out with wood and no fire allowed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
   <div class="wrap">
     <form class="plan-form" id="tripForm">
       <div class="form-grid">
@@ -246,7 +270,10 @@ document.addEventListener('click', function (e) {
     <p class="lede" id="planIntro"></p>
     <div id="tideIntel"></div>
     <div id="recs"></div>
-    <h2 class="section-title" style="margin-top:56px;font-size:34px">Your Checklist</h2>
+    <div class="plan-head" style="margin-top:56px;align-items:baseline">
+      <h2 class="section-title" style="font-size:34px;margin-bottom:0">Your Checklist</h2>
+      <span id="checkProgress" style="font-weight:700;color:var(--ocean-deep);font-size:15px"></span>
+    </div>
     <div id="checklists"></div>
     <p class="cond-note" style="margin-top:20px">Tide predictions from NOAA station 9412110 (Port San Luis). Conditions change: check the <a href="creek.html">creek status</a> the morning you leave, and confirm fire rules at the entrance station. Reservations: (800) 444-7275.</p>
   </div>
@@ -392,20 +419,94 @@ document.addEventListener('click', function (e) {
     document.getElementById('planOut').style.display = 'block';
     document.getElementById('planSection').scrollIntoView({ behavior: 'smooth' });
 
-    fetch(BASE + '&begin_date=' + ymd(arrive) + '&end_date=' + ymd(new Date(depart.getTime() + 86400000)))
-      .then(function (r) { return r.json(); })
-      .then(function (data) { buildTides(data.predictions || [], opts); })
-      .catch(function () {
+    var tidesP = fetch(BASE + '&begin_date=' + ymd(arrive) + '&end_date=' + ymd(new Date(depart.getTime() + 86400000)))
+      .then(function (r) { return r.json(); }).catch(function () { return null; });
+    var rainP = fetch('https://api.open-meteo.com/v1/forecast?latitude=35.0894&longitude=-120.6296' +
+      '&daily=precipitation_sum&past_days=3&forecast_days=16&precipitation_unit=inch&timezone=America/Los_Angeles')
+      .then(function (r) { return r.json(); }).catch(function () { return null; });
+
+    Promise.all([tidesP, rainP]).then(function (results) {
+      var data = results[0], rain = results[1];
+      if (!data || !data.predictions || !data.predictions.length) {
         document.getElementById('tideIntel').innerHTML =
           '<div class="tide-day"><h3>Tide Game Plan</h3><p class="advice">The tide feed is unavailable right now. Check the <a href="tides.html">tide page</a> before you leave: arrive and depart as close to low tide as you can, and set camp well above the evening high-tide line.</p></div>';
-      });
+        return;
+      }
+      buildTides(data.predictions, opts, rain);
+    });
   });
 
+  /* ---------- rain lookup: same-day + 2-day runoff lag ---------- */
+  function rainNear(rain, t) {
+    if (!rain || !rain.daily || !rain.daily.time) return null;
+    var days = rain.daily.time, amt = rain.daily.precipitation_sum;
+    var target = t.getFullYear() + '-' + ('0' + (t.getMonth() + 1)).slice(-2) + '-' + ('0' + t.getDate()).slice(-2);
+    var idx = days.indexOf(target);
+    if (idx === -1) return null; /* date outside the 16-day forecast / 3-day lookback window */
+    var total = 0;
+    for (var i = Math.max(0, idx - 2); i <= idx; i++) total += (amt[i] || 0);
+    return total;
+  }
+
+  /* ---------- creek crossing estimate (same logic as conditions.js) ---------- */
+  function creekHighNear(evs, t) {
+    var hit = null;
+    evs.forEach(function (e) {
+      if (e.type !== 'H') return;
+      var before = 2.5 * 3600000, after = 2.0 * 3600000;
+      if (e.v >= 5.5) { before += 0.5 * 3600000; after += 0.5 * 3600000; }
+      if (t.getTime() >= e.t.getTime() - before && t.getTime() <= e.t.getTime() + after) hit = e;
+    });
+    return hit;
+  }
+  function creekNote(evs, t, label, rain) {
+    var near = creekHighNear(evs, t);
+    var wet = rainNear(rain, t);
+
+    if (wet !== null && wet >= 0.75) {
+      return '<div class="warn-box"><strong>Creek at ' + label + ':</strong> ' + wet.toFixed(1) + '" of rain in the day(s) around your ' + label +
+        ' — that\'s enough runoff to override the tide entirely. Arroyo Grande Creek can run high and fast no matter what the tide is doing. ' +
+        'Treat the crossing as closed until you confirm the <a href="creek.html">creek status</a> in person or with rangers.</div>';
+    }
+    if (near) {
+      var big = near.v >= 5.5;
+      var wetNote = (wet !== null && wet > 0.1) ? ' Add in ' + wet.toFixed(1) + '" of recent rain and this could run higher than the tide alone suggests.' : '';
+      return '<div class="warn-box"><strong>Creek at ' + label + ':</strong> close to a' + (big ? ' big' : '') + ' high tide (' +
+        near.v.toFixed(1) + ' ft at ' + fmtT(near.t) + '), when Arroyo Grande Creek runs deepest.' + wetNote + ' Check the ' +
+        '<a href="creek.html">creek status</a> before you cross — this is a tide-based estimate, not a guarantee.</div>';
+    }
+    if (wet !== null && wet > 0.1) {
+      return '<div class="warn-box"><strong>Creek at ' + label + ':</strong> outside the high-tide window, but ' + wet.toFixed(1) +
+        '" of rain fell nearby — rain can push the creek up regardless of tide. Check the <a href="creek.html">creek status</a> before you cross.</div>';
+    }
+    return '<div class="ok-box"><strong>Creek at ' + label + ':</strong> outside the high-tide window, so the crossing is normally at its shallowest. Still confirm the ' +
+      '<a href="creek.html">creek status</a> the morning you leave.</div>';
+  }
+
   /* ---------- tide intelligence ---------- */
-  function buildTides(preds, opts) {
+  function buildTides(preds, opts, rain) {
     var evs = preds.map(function (p) { return { t: parseT(p.t), v: parseFloat(p.v), type: p.type }; });
     if (!evs.length) return;
     var out = ['<h2 class="section-title" style="margin-top:44px;font-size:34px">Tide Game Plan</h2>'];
+
+    var now = new Date(), rainySeason = (now.getMonth() >= 10 || now.getMonth() <= 3) || (opts.arrive.getMonth() >= 10 || opts.arrive.getMonth() <= 3);
+    if (rainySeason) {
+      out.push('<div class="warn-box"><strong>Winter/rain note:</strong> the creek notes below are tide-based, plus a live check of rain in the forecast. ' +
+        'But heavy or sustained storms can push the creek up fast and keep it high well after tide alone would suggest it\'s clear — rain always beats tide. ' +
+        'During wet months, confirm the <a href="creek.html">creek status</a> in person before you cross, no matter what this plan says.</div>');
+    }
+
+    if (window.CCW_CREEK && CCW_CREEK.mode && CCW_CREEK.mode !== 'auto') {
+      var CM = { open: { label: 'Open', long: 'The creek is low and crossable.' },
+                 caution: { label: 'Use Caution', long: 'Cross carefully and only if you are sure of conditions.' },
+                 closed: { label: 'Closed', long: 'The crossing is closed. Crossing a closed creek is a ticket, no exceptions.' } };
+      var cm = CM[CCW_CREEK.mode];
+      if (cm) {
+        out.push('<div class="warn-box"><strong>Creek Status Right Now: ' + cm.label + '.</strong> ' + cm.long +
+          (CCW_CREEK.note ? ' ' + CCW_CREEK.note + '.' : '') +
+          ' This is today\'s status, not a forecast for your trip date — confirm the <a href="creek.html">creek status</a> again closer to when you leave.</div>');
+      }
+    }
 
     /* arrival window */
     var dayEvs = function (d) {
@@ -430,6 +531,7 @@ document.addEventListener('click', function (e) {
         ? '<div class="ok-box">Your ' + fmtT(opts.arrive) + ' arrival lands inside that window. Nice planning.</div>'
         : '<div class="warn-box">Your planned ' + fmtT(opts.arrive) + ' arrival is outside that window. If you can shift toward ' + fmtT(bestLow.t) + ', the drive down the beach gets a lot easier' + (opts.vehicle !== '4wd' ? ' — and with your vehicle, timing the low tide isn\'t optional, it\'s the plan' : '') + '.</div>';
     }
+    arrHtml += creekNote(evs, opts.arrive, 'arrival', rain);
     arrHtml += '</div>';
     out.push(arrHtml);
 
@@ -470,6 +572,7 @@ document.addEventListener('click', function (e) {
     if (bestDep) {
       depHtml += '<p class="advice">Aim to tow out around the <strong>' + fmtT(bestDep.t) + ' low (' + bestDep.v.toFixed(1) + ' ft)</strong>. By late in a busy weekend the soft sand is churned up — the low tide gives you the firm lane out' + (opts.vehicle === 'rv' ? ', and with a trailer you want every bit of it' : '') + '.</p>';
     }
+    depHtml += creekNote(evs, opts.depart, 'departure', rain);
     depHtml += '</div>';
     out.push(depHtml);
 
@@ -562,7 +665,20 @@ document.addEventListener('click', function (e) {
         return '<li><label><input type="checkbox"><span>' + it + '</span></label></li>';
       }).join('') + '</ul></div>';
     }).join('');
+    updateCheckProgress();
   }
+
+  /* ---------- checklist progress counter ---------- */
+  function updateCheckProgress() {
+    var boxes = document.querySelectorAll('#checklists input[type=checkbox]');
+    var checked = 0;
+    boxes.forEach(function (b) { if (b.checked) checked++; });
+    var el = document.getElementById('checkProgress');
+    if (el) el.textContent = boxes.length ? checked + ' of ' + boxes.length + ' packed' : '';
+  }
+  document.getElementById('checklists').addEventListener('change', function (e) {
+    if (e.target && e.target.type === 'checkbox') updateCheckProgress();
+  });
 })();
 </script>
 
