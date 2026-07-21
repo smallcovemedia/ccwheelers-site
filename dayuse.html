@@ -48,6 +48,7 @@ document.addEventListener('click', function (e) {
 <link rel="stylesheet" href="site.css">
 <script src="nav.js" defer></script>
 <script src="share.js" defer></script>
+<script src="lightbox.js" defer></script>
 </head>
 <body>
 
@@ -177,17 +178,13 @@ document.addEventListener('click', function (e) {
   </div>
 </section>
 
-<div class="dual-hero">
-  <img src="images/surviving-the-surf-poster.jpg" alt="Surviving the Surf illustrated beach safety poster showing sleeper waves, rip currents, and backwash" loading="lazy">
-  <img src="images/surf-fishing-poster.jpg" alt="Surf Fishing illustrated poster showing an angler casting and local surfperch species" loading="lazy">
-</div>
-
 <section class="band">
   <div class="wrap">
     <span class="eyebrow" style="color:var(--dune)">Posted at the Beach</span>
     <h2 class="section-title">Surf Smarts &amp; Fishing the Tide</h2>
     <div class="split" style="margin-top:36px">
       <div>
+        <img src="images/surviving-the-surf-poster.jpg" alt="Surviving the Surf illustrated beach safety poster showing sleeper waves, rip currents, and backwash" data-lightbox="images/surviving-the-surf-poster.jpg" data-cap="Surviving the Surf: sleeper waves, rip currents, and backwash. Caught in a rip? Swim parallel to shore until you're free." style="width:100%;border-radius:14px;display:block;margin-bottom:18px;box-shadow:0 10px 30px rgba(0,0,0,.25)" loading="lazy">
         <h3 style="font-size:26px;margin-bottom:10px">Surviving the Surf</h3>
         <p style="color:rgba(255,255,255,.85);font-size:15.5px;margin-bottom:14px">This coast earns its warning sign. Three dangers put people in the water every year:</p>
         <ol class="steps">
@@ -197,6 +194,7 @@ document.addEventListener('click', function (e) {
         </ol>
       </div>
       <div>
+        <img src="images/surf-fishing-poster.jpg" alt="Surf Fishing illustrated poster showing an angler casting and local surfperch species" data-lightbox="images/surf-fishing-poster.jpg" data-cap="Surf fishing: best from two hours before high tide to two hours after. License required 16 and over." style="width:100%;border-radius:14px;display:block;margin-bottom:18px;box-shadow:0 10px 30px rgba(0,0,0,.25)" loading="lazy">
         <h3 style="font-size:26px;margin-bottom:10px">Surf Fishing</h3>
         <p style="color:rgba(255,255,255,.85);font-size:15.5px;margin-bottom:14px">A rod, a bucket, and a little tide knowledge is all it takes out here.</p>
         <ol class="steps">
