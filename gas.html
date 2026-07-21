@@ -74,6 +74,7 @@ document.addEventListener('click', function (e) {
   }
 </style>
 <script src="nav.js" defer></script>
+<script src="share.js" defer></script>
 </head>
 <body>
 
@@ -121,6 +122,15 @@ document.addEventListener('click', function (e) {
     <span class="eyebrow">Fuel Up Smart</span>
     <h1>Gas Prices Near the Dunes</h1>
     <p>San Luis Obispo County averages, updated a few times daily from AAA. Tow rigs are thirsty and the last stops before the sand run above average, so know the number before the pump surprises you.</p>
+    <div class="share-row">
+      <span class="share-label">Know someone who'd find this useful?</span>
+      <div class="share-links">
+        <button class="share-btn" type="button" id="nativeShareBtn">Share</button>
+        <a class="share-btn share-fallback" id="fbShareBtn" href="#" target="_blank" rel="noopener" aria-label="Share on Facebook">Facebook</a>
+        <a class="share-btn share-fallback" id="xShareBtn" href="#" target="_blank" rel="noopener" aria-label="Share on X">X</a>
+        <button class="share-btn" type="button" id="copyLinkBtn">Copy Link</button>
+      </div>
+    </div>
   </div>
 </div>
 

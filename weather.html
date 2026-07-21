@@ -82,6 +82,7 @@ document.addEventListener('click', function (e) {
   @media(max-width:560px){.days{grid-template-columns:repeat(2,1fr)}}
 </style>
 <script src="nav.js" defer></script>
+<script src="share.js" defer></script>
 </head>
 <body>
 
@@ -129,6 +130,15 @@ document.addEventListener('click', function (e) {
     <span class="eyebrow">Live From the Beach</span>
     <h1>Weather &amp; Wind at the Dunes</h1>
     <p>Measured at the sand, not in town. Wind is the ruler of the dunes: it builds the riding, sculpts the bowls, and sandblasts your camp when it feels like it. Know what it's doing before you go.</p>
+    <div class="share-row">
+      <span class="share-label">Know someone who'd find this useful?</span>
+      <div class="share-links">
+        <button class="share-btn" type="button" id="nativeShareBtn">Share</button>
+        <a class="share-btn share-fallback" id="fbShareBtn" href="#" target="_blank" rel="noopener" aria-label="Share on Facebook">Facebook</a>
+        <a class="share-btn share-fallback" id="xShareBtn" href="#" target="_blank" rel="noopener" aria-label="Share on X">X</a>
+        <button class="share-btn" type="button" id="copyLinkBtn">Copy Link</button>
+      </div>
+    </div>
   </div>
 </div>
 

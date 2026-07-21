@@ -154,3 +154,10 @@ footer a:hover{color:var(--dune)}
 .plan-cta h2{font-size:clamp(30px,4vw,42px);font-weight:800;margin-bottom:12px;color:#fff}
 .plan-cta p{color:rgba(255,255,255,.82);font-size:16px;max-width:54ch;margin:0 auto 30px}
 @media(max-width:600px){.plan-cta{padding:40px 22px}.plan-cta-band{padding:48px 0 64px}}
+
+/* ---- v6: page share row ---- */
+.share-row{margin-top:22px;display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.share-label{font-size:14px;color:var(--ink-soft);font-weight:600}
+.share-links{display:flex;flex-wrap:wrap;gap:8px}
+.share-btn{display:inline-flex;align-items:center;padding:8px 16px;border-radius:999px;border:1.5px solid var(--ocean);color:var(--ocean);font-size:13px;font-weight:700;text-decoration:none;background:none;cursor:pointer;transition:background .15s ease,color .15s ease;font-family:inherit}
+.share-btn:hover{background:var(--ocean);color:#fff}

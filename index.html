@@ -268,8 +268,16 @@ document.addEventListener('click', function (e) {
 /* ---- v4: real CCW logo ---- */
 .logo-chip{display:flex;align-items:center;flex:0 0 auto}
 .logo-chip img{height:30px;width:auto;display:block}
+
+/* ---- v6: page share row ---- */
+.share-row{margin-top:22px;display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.share-label{font-size:14px;color:var(--ink-soft);font-weight:600}
+.share-links{display:flex;flex-wrap:wrap;gap:8px}
+.share-btn{display:inline-flex;align-items:center;padding:8px 16px;border-radius:999px;border:1.5px solid var(--ocean);color:var(--ocean);font-size:13px;font-weight:700;text-decoration:none;background:none;cursor:pointer;transition:background .15s ease,color .15s ease;font-family:inherit}
+.share-btn:hover{background:var(--ocean);color:#fff}
 </style>
 <script src="nav.js" defer></script>
+<script src="share.js" defer></script>
 <script src="news-data.js" defer></script>
 <script src="conditions.js" defer></script>
 </head>
@@ -328,6 +336,15 @@ document.addEventListener('click', function (e) {
     <div class="hero-ctas">
       <a class="btn btn-primary" href="planner.html">Plan Your Trip</a>
       <a class="btn btn-ghost" href="creek.html">Check Creek Status</a>
+    </div>
+    <div class="share-row" style="margin-top:18px">
+      <span class="share-label" style="color:rgba(255,255,255,.75)">Know someone who'd find this useful?</span>
+      <div class="share-links">
+        <button class="share-btn" type="button" id="nativeShareBtn" style="border-color:rgba(255,255,255,.6);color:#fff">Share</button>
+        <a class="share-btn share-fallback" id="fbShareBtn" href="#" target="_blank" rel="noopener" aria-label="Share on Facebook" style="border-color:rgba(255,255,255,.6);color:#fff">Facebook</a>
+        <a class="share-btn share-fallback" id="xShareBtn" href="#" target="_blank" rel="noopener" aria-label="Share on X" style="border-color:rgba(255,255,255,.6);color:#fff">X</a>
+        <button class="share-btn" type="button" id="copyLinkBtn" style="border-color:rgba(255,255,255,.6);color:#fff">Copy Link</button>
+      </div>
     </div>
   </div>
   <svg focusable="false" class="hero-dunes" viewBox="0 0 1440 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
