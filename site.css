@@ -39,10 +39,11 @@ nav a.active{color:var(--dune)}
 .menu-toggle{display:none;background:none;border:none;color:#fff;font-size:26px;cursor:pointer;padding:6px 10px;line-height:1}
 
 /* PAGE HEAD */
-.page-head{background:linear-gradient(180deg,var(--ocean) 0%,#134b63 100%);color:#fff;padding:56px 0 50px}
+.page-head{background:linear-gradient(180deg,var(--ocean) 0%,#134b63 100%);color:#fff;padding:56px 0 0;position:relative;overflow:hidden}
 .page-head .eyebrow{color:var(--dune);margin-bottom:10px}
 .page-head h1{font-size:clamp(38px,5.5vw,64px);font-weight:800}
 .page-head p{color:rgba(255,255,255,.82);font-size:17px;max-width:70ch;margin-top:12px}
+.head-dunes{display:block;width:100%;margin-top:30px}
 
 /* CONTENT BLOCKS */
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
@@ -161,7 +162,14 @@ footer a:hover{color:var(--dune)}
 .share-links{display:flex;flex-wrap:wrap;gap:8px}
 .share-btn{display:inline-flex;align-items:center;padding:8px 16px;border-radius:999px;border:1.5px solid var(--ocean);color:var(--ocean);font-size:13px;font-weight:700;text-decoration:none;background:none;cursor:pointer;transition:background .15s ease,color .15s ease;font-family:inherit}
 .share-btn:hover{background:var(--ocean);color:#fff}
+.page-head .share-label{color:rgba(255,255,255,.82)}
+.page-head .share-btn{border-color:rgba(255,255,255,.7);color:#fff}
+.page-head .share-btn:hover{background:#fff;color:var(--ocean)}
 
 /* ---- v7: generic page hero banner ---- */
 .page-hero{background:var(--ocean-deep);line-height:0;overflow:hidden}
 .page-hero img{width:100%;height:clamp(190px,26vw,340px);object-fit:cover;object-position:center 50%;display:block}
+
+.dual-hero{display:grid;grid-template-columns:1fr 1fr;background:var(--ocean-deep);line-height:0;overflow:hidden}
+.dual-hero img{width:100%;height:clamp(170px,22vw,300px);object-fit:cover;object-position:center 30%;display:block}
+@media(max-width:600px){.dual-hero{grid-template-columns:1fr}}

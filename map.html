@@ -80,10 +80,11 @@ document.addEventListener('click', function (e) {
   nav a.active{color:var(--dune)}
   .menu-toggle{display:none;background:none;border:none;color:#fff;font-size:26px;cursor:pointer;padding:6px 10px;line-height:1}
 
-  .page-head{background:var(--ocean);color:#fff;padding:34px 0 30px}
+  .page-head{background:var(--ocean);color:#fff;padding:34px 0 0;position:relative;overflow:hidden}
   .page-head h1{font-size:clamp(30px,4vw,44px);font-weight:800}
   .page-head p{color:rgba(255,255,255,.78);font-size:15px;max-width:80ch;margin-top:8px}
   .page-head .eyebrow{display:inline-block;font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--dune);margin-bottom:8px}
+  .head-dunes{display:block;width:100%;margin-top:18px}
 
   .map-shell{flex:1;display:grid;grid-template-columns:330px 1fr;min-height:640px}
   aside{background:#fff;border-right:1px solid var(--sand-deep);overflow-y:auto;max-height:calc(100vh - 70px)}
@@ -225,6 +226,11 @@ document.addEventListener('click', function (e) {
       </div>
     </div>
   </div>
+  <svg class="head-dunes" viewBox="0 0 1440 54" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M0,29 C240,10 420,37 720,25 C980,14 1180,37 1440,22 L1440,54 L0,54 Z" fill="#e8dcc8" opacity=".55"/>
+    <path d="M0,39 C300,22 560,47 860,34 C1120,24 1300,44 1440,34 L1440,54 L0,54 Z" fill="#efe5d2" opacity=".8"/>
+    <path d="M0,47 C360,32 700,53 1040,43 C1240,37 1360,48 1440,44 L1440,54 L0,54 Z" fill="#f5ede0"/>
+  </svg>
 </div>
 
 <div class="map-shell">
