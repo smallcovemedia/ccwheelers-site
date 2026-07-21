@@ -637,7 +637,7 @@ document.addEventListener('click', function (e) {
       (o.camp ? 'Reservation confirmation pulled up and ready to show at the kiosk'
               : 'Pay the day-use fee at the kiosk' + (o.offsite ? ' — every riding day, so consider an annual pass' : '')),
       'Air down to 15–20 PSI on the pavement',
-      'Confirm current fire rules with the entrance station' + (o.fire ? '' : ' (if plans change)'),
+      (o.fire ? 'Ask the kiosk: "Any fire restrictions in effect today?"' : 'Ask the kiosk about current fire rules, in case plans change'),
       'Note the tide times for today on your phone',
       'Radios set — CB channel 9 is ranger base'] });
 
