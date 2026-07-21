@@ -345,6 +345,11 @@
     <loc>https://ccwheelers.com/planner.html</loc>
     <lastmod>2026-07-12</lastmod>
     <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/oceano-dunes-sand-rail-buggy-planner-hero.jpg</image:loc>
+      <image:title>A yellow sand rail buggy full of riders cresting a dune at Oceano Dunes</image:title>
+      <image:caption>A yellow sand rail buggy full of riders cresting a dune at Oceano Dunes, California, with an American flag flying</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://ccwheelers.com/dayuse.html</loc>
