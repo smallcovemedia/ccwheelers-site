@@ -436,9 +436,29 @@
       <image:caption>Closed area no motor vehicles sign posted in a restricted dune area at Oceano Dunes</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ccwheelers.com/images/rules-sign.jpg</image:loc>
-      <image:title>Other rules and regulations safety sign posted at Oceano Dunes</image:title>
-      <image:caption>Other rules and regulations safety sign posted at Oceano Dunes, California</image:caption>
+      <image:loc>https://ccwheelers.com/images/other-rules-poster.jpg</image:loc>
+      <image:title>Other Rules and Regulations For Your Safety illustrated poster</image:title>
+      <image:caption>Other Rules and Regulations For Your Safety illustrated poster posted at Oceano Dunes, California</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/protective-gear-poster.jpg</image:loc>
+      <image:title>Protective Riding Gear and Safety Tips illustrated poster</image:title>
+      <image:caption>Protective Riding Gear and Safety Tips illustrated poster for motorcycle and ATV riders</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/mufflers-noise-poster.jpg</image:loc>
+      <image:title>Mufflers and OHV Noise Regulations illustrated poster</image:title>
+      <image:caption>Mufflers and OHV Noise Regulations illustrated poster</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://ccwheelers.com/history.html</loc>
+    <lastmod>2026-07-21</lastmod>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://ccwheelers.com/images/dunes-pristine.jpg</image:loc>
+      <image:title>Open sand dunes under a blue sky at Oceano Dunes</image:title>
+      <image:caption>Open sand dunes under a blue sky at Oceano Dunes, California</image:caption>
     </image:image>
   </url>
   <url>
@@ -526,14 +546,14 @@
       <image:caption>Campfire burning on the sand in front of a trailer</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ccwheelers.com/images/fishing-sign.jpg</image:loc>
-      <image:title>Surf fishing information sign</image:title>
-      <image:caption>Surf fishing information sign</image:caption>
+      <image:loc>https://ccwheelers.com/images/surf-fishing-poster.jpg</image:loc>
+      <image:title>Surf Fishing illustrated poster</image:title>
+      <image:caption>Surf Fishing illustrated poster showing an angler casting and local surfperch species</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ccwheelers.com/images/gear-sign.jpg</image:loc>
-      <image:title>Protective riding gear safety sign</image:title>
-      <image:caption>Protective riding gear safety sign</image:caption>
+      <image:loc>https://ccwheelers.com/images/protective-gear-poster.jpg</image:loc>
+      <image:title>Protective Riding Gear and Safety Tips illustrated poster</image:title>
+      <image:caption>Protective Riding Gear and Safety Tips illustrated poster for motorcycle and ATV riders</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://ccwheelers.com/images/helicopter.jpg</image:loc>
@@ -561,9 +581,9 @@
       <image:caption>Park entrance kiosk</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ccwheelers.com/images/noise-sign.jpg</image:loc>
-      <image:title>Mufflers and OHV noise regulations sign</image:title>
-      <image:caption>Mufflers and OHV noise regulations sign</image:caption>
+      <image:loc>https://ccwheelers.com/images/mufflers-noise-poster.jpg</image:loc>
+      <image:title>Mufflers and OHV Noise Regulations illustrated poster</image:title>
+      <image:caption>Mufflers and OHV Noise Regulations illustrated poster</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://ccwheelers.com/images/oceano-dunes-ada-accessible-beach-ramp.jpg</image:loc>
@@ -646,9 +666,9 @@
       <image:caption>Family in a rented yellow dune buggy</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ccwheelers.com/images/rules-sign.jpg</image:loc>
-      <image:title>Other rules and regulations safety sign</image:title>
-      <image:caption>Other rules and regulations safety sign</image:caption>
+      <image:loc>https://ccwheelers.com/images/other-rules-poster.jpg</image:loc>
+      <image:title>Other Rules and Regulations For Your Safety illustrated poster</image:title>
+      <image:caption>Other Rules and Regulations For Your Safety illustrated poster</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://ccwheelers.com/images/rv-dusk.jpg</image:loc>
@@ -671,9 +691,9 @@
       <image:caption>Lowered two wheel drive truck stuck in the sand</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://ccwheelers.com/images/surf-safety-sign.jpg</image:loc>
-      <image:title>Surviving the Surf ocean safety sign</image:title>
-      <image:caption>Surviving the Surf ocean safety sign</image:caption>
+      <image:loc>https://ccwheelers.com/images/surviving-the-surf-poster.jpg</image:loc>
+      <image:title>Surviving the Surf illustrated poster</image:title>
+      <image:caption>Surviving the Surf illustrated poster showing sleeper waves, rip currents, and backwash</image:caption>
     </image:image>
     <image:image>
       <image:loc>https://ccwheelers.com/images/trail-sign.jpg</image:loc>

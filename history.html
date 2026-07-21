@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-N9HPGB15V1"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-N9HPGB15V1');
+// CCWheelers click events: money actions for an info site
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a, button');
+  if (!a || typeof gtag !== 'function') return;
+  var href = a.getAttribute && (a.getAttribute('href') || '');
+  if (href.indexOf('tel:') === 0) {
+    gtag('event', 'phone_call', { page_path: location.pathname });
+  } else if (/^https?:\/\//.test(href) && href.indexOf('ccwheelers.com') === -1) {
+    gtag('event', 'outbound_click', { link_domain: href.split('/')[2] || '', page_path: location.pathname });
+  }
+}, { passive: true });
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>History of Oceano Dunes: Over a Century of Vehicle Recreation | CCWheelers</title>
+<meta name="description" content="From horse and buggy to dune buggies to EVs: the real history of driving on Oceano Dunes, California's last drivable beach, since 1905.">
+<link rel="canonical" href="https://ccwheelers.com/history.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CCWheelers">
+<meta property="og:title" content="History of Oceano Dunes: Over a Century of Vehicle Recreation">
+<meta property="og:description" content="From horse and buggy to dune buggies to EVs: the real history of driving on Oceano Dunes, California's last drivable beach, since 1905.">
+<meta property="og:url" content="https://ccwheelers.com/history.html">
+<meta property="og:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="History of Oceano Dunes: Over a Century of Vehicle Recreation">
+<meta name="twitter:image" content="https://ccwheelers.com/images/og-image.jpg?v=2">
+<link rel="icon" type="image/png" href="images/favicon.png?v=4">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png?v=4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<script src="nav.js" defer></script>
+<script src="share.js" defer></script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="index.html">
+      <span class="logo-chip"><img src="images/ccw-logo.png" alt="Central Coast Wheelers logo"></span>
+      <div class="logo-text">CCWheelers<small>Oceano Dunes Info Center</small></div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="camping.html">Camping</a></li>
+        <li><a href="creek.html">Creek</a></li>
+        <li><a href="tides.html">Tides</a></li>
+        <li><a href="planner.html">Planner</a></li>
+        <li><a href="dayuse.html">Day Use</a></li>
+        <li><a href="map.html">Map</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="merch.html">Merch</a></li>
+        <li class="has-sub">
+          <button class="sub-toggle" aria-expanded="false" aria-haspopup="true">More <span aria-hidden="true">&#9662;</span></button>
+          <ul class="sub">
+            <li><a href="weather.html">Weather</a></li>
+            <li><a href="gas.html">Gas Prices</a></li>
+            <li><a href="fires.html">Campfires</a></li>
+            <li><a href="rules.html">Rules</a></li>
+            <li><a href="tips.html">Tips</a></li>
+            <li><a href="emergency.html">Emergency</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="history.html" class="active">History</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary nav-book" href="https://www.reservecalifornia.com" target="_blank" rel="noopener">Book a Campsite</a>
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main>
+<div class="page-hero">
+  <img src="images/dunes-pristine.jpg" alt="Open sand dunes on a clear day at Oceano Dunes, California" width="1200" height="799" fetchpriority="high">
+</div>
+
+<div class="page-head">
+  <div class="wrap">
+    <span class="eyebrow">A Century on the Sand</span>
+    <h1>The History of Oceano Dunes</h1>
+    <p>Horse and buggy. Model Ts. Jeeps. Dune buggies. Quads. Now electric UTVs. Different machines, same stretch of coast, for well over a hundred years. Here's how it happened, and why it's still legal today.</p>
+    <div class="share-row">
+      <span class="share-label">Know someone who'd find this useful?</span>
+      <div class="share-links">
+        <button class="share-btn" type="button" id="nativeShareBtn">Share</button>
+        <a class="share-btn share-fallback" id="fbShareBtn" href="#" target="_blank" rel="noopener" aria-label="Share on Facebook">Facebook</a>
+        <a class="share-btn share-fallback" id="xShareBtn" href="#" target="_blank" rel="noopener" aria-label="Share on X">X</a>
+        <button class="share-btn" type="button" id="copyLinkBtn">Copy Link</button>
+      </div>
+    </div>
+  </div>
+  <svg class="head-dunes" viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M0,49 C240,16 420,61 720,41 C980,24 1180,61 1440,37 L1440,90 L0,90 Z" fill="#e8dcc8" opacity=".55"/>
+    <path d="M0,65 C300,37 560,78 860,57 C1120,40 1300,74 1440,57 L1440,90 L0,90 Z" fill="#efe5d2" opacity=".8"/>
+    <path d="M0,78 C360,53 700,88 1040,72 C1240,62 1360,80 1440,74 L1440,90 L0,90 Z" fill="#f5ede0"/>
+  </svg>
+</div>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">1769</span>
+    <h2 class="section-title">The Skinny Bear That Named a Lake</h2>
+    <p class="lede" style="max-width:80ch">Gaspar de Portolá's overland expedition, the first Spanish land party to travel this stretch of California, crossed these dunes in 1769. Local lore says his men killed and ate a starving bear near the lake at the south end of today's park; several of them fell sick that night. They named the spot Oso Flaco, Spanish for "skinny bear," and the name stuck. Oso Flaco Lake still carries it today.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow">Before the Engine</span>
+      <h2 class="section-title">Wheels Before the Automobile</h2>
+      <p class="lede">For thousands of years before any of this, the Northern Chumash people used this stretch of coast, drawing on its dunes, wetlands, and tide life.</p>
+      <p style="margin-top:16px;color:var(--ink-soft)">When settlers arrived, they found something unusual: unlike most California beaches, the hard-packed sand here was firm enough to drive a wagon on. Horse-drawn buggies were using this beach as a road decades before the first engine ever turned over on it.</p>
+    </div>
+    <div>
+      <span class="eyebrow">1905</span>
+      <h2 class="section-title">The Automobile Finds the Beach</h2>
+      <p class="lede">Around 1905, the automobile showed up, and the beach never went back to horses only.</p>
+      <p style="margin-top:16px;color:var(--ink-soft)">The same flat, firm sand that worked for buggies turned out to be perfect for cars. Early tourism brochures for the area listed "automobiling on the sand" as a top attraction, and the beach hosted straight-line speed trials, the same idea as Daytona Beach in Florida, decades before NASCAR ever raced there. A dance pavilion went up on what's still called Pavilion Hill, and the beach became a destination as much for the driving as for anything else.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--dune)">1920s to 1940s</span>
+    <h2 class="section-title">The Dunites</h2>
+    <p class="lede" style="color:rgba(255,255,255,.85)">Not everyone who came to the dunes came for the driving.</p>
+    <p style="margin-top:16px;color:rgba(255,255,255,.8);max-width:75ch">Starting in the 1920s, a loose colony of artists, mystics, and Depression-era dropouts built a scattering of driftwood cabins in the dunes. An astrologer named Gavin Arthur organized the group and named the settlement Moy Mell, Gaelic for "pastures of honey." Visitors included John Steinbeck and Upton Sinclair, and the colony published its own literary magazine, <em>The Dune Forum</em>. World War II ended it: the Coast Guard used the cabins for training, the Depression that had pushed people into the dunes was over, and the Dunites never regrouped. Moy Mell sits somewhere under the sand of today's SVRA.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap split">
+    <div>
+      <span class="eyebrow">1950s to 1970s</span>
+      <h2 class="section-title">Born to Run: Dune Buggy Culture</h2>
+      <p class="lede">After the war, surplus Jeeps came home with the soldiers who'd driven them, and off-roading caught on as a hobby up and down this coast.</p>
+      <p style="margin-top:16px;color:var(--ink-soft)">Families started "duning" as a weekend tradition, camping right on the beach with nothing more than tents and slide-in campers. By the early 1970s it was a full-blown scene: a Life Magazine photo from July 4, 1971 famously showed something like 100,000 dune buggy fans packed onto the beach at once. Pismo Beach, the town nearest the dunes, is still known as the birthplace of dune buggy culture.</p>
+    </div>
+    <div>
+      <span class="eyebrow">1974 to 1982</span>
+      <h2 class="section-title">From Open Beach to State Park</h2>
+      <p class="lede">All that driving was happening on open beach, not a managed park. That changed in 1974.</p>
+      <p style="margin-top:16px;color:var(--ink-soft)">Oceano Dunes became a California state park that year, covering roughly 3,600 acres. In 1982, State Parks' Off-Highway Motor Vehicle Recreation Division took over active management and built the first entrance kiosks and fencing, creating what's considered California's first official off-highway vehicle park.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band" style="background:var(--ocean-deep)">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--dune)">Since the 1980s</span>
+    <h2 class="section-title">A Shrinking Footprint</h2>
+    <p class="lede" style="color:rgba(255,255,255,.85)">The riding area has been shrinking ever since it was formalized.</p>
+    <p style="margin-top:16px;color:rgba(255,255,255,.8);max-width:75ch">Of the roughly 3,600 acres in the park, less than 1,500 are open to OHVs today. The rest is set aside for habitat, including seasonal nesting closures for the western snowy plover and California least tern. Dust and air quality became the next front: nearby Nipomo Mesa residents and regulators raised concerns that blowing sand from the open riding area was affecting local air quality, a fight that would eventually end up in court.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">2019 to 2025</span>
+    <h2 class="section-title">The Fight for the Future</h2>
+    <p class="lede">In 2019, California Coastal Commission staff recommended phasing out OHV riding at Oceano Dunes entirely.</p>
+    <p style="margin-top:16px;color:var(--ink-soft);max-width:80ch">The full Commission rejected that recommendation 8 to 2, but reversed course in February 2021, voting to eliminate motorized access within three years. Friends of Oceano Dunes and the Specialty Equipment Market Association sued, arguing the Commission had overstepped its authority under San Luis Obispo County's existing coastal plan. The county Superior Court agreed. California's Second District Court of Appeal upheld that ruling in March 2025, and on July 9, 2025, the California Supreme Court declined to hear any further appeal, closing the case for good. Off-highway vehicle recreation at Oceano Dunes remains legal.</p>
+    <div class="callout info" style="max-width:80ch">
+      <strong>Still an evolving story</strong>
+      A separate federal lawsuit and ongoing dust and habitat rules mean the details of what's allowed where can still change. Always check current <a href="rules.html">rules</a> and closures before you go.
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <span class="eyebrow" style="color:var(--dune)">Today</span>
+    <h2 class="section-title">Still the Last Beach You Can Drive On</h2>
+    <p class="lede" style="color:rgba(255,255,255,.85)">Oceano Dunes is the only state park left in California where you can legally drive a vehicle on the beach.</p>
+    <p style="margin-top:16px;color:rgba(255,255,255,.8);max-width:75ch">The machines keep changing. Horse and buggy gave way to the Model T, the Model T to the Jeep, the Jeep to the dune buggy, and gas engines are increasingly sharing the sand with electric UTVs and e-bikes. What hasn't changed is that people have been doing this here, legally, for well over a century.</p>
+
+    <ul class="rules-list" style="max-width:80ch;margin-top:32px">
+      <li><strong>Thousands of years ago:</strong> the Northern Chumash inhabit and manage this stretch of coast.</li>
+      <li><strong>1769:</strong> the Portolá expedition passes through and names Oso Flaco Lake.</li>
+      <li><strong>1905:</strong> automobiles start driving the beach; speed trials begin.</li>
+      <li><strong>1920s to 1940s:</strong> the Dunites art colony lives at Moy Mell.</li>
+      <li><strong>1950s to 1970s:</strong> post-war Jeep culture grows into dune buggy culture; Pismo becomes its birthplace.</li>
+      <li><strong>1974:</strong> Oceano Dunes becomes a California state park.</li>
+      <li><strong>1982:</strong> State Parks begins active SVRA management; the first kiosks and fencing go up.</li>
+      <li><strong>2021:</strong> the California Coastal Commission votes to phase out OHV access.</li>
+      <li><strong>2025:</strong> the Court of Appeal, then the California Supreme Court, affirm that OHV recreation at Oceano Dunes is legal.</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="callout info" style="max-width:80ch">
+      <strong>Keep the dunes open</strong>
+      This history exists because people showed up, over and over, for more than a hundred years, and because a lot of them fought to keep this place open when it mattered. Donations of any kind should go to <a href="http://oceanodunes.org">Friends of Oceano Dunes (FoOD)</a>, who carry that fight forward today.
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>CCWheelers</h4>
+        <p>The Oceano Dunes Information Center. Built and maintained by Central Coast Wheelers, an OHV community keeping the dunes clean, safe, and open.</p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <ul>
+          <li><a href="camping.html">Camping</a></li>
+          <li><a href="creek.html">Creek Status</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="planner.html">Trip Planner</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="dayuse.html">Day Use</a></li>
+          <li><a href="rules.html">Rules</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Ride</h4>
+        <ul>
+          <li><a href="map.html">Virtual Map</a></li>
+          <li><a href="tips.html">Riding Tips</a></li>
+          <li><a href="history.html">History</a></li>
+          <li><a href="emergency.html">Emergency Info</a></li>
+          <li><a href="about.html">About CCW</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Oceano Dunes SVRA<br>928 Pacific Blvd<br>Oceano, CA 93445</li>
+          <li>Info: (805) 473-7220 (recorded)</li>
+          <li>Reservations: (800) 444-7275</li>
+          <li><a href="contact.html">Contact CCWheelers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 CCWheelers.com · Central Coast Wheelers</span>
+      <span>Not an official California State Parks website</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
