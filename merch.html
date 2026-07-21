@@ -212,9 +212,9 @@ document.addEventListener('click', function (e) {
     <div class="share-row">
       <span class="share-label">Know a fellow rider who'd love this?</span>
       <div class="share-links">
-        <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fccwheelers.com%2Fmerch.html" target="_blank" rel="noopener" aria-label="Share on Facebook">Facebook</a>
-        <a class="share-btn" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fccwheelers.com%2Fmerch.html&amp;text=Check%20out%20the%20CCWheelers%20Gift%20Shop" target="_blank" rel="noopener" aria-label="Share on X">X</a>
-        <a class="share-btn" href="https://www.snapchat.com/scan?attachmentUrl=https%3A%2F%2Fccwheelers.com%2Fmerch.html" target="_blank" rel="noopener" aria-label="Share on Snapchat">Snapchat</a>
+        <button class="share-btn" type="button" id="nativeShareBtn">Share</button>
+        <a class="share-btn share-fallback" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fccwheelers.com%2Fmerch.html" target="_blank" rel="noopener" aria-label="Share on Facebook">Facebook</a>
+        <a class="share-btn share-fallback" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fccwheelers.com%2Fmerch.html&amp;text=Check%20out%20the%20CCWheelers%20Gift%20Shop" target="_blank" rel="noopener" aria-label="Share on X">X</a>
         <button class="share-btn" type="button" id="copyLinkBtn">Copy Link</button>
       </div>
     </div>
@@ -616,6 +616,33 @@ document.addEventListener('click', function (e) {
 
     render(0);
   });
+})();
+</script>
+
+<script>
+(function () {
+  // Native share hands off to the user's actual installed, already-logged-in
+  // apps (Messages, Facebook, Snapchat, WhatsApp, Mail, etc.) via the OS share
+  // sheet -- no web login involved. Where it's not supported (mainly desktop
+  // browsers without Web Share API), fall back to the plain Facebook/X links.
+  var pageUrl = 'https://ccwheelers.com/merch.html';
+  var nativeBtn = document.getElementById('nativeShareBtn');
+  var fallbackLinks = document.querySelectorAll('.share-fallback');
+  if (nativeBtn) {
+    if (navigator.share) {
+      for (var i = 0; i < fallbackLinks.length; i++) { fallbackLinks[i].style.display = 'none'; }
+      nativeBtn.addEventListener('click', function () {
+        navigator.share({
+          title: 'CCWheelers Gift Shop',
+          text: 'Check out the CCWheelers Gift Shop, gifts from Oceano Dunes.',
+          url: pageUrl
+        }).catch(function () {});
+        if (typeof gtag === 'function') { gtag('event', 'merch_share_native', {}); }
+      });
+    } else {
+      nativeBtn.style.display = 'none';
+    }
+  }
 })();
 </script>
 
