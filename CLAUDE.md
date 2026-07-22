@@ -6,6 +6,11 @@ Public info site for Oceano Dunes SVRA, run by Central Coast Wheelers (a father-
 
 - **Plain static HTML/CSS/JS. No frameworks, no build step.** Every page is a self-contained `.html` file. Keep it that way — do not introduce React, bundlers, npm builds, or TypeScript.
 - **Deploys are automatic.** Pushing to `main` on GitHub deploys to ccwheelers.com via Netlify in ~1 minute. NEVER run `netlify deploy` manually; git push is the only deploy path.
+- **Deploys cost real money, so batch them.** Every push to `main` triggers a production deploy that costs 15 Netlify credits (about **$0.10**), whether it changed one word or the whole site. On 2026-07-22 a single morning of work produced 64 deploys (~$6.40) because each small change was pushed on its own.
+  - Put **`[skip ci]`** at the end of the commit message for work-in-progress commits. Netlify skips the build entirely, and nothing deploys.
+  - Leave `[skip ci]` OFF the **final** commit of a work session. That one commit deploys everything accumulated before it.
+  - Example: `git commit -m "Fix nav spacing on map page [skip ci]"` while working, then `git commit -m "Add Sunset Collection section"` when the session is done and ready to go live.
+  - If you need something live immediately, just omit `[skip ci]` on that commit. Correctness beats thrift; the rule is about avoiding 60 deploys where 2 would do.
 - **Serverless functions** live in `netlify/functions/` (`gas.mjs` = AAA gas prices at `/api/gas`, `metrics.mjs` = dashboard data). They run on Netlify, not in the browser. API keys live in Netlify environment variables, never in this repo.
 
 ## Design system (do not deviate)
