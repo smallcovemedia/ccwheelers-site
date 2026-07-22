@@ -140,7 +140,7 @@ document.addEventListener('click', function (e) {
 
   /* picker: big viewer on the left, design list on the right */
   .sc-picker{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:start;margin-top:8px}
-  .sc-stage{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+  .sc-stage{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;scroll-margin-top:90px}
   .sc-view{background:linear-gradient(135deg,var(--sand-deep),var(--sand));border-radius:10px;overflow:hidden;position:relative;aspect-ratio:1/1;display:grid;place-items:center}
   .sc-view img{width:100%;height:100%;object-fit:contain;display:block}
   .sc-shots{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
@@ -564,7 +564,11 @@ document.addEventListener('click', function (e) {
     b.className = 'sc-thumb';
     b.setAttribute('aria-current', i === 0 ? 'true' : 'false');
     b.innerHTML = '<img src="' + d.th + '" alt="" loading="lazy"><span>' + d.name + '</span>';
-    b.addEventListener('click', function () { select(i); });
+    b.addEventListener('click', function () {
+      select(i);
+      var stage = document.querySelector('.sc-stage');
+      if (stage) stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
     thumbsEl.appendChild(b);
   });
 
