@@ -114,7 +114,7 @@ footer a:hover{color:var(--dune)}
   .menu-toggle{position:absolute;right:10px;top:50%;transform:translateY(-50%)}
   .logo-text{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;width:max-content}
   .logo-text small{letter-spacing:1.5px}
-  header.nav-open nav>ul{display:flex;flex-direction:column;align-items:stretch;gap:0;position:absolute;top:70px;left:0;right:0;background:var(--ocean-deep);padding:10px 0 14px;border-bottom:1px solid rgba(255,255,255,.12);box-shadow:0 18px 30px rgba(0,0,0,.35)}
+  header.nav-open nav>ul{display:flex;flex-direction:column;align-items:stretch;gap:0;position:absolute;top:70px;left:0;right:0;background:var(--ocean-deep);padding:10px 0 14px;border-bottom:1px solid rgba(255,255,255,.12);box-shadow:0 18px 30px rgba(0,0,0,.35);max-height:calc(100vh - 70px);overflow-y:auto;-webkit-overflow-scrolling:touch}
   header.nav-open nav a{display:block;padding:13px 26px;font-size:16px;border-bottom:1px solid rgba(255,255,255,.06)}
   .cards,.cards.two,.stat-row{grid-template-columns:1fr}
   .stat-row{grid-template-columns:repeat(2,1fr)}
