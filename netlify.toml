@@ -98,8 +98,12 @@
   to = "https://files.cdn.printful.com/:splat"
   status = 200
 
-# ---- Fallback: anything unknown lands on the homepage ----
+# Old deep-structure links from forums (ck5.com etc.)
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+  from = "/ccw/*"
+  to = "/map.html"
+  status = 301
+
+# NOTE: no catch-all rewrite. Unknown URLs (including the hacked-era casino
+# spam URLs Google still remembers) must return a real 404 so they fall out
+# of the index. Netlify serves 404.html automatically.
