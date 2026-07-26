@@ -54,7 +54,7 @@ document.addEventListener('click', function (e) {
   .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px 28px}
   .field{min-width:0}
   .field label{display:block;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-soft);margin-bottom:7px}
-  .field input[type=date],.field input[type=time],.field select{width:100%;min-width:0;max-width:100%;box-sizing:border-box;padding:12px 14px;border:2px solid var(--sand-deep);border-radius:10px;font-family:'Inter';font-size:15px;color:var(--ink);background:#fff}
+  .field input[type=text],.field input[type=date],.field input[type=time],.field select{width:100%;min-width:0;max-width:100%;box-sizing:border-box;padding:12px 14px;border:2px solid var(--sand-deep);border-radius:10px;font-family:'Inter';font-size:15px;color:var(--ink);background:#fff}
   .field input:focus,.field select:focus{outline:none;border-color:var(--ocean)}
   input[type=date]::-webkit-date-and-time-value,input[type=time]::-webkit-date-and-time-value{text-align:left}
   .field .pair{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:10px}
@@ -108,11 +108,17 @@ document.addEventListener('click', function (e) {
     .check-group{padding:18px 14px}
     .warn-box,.ok-box{padding:12px 14px;font-size:13.5px}
   }
+  body.print-group .private{display:none!important}
   @media print{
     header,footer,.page-head,.plan-form,.print-btn,.cond-note{display:none !important}
     body{background:#fff}
     #planOut{display:block !important}
     .tide-day,.check-group{box-shadow:none;border:1px solid #ddd;break-inside:avoid}
+    .card{box-shadow:none;border:1px solid #ddd;padding:12px 14px;break-inside:avoid}
+    .cards{gap:10px}
+    body{font-size:13px}
+    .section-title{font-size:22px !important;margin-top:18px !important}
+    .tide-day,.check-group{padding:12px 14px;margin-top:10px}
   }
 </style>
 <script src="nav.js" defer></script>
@@ -239,12 +245,27 @@ document.addEventListener('click', function (e) {
           </select>
         </div>
         <div class="field">
-          <label for="tripType">Trip Type</label>
+          <label for="tripType">Where Are You Staying?</label>
           <select id="tripType">
-            <option value="camp">Beach camping overnight</option>
-            <option value="offsite">Staying off-beach (RV park / hotel), riding days</option>
-            <option value="day">Day trip</option>
+            <option value="camp">On the beach (camping)</option>
+            <option value="town">In town (hotel / RV park)</option>
+            <option value="none">Not overnight (day trip)</option>
           </select>
+        </div>
+        <div class="field">
+          <label for="beachDrive">Driving Onto the Sand?</label>
+          <select id="beachDrive">
+            <option value="yes">Yes, taking a vehicle on the beach</option>
+            <option value="no">No, staying on pavement</option>
+          </select>
+        </div>
+        <div class="field" id="lodgeNameField" style="display:none">
+          <label for="lodgeName">Hotel / RV Park Name</label>
+          <input type="text" id="lodgeName" placeholder="Where you booked">
+        </div>
+        <div class="field" id="lodgeConfField" style="display:none">
+          <label for="lodgeConf">Confirmation # <span style="text-transform:none;letter-spacing:0">(optional, hidden on group copies)</span></label>
+          <input type="text" id="lodgeConf" placeholder="Booking confirmation">
         </div>
         <fieldset>
           <legend>Bringing Any Toys?</legend>
@@ -252,6 +273,7 @@ document.addEventListener('click', function (e) {
             <label><input type="checkbox" id="bAtv">ATVs / quads</label>
             <label><input type="checkbox" id="bSxs">Side-by-side / UTV</label>
             <label><input type="checkbox" id="bBike">Dirt bikes</label>
+            <label><input type="checkbox" id="bRent">Planning to rent</label>
           </div>
         </fieldset>
         <fieldset>
@@ -261,8 +283,17 @@ document.addEventListener('click', function (e) {
             <label><input type="checkbox" id="bFire">Campfire</label>
             <label><input type="checkbox" id="bDog">Bringing a dog</label>
             <label><input type="checkbox" id="bClam">Want to try clamming</label>
+            <label><input type="checkbox" id="bGroup">Group trip</label>
           </div>
         </fieldset>
+        <div class="field" id="mealsFields" style="display:none;grid-column:1/-1">
+          <label>Group Meal Plan <span style="text-transform:none;letter-spacing:0">(so everybody ends up at the same table — printed on every copy)</span></label>
+          <div class="pair" style="grid-template-columns:1fr 1fr 1fr;gap:10px">
+            <input type="text" id="mealB" placeholder="Breakfast: place + time">
+            <input type="text" id="mealL" placeholder="Lunch: place + time">
+            <input type="text" id="mealD" placeholder="Dinner: place + time">
+          </div>
+        </div>
         <div class="field" style="grid-column:1/-1">
           <label for="rideDesc">Describe Your Ride (Optional — We'll Tune the Plan to It)</label>
           <textarea id="rideDesc" rows="2" placeholder="e.g. RZR Turbo on paddle tires, stock Tacoma, sand rail, Banshee, Jeep on 35s…" style="width:100%;padding:12px 14px;border:2px solid var(--sand-deep);border-radius:10px;font-family:'Inter';font-size:15px;color:var(--ink);resize:vertical"></textarea>
@@ -282,7 +313,13 @@ document.addEventListener('click', function (e) {
         <span class="eyebrow">Your Personalized Plan</span>
         <h2 class="section-title" id="planTitle">Your Trip</h2>
       </div>
-      <button class="print-btn" onclick="window.print()">🖨 Print / Save as PDF</button>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="print-btn" onclick="window.print()">🖨 Print My Copy</button>
+        <button class="print-btn" id="groupPrintBtn" style="display:none">👥 Print Group Copy</button>
+        <button class="print-btn" id="sharePlanBtn" style="display:none">📤 Share Plan</button>
+        <a class="print-btn" id="emailPlanBtn" style="text-decoration:none;display:none">✉️ Email</a>
+        <a class="print-btn" id="textPlanBtn" style="text-decoration:none;display:none">💬 Text</a>
+      </div>
     </div>
     <p class="lede" id="planIntro"></p>
     <div id="tideIntel"></div>
@@ -292,7 +329,7 @@ document.addEventListener('click', function (e) {
       <span id="checkProgress" style="font-weight:700;color:var(--ocean-deep);font-size:15px"></span>
     </div>
     <div id="checklists"></div>
-    <p class="cond-note" style="margin-top:20px">Tide predictions from NOAA station 9412110 (Port San Luis). Conditions change: check the <a href="creek.html">creek status</a> the morning you leave, and confirm fire rules at the entrance station. Reservations: (800) 444-7275.</p>
+    <p class="cond-note" style="margin-top:20px" id="planFootnote"></p>
   </div>
 </section>
 </main>
@@ -362,8 +399,8 @@ document.addEventListener('click', function (e) {
   document.getElementById('departDate').value = iso(sun);
 
   /* ---- save & recall trip details on this device ---- */
-  var FIELDS = ['arriveDate','arriveTime','departDate','departTime','vehicle','tripType','rideDesc'];
-  var BOXES = ['bAtv','bSxs','bBike','bKids','bFire','bDog','bClam'];
+  var FIELDS = ['arriveDate','arriveTime','departDate','departTime','vehicle','tripType','beachDrive','lodgeName','lodgeConf','mealB','mealL','mealD','rideDesc'];
+  var BOXES = ['bAtv','bSxs','bBike','bRent','bKids','bFire','bDog','bClam','bGroup'];
   function saveTrip() {
     try {
       var d = {};
@@ -383,8 +420,34 @@ document.addEventListener('click', function (e) {
         ['vehicle','tripType','rideDesc'].forEach(function (id) { if (d[id] !== undefined) document.getElementById(id).value = d[id]; });
       }
       BOXES.forEach(function (id) { if (d[id] !== undefined) document.getElementById(id).checked = d[id]; });
+      /* migrate pre-2.0 saved values */
+      var tt = document.getElementById('tripType');
+      if (tt.value !== 'camp' && tt.value !== 'town' && tt.value !== 'none') {
+        tt.value = (d.tripType === 'offsite') ? 'town' : (d.tripType === 'day') ? 'none' : 'camp';
+      }
     } catch (e) {}
   })();
+
+  /* ---- progressive disclosure ---- */
+  function syncFormVisibility() {
+    var stay = document.getElementById('tripType').value;
+    var bd = document.getElementById('beachDrive');
+    if (stay === 'camp') { bd.value = 'yes'; bd.disabled = true; } else { bd.disabled = false; }
+    var lodge = stay === 'town';
+    document.getElementById('lodgeNameField').style.display = lodge ? '' : 'none';
+    document.getElementById('lodgeConfField').style.display = lodge ? '' : 'none';
+    document.getElementById('mealsFields').style.display = document.getElementById('bGroup').checked ? '' : 'none';
+  }
+  document.getElementById('tripType').addEventListener('change', syncFormVisibility);
+  document.getElementById('bGroup').addEventListener('change', syncFormVisibility);
+  syncFormVisibility();
+
+  /* ---- group print: hide private details ---- */
+  document.getElementById('groupPrintBtn').addEventListener('click', function () {
+    document.body.classList.add('print-group');
+    window.print();
+  });
+  window.addEventListener('afterprint', function () { document.body.classList.remove('print-group'); });
 
   /* ---- smart ride engine: tune recs to what they describe ---- */
   function rideSmart(desc) {
@@ -419,7 +482,7 @@ document.addEventListener('click', function (e) {
       arrive: arrive, depart: depart,
       vehicle: document.getElementById('vehicle').value,
       camp: tripType === 'camp',
-      offsite: tripType === 'offsite',
+      town: tripType === 'town',
       atv: document.getElementById('bAtv').checked,
       sxs: document.getElementById('bSxs').checked,
       bike: document.getElementById('bBike').checked,
@@ -427,15 +490,41 @@ document.addEventListener('click', function (e) {
       fire: document.getElementById('bFire').checked,
       dog: document.getElementById('bDog').checked,
       clam: document.getElementById('bClam').checked,
+      group: document.getElementById('bGroup').checked,
+      lodgeName: document.getElementById('lodgeName').value.trim(),
+      lodgeConf: document.getElementById('lodgeConf').value.trim(),
+      meals: {
+        B: document.getElementById('mealB').value.trim(),
+        L: document.getElementById('mealL').value.trim(),
+        D: document.getElementById('mealD').value.trim()
+      },
       ride: document.getElementById('rideDesc').value.trim()
     };
+    opts.rent = document.getElementById('bRent').checked;
     opts.toys = opts.atv || opts.sxs || opts.bike;
+    opts.riding = opts.toys || opts.rent;
+    /* THE master gate: no sand driving = zero sand content in the plan */
+    opts.sand = opts.camp || opts.toys || document.getElementById('beachDrive').value === 'yes';
+    opts.offsite = opts.town && opts.sand;
+    document.getElementById('groupPrintBtn').style.display = (opts.lodgeConf && opts.group) ? '' : 'none';
     saveTrip();
 
-    buildStatic(opts);
-    document.getElementById('tideIntel').innerHTML = '<div class="tide-day"><h3>Tide Game Plan</h3><p class="advice">Pulling tide predictions for your dates…</p></div>';
+    /* forecast first, so the plan itself is weather-aware */
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=35.0894&longitude=-120.6296' +
+      '&daily=temperature_2m_max,temperature_2m_min,precipitation_sum,precipitation_probability_max,wind_gusts_10m_max' +
+      '&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=America/Los_Angeles&forecast_days=16')
+      .then(function (r) { return r.json(); }).catch(function () { return null; })
+      .then(function (wx) { buildPlan(opts, wx); });
+  });
+
+  function buildPlan(opts, wx) {
+    buildStatic(opts, tripWeather(opts, wx));
+    document.getElementById('tideIntel').innerHTML = opts.sand
+      ? '<div class="tide-day"><h3>Tide Game Plan</h3><p class="advice">Pulling tide predictions for your dates…</p></div>'
+      : '';
     document.getElementById('planOut').style.display = 'block';
     document.getElementById('planSection').scrollIntoView({ behavior: 'smooth' });
+    if (!opts.sand) return; /* no vehicle on the sand: tides, creek, and air-down advice have no business in this plan */
 
     var tidesP = fetch(BASE + '&begin_date=' + ymd(arrive) + '&end_date=' + ymd(new Date(depart.getTime() + 86400000)))
       .then(function (r) { return r.json(); }).catch(function () { return null; });
@@ -452,7 +541,32 @@ document.addEventListener('click', function (e) {
       }
       buildTides(data.predictions, opts, rain);
     });
-  });
+  }
+
+  /* ---------- trip weather: per-day forecast summary ---------- */
+  function tripWeather(o, wx) {
+    if (!wx || !wx.daily || !wx.daily.time) return null;
+    var days = [], d = new Date(o.arrive.toDateString());
+    var last = new Date(o.depart.toDateString());
+    while (d <= last) {
+      var key = d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2);
+      var i = wx.daily.time.indexOf(key);
+      if (i !== -1) days.push({
+        date: new Date(d), hi: wx.daily.temperature_2m_max[i], lo: wx.daily.temperature_2m_min[i],
+        rain: wx.daily.precipitation_sum[i] || 0, prob: wx.daily.precipitation_probability_max[i] || 0,
+        gust: wx.daily.wind_gusts_10m_max[i] || 0
+      });
+      d = new Date(d.getTime() + 86400000);
+    }
+    if (!days.length) return { covered: false };
+    return {
+      covered: true, days: days,
+      rainy: days.some(function (x) { return x.rain >= 0.05 || x.prob >= 40; }),
+      windy: days.some(function (x) { return x.gust >= 25; }),
+      coldNights: days.some(function (x) { return x.lo <= 45; }),
+      hot: days.some(function (x) { return x.hi >= 85; })
+    };
+  }
 
   /* ---------- rain lookup: same-day + 2-day runoff lag ---------- */
   function rainNear(rain, t) {
@@ -598,60 +712,127 @@ document.addEventListener('click', function (e) {
   }
 
   /* ---------- recommendations + checklist ---------- */
-  function buildStatic(o) {
+  function buildStatic(o, wx) {
     var days = Math.round((new Date(o.depart.toDateString()) - new Date(o.arrive.toDateString())) / 86400000);
     document.getElementById('planTitle').textContent = fmtDs(o.arrive) + ' → ' + fmtDs(o.depart);
-    document.getElementById('planIntro').textContent = (o.camp
-      ? days + (days === 1 ? ' night' : ' nights') + ' of beach camping'
-      : o.offsite ? days + (days === 1 ? ' riding day' : ' riding days') + ' from an off-beach basecamp'
-      : 'Day trip') + (o.toys ? ' with toys in tow.' : '.') + ' Here is your game plan.';
+    document.getElementById('planIntro').textContent =
+      (o.camp ? days + (days === 1 ? ' night' : ' nights') + ' of beach camping'
+      : o.town ? days + (days === 1 ? ' night' : ' nights') + ' in town' + (o.sand ? ' with days on the sand' : ', no sand driving')
+      : 'Day trip' + (o.sand ? ' on the sand' : '')) +
+      (o.toys ? ' with toys in tow.' : '.') + ' Here is your game plan.';
 
-    /* --- recommendations (ride-specific first) --- */
-    var recs = rideSmart(o.ride);
-    if (o.offsite) recs.push({ h: 'Off-beach basecamp strategy', p: 'Staying at an RV park or hotel means a beach entry every riding day — so every morning is a mini tow-in. Hit the sand near the day\'s low tide, air down at the pavement each time, and pay day use at the kiosk (or grab an annual pass if you come often). Pro move: stage your toys and gear the night before so you roll at first light, when the beach is empty and the sand is firm.' });
-    recs.push({ h: 'Air down at the pavement, not in the sand', p: 'Drop to 15–20 PSI before you leave the hard surface (never below 15). Low pressure widens your footprint and is the single biggest difference between cruising and digging. Air back up before the highway home — bring a gauge and plan on the air station or your own compressor.' });
-    recs.push({ h: 'Stay on the hard pack', p: 'The firm, wet sand below the last high-tide line is your highway. The dry, deep, churned-up sand near the dunes is where 2WDs die and even 4WDs work hard. Follow the tracks of others down the beach, keep momentum in soft spots, and never stop pointed uphill in loose sand.' });
-    if (o.vehicle === '2wd') recs.push({ h: '2WD reality check', p: 'The park recommends 4WD past Post 2 — with 2WD, everything depends on tide timing and the hard pack. Arrive at low tide, stay off the dry sand entirely, don\'t stop on soft ground, and know that beach towing is available if it goes wrong. If conditions look sketchy when you arrive, camping north of Post 2 near the entrance beats a recovery bill.' });
-    if (o.vehicle === 'rv') recs.push({ h: 'Trailer strategy', p: 'Tow in on the morning low tide — Friday morning is gold, before the weekend chews up the beach. Drop the trailer above the high-tide line and level it before dark. Position so you can pull straight out; backing a trailer in soft sand is misery.' });
-    recs.push({ h: 'Speed rules', p: '15 MPH on the beach and within 50 feet of any camp. Sand Highway is a legal extension of Highway 1 down to Pole 11: seatbelts, helmet law, DUI, and speed limits all enforced.' });
+    var pre = [];
+
+    /* --- weather for the trip dates (forecast-driven, no guessing) --- */
+    if (wx && wx.covered) {
+      var chips = wx.days.map(function (x) {
+        var wet = x.rain >= 0.05 || x.prob >= 40;
+        return '<span class="ev ' + (wet ? 'hi' : 'lo') + '">' + fmtDs(x.date) + ': ' + Math.round(x.hi) + '°/' + Math.round(x.lo) + '°' +
+          (wet ? ' · rain ' + (x.rain >= 0.05 ? x.rain.toFixed(1) + '"' : x.prob + '%') : '') +
+          (x.gust >= 25 ? ' · gusts ' + Math.round(x.gust) : '') + '</span>';
+      }).join('');
+      var wxNotes = [];
+      if (wx.rainy) wxNotes.push('Rain is in this forecast — pack rain gear' + (o.camp ? ', a tarp for gear, and keep firewood covered' : '') + '.');
+      if (wx.windy && (o.sand || o.riding)) wxNotes.push('Gusts over 25 mph expected: goggles for riding, and stake anything light the moment you set it down.');
+      if (wx.coldNights && o.camp) wxNotes.push('Nights dip into the 40s or colder — pack proper sleeping layers, the beach gets cold fast after sunset.');
+      if (wx.hot) wxNotes.push('Heat in the forecast: extra water, and mind paws and bare feet on hot sand.');
+      pre.push('<div class="tide-day"><h3>Weather for Your Dates</h3><div class="evs">' + chips + '</div>' +
+        (wxNotes.length ? '<p class="advice">' + wxNotes.join(' ') + '</p>' : '<p class="advice">No rain in the forecast for your dates. Coastal standard applies: sunny afternoons, wind after lunch, cool evenings.</p>') +
+        '</div>');
+    } else if (wx && !wx.covered) {
+      pre.push('<div class="tide-day"><h3>Weather for Your Dates</h3><p class="advice">Your dates are beyond the 16-day forecast window. Check back closer to the trip and this plan will fold the forecast in automatically.</p></div>');
+    }
+
+    /* --- basecamp block (hotel / RV park stays) --- */
+    if (o.town && (o.lodgeName || o.lodgeConf)) {
+      var lodge = '<div class="tide-day"><h3>Your Basecamp</h3>';
+      if (o.lodgeName) lodge += '<p class="advice"><strong>' + esc(o.lodgeName) + '</strong> — plan check-in around your ' + fmtT(o.arrive) + ' arrival.</p>';
+      if (o.lodgeConf) lodge += '<p class="advice private"><strong>Confirmation #:</strong> ' + esc(o.lodgeConf) + '</p>';
+      if (o.dog) lodge += '<p class="advice">Traveling with the dog: confirm the pet policy and pet fee with the front desk before you arrive.</p>';
+      lodge += '</div>';
+      pre.push(lodge);
+    }
+
+    /* --- group meal plan --- */
+    var mealRows = [];
+    if (o.group) {
+      if (o.meals.B) mealRows.push(['Breakfast', o.meals.B]);
+      if (o.meals.L) mealRows.push(['Lunch', o.meals.L]);
+      if (o.meals.D) mealRows.push(['Dinner', o.meals.D]);
+    }
+    if (mealRows.length) {
+      pre.push('<div class="tide-day"><h3>Group Meal Plan</h3><div class="evs">' +
+        mealRows.map(function (m) { return '<span class="ev lo"><strong>' + m[0] + ':</strong>&nbsp;' + esc(m[1]) + '</span>'; }).join('') +
+        '</div><p class="advice">Same table, same time — share this plan so nobody is texting "where is everyone?" at 8 AM.</p></div>');
+    }
+
+    /* --- recommendations: every card must be earned by an input --- */
+    var recs = [];
+    if (o.sand) {
+      recs = rideSmart(o.ride);
+      if (o.offsite) recs.push({ h: 'Off-beach basecamp strategy', p: 'Staying in town with riding days means a beach entry every morning — a mini tow-in each time. Hit the sand near the day\'s low tide, air down at the pavement every entry, and pay day use at the kiosk (or grab an annual pass if you come often). Pro move: stage toys and gear the night before so you roll at first light, when the beach is empty and firm.' });
+      recs.push({ h: 'Air down at the pavement, not in the sand', p: 'Drop to 15–20 PSI before you leave the hard surface (never below 15). Low pressure widens your footprint and is the single biggest difference between cruising and digging. Air back up before the highway home — bring a gauge and plan on the air station or your own compressor.' });
+      recs.push({ h: 'Stay on the hard pack', p: 'The firm, wet sand below the last high-tide line is your highway. The dry, deep, churned-up sand near the dunes is where 2WDs die and even 4WDs work hard. Follow the tracks of others down the beach, keep momentum in soft spots, and never stop pointed uphill in loose sand.' });
+      if (o.vehicle === '2wd') recs.push({ h: '2WD reality check', p: 'The park recommends 4WD past Post 2 — with 2WD, everything depends on tide timing and the hard pack. Arrive at low tide, stay off the dry sand entirely, don\'t stop on soft ground, and know that beach towing is available if it goes wrong. If conditions look sketchy when you arrive, camping north of Post 2 near the entrance beats a recovery bill.' });
+      if (o.vehicle === 'rv') recs.push({ h: 'Trailer strategy', p: 'Tow in on the morning low tide — Friday morning is gold, before the weekend chews up the beach. Drop the trailer above the high-tide line and level it before dark. Position so you can pull straight out; backing a trailer in soft sand is misery.' });
+      recs.push({ h: 'Speed rules', p: '15 MPH on the beach and within 50 feet of any camp. Sand Highway is a legal extension of Highway 1 down to Pole 11: seatbelts, helmet law, DUI, and speed limits all enforced.' });
+    }
     if (o.toys) recs.push({ h: 'Green sticker & gear', p: 'Every OHV needs current DMV registration (green sticker) or a nonresident permit, an 8-foot whip with a 6"×12" orange/red flag, a working spark arrester, and lights if you ride between sunset and sunrise. Helmets required on ATVs — no passengers on single-seat quads.' });
-    if (o.kids) recs.push({ h: 'Young riders', p: 'Riders under 18 need an ATV safety certificate or direct supervision by a certificate-holding adult; under 14 also requires a parent or guardian supervising. Free training for ages 6–17: (800) 887-2887. Rangers do check.' });
-    if (o.toys) recs.push({ h: 'Read the dunes before you send it', p: 'Dune crests run north–south: gentle on the ocean side, steep drop (the slipface) on the east side. Riding east is where surprises live — crest slow the first time, every time. Walk Competition Hill before you climb it.' });
-    if (o.fire) recs.push({ h: 'Campfire the right way', p: 'Wood only — pallets or boards with nails earn tickets. Collect driftwood freely (after a storm there\'s plenty). Keep real distance between the fire and anything with a gas tank, and never bury a fire in sand: a hidden bed of coals is brutal for the next barefoot kid or parked tire. Let it burn out completely.' });
-    if (o.dog) recs.push({ h: 'Dogs on the beach', p: 'Dogs are welcome but must stay leashed — it protects them from traffic and protects the nesting snowy plovers. Bring shade and fresh water; summer sand gets hot enough to burn paws.' });
+    if (o.rent) recs.push({ h: 'Renting your ride', p: 'Four official concessionaires rent quads, buggies, and side-by-sides right at the entrances: Arnie\'s (805) 474-6060, BJ\'s (805) 481-5411, Steve\'s (805) 481-2597, and Sun Buggie (805) 473-8636. Helmets, whip flags, and a quick lesson are included, and the machines come registered — no green sticker needed. Book ahead for holiday weekends; walk-ups sell out.' });
+    if (o.riding) recs.push({ h: 'Read the dunes before you send it', p: 'Dune crests run north–south: gentle on the ocean side, steep drop (the slipface) on the east side. Riding east is where surprises live — crest slow the first time, every time. Walk Competition Hill before you climb it.' });
+    if (o.kids && o.riding) recs.push({ h: 'Young riders', p: 'Riders under 18 need an ATV safety certificate or direct supervision by a certificate-holding adult; under 14 also requires a parent or guardian supervising — and that applies to rentals too. Free training for ages 6–17: (800) 887-2887. Rangers do check.' });
+    if (o.fire) recs.push({ h: 'Campfire the right way', p: 'Fires are allowed on the sand south of Grand Avenue, up to 3 feet across. Wood only — pallets or boards with nails earn tickets. Collect driftwood freely (after a storm there\'s plenty). Keep real distance between the fire and anything with a gas tank, and put it out with water, never sand: buried coals stay hot for hours. Confirm restrictions at the kiosk on hot, windy days.' });
+    if (o.dog) recs.push({ h: 'Dogs on the beach', p: 'Dogs are welcome but must stay on a leash (6 ft max) — it protects them from traffic and protects the nesting snowy plovers. No dogs at Oso Flaco Lake or the Dune Preserve. Bring shade and fresh water; summer sand gets hot enough to burn paws.' });
     if (o.clam) recs.push({ h: 'Clamming basics', p: 'You need a California fishing license and a rigid measuring device. Pismo clams must be 4½ inches minimum, limit 10, from half an hour before sunrise to half an hour after sunset. Rebury the shorts right where you dug them.' });
-    recs.push({ h: 'Know the creek call', p: 'If Arroyo Grande Creek is posted closed, crossing is a ticket — no exceptions. Check the creek page the morning you leave. When it\'s open and running: cross slow, in the fresh water (not the surf line), and light cars should wait if it\'s over 2 feet deep.' });
-    if (o.camp) recs.push({ h: 'Camp setup, in order', p: 'Arrive → find the high-tide debris line → camp above it with two traffic lanes of room → level up and stake down before dark. The wind picks up in the afternoon; anything light (canopies especially) gets staked or it leaves.' });
-    recs.push({ h: 'Stock up before the gate', p: 'Last stops: Pier Liquor (393 Pier Ave, right by the Oceano gate) for beer, ice, and basics, or hit Vons / Beverage House / the Flyers station on W Grand Ave in Grover Beach for a full run. Already set up? Vendor trucks patrol the beach selling ice, firewood, water, and snacks — flag one down instead of breaking camp. And keep drinks at camp: open containers on an OHV and sand DUIs are both tickets.' });
-    recs.push({ h: 'If you get stuck', p: 'Air down more (to 15), dig out all four tires, keep the front wheels straight, and have friends push while you throttle gently. Never spin — spinning digs a grave. Old duner trick: pour water on the sand in front of your tires — wet sand packs hard and gives you a firm launch ramp, which is why the water\'s edge drives like pavement. Bring jugs or a bucket (ocean\'s right there). CB channel 9 reaches ranger base; a solar call box sits at the Sand Highway entrance.' });
+    if (o.sand) {
+      recs.push({ h: 'Know the creek call', p: 'If Arroyo Grande Creek is posted closed, crossing is a ticket — no exceptions. Check the creek page the morning you leave. When it\'s open and running: cross slow, in the fresh water (not the surf line), and light cars should wait if it\'s over 2 feet deep.' });
+      if (o.camp) recs.push({ h: 'Camp setup, in order', p: 'Arrive → find the high-tide debris line → camp above it with two traffic lanes of room → level up and stake down before dark. The wind picks up in the afternoon; anything light (canopies especially) gets staked or it leaves.' });
+      recs.push({ h: 'Stock up before the gate', p: (o.camp
+        ? 'Last stops: Pier Liquor (393 Pier Ave, right by the Oceano gate) for beer, ice, and basics, or Vons / Beverage House / the Flyers station on W Grand Ave in Grover Beach for a full run. Already set up? Vendor trucks patrol the beach selling ice, firewood, water, and snacks. And keep drinks at camp: open containers on an OHV and sand DUIs are both tickets.'
+        : 'Grab water, snacks, and sunscreen before you hit the sand — there are no services on the beach. Pier Liquor (393 Pier Ave) is the classic last stop by the Oceano gate; the W Grand Ave stores in Grover Beach work too.') });
+      recs.push({ h: 'If you get stuck', p: 'Air down more (to 15), dig out all four tires, keep the front wheels straight, and have friends push while you throttle gently. Never spin — spinning digs a grave. Old duner trick: pour water on the sand in front of your tires — wet sand packs hard. Bring jugs or a bucket (ocean\'s right there). CB channel 9 reaches ranger base; a solar call box sits at the Sand Highway entrance.' });
+    }
+    if (!o.sand) {
+      recs.push({ h: 'Seeing the dunes on foot', p: 'Walking in is free — the $5 day-use fee only applies to vehicles entering the beach. The Grand Avenue (Grover Beach) and Pier Avenue (Oceano) entrances both put you straight onto the sand, and sand wheelchairs are available first come, first served at the entrance stations.' });
+      recs.push({ h: 'The quiet side of the dunes', p: 'For the no-engines experience, the Oso Flaco Lake boardwalk (south end of the park) is a one-mile accessible walk across the lake and through the dunes to the ocean — bird life the whole way. No dogs on that side.' });
+      recs.push({ h: 'Watch the riders', p: 'The beach north of the creek is open to foot traffic and you can watch trucks and quads head south toward the riding area. Best light and fewest crowds: mornings. Bring layers — the coast is 15 degrees cooler than inland and the afternoon wind is real.' });
+    }
 
     document.getElementById('recs').innerHTML =
+      pre.join('') +
       '<h2 class="section-title" style="margin-top:56px;font-size:34px">Tricks of the Trade</h2>' +
       '<div class="cards" style="margin-top:24px">' + recs.map(function (r) {
         return '<div class="card"><h3>' + r.h + '</h3><p>' + r.p + '</p></div>';
       }).join('') + '</div>';
 
-    /* --- checklist --- */
+    /* --- checklist: assembled only from what applies --- */
     var groups = [];
-    var before = ['Campsite reservation confirmed — (800) 444-7275' + (o.camp ? '' : ' (skip if just day use)'),
+    var before = [];
+    if (o.camp) before.push('Campsite reservation confirmed — (800) 444-7275');
+    if (o.town && o.lodgeName) before.push('Lodging confirmed at ' + esc(o.lodgeName) + (o.dog ? ' (pet policy checked)' : ''));
+    if (o.sand) before.push(
       'Check creek status & weather the morning you leave',
       'Check the tide chart for your dates',
       'Tire pressure gauge + air compressor (or plan for the air station)',
       'Tow strap, shovel, and a traction board if you have one',
-      'Water jugs or a bucket — soaking the sand ahead of your tires is the oldest unsticking trick on the dunes',
-      'Water — bring ALL you need, there is none on the beach',
-      'Cooler packed — last ice/beer stop is Pier Liquor (Pier Ave) or Vons / Flyers (W Grand Ave)',
-      'Trash bags — pack out everything',
-      'First aid kit'];
+      'Water jugs or a bucket — soaking the sand ahead of your tires is the oldest unsticking trick on the dunes');
+    else before.push('Check the weather for your dates — coastal mornings are foggy, afternoons windy');
+    before.push('Water' + (o.sand ? ' — bring ALL you need, there is none on the beach' : ' and snacks for the day'));
+    if (o.sand) before.push('Cooler packed — last ice/beer stop is Pier Liquor (Pier Ave) or Vons / Flyers (W Grand Ave)');
+    before.push('Trash bags — pack out everything');
+    if (o.sand || o.riding || o.camp) before.push('First aid kit');
+    if (wx && wx.covered && wx.rainy) before.push('Rain gear — rain is in the forecast for your dates');
+    if (o.group) before.push('Share this plan with the group — print the group copy for everyone');
     if (o.toys) before.push('Green stickers current on every OHV (or nonresident permit)', 'Whip flags on every machine (8 ft, orange/red flag)', 'Helmets for every rider', 'Spark arresters in working order');
-    if (o.kids) before.push('ATV safety certificates for riders under 18');
+    if (o.kids && o.riding) before.push('ATV safety certificates for riders under 18' + (o.rent ? ' (rental shops require them too)' : ''));
+    if (o.rent) before.push('Rental reserved — Arnie\'s, BJ\'s, Steve\'s, or Sun Buggie (book ahead on weekends)');
     if (o.fire) before.push('Lighter/matches — firewood can be collected on the beach');
-    if (o.dog) before.push('Leash, dog water bowl, and shade for the dog');
+    if (o.dog) before.push('Leash (6 ft), dog water bowl, and shade for the dog');
     if (o.clam) before.push('Fishing license + rigid clam measuring gauge');
     if (o.camp) before.push('Headlamps/lanterns — it gets DARK', 'Stakes and guylines rated for wind');
     groups.push({ h: '📋 Before You Leave Home', items: before });
 
-    groups.push({ h: '🚧 At the Entrance', items: [
+    if (o.sand) groups.push({ h: '🚧 At the Entrance', items: [
       (o.camp ? 'Reservation confirmation pulled up and ready to show at the kiosk'
               : 'Pay the day-use fee at the kiosk' + (o.offsite ? ' — every riding day, so consider an annual pass' : '')),
       'Air down to 15–20 PSI on the pavement',
@@ -667,24 +848,56 @@ document.addEventListener('click', function (e) {
       'Walk your exit route while it\'s light',
       'No gray water on the beach — it\'s state law'] });
 
-    groups.push({ h: (o.toys ? '🏁 Every Ride' : '🚗 On the Sand'), items: (o.toys ? [
+    if (o.riding) groups.push({ h: '🏁 Every Ride', items: [
       'Helmets on, whips up, flags flying',
       'Buddy system — never ride alone in the dunes',
       'Crest every dune slow the first time (slipfaces face east)',
       '15 MPH near camps and on the beach',
-      'Stay out of fenced/posted nesting areas'] : [
+      'Stay out of fenced/posted nesting areas'] });
+    else if (o.sand) groups.push({ h: '🚗 On the Sand', items: [
       'Stay on the hard pack below the debris line',
       '15 MPH near camps and on the beach',
       'Watch for riders coming off the dunes',
-      'Stay out of fenced/posted nesting areas']) });
+      'Stay out of fenced/posted nesting areas'] });
+    else groups.push({ h: '🏖 At the Beach', items: [
+      'Sunscreen and layers — coastal weather flips fast',
+      'Stay out of fenced/posted nesting areas',
+      'Keep clear of vehicle lanes when crossing the open beach' + (o.dog ? '— dog leashed at all times' : '')] });
 
     document.getElementById('checklists').innerHTML = groups.map(function (g, gi) {
       return '<div class="check-group"><h3>' + g.h + '</h3><ul>' + g.items.map(function (it, i) {
         return '<li><label><input type="checkbox"><span>' + it + '</span></label></li>';
       }).join('') + '</ul></div>';
     }).join('');
+    /* --- shareable plan summary (never includes confirmation numbers) --- */
+    var sl = ['Oceano Dunes trip: ' + fmtDs(o.arrive) + ' to ' + fmtDs(o.depart)];
+    sl.push(o.camp ? 'Staying: beach camping south of Post 2'
+          : o.town ? ('Staying: ' + (o.lodgeName ? o.lodgeName : 'in town'))
+          : 'Day trip');
+    if (mealRows.length) mealRows.forEach(function (m) { sl.push(m[0] + ': ' + m[1]); });
+    if (o.riding) sl.push(o.rent ? 'Riding: renting at the entrance' : 'Riding: bringing our own machines');
+    sl.push('', 'Full plan builder: https://ccwheelers.com/planner.html');
+    var shareText = sl.join('\n');
+    var shareTitle = 'Oceano Dunes Trip Plan';
+    document.getElementById('emailPlanBtn').href = 'mailto:?subject=' + encodeURIComponent(shareTitle + ' · ' + fmtDs(o.arrive)) + '&body=' + encodeURIComponent(shareText);
+    document.getElementById('emailPlanBtn').style.display = '';
+    document.getElementById('textPlanBtn').href = 'sms:?&body=' + encodeURIComponent(shareText);
+    document.getElementById('textPlanBtn').style.display = '';
+    var spb = document.getElementById('sharePlanBtn');
+    if (navigator.share) {
+      spb.style.display = '';
+      spb.onclick = function () {
+        navigator.share({ title: shareTitle, text: shareText }).catch(function () {});
+      };
+    }
+
+    document.getElementById('planFootnote').innerHTML = o.sand
+      ? 'Tide predictions from NOAA station 9412110 (Port San Luis). Conditions change: check the <a href="creek.html">creek status</a> the morning you leave, and confirm fire rules at the entrance station. Reservations: (800) 444-7275.'
+      : 'Hours, policies, and conditions change: confirm details with businesses directly, and for park questions call the rangers at (805) 473-7220.';
     updateCheckProgress();
   }
+
+  function esc(t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
 
   /* ---------- checklist progress counter ---------- */
   function updateCheckProgress() {
