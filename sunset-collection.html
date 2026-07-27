@@ -158,6 +158,11 @@ document.addEventListener('click', function (e) {
   .sc-shot img{width:100%;height:100%;object-fit:cover;display:block}
   .sc-shot[aria-current="true"]{border-color:var(--sunset-hot)}
 
+  .sc-types{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+  .sc-type{background:#fff;border:2px solid var(--sand-deep);color:var(--ocean);font-family:'Barlow Condensed';font-weight:700;font-size:14px;letter-spacing:.3px;text-transform:uppercase;border-radius:99px;padding:7px 16px;cursor:pointer;transition:background .15s ease,border-color .15s ease,color .15s ease}
+  .sc-type:hover{border-color:var(--dune)}
+  .sc-type[aria-current="true"]{background:var(--ocean);border-color:var(--ocean);color:#fff}
+
   .sc-info .sc-edition{display:inline-block;background:var(--sunset-hot);color:#fff;font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-radius:99px;padding:4px 12px}
   .sc-info h2{font-family:'Barlow Condensed';font-size:clamp(30px,4vw,42px);font-weight:800;color:var(--ocean);margin:14px 0 6px;line-height:1.05}
   .sc-info .sc-tag{font-size:16px;color:var(--ink-soft);max-width:46ch}
@@ -285,7 +290,10 @@ document.addEventListener('click', function (e) {
         <span class="sc-edition" id="scEdition">No. 1 of 6</span>
         <h2 id="scName">Hidden Treasure</h2>
         <p class="sc-tag" id="scTag">A buggy parked at the water line, a heart drawn in the sand, and whatever it is you came out here to find.</p>
-        <div class="sc-price" id="scPrice">$53.35<small>Crop hoodie &middot; black, charcoal, military green or peach</small></div>
+
+        <div class="sc-types" id="scTypes" role="group" aria-label="Choose a product"></div>
+
+        <div class="sc-price" id="scPrice">$66.50<small>Crop hoodie &middot; black, charcoal, military green or peach</small></div>
         <div class="sc-buy">
           <a class="btn btn-primary" id="scBuy" href="https://ccwheelers-oceano-dunes.printful.me/product/cc-wheelers-sunset-collection-hidden-treasure" target="_blank" rel="noopener">Pick Size &amp; Color</a>
         </div>
@@ -459,6 +467,7 @@ document.addEventListener('click', function (e) {
   var DESIGNS = [
     {
       n: 1, name: 'Hidden Treasure', slug: 'cc-wheelers-sunset-collection-hidden-treasure',
+      hoodieSlug: 'sunset-collection-no1-hidden-treasure', mugSlug: 'black-glossy-mug-6a65ce2302366',
       tag: 'A buggy parked at the water line, a heart drawn in the sand, and whatever it is you came out here to find.',
       art: 'images/merch/sc-01-hidden-treasure-lg.jpg', th: 'images/merch/sc-01-hidden-treasure-th.jpg',
       alt: 'Hidden Treasure: a dune buggy, a heart drawn in the sand, and a treasure chest at sunset, Oceano Dunes California',
@@ -467,6 +476,7 @@ document.addEventListener('click', function (e) {
     },
     {
       n: 2, name: 'Sunset Together', slug: 'cc-wheelers-sunset-collection-sunset-together',
+      hoodieSlug: 'sunset-collection-no2-better-together', mugSlug: 'black-glossy-mug-6a65ceb3e63b4',
       tag: 'Two people on the tailgate of a buggy, watching the sun go down over the water. The reason most of us come back.',
       art: 'images/merch/sc-02-sunset-together-lg.jpg', th: 'images/merch/sc-02-sunset-together-th.jpg',
       alt: 'Sunset Together: a couple sitting on a dune buggy watching the sunset, Oceano Dunes California',
@@ -475,6 +485,7 @@ document.addEventListener('click', function (e) {
     },
     {
       n: 3, name: 'Just Us', slug: 'cc-wheelers-sunset-collection-just-us',
+      hoodieSlug: 'sunset-collection-no3-just-us', mugSlug: 'black-glossy-mug-6a65cf3fe4154',
       tag: 'Out past the crowds with one other person and a full tank. No plan, no schedule, no one else around.',
       art: 'images/merch/sc-03-just-us-lg.jpg', th: 'images/merch/sc-03-just-us-th.jpg',
       alt: 'Just Us: a couple riding a dune buggy together over the dunes at sunset, Oceano Dunes California',
@@ -483,6 +494,7 @@ document.addEventListener('click', function (e) {
     },
     {
       n: 4, name: 'Our Escape', slug: 'cc-wheelers-sunset-collection-our-escape',
+      hoodieSlug: 'sunset-collection-no4-our-escape', mugSlug: 'black-glossy-mug-6a65cfe299ff4',
       tag: 'Camp chairs, a fire ring, and two mugs going cold while nobody gets up to fix it.',
       art: 'images/merch/sc-04-our-escape-lg.jpg', th: 'images/merch/sc-04-our-escape-th.jpg',
       alt: 'Our Escape: a beach campfire, camp chairs, and coffee mugs with a dune buggy at sunset, Oceano Dunes California',
@@ -491,6 +503,7 @@ document.addEventListener('click', function (e) {
     },
     {
       n: 5, name: 'Better Together', slug: 'cc-wheelers-sunset-collection-better-together',
+      hoodieSlug: 'sunset-collection-no5-better-together', mugSlug: 'black-glossy-mug-6a65d049d00f1',
       tag: 'The walk down the beach after the riding is done and the buggy is parked for the night.',
       art: 'images/merch/sc-05-better-together-lg.jpg', th: 'images/merch/sc-05-better-together-th.jpg',
       alt: 'Better Together: a couple walking the beach hand in hand with their dune buggy, Oceano Dunes California',
@@ -499,6 +512,7 @@ document.addEventListener('click', function (e) {
     },
     {
       n: 6, name: 'Love Runs on Sand', slug: 'cc-wheelers-sunset-collection-love-runs-on-sand',
+      hoodieSlug: 'sunset-collection-no6-love-runs-on-sand', mugSlug: 'black-glossy-mug-6a65d0bc0ca21',
       tag: 'Truck, trailer, fire going, nowhere to be in the morning. A whole weekend in one picture.',
       art: 'images/merch/sc-06-love-runs-on-sand-lg.jpg', th: 'images/merch/sc-06-love-runs-on-sand-th.jpg',
       alt: 'Love Runs on Sand: a truck and camper trailer parked at a beach campfire at sunset, Oceano Dunes California',
@@ -507,6 +521,17 @@ document.addEventListener('click', function (e) {
     }
   ];
 
+  // Four product types share the same six designs. "slug" is the field on
+  // each DESIGNS entry holding that type's Printful product slug, except
+  // stickers, which are one shared product (not printed per-design).
+  var PRODUCT_TYPES = [
+    { key: 'crop', label: 'Crop Hoodie', slugField: 'slug', price: '$66.50', note: 'Crop hoodie &middot; black, charcoal, military green or peach' },
+    { key: 'hoodie', label: 'Hoodie', slugField: 'hoodieSlug', price: '$62.50', note: 'Regular unisex hoodie &middot; black, charcoal, military green or peach' },
+    { key: 'mug', label: 'Mug', slugField: 'mugSlug', price: '$10.50', note: '11oz glossy mug, printed with this design' },
+    { key: 'sticker', label: 'Stickers', slug: 'ccwheelers-vinyl-decals', price: '$2.00', note: 'CCWheelers Sunset vinyl decal, fits any design in the collection' }
+  ];
+  var currentType = 0;
+
   var view = document.getElementById('scView');
   var shotsEl = document.getElementById('scShots');
   var thumbsEl = document.getElementById('scThumbs');
@@ -514,6 +539,8 @@ document.addEventListener('click', function (e) {
   var nameEl = document.getElementById('scName');
   var tagEl = document.getElementById('scTag');
   var buy = document.getElementById('scBuy');
+  var typesEl = document.getElementById('scTypes');
+  var priceEl = document.getElementById('scPrice');
   if (!view || !thumbsEl) return;
 
   var current = 0;
@@ -536,14 +563,25 @@ document.addEventListener('click', function (e) {
     });
   }
 
+  function applyType() {
+    var d = DESIGNS[current];
+    var t = PRODUCT_TYPES[currentType];
+    var slug = t.key === 'sticker' ? t.slug : d[t.slugField];
+    buy.href = BASE + slug;
+    buy.setAttribute('aria-label', 'Pick options for ' + d.name + ', ' + t.label);
+    priceEl.innerHTML = t.price + '<small>' + t.note + '</small>';
+    Array.prototype.forEach.call(typesEl.children, function (b, k) {
+      b.setAttribute('aria-current', k === currentType ? 'true' : 'false');
+    });
+  }
+
   function select(i) {
     var d = DESIGNS[i];
     current = i;
     edition.textContent = 'No. ' + d.n + ' of 6';
     nameEl.textContent = d.name;
     tagEl.textContent = d.tag;
-    buy.href = BASE + d.slug;
-    buy.setAttribute('aria-label', 'Pick size and color for ' + d.name);
+    applyType();
 
     var list = shotsFor(d);
     shotsEl.innerHTML = '';
@@ -580,6 +618,22 @@ document.addEventListener('click', function (e) {
       if (stage) stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
     thumbsEl.appendChild(b);
+  });
+
+  PRODUCT_TYPES.forEach(function (t, k) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'sc-type';
+    b.textContent = t.label;
+    b.setAttribute('aria-current', k === 0 ? 'true' : 'false');
+    b.addEventListener('click', function () {
+      currentType = k;
+      applyType();
+      if (typeof gtag === 'function') {
+        gtag('event', 'sunset_type_select', { product_type: t.key });
+      }
+    });
+    typesEl.appendChild(b);
   });
 
   select(0);
