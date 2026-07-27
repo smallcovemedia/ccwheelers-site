@@ -91,13 +91,6 @@
   to = "/gallery.html"
   status = 301
 
-# Proxy Printful product thumbnails through our own domain so
-# ad blockers and strict privacy settings don't hide them
-[[redirects]]
-  from = "/pfimg/*"
-  to = "https://files.cdn.printful.com/:splat"
-  status = 200
-
 # Old deep-structure links from forums (ck5.com etc.)
 [[redirects]]
   from = "/ccw/*"

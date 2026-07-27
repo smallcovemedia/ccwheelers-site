@@ -29,12 +29,40 @@ async function runReport(token, property, body) {
 }
 const rows = (r) => (r.rows || []).map((x) => ({ dims: (x.dimensionValues || []).map((d) => d.value), vals: (x.metricValues || []).map((m) => Number(m.value)) }));
 
-export default async () => {
+const TIMEZONE = "America/Los_Angeles"; // property timezone
+
+// ?month=YYYY-MM pins the whole dashboard to one calendar month. No param =
+// the rolling last-30-days view. A month that has already closed can never
+// change, so its response gets cached hard.
+function resolveRange(req) {
+  const m = new URL(req.url).searchParams.get("month") || "";
+  if (!/^\d{4}-\d{2}$/.test(m)) {
+    return { range: { startDate: "30daysAgo", endDate: "today" }, period: "Last 30 days", closed: false };
+  }
+  const [y, mo] = m.split("-").map(Number);
+  const nowKey = new Date().toLocaleDateString("en-CA", {
+    timeZone: TIMEZONE, year: "numeric", month: "2-digit",
+  }).slice(0, 7);
+  const current = m === nowKey;
+  const lastDay = new Date(Date.UTC(y, mo, 0)).getUTCDate();
+  return {
+    range: {
+      startDate: `${m}-01`,
+      endDate: current ? "today" : `${m}-${String(lastDay).padStart(2, "0")}`,
+    },
+    period: new Date(Date.UTC(y, mo - 1, 1))
+      .toLocaleDateString("en-US", { month: "long", year: "numeric", timeZone: "UTC" }) +
+      (current ? " (so far)" : ""),
+    closed: !current && m < nowKey,
+  };
+}
+
+export default async (req) => {
   const property = process.env.GA4_PROPERTY_ID, email = process.env.GSA_EMAIL, pem = (process.env.GSA_KEY || "").replace(/\\n/g, "\n");
   if (!property || !email || !pem) return Response.json({ sample: true, reason: "env vars not set" }, { headers: { "Cache-Control": "public, s-maxage=300" } });
   try {
     const token = await accessToken(email, pem);
-    const range = { startDate: "30daysAgo", endDate: "today" };
+    const { range, period, closed } = resolveRange(req);
     const [totals, events, pages, sources, cities, devices, pageTime] = await Promise.all([
       runReport(token, property, { dateRanges: [range], metrics: [{ name: "totalUsers" }, { name: "screenPageViews" }, { name: "averageSessionDuration" }] }),
       runReport(token, property, { dateRanges: [range], dimensions: [{ name: "eventName" }], metrics: [{ name: "eventCount" }],
@@ -53,7 +81,7 @@ export default async () => {
     const ev = Object.fromEntries(rows(events).map((r) => [r.dims[0], r.vals[0]]));
     return Response.json({
       sample: false,
-      period: "Last 30 days",
+      period,
       updated: new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }),
       totals: {
         visitors: rows(totals)[0]?.vals[0] ?? 0,
@@ -69,7 +97,9 @@ export default async () => {
       locations: rows(cities).filter((r) => r.dims[0] && r.dims[0] !== "(not set)").map((r) => ({ name: r.dims[0] + (r.dims[1] && r.dims[1] !== "(not set)" ? ", " + r.dims[1] : ""), visitors: r.vals[0] })),
       devices: rows(devices).map((r) => ({ name: { desktop: "Computer", mobile: "Phone", tablet: "Tablet" }[r.dims[0]] || r.dims[0], visitors: r.vals[0] })),
       pageTime: rows(pageTime).filter((r) => r.vals[1] > 0).map((r) => ({ path: r.dims[0], seconds: Math.round(r.vals[0] / r.vals[1]) })),
-    }, { headers: { "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400" } });
+    }, { headers: { "Cache-Control": closed
+      ? "public, s-maxage=31536000, immutable"   // a finished month never changes
+      : "public, s-maxage=3600, stale-while-revalidate=86400" } });
   } catch (err) {
     return Response.json({ sample: true, reason: String(err) }, { headers: { "Cache-Control": "public, s-maxage=300" } });
   }
