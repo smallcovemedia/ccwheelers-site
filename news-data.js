@@ -8,6 +8,15 @@
    ============================================================ */
 window.CCW_NEWS = [
   {
+    date: '2026-07-26',
+    tag: 'community',
+    title: 'CCWheelers Sister Site Now Up, Covering the Oregon Dunes',
+    summary: 'Planning a trip further up the coast? Oregon Dunes Guide is a new independent visitor guide for the Oregon Dunes National Recreation Area, built by the same team, covering camping, riding, tides, and trip planning for Florence, Winchester Bay, and Coos Bay.',
+    source: 'CCWheelers',
+    url: 'https://oregondunesguide.com/'
+  },
+
+  {
     date: '2026-07-17',
     tag: 'community',
     title: 'The CCWheelers Merch Shop Is Open',

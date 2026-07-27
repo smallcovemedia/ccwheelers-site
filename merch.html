@@ -52,6 +52,11 @@ document.addEventListener('click', function (e) {
   .shop-hero img{width:100%;height:clamp(190px,26vw,340px);object-fit:cover;object-position:center 42%;display:block}
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   .shop-note{font-size:13.5px;color:var(--ink-soft);margin-top:12px}
+  .shop-catnav{background:var(--sand-deep);border-bottom:1px solid rgba(14,58,77,.08);position:sticky;top:70px;z-index:90}
+  .shop-catnav .wrap{display:flex;gap:10px;flex-wrap:wrap;padding:14px 24px}
+  .shop-catnav a{display:inline-flex;align-items:center;padding:8px 18px;border-radius:999px;background:#fff;color:var(--ocean);font-family:'Barlow Condensed';font-weight:700;font-size:14px;letter-spacing:.5px;text-transform:uppercase;text-decoration:none;box-shadow:var(--shadow);transition:background .15s ease,color .15s ease}
+  .shop-catnav a:hover{background:var(--ocean);color:#fff}
+  @media(max-width:600px){.shop-catnav{position:static}.shop-catnav .wrap{padding:12px 16px;gap:8px}.shop-catnav a{padding:7px 14px;font-size:12.5px}}
   .sticker-band{position:relative;background:linear-gradient(180deg,var(--ocean) 0%,var(--ocean-deep) 100%);padding-top:56px;overflow:hidden}
   .sticker-band .wave-top{position:absolute;top:0;left:0;width:100%;height:auto;display:block}
   .sticker-band .eyebrow{color:var(--dune)}
@@ -200,6 +205,16 @@ document.addEventListener('click', function (e) {
   <h1 class="sr-only">CCWheelers Merch</h1>
 </div>
 
+<nav class="shop-catnav" aria-label="Shop by category">
+  <div class="wrap">
+    <a href="#men">Men</a>
+    <a href="#women">Women</a>
+    <a href="#kids">Kids</a>
+    <a href="#pets">Pets</a>
+    <a href="#misc">Misc</a>
+  </div>
+</nav>
+
 <section style="padding-top:0">
   <div class="wrap">
     <span class="eyebrow">For The Ones Who Keep Coming Back</span>
@@ -219,7 +234,7 @@ document.addEventListener('click', function (e) {
   </div>
 </section>
 
-<section class="sticker-band">
+<section class="sticker-band" id="misc">
   <svg class="wave-top" viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <path d="M0,0 L1440,0 L1440,30 C1320,50 1200,10 1080,30 C960,50 840,10 720,30 C600,50 480,10 360,30 C240,50 120,10 0,30 Z" fill="#f5ede0"/>
   </svg>
@@ -323,7 +338,7 @@ document.addEventListener('click', function (e) {
     <h2 class="section-title">See The Art Up Close</h2>
 
     <div class="merch-hero-grid">
-      <div class="merch-hero-card" data-tile="women">
+      <div class="merch-hero-card" id="women" data-tile="women">
         <span class="merch-hero-cat">Women</span>
         <div class="merch-hero-art">
           <button class="merch-hero-nav prev" aria-label="Previous design">&#10094;</button>
@@ -337,7 +352,7 @@ document.addEventListener('click', function (e) {
         <a class="btn btn-primary mh-link" target="_blank" rel="noopener">Shop This Design</a>
       </div>
 
-      <div class="merch-hero-card" data-tile="men">
+      <div class="merch-hero-card" id="men" data-tile="men">
         <span class="merch-hero-cat">Men</span>
         <div class="merch-hero-art">
           <button class="merch-hero-nav prev" aria-label="Previous design">&#10094;</button>
@@ -351,7 +366,7 @@ document.addEventListener('click', function (e) {
         <a class="btn btn-primary mh-link" target="_blank" rel="noopener">Shop This Design</a>
       </div>
 
-      <div class="merch-hero-card" data-tile="kids">
+      <div class="merch-hero-card" id="kids" data-tile="kids">
         <span class="merch-hero-cat">Kids</span>
         <div class="merch-hero-art">
           <button class="merch-hero-nav prev" aria-label="Previous design">&#10094;</button>
@@ -365,7 +380,7 @@ document.addEventListener('click', function (e) {
         <a class="btn btn-primary mh-link" target="_blank" rel="noopener">Shop This Design</a>
       </div>
 
-      <div class="merch-hero-card" data-tile="pets">
+      <div class="merch-hero-card" id="pets" data-tile="pets">
         <span class="merch-hero-cat">Accessories</span>
         <div class="merch-hero-art">
           <button class="merch-hero-nav prev" aria-label="Previous design">&#10094;</button>
