@@ -158,18 +158,19 @@ document.addEventListener('click', function (e) {
   .sc-shot img{width:100%;height:100%;object-fit:cover;display:block}
   .sc-shot[aria-current="true"]{border-color:var(--sunset-hot)}
 
-  .sc-types{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
-  .sc-type{background:#fff;border:2px solid var(--sand-deep);color:var(--ocean);font-family:'Barlow Condensed';font-weight:700;font-size:14px;letter-spacing:.3px;text-transform:uppercase;border-radius:99px;padding:7px 16px;cursor:pointer;transition:background .15s ease,border-color .15s ease,color .15s ease}
-  .sc-type:hover{border-color:var(--dune)}
-  .sc-type[aria-current="true"]{background:var(--ocean);border-color:var(--ocean);color:#fff}
-
   .sc-info .sc-edition{display:inline-block;background:var(--sunset-hot);color:#fff;font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border-radius:99px;padding:4px 12px}
   .sc-info h2{font-family:'Barlow Condensed';font-size:clamp(30px,4vw,42px);font-weight:800;color:var(--ocean);margin:14px 0 6px;line-height:1.05}
   .sc-info .sc-tag{font-size:16px;color:var(--ink-soft);max-width:46ch}
-  .sc-price{font-family:'Barlow Condensed';font-weight:800;color:var(--sunset-hot);font-size:30px;margin-top:18px}
-  .sc-price small{display:block;font-family:'Inter';font-size:12.5px;font-weight:500;color:var(--ink-soft);letter-spacing:0}
-  .sc-buy{margin-top:18px}
   .sc-note{font-size:13px;color:var(--ink-soft);margin-top:12px}
+
+  .sc-products{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}
+  .sc-product{background:#fff;border:1px solid rgba(14,58,77,.12);border-radius:10px;padding:14px;display:flex;flex-direction:column;box-shadow:var(--shadow)}
+  .sc-product .sc-product-type{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ink-soft);font-weight:700}
+  .sc-product .sc-product-price{font-family:'Barlow Condensed';font-weight:800;color:var(--sunset-hot);font-size:22px;margin:4px 0 12px}
+  .sc-product .btn{margin-top:auto;font-size:13px;padding:9px 16px;align-self:flex-start}
+  @media(max-width:420px){
+    .sc-products{grid-template-columns:1fr}
+  }
 
   .sc-list{margin-top:26px;border-top:1px solid rgba(14,58,77,.12);padding-top:18px}
   .sc-list h3{font-size:12.5px;letter-spacing:1.6px;text-transform:uppercase;color:var(--ink-soft);font-weight:700;margin-bottom:12px}
@@ -291,12 +292,7 @@ document.addEventListener('click', function (e) {
         <h2 id="scName">Hidden Treasure</h2>
         <p class="sc-tag" id="scTag">A buggy parked at the water line, a heart drawn in the sand, and whatever it is you came out here to find.</p>
 
-        <div class="sc-types" id="scTypes" role="group" aria-label="Choose a product"></div>
-
-        <div class="sc-price" id="scPrice">$66.50<small>Crop hoodie &middot; black, charcoal, military green or peach</small></div>
-        <div class="sc-buy">
-          <a class="btn btn-primary" id="scBuy" href="https://ccwheelers-oceano-dunes.printful.me/product/cc-wheelers-sunset-collection-hidden-treasure" target="_blank" rel="noopener">Pick Size &amp; Color</a>
-        </div>
+        <div class="sc-products" id="scProducts"></div>
         <p class="sc-note">Sizes and colors are chosen at checkout. Printed and shipped by our print partner, usually within a week.</p>
 
         <div class="sc-list">
@@ -525,12 +521,11 @@ document.addEventListener('click', function (e) {
   // each DESIGNS entry holding that type's Printful product slug, except
   // stickers, which are one shared product (not printed per-design).
   var PRODUCT_TYPES = [
-    { key: 'crop', label: 'Crop Hoodie', slugField: 'slug', price: '$66.50', note: 'Crop hoodie &middot; black, charcoal, military green or peach' },
-    { key: 'hoodie', label: 'Hoodie', slugField: 'hoodieSlug', price: '$62.50', note: 'Regular unisex hoodie &middot; black, charcoal, military green or peach' },
-    { key: 'mug', label: 'Mug', slugField: 'mugSlug', price: '$10.50', note: '11oz glossy mug, printed with this design' },
-    { key: 'sticker', label: 'Stickers', slug: 'ccwheelers-vinyl-decals', price: '$2.00', note: 'CCWheelers Sunset vinyl decal, fits any design in the collection' }
+    { key: 'crop', label: 'Crop Hoodie', slugField: 'slug', price: '$66.50' },
+    { key: 'hoodie', label: 'Hoodie', slugField: 'hoodieSlug', price: '$62.50' },
+    { key: 'mug', label: 'Mug', slugField: 'mugSlug', price: '$10.50' },
+    { key: 'sticker', label: 'Stickers', slug: 'ccwheelers-vinyl-decals', price: '$2.00' }
   ];
-  var currentType = 0;
 
   var view = document.getElementById('scView');
   var shotsEl = document.getElementById('scShots');
@@ -538,9 +533,7 @@ document.addEventListener('click', function (e) {
   var edition = document.getElementById('scEdition');
   var nameEl = document.getElementById('scName');
   var tagEl = document.getElementById('scTag');
-  var buy = document.getElementById('scBuy');
-  var typesEl = document.getElementById('scTypes');
-  var priceEl = document.getElementById('scPrice');
+  var productsEl = document.getElementById('scProducts');
   if (!view || !thumbsEl) return;
 
   var current = 0;
@@ -563,15 +556,23 @@ document.addEventListener('click', function (e) {
     });
   }
 
-  function applyType() {
-    var d = DESIGNS[current];
-    var t = PRODUCT_TYPES[currentType];
-    var slug = t.key === 'sticker' ? t.slug : d[t.slugField];
-    buy.href = BASE + slug;
-    buy.setAttribute('aria-label', 'Pick options for ' + d.name + ', ' + t.label);
-    priceEl.innerHTML = t.price + '<small>' + t.note + '</small>';
-    Array.prototype.forEach.call(typesEl.children, function (b, k) {
-      b.setAttribute('aria-current', k === currentType ? 'true' : 'false');
+  function renderProducts(d) {
+    productsEl.innerHTML = '';
+    PRODUCT_TYPES.forEach(function (t) {
+      var slug = t.key === 'sticker' ? t.slug : d[t.slugField];
+      var card = document.createElement('div');
+      card.className = 'sc-product';
+      card.innerHTML = '<span class="sc-product-type">' + t.label + '</span>' +
+        '<span class="sc-product-price">' + t.price + '</span>' +
+        '<a class="btn btn-primary" href="' + BASE + slug + '" target="_blank" rel="noopener">Shop This</a>';
+      var a = card.querySelector('a');
+      a.setAttribute('aria-label', 'Pick options for ' + d.name + ', ' + t.label);
+      a.addEventListener('click', function () {
+        if (typeof gtag === 'function') {
+          gtag('event', 'sunset_type_select', { product_type: t.key, design: d.name });
+        }
+      });
+      productsEl.appendChild(card);
     });
   }
 
@@ -581,7 +582,7 @@ document.addEventListener('click', function (e) {
     edition.textContent = 'No. ' + d.n + ' of 6';
     nameEl.textContent = d.name;
     tagEl.textContent = d.tag;
-    applyType();
+    renderProducts(d);
 
     var list = shotsFor(d);
     shotsEl.innerHTML = '';
@@ -618,22 +619,6 @@ document.addEventListener('click', function (e) {
       if (stage) stage.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
     thumbsEl.appendChild(b);
-  });
-
-  PRODUCT_TYPES.forEach(function (t, k) {
-    var b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'sc-type';
-    b.textContent = t.label;
-    b.setAttribute('aria-current', k === 0 ? 'true' : 'false');
-    b.addEventListener('click', function () {
-      currentType = k;
-      applyType();
-      if (typeof gtag === 'function') {
-        gtag('event', 'sunset_type_select', { product_type: t.key });
-      }
-    });
-    typesEl.appendChild(b);
   });
 
   select(0);
