@@ -109,19 +109,20 @@ const HOUSE = [
 
      `sale` is the effective monthly cost on a half-price annual plan,
      not half the monthly rate, because the offer is on the annual:
-       Section Sponsor  $3,990/yr -> $1,995 first year = $166/mo
-       Featured Partner $1,990/yr ->   $995 first year =  $83/mo
-       Local Listing      $790/yr ->   $395 first year =  $33/mo
-     The sign says "on an annual plan" so nobody reads $166 as the
+       Section Sponsor  $4,990/yr -> $2,495 first year = $208/mo
+       Featured Partner $2,490/yr -> $1,245 first year = $104/mo
+       Local Listing      $990/yr ->   $495 first year =  $41/mo
+     The sign says "on an annual plan" so nobody reads $208 as the
      month-to-month price. */
   var SALE_ENDS = "September 30";
   var TIERS = {
-    listing:  { label: "Tier One",   name: "Local Listing",         price: "$79",  sale: "$33",  note: "Open inventory" },
-    featured: { label: "Tier Two",   name: "Featured Partner",      price: "$199", sale: "$83",  note: "Only three per category" },
-    sponsor:  { label: "Tier Three", name: "Section Sponsor",       price: "$399", sale: "$166", note: "Exclusive. One per section." },
-    /* $7,990/yr -> $3,995 first year = $333/mo. The ladder doubles at
-       every step, which makes it easy to hold in your head on a call. */
-    hero:     { label: "Premium",    name: "Live Conditions Sponsor", price: "$799", sale: "$333", note: "One only. The whole console." }
+    listing:  { label: "Tier One",   name: "Local Listing",         price: "$99",  sale: "$41",  note: "Open inventory" },
+    featured: { label: "Tier Two",   name: "Featured Partner",      price: "$249", sale: "$104", note: "Only three per category" },
+    sponsor:  { label: "Tier Three", name: "Section Sponsor",       price: "$499", sale: "$208", note: "Exclusive. One per section." },
+    /* $9,990/yr -> $4,995 first year = $416/mo. Roughly 2.5x at each
+       step, and every tier stays under what a local business already
+       pays Google, Meta, or Yelp in a month. */
+    hero:     { label: "Premium",    name: "Live Conditions Sponsor", price: "$999", sale: "$416", note: "One only. The whole console." }
   };
 
   function priceHtml(t) {

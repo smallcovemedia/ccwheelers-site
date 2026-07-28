@@ -45,7 +45,7 @@ document.addEventListener('click', function (e) {
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="site.css">
 <script src="nav.js" defer></script>
-<script src="partners.js?v=2" defer></script>
+<script src="partners.js?v=3" defer></script>
 <script src="share.js" defer></script>
 <style>
 /* Advertise page only. Uses the shared palette variables from site.css. */
@@ -119,6 +119,19 @@ document.addEventListener('click', function (e) {
 .tier-hero-note{margin:12px 0 0;font-size:12px;line-height:1.6;color:var(--ink-soft)}
 @media(max-width:900px){ .tier-hero{grid-template-columns:1fr} .tier-hero-price{padding:24px 26px 28px} }
 .pt-mocklabel{display:block;margin-bottom:4px;font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.14em;font-size:10.5px;font-weight:700;color:var(--dune)}
+/* Flat rate block. The single strongest differentiator against Yelp and
+   Google Ads, both of which bill per click. */
+.flat-rate{display:grid;grid-template-columns:.85fr 1.15fr;gap:0;margin-top:26px;border:2px solid var(--dune);border-radius:12px;overflow:hidden;background:#fff}
+.flat-rate-head{background:var(--dune);padding:28px 26px;display:flex;flex-direction:column;justify-content:center}
+.flat-rate-head b{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;font-size:30px;line-height:1.02;color:var(--ocean-deep)}
+.flat-rate-head span{display:block;margin-top:8px;font-size:14px;line-height:1.6;color:rgba(9,40,53,.78)}
+.flat-rate-body{padding:26px 28px}
+.flat-rate-body p{margin:0 0 12px;font-size:14.5px;line-height:1.72;color:var(--ink-soft)}
+.flat-rate-body ul{list-style:none;padding:0;margin:14px 0 0}
+.flat-rate-body li{padding:9px 0;border-top:1px solid var(--sand-deep);font-size:14px;line-height:1.55;color:var(--ink-soft)}
+.flat-rate-body li:first-child{border-top:0}
+.flat-rate-body li strong{color:var(--ocean)}
+@media(max-width:900px){ .flat-rate{grid-template-columns:1fr} }
 /* Launch offer */
 .offer-bar{background:var(--sunset-hot);color:#fff;border-radius:12px;padding:22px 26px;margin-top:26px;display:flex;align-items:center;gap:22px;flex-wrap:wrap}
 .offer-bar .tag{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.14em;font-size:12px;font-weight:800;background:rgba(255,255,255,.22);padding:7px 12px;border-radius:99px;white-space:nowrap}
@@ -276,9 +289,9 @@ document.addEventListener('click', function (e) {
         </ul>
       </div>
       <div class="tier-hero-price">
-        <div class="price"><s>$799</s> $333<small> / month, billed annually</small></div>
-        <p class="annual">Half price before Sept 30. <span class="was">$7,990 a year</span> &rarr; <span class="now">$3,995 first year</span></p>
-        <a class="btn btn-primary" href="#inquire" data-plan="Live Conditions Sponsor, $799 a month">Ask about this</a>
+        <div class="price"><s>$999</s> $416<small> / month, billed annually</small></div>
+        <p class="annual">Half price before Sept 30. <span class="was">$9,990 a year</span> &rarr; <span class="now">$4,995 first year</span></p>
+        <a class="btn btn-primary" href="#inquire" data-plan="Live Conditions Sponsor, $999 a month">Ask about this</a>
         <p class="tier-hero-note">Standard rate after the first year, locked for a further twelve months.</p>
       </div>
     </div>
@@ -288,8 +301,8 @@ document.addEventListener('click', function (e) {
         <span class="flag">Tier One</span>
         <h3>Local Listing</h3>
         <p class="cap">Open inventory</p>
-        <div class="price"><s>$79</s> $33<small> / month, billed annually</small></div>
-        <p class="annual">Half price before Sept 30. <span class="was">$790 a year</span> &rarr; <span class="now">$395 first year</span></p>
+        <div class="price"><s>$99</s> $41<small> / month, billed annually</small></div>
+        <p class="annual">Half price before Sept 30. <span class="was">$990 a year</span> &rarr; <span class="now">$495 first year</span></p>
         <ul>
           <li>Enhanced listing on the category page that fits your business</li>
           <li>Logo, 40 word description, phone number, and directions link</li>
@@ -297,15 +310,15 @@ document.addEventListener('click', function (e) {
           <li>Listed above every unpaid entry in your category</li>
           <li>We write the copy for you if you want</li>
         </ul>
-        <a class="btn btn-ghost" href="#inquire" data-plan="Local Listing, $79 a month">Ask About This</a>
+        <a class="btn btn-ghost" href="#inquire" data-plan="Local Listing, $99 a month">Ask About This</a>
       </div>
 
       <div class="tier featured">
         <span class="flag">Tier Two · Most Popular</span>
         <h3>Featured Partner</h3>
         <p class="cap">Capped at 3 per category</p>
-        <div class="price"><s>$199</s> $83<small> / month, billed annually</small></div>
-        <p class="annual">Half price before Sept 30. <span class="was">$1,990 a year</span> &rarr; <span class="now">$995 first year</span></p>
+        <div class="price"><s>$249</s> $104<small> / month, billed annually</small></div>
+        <p class="annual">Half price before Sept 30. <span class="was">$2,490 a year</span> &rarr; <span class="now">$1,245 first year</span></p>
         <ul>
           <li>Everything in Local Listing</li>
           <li>Top of your category, above the standard listings</li>
@@ -313,15 +326,15 @@ document.addEventListener('click', function (e) {
           <li>A photo with your listing, not just a logo</li>
           <li>Quarterly report on clicks and calls from your placement</li>
         </ul>
-        <a class="btn btn-primary" href="#inquire" data-plan="Featured Partner, $199 a month">Ask About This</a>
+        <a class="btn btn-primary" href="#inquire" data-plan="Featured Partner, $249 a month">Ask About This</a>
       </div>
 
       <div class="tier">
         <span class="flag">Tier Three</span>
         <h3>Section Sponsor</h3>
         <p class="cap">Exclusive. One per section.</p>
-        <div class="price"><s>$399</s> $166<small> / month, billed annually</small></div>
-        <p class="annual">Half price before Sept 30. <span class="was">$3,990 a year</span> &rarr; <span class="now">$1,995 first year</span></p>
+        <div class="price"><s>$499</s> $208<small> / month, billed annually</small></div>
+        <p class="annual">Half price before Sept 30. <span class="was">$4,990 a year</span> &rarr; <span class="now">$2,495 first year</span></p>
         <ul>
           <li>Everything in Featured Partner</li>
           <li>Your name on one whole section: Camping, Rules, Weather, Tides, Map, or Gas Prices<span class="explain">The section header reads "Camping at Oceano Dunes, presented by your business" on every page inside it. See the mock-up further down this page.</span></li>
@@ -329,7 +342,24 @@ document.addEventListener('click', function (e) {
           <li>Nobody else in that section. Not your competitors, not anyone</li>
           <li>First refusal on your section when the term is up<span class="explain">When your term ends, we come back to you first and give you the chance to renew before we offer that section to anyone else. Only if you pass do we sell it to someone new.</span></li>
         </ul>
-        <a class="btn btn-ghost" href="#inquire" data-plan="Section Sponsor, $399 a month">Ask About This</a>
+        <a class="btn btn-ghost" href="#inquire" data-plan="Section Sponsor, $499 a month">Ask About This</a>
+      </div>
+    </div>
+
+    <div class="flat-rate">
+      <div class="flat-rate-head">
+        <b>Flat rate. Every click is free.</b>
+        <span>One number a month. That is the whole bill.</span>
+      </div>
+      <div class="flat-rate-body">
+        <p>Yelp charges around $270 a month for an enhanced profile, then bills you $2 to $10 again every time somebody clicks it. Google Ads works the same way, so a busy Saturday costs you more than a slow Tuesday, and a bad month can cost you more than a good one.</p>
+        <p>We do not do that. You pay one flat monthly rate. If ten thousand people click through to your business, you pay exactly what you would have paid if nobody did. No per-click charge, no bidding against your competitors, no bill that moves around on you.</p>
+        <ul>
+          <li><strong>No per-click fees.</strong> Ever, at any tier</li>
+          <li><strong>No setup or design fee.</strong> Send a logo and a phone number, we build the placement</li>
+          <li><strong>No auto-renew trap.</strong> Monthly plans cancel with 30 days notice</li>
+          <li><strong>No bidding.</strong> Your price does not rise because a competitor turned up</li>
+        </ul>
       </div>
     </div>
 
@@ -513,6 +543,7 @@ document.addEventListener('click', function (e) {
       <div>
         <ul class="rules-list">
           <li><strong>30 days notice to cancel</strong> on monthly plans. If you sell or close the business, we refund the months you have not used.</li>
+          <li><strong>The rate is the whole bill.</strong> No per-click charges, no setup fee, no design fee, and no bidding against anyone. What is on the card is what you pay.</li>
           <li><strong>We will turn business away.</strong> If a placement would mislead a visitor about park rules or safety, we will say no and explain why.</li>
           <li><strong>Rates are reviewed once a year.</strong> Founding partners are exempt for the length of their lock.</li>
         </ul>
@@ -548,10 +579,10 @@ document.addEventListener('click', function (e) {
         <label>What are you interested in?
           <select name="plan" id="planSelect">
             <option value="">Not sure yet, tell me what fits</option>
-            <option>Live Conditions Sponsor, $799 a month</option>
-            <option>Local Listing, $79 a month</option>
-            <option>Featured Partner, $199 a month</option>
-            <option>Section Sponsor, $399 a month</option>
+            <option>Live Conditions Sponsor, $999 a month</option>
+            <option>Local Listing, $99 a month</option>
+            <option>Featured Partner, $249 a month</option>
+            <option>Section Sponsor, $499 a month</option>
             <option>National, all four guides</option>
           </select>
         </label>
