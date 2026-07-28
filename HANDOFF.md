@@ -21,6 +21,148 @@ entries once both sides have acted on them and nothing references them anymore.
 
 ## Messages
 
+### 2026-07-28 (later) - Claude (Opus): the house ads were being cropped on phones. Fixed at the CSS, not the artwork. LOCAL, UNPUSHED.
+
+**The real bug was never the artwork.** `.lsp-art` carried a mobile override,
+`@media(max-width:700px){.lsp-art{aspect-ratio:16/7}}`, against art that is
+16:5. With `object-fit:cover` that trimmed the sides: the visible band was
+500 * 16/7 = 1142.9px centred, so **x below 229 and above 1371 was thrown
+away at every phone width**, because the crop depends only on aspect ratio.
+
+That cut headlines and site URLs off on phones, which is where most of the
+traffic is. Silver Lake read "Make Silver Lake your next du..." with the URL
+cut to "SILVERLAKEDUNEG...". Oregon read "Forty miles of coast. One clear..."
+Both had been signed off on desktop, where they are genuinely fine.
+
+**The fix is one CSS change, applied to all four sites:** the override is
+gone and `object-fit` is now `contain`, so artwork is never cropped at any
+width. Chat's call, and the right one. Designing banners around a 1143px
+safe zone would have pushed an accidental crop onto every future local
+advertiser, who should never have to know it exists.
+
+If taller mobile creative is ever wanted, the answer is separate artwork
+behind `<picture>`, never a forced crop of the desktop banner.
+
+**Three banners were also corrected** (Chat rendered the originals; these are
+re-renders): Little Sahara's headline overflowed the canvas, the Dune Guide
+USA banner reused Oregon's photograph, and the CCWheelers headline read as a
+farewell. It is now "Plan your Oceano Dunes trip with confidence." The hub
+now has original non-photographic artwork that depicts no real location.
+
+**Oregon and Silver Lake were NOT re-rendered.** Once the crop was removed
+both display correctly, so the artwork never needed changing. Both still
+hash exactly as Chat rendered them: `E135F0BE` and `2643F479`.
+
+**Verified, not assumed:**
+- no `aspect-ratio:16/7` rule survives anywhere in any repo
+- rendered ratio is 3.2 against a natural 3.2 at viewport widths 320, 375
+  and 430, with `object-fit:contain` and no crop at any of them
+- the page generators emit only the `live-sponsor-band` container markup and
+  never the CSS, so a rebuild cannot reintroduce the override
+- CCWheelers defines these styles inline in `index.html` only; no other page
+  on that site carries them
+- all five banners render complete at phone size: full emblem, full headline
+  with its full stop, full URL, CTA intact
+- all 20 site copies hash identical to the five masters
+
+**Canonical files now live in the DuneGuideUSA repo**, under `network-ads/`:
+`masters/` holds the five banners, `scripts/` holds the renderer and two QA
+scripts, and `README.md` documents the contract. They previously sat in a
+scratch folder outside git on one machine, which was the only home of both
+the masters and the render code.
+
+Serving stays local to each site. Pulling all four sites' banners from
+duneguideusa.com would add a cross-origin fetch to an image high on the page
+and make the hub a single point of failure for house ads network-wide.
+
+**Also:** Python 3.12.10 and Pillow 12.3.0 are now installed on Mike's PC.
+Until today this artwork could only be rendered inside Chat's Codex
+environment, so it was blocked on Chat's quota.
+
+**Known limit, not a defect.** At a 375px viewport a banner renders about
+325x102, so the 24pt subheading lands near 5px and the URL near 4px. Nothing
+is cut; that copy is simply decorative at phone size. The headline and CTA
+hold up. This is the case for `<picture>` when there is reason to invest.
+
+**Nothing deployed. No commits, no pushes.** Awaiting Mike's approval.
+
+**Files changed here:**
+- `index.html` (inline `.lsp-art` rule)
+- `images/partners/house/` (3 of 5 banners re-rendered)
+- `HANDOFF.md`
+
+
+### 2026-07-28 - Claude (Opus): Dune Guide USA network hub wired into the ad layer. PUSHED as b949bf1.
+
+The parent company now exists: **duneguideusa.com**, the trunk the four
+guides hang off. This repo carries the first implementation of it.
+
+**The one rule that matters.** `partners.js` gained a `LIVE_GUIDE` constant.
+The advertising position directly below Live Conditions always belongs to
+the hub and **never rotates**. Every other unsold position continues to
+rotate through the three sister guides via `houseFor()`, which hashes the
+page path so a given page always shows the same guide instead of shuffling
+on reload.
+
+Both behaviours are fallbacks. The moment a real advertiser is sold into a
+position, the house advert steps aside.
+
+**If the hub is ever renamed or moved, `LIVE_GUIDE` must be updated in four
+repos:** ccwheelers-site, OregonDunesGuide, SilverLakeDuneGuide, and
+littlesaharautah. There is no shared file between them; the constant is
+copied into each.
+
+**Files changed here:**
+- `partners.js` - `LIVE_GUIDE`, UTM attribution on every house link, and
+  `house_ad_click` kept as a separate GA4 event from `partner_click` so
+  network traffic never inflates the figures shown to a paying advertiser
+- `images/partners/house/` - five 1600x500 WebP banners (the four guides
+  plus the hub)
+- `AD-CREATIVE-SPEC.md`, `OPUS-HANDOFF-2026-07-28.md`
+
+**The banner artwork is Chat's, not mine.** I got this wrong earlier and
+the correction matters, because it decides who can fix it. The five WebPs
+were rendered by `render_all_house_ads.py` in Chat's Codex bundle at 06:52,
+the same minute the files appear. This PC has no Python, no Pillow, and no
+WebP encoder at all, so nothing here could have produced them.
+
+**Three defects in that artwork, found after the push.** Nothing broken,
+but nothing I would show an advertiser either:
+
+1. `little-sahara-guide-banner-1600x500.webp` - the headline overflows the
+   canvas. The final letter is clipped and the full stop is gone. It is the
+   longest of the five headlines and nothing constrained it to the frame.
+2. `dune-guide-usa-banner-1600x500.webp` reuses the **same background
+   photograph** as the Oregon banner. The hub is supposed to read as the
+   parent of all four; instead it reads as Oregon a second time, and on the
+   Oregon site both can appear on one page.
+3. The CCWheelers headline, "Plan the last drive-on beach dune trip," was
+   meant as *last remaining* and reads just as easily as *your final trip*.
+   On a site whose whole premise is that Oceano stays open, that is the one
+   suggestion the artwork should not make.
+
+**Superseded - see the later entry at the top of this file.** All three were
+fixed the same day, and the underlying cause turned out to be a mobile CSS
+crop rather than the artwork. Kept here only for the record of what the
+defects were. The original plan below was:
+
+Mike approved fixing all three on 2026-07-28. The patch is written and
+waiting for Chat to run, at `OPUS-HOUSE-AD-FIXES-2026-07-28.md` in the
+Codex bundle: shrink-to-fit headlines inside a 460-1400 safe area, an
+original non-photographic background generated for the hub, and the
+CCWheelers headline replaced with "Plan your Oceano Dunes trip with
+confidence." Oregon and Silver Lake are approved and stay untouched.
+**Rendered but not deployed** until Mike approves the images.
+
+**Still open on this repo:** `advertise.html` carries two figures I invented
+that Mike has not replaced, an offer deadline of **September 30** and a
+scarcity claim of **twelve slots**, and both are live on ccwheelers.com now.
+No legal entity is named in the fine print, though the page promises refunds
+and traffic reporting in the first person. And there is still not a single
+`tel:` link across the 23 pages, which is the whole explanation for the zero
+phone taps in the metrics.
+
+
 ### 2026-07-27 — Mike's Claude → Logan's Claude (advertising platform built, NOT committed, needs decisions)
 
 Full day on a new revenue project: selling advertising across the four

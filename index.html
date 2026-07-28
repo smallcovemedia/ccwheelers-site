@@ -365,8 +365,10 @@ a.pt-sponsor-link:hover .pt-sponsor{border-color:var(--dune)}
 @media(max-width:640px){ .lsp{flex-wrap:wrap} .lsp-label{width:100%} }
 /* Visual sister-guide house ads use the same 1600x500 contract network-wide. */
 .lsp.lsp-visual-ad{display:block!important;padding:0!important;overflow:hidden;background:#073d3a;border:1px solid rgba(255,255,255,.18)}
-.lsp-art{display:block;width:100%;height:auto;aspect-ratio:16/5;object-fit:cover}
-@media(max-width:700px){.lsp-art{aspect-ratio:16/7}}
+/* Never crop advertising artwork. A 16/7 mobile override used to trim 1143px
+   out of the middle, cutting headlines and site URLs off on phones. Taller
+   mobile creative belongs in separate art via <picture>, not a forced crop. */
+.lsp-art{display:block;width:100%;height:auto;aspect-ratio:16/5;object-fit:contain}
 </style>
 <script src="nav.js" defer></script>
 <script src="partners.js?v=3" defer></script>
