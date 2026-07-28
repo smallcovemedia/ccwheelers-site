@@ -81,23 +81,39 @@ const PARTNERS = {
 const HOUSE = [
   {
     name: "Oregon Dunes Guide",
+    banner: "images/partners/house/oregon-dunes-guide-banner-1600x500.webp",
     blurb: "Riding Florence, Winchester Bay, and Coos Bay. Camping, tides, staging areas, and a trip planner for the Oregon coast.",
     url: "https://oregondunesguide.com/?utm_source=ccwheelers&utm_medium=house_ad&utm_campaign=sister_site",
     initials: "OD"
   },
   {
     name: "Silver Lake Dune Guide",
+    banner: "images/partners/house/silver-lake-guide-banner-1600x500.webp",
     blurb: "Mears, Michigan. The only place east of the Mississippi you can legally ride open dunes, and the permits you need to do it.",
     url: "https://silverlakeduneguide.com/?utm_source=ccwheelers&utm_medium=house_ad&utm_campaign=sister_site",
     initials: "SL"
   },
   {
     name: "Little Sahara Utah",
+    banner: "images/partners/house/little-sahara-guide-banner-1600x500.webp",
     blurb: "Juab County, Utah. Sand Mountain, White Sands, and Black Mountain, with fees, camping, and conditions in one place.",
     url: "https://littlesaharautah.com/?utm_source=ccwheelers&utm_medium=house_ad&utm_campaign=sister_site",
     initials: "LS"
   }
 ];
+
+/* The network hub always owns the position directly below Live Conditions.
+   All other unsold positions continue to feature the individual dune guides. */
+const LIVE_GUIDE = {
+  name: "Dune Guide USA",
+  banner: "images/partners/house/dune-guide-usa-banner-1600x500.webp",
+  blurb: "Choose your next dune destination, then open the local guide built for that sand.",
+  tagline: "Choose your next dune destination, then open the local guide built for that sand.",
+  url: "https://duneguideusa.com/?utm_source=ccwheelers&utm_medium=house_ad&utm_campaign=network_hub",
+  initials: "DG",
+  house: true
+};
+
 
 (function () {
   "use strict";
@@ -159,6 +175,23 @@ const HOUSE = [
     return '<span class="pt-mark ' + cls + '">' + esc(entry.initials || entry.name.slice(0, 2)).toUpperCase() + "</span>";
   }
 
+  var GUIDE_SOURCE = "ccwheelers.com";
+
+  function attributedUrl(raw, placement) {
+    if (!raw) return "";
+    try {
+      var url = new URL(raw, location.href);
+      if (url.protocol !== "http:" && url.protocol !== "https:") return raw;
+      if (!url.searchParams.has("utm_source")) url.searchParams.set("utm_source", GUIDE_SOURCE);
+      if (!url.searchParams.has("utm_medium")) url.searchParams.set("utm_medium", "referral");
+      if (!url.searchParams.has("utm_campaign")) url.searchParams.set("utm_campaign", "dune_guide_partner");
+      url.searchParams.set("utm_content", placement.replace(/[^a-z0-9]+/gi, "_").toLowerCase());
+      return url.href;
+    } catch (e) {
+      return raw;
+    }
+  }
+
   /* Every partner link reports itself, which is what makes the
      quarterly report possible without any extra tooling. House ads
      report under a separate event so they never inflate the numbers
@@ -166,11 +199,20 @@ const HOUSE = [
   function track(el, entry, placement) {
     el.addEventListener("click", function () {
       if (typeof window.gtag !== "function") return;
+      var destination = attributedUrl(entry.url, placement);
+      var destinationHost = "";
+      try { destinationHost = new URL(destination, location.href).hostname; } catch (e) {}
       window.gtag("event", entry.house ? "house_ad_click" : "partner_click", {
         partner_name: entry.name,
         partner_tier: entry.house ? "house" : (entry.tier || "sponsor"),
         placement: placement,
-        page_path: location.pathname
+        page_path: location.pathname,
+        guide_source: GUIDE_SOURCE,
+        destination_host: destinationHost,
+        destination_url: destination,
+        link_domain: destinationHost,
+        link_url: destination,
+        outbound: true
       });
     }, { passive: true });
   }
@@ -184,7 +226,7 @@ const HOUSE = [
     var pick = HOUSE[n % HOUSE.length];
     return {
       name: pick.name, blurb: pick.blurb, url: pick.url,
-      initials: pick.initials, tagline: pick.blurb, house: true
+      initials: pick.initials, tagline: pick.blurb, banner: pick.banner, house: true
     };
   }
 
@@ -199,7 +241,7 @@ const HOUSE = [
     var h = PARTNERS.hero;
     if (h && !live(h)) h = null;
     var sold = !!h;
-    if (!h) h = houseFor("hero:live-conditions");
+    if (!h) h = LIVE_GUIDE;
     if (!h) return;
 
     var t = TIERS.hero;
@@ -210,8 +252,8 @@ const HOUSE = [
       (h.tagline ? "<span>" + esc(h.tagline) + "</span>" : "") + "</span>";
 
     var a = document.createElement("a");
-    a.className = "lsp" + (sold ? "" : " lsp-avail");
-    a.href = h.url || "#";
+    a.className = "lsp" + (sold ? "" : " lsp-avail") + (h.banner ? " lsp-visual-ad" : "");
+    a.href = attributedUrl(h.url, "live-conditions") || "#";
     if (h.url) {
       a.target = "_blank";
       a.rel = sold ? "noopener sponsored" : "noopener";
@@ -220,6 +262,7 @@ const HOUSE = [
       ? "Visit " + h.name + ", sponsor of live conditions"
       : "Visit " + h.name + ", our sister guide");
     a.innerHTML = inner;
+    if (h.banner) a.innerHTML = '<img class="lsp-art" src="' + esc(h.banner) + '" alt="' + esc(h.name) + '" loading="eager" decoding="async">';
     track(a, h, "live-conditions");
     host.appendChild(a);
 
@@ -294,7 +337,7 @@ const HOUSE = [
 
     if (s.url) {
       var a = document.createElement("a");
-      a.href = s.url;
+      a.href = attributedUrl(s.url, "section-sponsor:" + key);
       a.target = "_blank";
       /* Paid placements carry rel="sponsored" because Google requires
          it and an unmarked paid link risks a penalty on both sites.
@@ -373,7 +416,7 @@ const HOUSE = [
               '<div class="pt-meta">' +
                 (p.phone ? '<a href="tel:' + esc(p.phone.replace(/[^0-9+]/g, "")) + '">' + esc(p.phone) + "</a>" : "") +
                 (p.phone && p.url ? " &middot; " : "") +
-                (p.url ? '<a href="' + esc(p.url) + '" target="_blank" rel="' + (p.house ? "noopener" : "noopener sponsored") + '">' + (p.house ? "Open the guide" : "Visit site") + '</a>' : "") +
+                (p.url ? '<a href="' + esc(attributedUrl(p.url, "directory:" + cat)) + '" target="_blank" rel="' + (p.house ? "noopener" : "noopener sponsored") + '">' + (p.house ? "Open the guide" : "Visit site") + '</a>' : "") +
               "</div>" +
             "</div>" +
           "</div>";
@@ -436,7 +479,7 @@ const HOUSE = [
               '<div class="pt-meta">' +
                 (p.phone ? '<a href="tel:' + esc(p.phone.replace(/[^0-9+]/g, "")) + '">' + esc(p.phone) + "</a>" : "") +
                 (p.phone && p.url ? " &middot; " : "") +
-                (p.url ? '<a href="' + esc(p.url) + '" target="_blank" rel="' + (p.house ? "noopener" : "noopener sponsored") + '">' + (p.house ? "Open the guide" : "Visit site") + '</a>' : "") +
+                (p.url ? '<a href="' + esc(attributedUrl(p.url, "trip-planner")) + '" target="_blank" rel="' + (p.house ? "noopener" : "noopener sponsored") + '">' + (p.house ? "Open the guide" : "Visit site") + '</a>' : "") +
               "</div>" +
             "</div>" +
           "</div>";
