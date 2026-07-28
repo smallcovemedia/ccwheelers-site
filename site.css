@@ -177,3 +177,75 @@ footer a:hover{color:var(--dune)}
 #lightbox img{max-width:min(1100px,94vw);max-height:78vh;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
 #lightbox p{color:#fff;margin-top:16px;font-size:15px;max-width:70ch;text-align:center}
 #lightbox .close{position:absolute;top:18px;right:24px;background:none;border:none;color:#fff;font-size:34px;cursor:pointer}
+
+/* ==================================================================
+   PARTNERS
+   Paid placements rendered by partners.js. None of this appears until
+   a partner exists in the PARTNERS object, so these rules sit inert
+   on a site with no advertisers.
+================================================================== */
+.pt-sponsor{display:flex;align-items:center;gap:14px;margin-top:22px;padding:14px 18px;background:#fff;border:1px solid var(--sand-deep);border-radius:10px}
+.pt-sponsor-label{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.13em;font-size:10.5px;font-weight:700;color:var(--ink-soft);white-space:nowrap}
+.pt-sponsor-body b{display:block;font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;font-size:19px;color:var(--ocean);line-height:1.1}
+.pt-sponsor-body span{display:block;font-size:12.5px;color:var(--ink-soft);margin-top:2px}
+a.pt-sponsor-link{display:block;text-decoration:none;border:0}
+a.pt-sponsor-link:hover .pt-sponsor{border-color:var(--dune)}
+
+.pt-mark{flex:0 0 48px;width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:"Barlow Condensed",sans-serif;font-weight:800;font-size:18px;letter-spacing:.04em;background:var(--ocean);color:var(--dune)}
+.pt-mark-b{background:var(--dune-dark);color:#fff}
+.pt-mark-c{background:var(--sunset-hot);color:#fff}
+.pt-logo{flex:0 0 48px;width:48px;height:48px;object-fit:contain;border-radius:8px;background:#fff}
+
+.pt-heading{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;font-size:20px;color:var(--ocean);margin:0 0 12px}
+.pt-free-head{margin:22px 0 8px;font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.12em;font-size:12px;font-weight:700;color:var(--ink-soft)}
+.pt-card{display:flex;gap:15px;align-items:flex-start;background:#fff;border:1px solid var(--sand-deep);border-radius:10px;padding:15px 17px;margin-bottom:10px}
+.pt-featured{border:2px solid var(--sunset-hot);box-shadow:0 8px 22px rgba(212,85,42,.12)}
+.pt-photo{flex:0 0 120px;height:82px;object-fit:cover;border-radius:8px}
+.pt-photo-slot{display:flex;align-items:center;justify-content:center;text-align:center;font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.1em;font-size:11px;font-weight:700;color:rgba(255,255,255,.9);background:linear-gradient(150deg,var(--ocean),var(--dune));border-radius:8px;line-height:1.5}
+.pt-body{flex:1;min-width:0}
+.pt-body h4{margin:0;font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;font-size:19px;color:var(--ocean);line-height:1.15}
+.pt-body p{margin:5px 0 0;font-size:13.5px;line-height:1.6;color:var(--ink-soft)}
+.pt-meta{margin-top:7px;font-size:12.5px;color:var(--ink-soft)}
+.pt-meta a{color:var(--sunset-hot);font-weight:700}
+.pt-badge{display:inline-block;background:var(--sunset-hot);color:#fff;font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.1em;font-size:10px;font-weight:800;padding:4px 9px;border-radius:99px;margin-bottom:6px}
+.pt-badge-sand{background:var(--dune-dark)}
+.pt-house .pt-sponsor-label,.pt-house .pt-badge{background:var(--ocean);color:var(--sand)}
+.pt-house.pt-sponsor{background:var(--sand);border-style:dashed}
+.pt-house.pt-card{background:var(--sand);border-style:dashed}
+
+.pt-planner{margin-top:26px;padding-top:22px;border-top:1px solid var(--sand-deep)}
+.pt-planner-note{font-size:12.5px;color:var(--ink-soft);margin:0 0 14px}
+
+@media(max-width:640px){
+  .pt-card{flex-wrap:wrap}
+  .pt-photo{flex:1 1 100%;height:110px}
+  .pt-sponsor{flex-wrap:wrap}
+}
+@media print{ .pt-sponsor,.pt-planner{display:none!important} }
+/* ---- For-sale treatment on unsold inventory ----
+   An empty slot sells nothing. A slot that shows a real, good-looking
+   advert with a price tag on it sells the space itself. */
+.pt-avail{position:relative;padding-top:34px!important;border-style:dashed!important;border-color:var(--dune)!important}
+.pt-ribbon{position:absolute;top:0;left:0;right:0;padding:7px 16px;background:var(--ocean);color:var(--sand);font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.13em;font-size:11px;font-weight:700;border-radius:8px 8px 0 0}
+.pt-ribbon b{color:var(--dune);font-weight:800;letter-spacing:.14em}
+
+.pt-forsale{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+  margin:-4px 0 12px;padding:16px 20px;text-decoration:none;border:0;border-radius:0 0 10px 10px;
+  background:linear-gradient(135deg,var(--sunset-hot),var(--dune-dark));color:#fff;
+  box-shadow:0 10px 26px rgba(212,85,42,.22);transition:transform .15s ease,box-shadow .15s ease}
+.pt-forsale:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(212,85,42,.3)}
+.pt-forsale-left b{display:block;font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;font-size:22px;line-height:1.05;color:#fff}
+.pt-forsale-left span{display:block;font-size:12.5px;color:rgba(255,255,255,.85);margin-top:3px}
+.pt-forsale-right{display:flex;align-items:center;gap:16px}
+.pt-forsale-right>b{font-family:"Barlow Condensed",sans-serif;font-size:32px;line-height:1;color:#fff}
+.pt-forsale-right>b small{font-size:13px;font-weight:600;color:rgba(255,255,255,.75)}
+.pt-forsale-cta{background:#fff;color:var(--sunset-hot);font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;
+  letter-spacing:.08em;font-size:13px;font-weight:800;padding:11px 16px;border-radius:99px;white-space:nowrap}
+.pt-forsale-sponsor{margin-top:-4px}
+.pt-price s{opacity:.6;font-weight:600;margin-right:6px}
+.pt-sale-note{display:block;margin-top:6px;font-size:11.5px;font-weight:700;letter-spacing:.03em;color:#fff;background:rgba(255,255,255,.2);padding:5px 10px;border-radius:99px}
+@media(max-width:640px){
+  .pt-forsale{flex-direction:column;align-items:flex-start}
+  .pt-forsale-right{width:100%;justify-content:space-between}
+}
+@media print{ .pt-forsale,.pt-ribbon{display:none!important} }
