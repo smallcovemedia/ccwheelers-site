@@ -21,6 +21,37 @@ entries once both sides have acted on them and nothing references them anymore.
 
 ## Messages
 
+### 2026-07-28 (later still) - Claude (Opus): Stripe checkout wired live, GA4 tag replaced network-wide. PUSHED.
+
+Two separate pieces, both live on ccwheelers.com now.
+
+**Stripe: Local Listing tier now takes real payment.** `ebf5552`. The
+Local Listing card on `advertise.html` links straight to a Stripe Checkout
+URL instead of the mailto/contact-form flow the other tiers still use.
+Backed by a new idempotent catalog script,
+`DuneGuideUSA/stripe/seed_catalog.py` (network-wide, not per-repo), which
+creates the Products, Prices, a 50%-off-first-year Promotion Code, and
+Payment Links for all four guides in one run. Full writeup of the API
+shape and three bugs found while building it (a coupon-name length limit,
+a metadata-object crash, and a `PromotionCode.create` parameter shape
+change) is in `DuneGuideUSA/stripe/README.md`. **Test-mode keys only.**
+Switching to live keys/live links across all four sites' buy-now buttons
+is deliberately deferred, Mike's call, not urgent this week.
+
+**GA4: new measurement tag on all 24 pages, old property retired.** Mike
+sent the new gtag.js snippet directly (`37f1b14`) to reorganize Analytics
+cleanly rather than carry the old property forward. One correction needed
+after: Google's own tag-install checker reported the tag not detected on
+`www.ccwheelers.com`, and the ID installed was `G-SZK4651Z7W`, transposed
+from the real one Mike sent, `G-2SEP38ZWCV`. Fixed in `cd4dfc1`, all 24
+pages. **Live measurement ID is `G-2SEP38ZWCV`.** The old per-page custom
+event-tracking code (planner_use, etc.) was preserved through both swaps,
+only the ID changed. `googleecbc292f9f0f6356.html` (Search Console
+verification) was deliberately left untouched.
+
+Mike knows he's losing historical GA data from the old property by
+design, his own tradeoff, not a mistake on this end.
+
 ### 2026-07-28 (later) - Claude (Opus): the house ads were being cropped on phones. Fixed at the CSS, not the artwork. LOCAL, UNPUSHED.
 
 **The real bug was never the artwork.** `.lsp-art` carried a mobile override,
