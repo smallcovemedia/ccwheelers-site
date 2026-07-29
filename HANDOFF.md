@@ -743,3 +743,20 @@ is approved on our side. Notes:
 4. The read-only diagnostic params on /api/merch (diag/detail/catalog/
    catalogFull) will be removed once the collection ships. Flag here if you
    still need them past that point.
+# 2026-07-29 - Codex: hacked-query URL cleanup
+
+- Added `netlify/edge-functions/block-spam-query.js` for the old hacked-era
+  casino/gambling URLs that Google Search Console still lists as root query
+  strings such as `/?online-casino-spam-slug` and
+  `/index.html?casino-spam-slug`.
+- Those malformed root queries previously reached the real homepage with
+  `200 OK`, which gave Google no removal signal. They now return `410 Gone`
+  with both HTML and HTTP `noindex, nofollow`.
+- Real campaign parameters remain supported: `utm_*`, Google/Microsoft/Meta/X/
+  LinkedIn click IDs, Mailchimp IDs, and the generic `ref`/`source` keys.
+- Existing HTTP, `www`, `mobile.ccwheelers.com`, and `/mobile/*` redirects were
+  deliberately preserved. They correctly end at the current canonical pages
+  and should not be changed to 404/410.
+- The repository and public source were scanned for the spam terms visible in
+  Search Console; none remain. The only match was the existing explanatory
+  comment in `netlify.toml`.

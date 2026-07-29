@@ -97,6 +97,7 @@
   to = "/map.html"
   status = 301
 
-# NOTE: no catch-all rewrite. Unknown URLs (including the hacked-era casino
-# spam URLs Google still remembers) must return a real 404 so they fall out
-# of the index. Netlify serves 404.html automatically.
+# NOTE: no catch-all rewrite. Unknown paths must return a real 404 so they fall
+# out of the index. Netlify serves 404.html automatically. Hacked-era root
+# query URLs are handled separately by netlify/edge-functions/block-spam-query.js
+# and return 410 while normal UTM/ad tracking parameters remain available.
