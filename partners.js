@@ -230,6 +230,36 @@ const LIVE_GUIDE = {
     };
   }
 
+  function tierLink(t, extraClass) {
+    return '<a class="pt-tier-link' + (extraClass ? " " + extraClass : "") + '" href="advertise.html">' +
+      '<span><b>' + esc(t.label + " · " + t.name) + '</b><small>' + esc(t.note) + '</small></span>' +
+      '<strong>This could be your ad &mdash; click here to see this tier &amp; pricing &rarr;</strong></a>';
+  }
+
+  function houseArt(entry, placement, eager) {
+    if (!entry || !entry.banner || !entry.url) return "";
+    return '<a class="pt-house-creative" href="' + esc(attributedUrl(entry.url, placement)) +
+      '" target="_blank" rel="noopener" aria-label="Visit ' + esc(entry.name) + ', our sister guide">' +
+      '<img class="pt-house-art" src="' + esc(entry.banner) + '" alt="' + esc(entry.name) +
+      '" loading="' + (eager ? "eager" : "lazy") + '" decoding="async"></a>';
+  }
+
+  function ensureCreativeStyles() {
+    if (document.getElementById("partnerCreativeStyles")) return;
+    var style = document.createElement("style");
+    style.id = "partnerCreativeStyles";
+    style.textContent =
+      ".pt-house-creative{display:block;width:100%;margin:0;overflow:hidden;background:#092f33;border:1px solid rgba(11,57,57,.18);box-shadow:0 12px 30px rgba(12,45,44,.12);text-decoration:none}" +
+      ".pt-house-creative:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(12,45,44,.18)}" +
+      ".pt-house-art{display:block;width:100%;height:auto;aspect-ratio:auto;object-fit:contain}" +
+      ".pt-tier-link{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:8px 0 18px;padding:10px 2px;border:0;border-top:1px solid rgba(18,56,54,.22);background:transparent!important;color:inherit!important;box-shadow:none!important;text-decoration:none}" +
+      ".pt-tier-link:hover{border-top-color:#e85d36;transform:none!important;box-shadow:none!important}" +
+      ".pt-tier-link>*{min-width:0;max-width:100%}.pt-tier-link b,.pt-tier-link small{display:block;overflow-wrap:anywhere}.pt-tier-link b{font:800 12px/1.35 sans-serif;letter-spacing:.08em;text-transform:uppercase}.pt-tier-link small{margin-top:2px;font-size:11px;opacity:.68}" +
+      ".pt-tier-link strong{font:800 11px/1.3 sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#d9512c;border-bottom:1px solid currentColor;white-space:nowrap;overflow-wrap:anywhere}" +
+      "@media(max-width:620px){.pt-tier-link{align-items:flex-start;flex-direction:column;gap:7px}.pt-tier-link strong{white-space:normal}}";
+    document.head.appendChild(style);
+  }
+
   /* ---------------- Premium: Live Conditions sponsor ----------------
      Renders into #liveSponsor, which sits between the console and the
      news band on the homepage. Styled to read as part of the console
@@ -252,7 +282,7 @@ const LIVE_GUIDE = {
       (h.tagline ? "<span>" + esc(h.tagline) + "</span>" : "") + "</span>";
 
     var a = document.createElement("a");
-    a.className = "lsp" + (sold ? "" : " lsp-avail") + (h.banner ? " lsp-visual-ad" : "");
+    a.className = "lsp" + (h.banner ? " lsp-visual-ad" : (sold ? "" : " lsp-avail"));
     a.href = attributedUrl(h.url, "live-conditions") || "#";
     if (h.url) {
       a.target = "_blank";
@@ -266,22 +296,7 @@ const LIVE_GUIDE = {
     track(a, h, "live-conditions");
     host.appendChild(a);
 
-    if (!sold) {
-      var sign = document.createElement("a");
-      sign.className = "pt-forsale lsp-forsale";
-      sign.href = "advertise.html";
-      sign.innerHTML =
-        '<span class="pt-forsale-left">' +
-          "<b>The best spot on the site</b>" +
-          "<span>" + t.name + " &middot; " + t.note + "</span>" +
-          saleLine(t) +
-        "</span>" +
-        '<span class="pt-forsale-right">' +
-          priceHtml(t) +
-          '<span class="pt-forsale-cta">Own this spot &rarr;</span>' +
-        "</span>";
-      host.appendChild(sign);
-    }
+    if (!sold) host.insertAdjacentHTML("beforeend", tierLink(t, "lsp-tier-link"));
   }
 
   /* ---------------- Tier Three: section sponsor bar ---------------- */
@@ -303,37 +318,18 @@ const LIVE_GUIDE = {
     if (!host) return;
 
     var bar = document.createElement("div");
-    bar.className = "pt-sponsor" + (s.house ? " pt-house" : "");
-    bar.innerHTML =
-      '<span class="pt-sponsor-label">' + (s.house ? "Our sister guide" : "Presented by") + "</span>" +
-      mark(s, s.house ? "pt-mark-b" : "pt-mark-c") +
-      '<span class="pt-sponsor-body">' +
-        '<b>' + esc(s.name) + "</b>" +
-        (s.tagline ? "<span>" + esc(s.tagline) + "</span>" : "") +
-      "</span>";
+    bar.className = s.house ? "pt-house-creative" : "pt-sponsor";
+    bar.innerHTML = s.house && s.banner
+      ? '<img class="pt-house-art" src="' + esc(s.banner) + '" alt="' + esc(s.name) + '" loading="lazy" decoding="async">'
+      : '<span class="pt-sponsor-label">Presented by</span>' +
+        mark(s, "pt-mark-c") +
+        '<span class="pt-sponsor-body"><b>' + esc(s.name) + "</b>" +
+        (s.tagline ? "<span>" + esc(s.tagline) + "</span>" : "") + "</span>";
 
     /* Unsold section, so the bar doubles as a for-sale sign. The sign
        is built here but appended after the advert, so a prospect reads
        the example first and the price second. */
-    var tag = null;
-    if (s.house) {
-      tag = document.createElement("a");
-      tag.className = "pt-forsale pt-forsale-sponsor";
-      tag.href = "advertise.html";
-      tag.innerHTML =
-        '<span class="pt-forsale-left">' +
-          "<b>This section is available</b>" +
-          "<span>" + TIERS.sponsor.name + " &middot; " + TIERS.sponsor.note + "</span>" +
-          saleLine(TIERS.sponsor) +
-        "</span>" +
-        '<span class="pt-forsale-right">' +
-          priceHtml(TIERS.sponsor) +
-          '<span class="pt-forsale-cta">Sponsor this section &rarr;</span>' +
-        "</span>";
-      bar.classList.add("pt-avail");
-      bar.insertAdjacentHTML("afterbegin",
-        '<span class="pt-ribbon"><b>' + TIERS.sponsor.label + "</b> " + TIERS.sponsor.name + "</span>");
-    }
+    var tag = s.house ? tierLink(TIERS.sponsor, "pt-tier-link-sponsor") : null;
 
     if (s.url) {
       var a = document.createElement("a");
@@ -353,7 +349,7 @@ const LIVE_GUIDE = {
     } else {
       host.appendChild(bar);
     }
-    if (tag) host.appendChild(tag);
+    if (tag) host.insertAdjacentHTML("beforeend", tag);
   }
 
   /* ---------------- Tier One and Two: directory listings ----------------
@@ -392,6 +388,10 @@ const LIVE_GUIDE = {
       var html = heading ? '<h3 class="pt-heading">' + esc(heading) + "</h3>" : "";
 
       rows.forEach(function (p) {
+        if (forSale && p.banner) {
+          html += houseArt(p, "directory:" + cat, false);
+          return;
+        }
         var featured = p.tier === "featured";
         html +=
           '<div class="pt-card' + (featured ? " pt-featured" : "") + (p.house ? " pt-house" : "") +
@@ -424,20 +424,7 @@ const LIVE_GUIDE = {
 
       /* The for-sale sign itself: price, what the tier gets you, and a
          way to buy it, sitting directly under the example. */
-      if (forSale) {
-        html +=
-          '<a class="pt-forsale" href="advertise.html">' +
-            '<span class="pt-forsale-left">' +
-              "<b>This space is available</b>" +
-              "<span>" + esc(forSale.name) + " &middot; " + esc(forSale.note) + "</span>" +
-              saleLine(forSale) +
-            "</span>" +
-            '<span class="pt-forsale-right">' +
-              priceHtml(forSale) +
-              '<span class="pt-forsale-cta">Place your ad here &rarr;</span>' +
-            "</span>" +
-          "</a>";
-      }
+      if (forSale) html += tierLink(forSale);
 
       slot.innerHTML = html;
       slot.classList.add("pt-slot-filled");
@@ -496,6 +483,7 @@ const LIVE_GUIDE = {
   }
 
   function start() {
+    ensureCreativeStyles();
     try { renderHero(); } catch (e) {}
     try { renderSponsor(); } catch (e) {}
     try { renderListings(); } catch (e) {}

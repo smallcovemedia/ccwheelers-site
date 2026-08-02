@@ -46,7 +46,7 @@ document.addEventListener('click', function (e) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="site.css?v=8">
 <style>
   .planner-hero{background:var(--ocean-deep);line-height:0;overflow:hidden}
   .planner-hero img{width:100%;height:clamp(190px,26vw,340px);object-fit:cover;object-position:center 55%;display:block}
@@ -92,6 +92,25 @@ document.addEventListener('click', function (e) {
   .check-group input{margin-top:4px;width:17px;height:17px;accent-color:var(--sunset-hot);flex:0 0 17px}
   .check-group label:has(input:checked) span{text-decoration:line-through;opacity:.5}
 
+  .planner-choice-section{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:28px;margin-top:28px}
+  .planner-choice-section>h2{font-family:'Barlow Condensed';font-size:34px;color:var(--ocean-deep);margin-bottom:6px}
+  .planner-choice-section>.advice{max-width:850px}
+  .planner-dog-filter{display:flex;gap:10px;align-items:flex-start;background:var(--sand);border-left:5px solid var(--sunset-hot);padding:14px 16px;margin:18px 0}
+  .planner-dog-filter b{white-space:nowrap}.planner-dog-filter span{font-size:13px;line-height:1.55;color:var(--ink-soft)}
+  .planner-choice-groups{display:grid;gap:18px;margin-top:22px}
+  .planner-choice-group{border-top:4px solid var(--sunset-hot);background:var(--sand);border-radius:0 0 12px 12px;padding:18px}
+  .planner-choice-group>p{font-family:'Barlow Condensed';font-size:15px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ocean-deep);margin:0 0 12px}
+  .planner-choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .planner-choice-card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--sand-deep);border-radius:10px;padding:18px;min-width:0}
+  .planner-choice-card>a{display:grid;gap:6px}.planner-choice-card>a>b{font-family:'Barlow Condensed';font-size:23px;line-height:1.05;color:var(--ocean-deep)}.planner-choice-card>a>span{font-size:12.5px;line-height:1.55;color:var(--ink-soft)}.planner-choice-card>a>i{font-size:11px;font-style:normal;font-weight:800;color:var(--sunset-hot);margin-top:5px}
+  .planner-pick-toggle{display:flex;align-items:center;gap:9px;margin-top:auto;padding-top:16px;font-size:13px;font-weight:800;cursor:pointer}.planner-pick-toggle input{width:18px;height:18px;accent-color:var(--sunset-hot)}
+  .planner-pick-fields{border-top:1px solid var(--sand-deep);margin-top:14px;padding-top:14px}.planner-pick-fields>div{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.planner-pick-fields label{display:grid;gap:5px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}.planner-pick-fields input,.planner-pick-fields select{width:100%;min-width:0;border:2px solid var(--sand-deep);border-radius:8px;background:#fff;padding:10px;font:inherit;font-size:12px}.planner-pick-fields small{display:block;font-size:9.5px;line-height:1.45;color:var(--ink-soft);margin-top:10px}
+  .planner-pick-status{background:var(--ocean-deep);color:#fff;border-radius:10px;padding:12px 15px;margin-top:16px;font-size:12px;font-weight:800}
+  .planner-selected-schedule{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);padding:24px 26px;margin-top:18px}
+  .planner-selected-schedule h3{font-size:22px;color:var(--ocean);margin-bottom:10px}.planner-schedule-row{display:grid;grid-template-columns:minmax(115px,.45fr) 1fr auto;gap:6px 14px;align-items:center;background:var(--sand);border-radius:8px;padding:11px 13px;margin-top:7px}.planner-schedule-row span{font-size:10px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--sunset-hot)}.planner-schedule-row b{font-size:13px}.planner-schedule-row small{font-size:12px;font-weight:800}.planner-schedule-row em{grid-column:2/4;font-size:11px;color:var(--ink-soft)}
+  .planner-share-panel{background:var(--ocean-deep);color:#fff;border-radius:var(--radius);padding:24px;margin-top:16px}.planner-share-panel[hidden]{display:none}.planner-share-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start}.planner-share-head p{font-size:10px;letter-spacing:.15em;font-weight:800;color:var(--dune);margin:0}.planner-share-head h3{font-size:25px;margin:4px 0 0}.planner-share-head button{border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;padding:8px 11px;border-radius:8px;cursor:pointer}.planner-share-prefs{display:grid;gap:8px;margin:18px 0}.planner-share-prefs label{display:grid;grid-template-columns:auto 1fr;gap:2px 9px;align-items:center;background:rgba(255,255,255,.08);padding:10px 12px;border-radius:8px;font-size:12px}.planner-share-prefs input{width:17px;height:17px;accent-color:var(--dune)}.planner-share-prefs small{grid-column:2;font-size:9px;color:rgba(255,255,255,.72)}
+  .planner-share-actions{display:flex;flex-wrap:wrap;gap:9px}.planner-share-actions button,.planner-share-actions a{border:0;border-radius:999px;background:var(--dune);color:var(--ocean-deep);padding:11px 15px;font-size:11px;font-weight:800;cursor:pointer}.planner-share-panel>p{font-size:11px;margin:12px 0 0;color:#fff}
+
   @media(max-width:760px){
     .form-grid{grid-template-columns:minmax(0,1fr);gap:16px}
     .plan-form{padding:20px 16px;margin-top:-24px}
@@ -107,10 +126,11 @@ document.addEventListener('click', function (e) {
     .ev{font-size:12.5px;padding:7px 10px}
     .check-group{padding:18px 14px}
     .warn-box,.ok-box{padding:12px 14px;font-size:13.5px}
+    .planner-choice-section{padding:22px 16px}.planner-choice-grid{grid-template-columns:1fr}.planner-pick-fields>div{grid-template-columns:1fr}.planner-dog-filter{display:grid}.planner-schedule-row{grid-template-columns:1fr auto}.planner-schedule-row span{grid-column:1/3}.planner-schedule-row b{grid-column:1}.planner-schedule-row em{grid-column:1/3}
   }
   body.print-group .private{display:none!important}
   @media print{
-    header,footer,.page-head,.plan-form,.print-btn,.cond-note{display:none !important}
+    header,footer,.page-head,.plan-form,.print-btn,.cond-note,.planner-choice-section,.planner-share-panel{display:none !important}
     body{background:#fff}
     #planOut{display:block !important}
     .tide-day,.check-group{box-shadow:none;border:1px solid #ddd;break-inside:avoid}
@@ -122,7 +142,7 @@ document.addEventListener('click', function (e) {
   }
 </style>
 <script src="nav.js" defer></script>
-<script src="partners.js?v=3" defer></script>
+<script src="partners.js?v=8" defer></script>
 <script src="share.js" defer></script>
 <script src="conditions.js"></script>
 </head>
@@ -318,13 +338,13 @@ document.addEventListener('click', function (e) {
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <button class="print-btn" onclick="window.print()">🖨 Print My Copy</button>
         <button class="print-btn" id="groupPrintBtn" style="display:none">👥 Print Group Copy</button>
-        <button class="print-btn" id="sharePlanBtn" style="display:none">📤 Share Plan</button>
-        <a class="print-btn" id="emailPlanBtn" style="text-decoration:none;display:none">✉️ Email</a>
-        <a class="print-btn" id="textPlanBtn" style="text-decoration:none;display:none">💬 Text</a>
+        <button class="print-btn" id="sharePlanBtn" style="display:none" aria-expanded="false">📤 Share Plan</button>
       </div>
     </div>
     <p class="lede" id="planIntro"></p>
     <div id="tideIntel"></div>
+    <div id="plannerChoices"></div>
+    <div id="selectedSchedule"></div>
     <div id="recs"></div>
     <div class="plan-head" style="margin-top:56px;align-items:baseline">
       <h2 class="section-title" style="font-size:34px;margin-bottom:0">Your Checklist</h2>
@@ -332,6 +352,21 @@ document.addEventListener('click', function (e) {
     </div>
     <div id="checklists"></div>
     <p class="cond-note" style="margin-top:20px" id="planFootnote"></p>
+    <div class="planner-share-panel" id="plannerSharePanel" hidden>
+      <div class="planner-share-head"><div><p>SHARE THIS PLAN</p><h3>Choose what your group receives</h3></div><button type="button" id="closePlannerShare" aria-label="Close share choices">Close</button></div>
+      <div class="planner-share-prefs">
+        <label><input type="checkbox" id="shareStayDetails" checked><span>Selected stay and reservation name</span></label>
+        <label><input type="checkbox" id="shareTripNotes" checked><span>Trip notes and meeting details</span></label>
+        <label><input type="checkbox" id="shareConfirmation"><span>Confirmation numbers</span><small>Off by default for group privacy</small></label>
+      </div>
+      <div class="planner-share-actions">
+        <button type="button" id="shareDevice">Share with an app</button>
+        <a id="emailPlanBtn" href="#">Email</a>
+        <a id="textPlanBtn" href="#">Text</a>
+        <button type="button" id="copyPlannerShare">Copy plan</button>
+      </div>
+      <p id="plannerShareStatus" aria-live="polite"></p>
+    </div>
   </div>
 </section>
 </main>
@@ -466,6 +501,181 @@ document.addEventListener('click', function (e) {
     return out;
   }
 
+  /* ---- selectable places: chosen stops become the day-by-day plan ---- */
+  var CCW_PLANNER_CATALOG = {
+    camp: [
+      { id: 'oceano-beach-camping', name: 'Oceano Dunes beach camping', desc: 'Reserve a vehicle-access campsite on the sand south of Post 2.', url: 'https://www.reservecalifornia.com/', dogFriendly: true, reservation: true, confirmation: true }
+    ],
+    stay: [
+      { id: 'oxford-suites', name: 'Oxford Suites Pismo Beach', desc: 'All-suite town base with a current pet-friendly listing from the Pismo Beach visitor bureau.', url: 'https://experiencepismobeach.com/places-to-stay/dog-friendly/', dogFriendly: true, reservation: true, confirmation: true },
+      { id: 'seacrest', name: 'SeaCrest OceanFront Hotel', desc: 'Oceanfront Pismo Beach base listed among the visitor bureau\'s dog-friendly stays.', url: 'https://experiencepismobeach.com/places-to-stay/dog-friendly/', dogFriendly: true, reservation: true, confirmation: true },
+      { id: 'holiday-rv', name: 'Holiday RV Park', desc: 'Full-hookup RV base in Pismo Beach; the current visitor listing allows leashed pets.', url: 'https://experiencepismobeach.com/places-to-stay/rv-parks/holiday-rv-park/', dogFriendly: true, reservation: true, confirmation: true }
+    ],
+    rental: [
+      { id: 'arnies', name: 'Arnie\'s ATV Rentals', desc: 'Official park concessionaire near the Pier Avenue entrance.', url: 'https://ohv.parks.ca.gov/?page_id=30465', reservation: true, confirmation: true },
+      { id: 'bjs', name: 'BJ\'s ATV Rentals', desc: 'Official park concessionaire serving Oceano Dunes riders.', url: 'https://ohv.parks.ca.gov/?page_id=30465', reservation: true, confirmation: true },
+      { id: 'steves', name: 'Steve\'s ATV Rentals', desc: 'Official park concessionaire with machines for a planned dune session.', url: 'https://ohv.parks.ca.gov/?page_id=30465', reservation: true, confirmation: true },
+      { id: 'sun-buggie', name: 'Sun Buggie Fun Rentals', desc: 'Official park concessionaire for buggy and OHV experiences.', url: 'https://ohv.parks.ca.gov/?page_id=30465', reservation: true, confirmation: true }
+    ],
+    breakfast: [
+      { id: 'brads-breakfast', name: 'Brad\'s Restaurant', desc: 'Classic Pismo Beach breakfast near the pier before the day gets moving.', url: 'https://experiencepismobeach.com/dining/brads-restaurant/', reservation: true },
+      { id: 'zorros-breakfast', name: 'Zorro\'s Cafe & Cantina', desc: 'Shell Beach breakfast option for crews staying north of the entrances.', url: 'https://experiencepismobeach.com/dining/zorros-cafe-cantina/', reservation: true }
+    ],
+    lunch: [
+      { id: 'brads-lunch', name: 'Brad\'s Restaurant', desc: 'Central Pismo lunch stop that is easy for a group to find.', url: 'https://experiencepismobeach.com/dining/brads-restaurant/', reservation: true },
+      { id: 'zorros-lunch', name: 'Zorro\'s Cafe & Cantina', desc: 'Casual Shell Beach lunch with a broad menu for mixed groups.', url: 'https://experiencepismobeach.com/dining/zorros-cafe-cantina/', reservation: true }
+    ],
+    dinner: [
+      { id: 'rosas-dinner', name: 'Rosa\'s Ristorante Italiano', desc: 'A polished Pismo Beach dinner choice for the whole crew.', url: 'https://experiencepismobeach.com/dining/rosas-ristorante-italiano/', reservation: true },
+      { id: 'brads-dinner', name: 'Brad\'s Restaurant', desc: 'A relaxed seafood-and-grill dinner near the pier.', url: 'https://experiencepismobeach.com/dining/brads-restaurant/', reservation: true }
+    ],
+    supplies: [
+      { id: 'pier-liquor', name: 'Pier Liquor last stop', desc: 'Ice, drinks, snacks, and basics close to the Oceano entrance.', url: 'https://www.google.com/maps/search/?api=1&query=Pier+Liquor+393+Pier+Ave+Oceano+CA' },
+      { id: 'vons-grover', name: 'Vons Grover Beach supply run', desc: 'A full grocery stop before the group commits to the sand.', url: 'https://www.google.com/maps/search/?api=1&query=Vons+Grover+Beach+CA' }
+    ],
+    clam: [
+      { id: 'pismo-clamming', name: 'Pismo clamming window', desc: 'Add a legal low-tide clamming session; license, gauge, season, and size rules still apply.', url: 'https://wildlife.ca.gov/Fishing/Ocean/Regulations/Fishing-Map/southern' }
+    ],
+    quiet: [
+      { id: 'pismo-pier', name: 'Pismo Pier & promenade', desc: 'A paved, easy-to-find coast stop for a no-sand-driving day.', url: 'https://www.google.com/maps/search/?api=1&query=Pismo+Beach+Pier', dogFriendly: true },
+      { id: 'oso-flaco', name: 'Oso Flaco Lake boardwalk', desc: 'A quiet lake-and-dunes walk to the ocean; dogs are not permitted.', url: 'dayuse.html', dogFriendly: false }
+    ]
+  };
+  var ccwPlannerState = { options: null };
+
+  function ccwTripDays(o) {
+    var out = [], d = new Date(o.arrive.toDateString()), last = new Date(o.depart.toDateString()), n = 1;
+    while (d <= last) {
+      out.push({ index: n - 1, label: 'Day ' + n + ' - ' + fmtDs(d), date: new Date(d) });
+      d = new Date(d.getTime() + 86400000); n++;
+    }
+    return out.length ? out : [{ index: 0, label: 'Day 1 - ' + fmtDs(o.arrive), date: new Date(o.arrive) }];
+  }
+
+  function ccwDefaultDay(kind, count) {
+    if (kind === 'stay' || kind === 'camp' || kind === 'dinner' || kind === 'supplies') return 0;
+    if (kind === 'breakfast' || kind === 'rental' || kind === 'clam' || kind === 'quiet') return Math.min(1, count - 1);
+    if (kind === 'lunch') return Math.min(1, count - 1);
+    return 0;
+  }
+
+  function ccwDefaultTime(kind, o) {
+    if (kind === 'stay' || kind === 'camp') return ('0' + o.arrive.getHours()).slice(-2) + ':' + ('0' + o.arrive.getMinutes()).slice(-2);
+    if (kind === 'breakfast') return '09:00';
+    if (kind === 'lunch') return '12:00';
+    if (kind === 'dinner') return '17:00';
+    if (kind === 'rental') return '08:00';
+    if (kind === 'supplies') return '15:30';
+    return '10:00';
+  }
+
+  function ccwPlannerGroups(o) {
+    var groups = [];
+    if (o.camp) groups.push({ key: 'camp', label: 'Where you are staying', items: CCW_PLANNER_CATALOG.camp });
+    if (o.town) groups.push({ key: 'stay', label: 'Where you are staying', items: CCW_PLANNER_CATALOG.stay });
+    if (o.rent) groups.push({ key: 'rental', label: 'Choose your rental company', items: CCW_PLANNER_CATALOG.rental });
+    if (o.group) {
+      groups.push({ key: 'breakfast', label: 'Breakfast', items: CCW_PLANNER_CATALOG.breakfast });
+      groups.push({ key: 'lunch', label: 'Lunch', items: CCW_PLANNER_CATALOG.lunch });
+      groups.push({ key: 'dinner', label: 'Dinner', items: CCW_PLANNER_CATALOG.dinner });
+    }
+    if (o.sand) groups.push({ key: 'supplies', label: 'Before the entrance', items: CCW_PLANNER_CATALOG.supplies });
+    if (o.clam) groups.push({ key: 'clam', label: 'Clamming plan', items: CCW_PLANNER_CATALOG.clam });
+    if (!o.sand) groups.push({ key: 'quiet', label: 'Coast and dunes without driving on the sand', items: CCW_PLANNER_CATALOG.quiet.filter(function (x) { return !o.dog || x.dogFriendly; }) });
+    return groups.filter(function (g) { return g.items.length; });
+  }
+
+  function ccwPlannerSaved() {
+    try { return JSON.parse(localStorage.getItem('ccw_trip_picks') || '{}') || {}; } catch (e) { return {}; }
+  }
+
+  function ccwOptionHtml(group, item, days, o, saved) {
+    var detail = saved.details && saved.details[item.id] ? saved.details[item.id] : {};
+    var chosen = saved.selected && saved.selected.indexOf(item.id) !== -1;
+    var defaultDay = ccwDefaultDay(group.key, days.length);
+    var dayValue = detail.day !== undefined ? Number(detail.day) : defaultDay;
+    var timeValue = detail.time || ccwDefaultTime(group.key, o);
+    var fields = '<div class="planner-pick-fields"' + (chosen ? '' : ' hidden') + '><div>' +
+      '<label>Place it on<select data-pick-day>' + days.map(function (d) { return '<option value="' + d.index + '"' + (d.index === dayValue ? ' selected' : '') + '>' + d.label + '</option>'; }).join('') + '</select></label>' +
+      '<label>Time<input type="time" data-pick-time value="' + esc(timeValue) + '"></label>';
+    if (item.reservation) fields += '<label>Reservation name<input type="text" data-pick-name value="' + esc(detail.name || '') + '" placeholder="Optional"></label>';
+    if (item.confirmation) fields += '<label>Confirmation number<input type="text" data-pick-confirmation value="' + esc(detail.confirmation || '') + '" placeholder="Private by default"></label>';
+    fields += '</div>' + (item.confirmation ? '<small>Confirmation numbers stay off group shares unless you deliberately include them.</small>' : '') + '</div>';
+    return '<article class="planner-choice-card" data-pick-id="' + item.id + '" data-pick-group="' + group.key + '">' +
+      '<a href="' + item.url + '" target="_blank" rel="noopener"><b>' + item.name + '</b><span>' + item.desc + '</span><i>View current details -></i></a>' +
+      '<label class="planner-pick-toggle"><input type="checkbox" data-plan-pick' + (chosen ? ' checked' : '') + '> Plan this</label>' + fields + '</article>';
+  }
+
+  function renderPlannerChoices(o) {
+    ccwPlannerState.options = o;
+    var groups = ccwPlannerGroups(o), days = ccwTripDays(o), saved = ccwPlannerSaved();
+    var dog = o.dog ? '<div class="planner-dog-filter"><b>Dog-friendly filter is on.</b><span>Stay and activity choices shown here allow dogs according to their current visitor listing. Confirm fees, limits, and current policy before booking.</span></div>' : '';
+    var html = '<section class="planner-choice-section"><h2>Now choose the places that make this your trip</h2>' +
+      '<p class="advice">Check <strong>Plan this</strong>, place it on a day, and it will appear in the schedule, printout, and shareable group plan.</p>' + dog +
+      '<div class="planner-choice-groups">' + groups.map(function (g) {
+        return '<section class="planner-choice-group"><p>' + g.label + '</p><div class="planner-choice-grid">' + g.items.map(function (item) { return ccwOptionHtml(g, item, days, o, saved); }).join('') + '</div></section>';
+      }).join('') + '</div><div class="planner-pick-status" id="plannerPickStatus">No places selected yet.</div></section>';
+    document.getElementById('plannerChoices').innerHTML = html;
+    document.querySelectorAll('[data-plan-pick]').forEach(function (box) {
+      box.addEventListener('change', function () {
+        var card = box.closest('[data-pick-id]');
+        if (box.checked) document.querySelectorAll('[data-pick-group="' + card.getAttribute('data-pick-group') + '"] [data-plan-pick]').forEach(function (other) {
+          if (other !== box) { other.checked = false; other.closest('[data-pick-id]').querySelector('.planner-pick-fields').hidden = true; }
+        });
+        card.querySelector('.planner-pick-fields').hidden = !box.checked;
+        updateCcwSelections();
+      });
+    });
+    document.querySelectorAll('.planner-pick-fields input,.planner-pick-fields select').forEach(function (el) { el.addEventListener('input', updateCcwSelections); el.addEventListener('change', updateCcwSelections); });
+    updateCcwSelections();
+  }
+
+  function ccwAllCatalogItems() {
+    var map = {};
+    Object.keys(CCW_PLANNER_CATALOG).forEach(function (key) { CCW_PLANNER_CATALOG[key].forEach(function (item) { map[item.id] = item; }); });
+    return map;
+  }
+
+  function ccwSelectedPicks() {
+    var map = ccwAllCatalogItems(), picks = [];
+    document.querySelectorAll('[data-pick-id]').forEach(function (card) {
+      var box = card.querySelector('[data-plan-pick]');
+      if (!box || !box.checked) return;
+      var item = map[card.getAttribute('data-pick-id')];
+      picks.push({
+        id: item.id, name: item.name, group: card.getAttribute('data-pick-group'),
+        day: Number(card.querySelector('[data-pick-day]').value || 0), time: card.querySelector('[data-pick-time]').value || '',
+        reservationName: card.querySelector('[data-pick-name]') ? card.querySelector('[data-pick-name]').value.trim() : '',
+        confirmation: card.querySelector('[data-pick-confirmation]') ? card.querySelector('[data-pick-confirmation]').value.trim() : ''
+      });
+    });
+    return picks.sort(function (a, b) { return a.day - b.day || a.time.localeCompare(b.time); });
+  }
+
+  function ccwPrettyTime(t) {
+    if (!t) return '';
+    var bits = t.split(':'), d = new Date(2000, 0, 1, Number(bits[0]), Number(bits[1] || 0));
+    return d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+  }
+
+  function updateCcwSelections() {
+    if (!ccwPlannerState.options) return;
+    var picks = ccwSelectedPicks(), details = {};
+    picks.forEach(function (p) { details[p.id] = { day: p.day, time: p.time, name: p.reservationName, confirmation: p.confirmation }; });
+    try { localStorage.setItem('ccw_trip_picks', JSON.stringify({ selected: picks.map(function (p) { return p.id; }), details: details })); } catch (e) {}
+    var status = document.getElementById('plannerPickStatus');
+    if (status) status.textContent = picks.length ? picks.length + (picks.length === 1 ? ' place added to your plan.' : ' places added to your plan.') : 'No places selected yet.';
+    var days = ccwTripDays(ccwPlannerState.options), out = document.getElementById('selectedSchedule');
+    if (!picks.length) { out.innerHTML = ''; return; }
+    out.innerHTML = '<section class="planner-selected-schedule"><h3>Your selected schedule</h3>' + picks.map(function (p) {
+      var day = days[Math.min(p.day, days.length - 1)] || days[0];
+      return '<div class="planner-schedule-row"><span>' + day.label + '</span><b>' + p.name + '</b><small>' + ccwPrettyTime(p.time) + '</small>' +
+        (p.reservationName ? '<em>Reservation: ' + esc(p.reservationName) + '</em>' : '') +
+        (p.confirmation ? '<em class="private">Confirmation: ' + esc(p.confirmation) + '</em>' : '') + '</div>';
+    }).join('') + '</section>';
+    refreshPlannerShareLinks();
+  }
+
   document.getElementById('tripForm').addEventListener('submit', function (e) {
     e.preventDefault();
     var err = document.getElementById('formErr');
@@ -509,7 +719,7 @@ document.addEventListener('click', function (e) {
     /* THE master gate: no sand driving = zero sand content in the plan */
     opts.sand = opts.camp || opts.toys || document.getElementById('beachDrive').value === 'yes';
     opts.offsite = opts.town && opts.sand;
-    document.getElementById('groupPrintBtn').style.display = (opts.lodgeConf && opts.group) ? '' : 'none';
+    document.getElementById('groupPrintBtn').style.display = opts.group ? '' : 'none';
     saveTrip();
 
     /* forecast first, so the plan itself is weather-aware */
@@ -529,7 +739,7 @@ document.addEventListener('click', function (e) {
     document.getElementById('planSection').scrollIntoView({ behavior: 'smooth' });
     if (!opts.sand) return; /* no vehicle on the sand: tides, creek, and air-down advice have no business in this plan */
 
-    var tidesP = fetch(BASE + '&begin_date=' + ymd(arrive) + '&end_date=' + ymd(new Date(depart.getTime() + 86400000)))
+    var tidesP = fetch(BASE + '&begin_date=' + ymd(opts.arrive) + '&end_date=' + ymd(new Date(opts.depart.getTime() + 86400000)))
       .then(function (r) { return r.json(); }).catch(function () { return null; });
     var rainP = fetch('https://api.open-meteo.com/v1/forecast?latitude=35.0894&longitude=-120.6296' +
       '&daily=precipitation_sum&past_days=3&forecast_days=16&precipitation_unit=inch&timezone=America/Los_Angeles')
@@ -723,6 +933,7 @@ document.addEventListener('click', function (e) {
       : o.town ? days + (days === 1 ? ' night' : ' nights') + ' in town' + (o.sand ? ' with days on the sand' : ', no sand driving')
       : 'Day trip' + (o.sand ? ' on the sand' : '')) +
       (o.toys ? ' with toys in tow.' : '.') + ' Here is your game plan.';
+    renderPlannerChoices(o);
 
     var pre = [];
 
@@ -872,32 +1083,91 @@ document.addEventListener('click', function (e) {
         return '<li><label><input type="checkbox"><span>' + it + '</span></label></li>';
       }).join('') + '</ul></div>';
     }).join('');
-    /* --- shareable plan summary (never includes confirmation numbers) --- */
-    var sl = ['Oceano Dunes trip: ' + fmtDs(o.arrive) + ' to ' + fmtDs(o.depart)];
-    sl.push(o.camp ? 'Staying: beach camping south of Post 2'
-          : o.town ? ('Staying: ' + (o.lodgeName ? o.lodgeName : 'in town'))
-          : 'Day trip');
-    if (mealRows.length) mealRows.forEach(function (m) { sl.push(m[0] + ': ' + m[1]); });
-    if (o.riding) sl.push(o.rent ? 'Riding: renting at the entrance' : 'Riding: bringing our own machines');
-    sl.push('', 'Full plan builder: https://ccwheelers.com/planner.html');
-    var shareText = sl.join('\n');
-    var shareTitle = 'Oceano Dunes Trip Plan';
-    document.getElementById('emailPlanBtn').href = 'mailto:?subject=' + encodeURIComponent(shareTitle + ' · ' + fmtDs(o.arrive)) + '&body=' + encodeURIComponent(shareText);
-    document.getElementById('emailPlanBtn').style.display = '';
-    document.getElementById('textPlanBtn').href = 'sms:?&body=' + encodeURIComponent(shareText);
-    document.getElementById('textPlanBtn').style.display = '';
-    var spb = document.getElementById('sharePlanBtn');
-    if (navigator.share) {
-      spb.style.display = '';
-      spb.onclick = function () {
-        navigator.share({ title: shareTitle, text: shareText }).catch(function () {});
-      };
-    }
+    ccwPlannerState.mealRows = mealRows;
+    setupPlannerShare(o);
 
     document.getElementById('planFootnote').innerHTML = o.sand
       ? 'Tide predictions from NOAA station 9412110 (Port San Luis). Conditions change: check the <a href="creek.html">creek status</a> the morning you leave, and confirm fire rules at the entrance station. Reservations: (800) 444-7275.'
       : 'Hours, policies, and conditions change: confirm details with businesses directly, and for park questions call the rangers at (805) 473-7220.';
     updateCheckProgress();
+  }
+
+  function ccwPlannerShareText() {
+    var o = ccwPlannerState.options;
+    if (!o) return '';
+    var includeStay = document.getElementById('shareStayDetails').checked;
+    var includeNotes = document.getElementById('shareTripNotes').checked;
+    var includeConfirmation = document.getElementById('shareConfirmation').checked;
+    var picks = ccwSelectedPicks(), days = ccwTripDays(o);
+    var sl = ['Oceano Dunes trip: ' + fmtDs(o.arrive) + ' to ' + fmtDs(o.depart)];
+    if (o.camp) sl.push('Stay: beach camping south of Post 2');
+    else if (o.town) sl.push('Stay: ' + (includeStay && o.lodgeName ? o.lodgeName : 'in town'));
+    else sl.push('Day trip');
+    if (includeStay && o.lodgeConf && includeConfirmation) sl.push('Stay confirmation: ' + o.lodgeConf);
+    if (o.riding) sl.push(o.rent ? 'Riding: renting at the entrance' : 'Riding: bringing our own machines');
+    if (picks.length) {
+      sl.push('', 'SELECTED SCHEDULE');
+      picks.forEach(function (p) {
+        var isStay = p.group === 'stay' || p.group === 'camp';
+        if (isStay && !includeStay) return;
+        var day = days[Math.min(p.day, days.length - 1)] || days[0];
+        var line = day.label + (p.time ? ', ' + ccwPrettyTime(p.time) : '') + ': ' + p.name;
+        if (includeStay && p.reservationName) line += ' - reservation: ' + p.reservationName;
+        if (includeConfirmation && p.confirmation) line += ' - confirmation: ' + p.confirmation;
+        sl.push(line);
+      });
+    }
+    if (includeNotes) {
+      var mealRows = ccwPlannerState.mealRows || [];
+      mealRows.forEach(function (m) { sl.push(m[0] + ': ' + m[1]); });
+      if (o.ride) sl.push('Trip note: ' + o.ride);
+    }
+    sl.push('', 'Open the full planner: https://ccwheelers.com/planner.html');
+    return sl.join('\n');
+  }
+
+  function refreshPlannerShareLinks() {
+    if (!ccwPlannerState.options) return;
+    var text = ccwPlannerShareText(), o = ccwPlannerState.options;
+    var subject = 'Oceano Dunes Trip Plan - ' + fmtDs(o.arrive);
+    document.getElementById('emailPlanBtn').href = 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(text);
+    document.getElementById('textPlanBtn').href = 'sms:?body=' + encodeURIComponent(text);
+  }
+
+  function ccwCopyPlan(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) return navigator.clipboard.writeText(text);
+    return new Promise(function (resolve, reject) {
+      var area = document.createElement('textarea');
+      area.value = text; area.setAttribute('readonly', ''); area.style.position = 'fixed'; area.style.opacity = '0';
+      document.body.appendChild(area); area.select();
+      try { document.execCommand('copy'); document.body.removeChild(area); resolve(); }
+      catch (e) { document.body.removeChild(area); reject(e); }
+    });
+  }
+
+  function setupPlannerShare(o) {
+    ccwPlannerState.options = o;
+    var button = document.getElementById('sharePlanBtn'), panel = document.getElementById('plannerSharePanel'), status = document.getElementById('plannerShareStatus');
+    button.style.display = '';
+    button.onclick = function () {
+      panel.hidden = !panel.hidden;
+      button.setAttribute('aria-expanded', panel.hidden ? 'false' : 'true');
+      if (!panel.hidden) { refreshPlannerShareLinks(); panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+    };
+    document.getElementById('closePlannerShare').onclick = function () { panel.hidden = true; button.setAttribute('aria-expanded', 'false'); };
+    ['shareStayDetails','shareTripNotes','shareConfirmation'].forEach(function (id) { document.getElementById(id).onchange = refreshPlannerShareLinks; });
+    document.getElementById('shareDevice').onclick = function () {
+      var text = ccwPlannerShareText();
+      if (navigator.share) {
+        navigator.share({ title: 'Oceano Dunes Trip Plan', text: text, url: 'https://ccwheelers.com/planner.html' }).catch(function () {});
+      } else {
+        ccwCopyPlan(text).then(function () { status.textContent = 'Plan copied. Paste it into your favorite app.'; }).catch(function () { status.textContent = 'Use Email or Text to share this plan.'; });
+      }
+    };
+    document.getElementById('copyPlannerShare').onclick = function () {
+      ccwCopyPlan(ccwPlannerShareText()).then(function () { status.textContent = 'Plan copied.'; }).catch(function () { status.textContent = 'Copy was blocked by this browser. Use Email or Text instead.'; });
+    };
+    refreshPlannerShareLinks();
   }
 
   function esc(t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }

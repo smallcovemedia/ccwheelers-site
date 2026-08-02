@@ -46,7 +46,7 @@ document.addEventListener('click', function (e) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="site.css">
+<link rel="stylesheet" href="site.css?v=8">
 <style>
   .news-filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px}
   .news-filters button{border:2px solid var(--sand-deep);background:#fff;border-radius:999px;padding:9px 20px;font-family:'Inter';font-size:14px;font-weight:600;color:var(--ink-soft);cursor:pointer;transition:.15s}
@@ -64,7 +64,7 @@ document.addEventListener('click', function (e) {
   .news-empty{text-align:center;color:var(--ink-soft);padding:40px 0;display:none}
 </style>
 <script src="nav.js" defer></script>
-<script src="partners.js?v=3" defer></script>
+<script src="partners.js?v=8" defer></script>
 <script src="share.js" defer></script>
 <script src="news-data.js"></script>
 </head>
@@ -204,14 +204,17 @@ document.addEventListener('click', function (e) {
   var TAGS = { park: 'Park News', event: 'Event', community: 'Community' };
   var list = document.getElementById('newsList');
   var empty = document.getElementById('newsEmpty');
+  var activeFilter = 'all';
+  var currentItems = (window.CCW_NEWS || []).slice();
 
   function fmtDate(iso) {
-    var d = new Date(iso + 'T12:00:00');
+    if (!iso) return 'Current update';
+    var d = new Date(iso.length === 10 ? iso + 'T12:00:00' : iso);
     return d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
   }
 
   function render(filter) {
-    var items = (window.CCW_NEWS || []).slice().sort(function (a, b) { return b.date < a.date ? -1 : 1; });
+    var items = currentItems.slice().sort(function (a, b) { return String(b.date || '').localeCompare(String(a.date || '')); });
     if (filter !== 'all') items = items.filter(function (n) { return n.tag === filter; });
     list.innerHTML = items.map(function (n) {
       return '<article class="news-item">' +
@@ -229,11 +232,30 @@ document.addEventListener('click', function (e) {
     b.addEventListener('click', function () {
       document.querySelectorAll('.news-filters button').forEach(function (x) { x.classList.remove('on'); });
       b.classList.add('on');
-      render(b.dataset.f);
+      activeFilter = b.dataset.f;
+      render(activeFilter);
     });
   });
 
   render('all');
+
+  fetch('https://duneguideusa.com/api/news', { headers: { Accept: 'application/json' } })
+    .then(function (response) { if (!response.ok) throw new Error('News request failed'); return response.json(); })
+    .then(function (data) {
+      var live = (data.items || []).filter(function (item) { return item.region === 'california'; }).map(function (item) {
+        return {
+          tag: item.priority ? 'community' : 'park',
+          date: item.publishedAt,
+          title: item.title,
+          summary: item.summary,
+          source: item.source,
+          url: item.url
+        };
+      });
+      if (live.length) currentItems = live.concat(currentItems);
+      render(activeFilter);
+    })
+    .catch(function () { /* Keep the verified local fallback stories visible. */ });
 })();
 </script>
 
