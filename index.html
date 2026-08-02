@@ -354,7 +354,9 @@ a.pt-sponsor-link:hover .pt-sponsor{border-color:var(--dune)}
 /* ---- Premium: Live Conditions sponsor ----
    Continues the console's dark background so it reads as part of the
    module people came for, not an advert bolted underneath it. */
-.live-sponsor-band{background:var(--ocean-deep);padding:0 0 26px}
+  .live-sponsor-band{background:var(--ocean-deep);padding:0 0 26px}
+  .partner-tail{padding:58px 0 28px}
+  @media(max-width:700px){.partner-tail{padding:42px 0 22px}}
 .lsp{display:flex;align-items:center;gap:15px;padding:15px 18px;text-decoration:none;border:0;border-radius:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);transition:background .15s ease}
 .lsp:hover{background:rgba(255,255,255,.12)}
 .lsp-label{font-family:"Barlow Condensed",sans-serif;text-transform:uppercase;letter-spacing:.14em;font-size:11px;font-weight:700;color:var(--dune);white-space:nowrap}
@@ -371,7 +373,7 @@ a.pt-sponsor-link:hover .pt-sponsor{border-color:var(--dune)}
 .lsp-art{display:block;width:100%;height:auto;aspect-ratio:16/5;object-fit:contain}
 </style>
 <script src="nav.js" defer></script>
-<script src="partners.js?v=3" defer></script>
+<script src="partners.js?v=8" defer></script>
 <script src="share.js" defer></script>
 <script src="news-data.js" defer></script>
 <script src="conditions.js" defer></script>
@@ -744,7 +746,7 @@ a.pt-sponsor-link:hover .pt-sponsor{border-color:var(--dune)}
   </div>
 </div>
 
-<section><div class="wrap"><div data-partners="lodging" data-tier="featured" data-partners-title="Where to Stay &amp; Ride"></div></div></section>
+<section class="partner-tail"><div class="wrap"><div data-partners="lodging" data-tier="featured" data-partners-title="Where to Stay &amp; Ride"></div></div></section>
 <footer>
   <div class="wrap">
     <div class="foot-grid">

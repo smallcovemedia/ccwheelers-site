@@ -8,6 +8,54 @@
    ============================================================ */
 window.CCW_NEWS = [
   {
+    date: '2026-08-01',
+    tag: 'community',
+    title: 'Meet Dune Guide USA, the New Home of Our Growing Guide Network',
+    summary: 'CCWheelers now has a national parent guide. Dune Guide USA helps riders compare dune destinations, discover places they may never have considered, and then open the local guide built for that sand.',
+    source: 'Dune Guide USA',
+    url: 'https://duneguideusa.com/?utm_source=ccwheelers.com&utm_medium=news&utm_campaign=network_launch'
+  },
+  {
+    date: '2026-07-31',
+    tag: 'community',
+    title: 'Silver Lake Michigan Dune Guide Joins the Family',
+    summary: 'The new Michigan guide brings together live conditions, ORV rules, permits, rentals, camping, weather, maps, off-season fat-tire riding, and a trip planner for Silver Lake.',
+    source: 'Dune Guide USA',
+    url: 'https://silverlakeduneguide.com/?utm_source=ccwheelers.com&utm_medium=news&utm_campaign=sister_site_launch'
+  },
+  {
+    date: '2026-07-30',
+    tag: 'community',
+    title: 'Little Sahara Utah Dune Guide Is Now Live',
+    summary: 'Our Utah sister guide covers Sand Mountain, White Sands, Black Mountain, camping, fees, weather, rules, maps, and day-by-day trip planning in one place.',
+    source: 'Dune Guide USA',
+    url: 'https://littlesaharautah.com/?utm_source=ccwheelers.com&utm_medium=news&utm_campaign=sister_site_launch'
+  },
+  {
+    date: '2026-07-29',
+    tag: 'community',
+    title: 'Coming Next: Three More Local Dune Guides',
+    summary: 'Planning has begun for St. Anthony Sand Dunes in Idaho, Sand Hollow in Utah, and Little Sahara in Oklahoma. These guides are coming soon and are not yet published.',
+    source: 'Dune Guide USA',
+    url: 'https://duneguideusa.com/?utm_source=ccwheelers.com&utm_medium=news&utm_campaign=coming_guides'
+  },
+  {
+    date: '2026-07-29',
+    tag: 'community',
+    title: 'Action Alert: Help Hold the California Coastal Commission Accountable',
+    summary: 'Cal4Wheel is asking access supporters to act on a proposal intended to strengthen accountability and transparency at the California Coastal Commission.',
+    source: 'Cal4Wheel',
+    url: 'https://cal4wheel.com/access-advocacy/access-issues/item/action-alert-help-hold-the-california-coastal-commission-accountable'
+  },
+  {
+    date: '2026-07-28',
+    tag: 'community',
+    title: 'Friends of Oceano Dunes Continues the Court Fight for Access',
+    summary: 'Friends of Oceano Dunes has spent years defending responsible motorized access through legal action. Follow its rulings and case updates directly from the organization doing the courtroom work.',
+    source: 'Friends of Oceano Dunes',
+    url: 'https://www.oceanodunes.org/category/legal/rulings/'
+  },
+  {
     date: '2026-07-26',
     tag: 'community',
     title: 'CCWheelers Sister Site Now Up, Covering the Oregon Dunes',

@@ -201,12 +201,51 @@ document.addEventListener('DOMContentLoaded', function () {
   var nb = document.getElementById('latestNews');
   if (nb && window.CCW_NEWS && window.CCW_NEWS.length) {
     var TAGS = { park: 'Park News', event: 'Event', community: 'Community' };
-    var items = window.CCW_NEWS.slice().sort(function (a, b) { return b.date < a.date ? -1 : 1; }).slice(0, 3);
-    nb.innerHTML = items.map(function (n) {
+    var escapeNews = function (value) {
+      return String(value || '').replace(/[&<>"']/g, function (character) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[character];
+      });
+    };
+    var renderLatestNews = function (sourceItems) {
+      var items = sourceItems.slice().sort(function (a, b) {
+        if (!!a.priority !== !!b.priority) return a.priority ? -1 : 1;
+        return String(b.date || '').localeCompare(String(a.date || ''));
+      }).slice(0, 3);
+      nb.innerHTML = items.map(function (n) {
       var d = new Date(n.date + 'T12:00:00');
       var ds = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-      return '<a class="nb-item" href="news.html"><div class="nb-meta">' + (TAGS[n.tag] || 'News') +
-        '<span>' + ds + '</span></div><h3>' + n.title + '</h3></a>';
-    }).join('');
+        return '<a class="nb-item" href="news.html"><div class="nb-meta">' + escapeNews(TAGS[n.tag] || 'News') +
+          '<span>' + escapeNews(ds) + '</span></div><h3>' + escapeNews(n.title) + '</h3></a>';
+      }).join('');
+    };
+    var localNews = window.CCW_NEWS.slice();
+    renderLatestNews(localNews);
+
+    fetch('https://duneguideusa.com/api/news', { headers: { Accept: 'application/json' } })
+      .then(function (response) { if (!response.ok) throw new Error('News request failed'); return response.json(); })
+      .then(function (data) {
+        var liveNews = (data.items || []).filter(function (item) {
+          return item.region === 'california' || item.region === 'network';
+        }).map(function (item) {
+          return {
+            priority: !!item.priority,
+            tag: item.region === 'network' ? 'community' : (item.priority ? 'community' : 'park'),
+            date: String(item.publishedAt || '').slice(0, 10),
+            title: item.title,
+            summary: item.summary,
+            source: item.source,
+            url: item.url
+          };
+        });
+        var seen = {};
+        var combined = liveNews.concat(localNews).filter(function (item) {
+          var key = String(item.url || item.title || '').toLowerCase();
+          if (!key || seen[key]) return false;
+          seen[key] = true;
+          return true;
+        });
+        if (combined.length) renderLatestNews(combined);
+      })
+      .catch(function () { /* The verified local stories remain visible offline. */ });
   }
 });
