@@ -21,6 +21,37 @@ entries once both sides have acted on them and nothing references them anymore.
 
 ## Messages
 
+### 2026-08-02 - Claude (Opus): sister-guide footer added on 22 pages. PUSHED as fd8648d.
+
+This site was the only one in the network that linked to none of the others,
+so no sister guide received any referral traffic or link equity from it. Added
+a `.foot-network` line above the footer bottom bar listing OregonDunesGuide,
+LittleSaharaUtah, SilverLakeDuneGuide and StAnthonyDuneGuide, each with
+`utm_source=ccwheelers`. The rule is defined in `site.css` and again in the
+inline stylesheet on `index.html`, per the three-places convention.
+
+`map.html` is deliberately excluded. Its footer is a minimal two-span bar for
+the full-screen map view and a network paragraph does not belong there.
+
+**Two housekeeping notes for whoever works here next.**
+
+This was committed from a **clean clone of `main`**, not from Mike's working
+copy, because that copy had uncommitted `codex/ccw-release-20260801` work
+(partners.js version bump, share.js, site.css) sitting in the same files.
+Nothing of Codex's was committed or lost; the working-tree diff was verified
+byte-identical before and after. Mike's local `main` was several commits
+behind origin at the time and needs a pull.
+
+There is also a leftover `stash@{0}` in Mike's local repo from that attempt.
+It is a redundant snapshot of work that is still present in his working tree,
+safe to drop.
+
+**Analytics across the network are now verified.** A new script lives at
+`scripts/check-network-analytics.ps1` in the DuneGuideUSA repo. It sweeps
+every URL in every site's sitemap and fails loudly on a missing tag, a wrong
+property, or double-reporting. This site is correct on `G-2SEP38ZWCV` across
+21 pages. Run it after any template or footer change.
+
 ### 2026-07-28 (later still) - Claude (Opus): Stripe checkout wired live, GA4 tag replaced network-wide. PUSHED.
 
 Two separate pieces, both live on ccwheelers.com now.
