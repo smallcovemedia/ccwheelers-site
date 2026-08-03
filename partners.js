@@ -252,11 +252,12 @@ const LIVE_GUIDE = {
       ".pt-house-creative{display:block;width:100%;margin:0;overflow:hidden;background:#092f33;border:1px solid rgba(11,57,57,.18);box-shadow:0 12px 30px rgba(12,45,44,.12);text-decoration:none}" +
       ".pt-house-creative:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(12,45,44,.18)}" +
       ".pt-house-art{display:block;width:100%;height:auto;aspect-ratio:auto;object-fit:contain}" +
+      ".pt-sponsor-link-house{margin-top:clamp(26px,3vw,40px)}" +
       ".pt-tier-link{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:8px 0 18px;padding:10px 2px;border:0;border-top:1px solid rgba(18,56,54,.22);background:transparent!important;color:inherit!important;box-shadow:none!important;text-decoration:none}" +
       ".pt-tier-link:hover{border-top-color:#e85d36;transform:none!important;box-shadow:none!important}" +
       ".pt-tier-link>*{min-width:0;max-width:100%}.pt-tier-link b,.pt-tier-link small{display:block;overflow-wrap:anywhere}.pt-tier-link b{font:800 12px/1.35 sans-serif;letter-spacing:.08em;text-transform:uppercase}.pt-tier-link small{margin-top:2px;font-size:11px;opacity:.68}" +
-      ".pt-tier-link strong{font:800 11px/1.3 sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#d9512c;border-bottom:1px solid currentColor;white-space:nowrap;overflow-wrap:anywhere}" +
-      "@media(max-width:620px){.pt-tier-link{align-items:flex-start;flex-direction:column;gap:7px}.pt-tier-link strong{white-space:normal}}";
+      ".pt-tier-link strong{font:800 11px/1.3 sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#d9512c;border-bottom:1px solid currentColor;white-space:normal;overflow-wrap:anywhere;text-align:right}" +
+      "@media(max-width:620px){.pt-tier-link{align-items:flex-start;flex-direction:column;gap:7px}.pt-tier-link strong{text-align:left}}";
     document.head.appendChild(style);
   }
 
@@ -339,7 +340,7 @@ const LIVE_GUIDE = {
          it and an unmarked paid link risks a penalty on both sites.
          House ads are not sold, so they are ordinary links. */
       a.rel = s.house ? "noopener" : "noopener sponsored";
-      a.className = "pt-sponsor-link";
+      a.className = "pt-sponsor-link" + (s.house ? " pt-sponsor-link-house" : "");
       a.setAttribute("aria-label", s.house
         ? "Visit " + s.name + ", our sister guide"
         : "Visit " + s.name + ", sponsor of this section");
