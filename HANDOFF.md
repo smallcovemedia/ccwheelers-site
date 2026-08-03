@@ -21,6 +21,74 @@ entries once both sides have acted on them and nothing references them anymore.
 
 ## Messages
 
+### 2026-08-02 - Claude (Opus): checklist for moving this site to Mike's own Netlify account
+
+**Why this exists.** This site is the only one in the network hosted on
+Logan's Netlify account; the other five guides are already on Mike's. When
+Logan's account ran out of credits the site went dark and Mike could not fix
+it himself, because he has no access to add credit to an account he does not
+own. This is a planned move, not an emergency one. Do it deliberately.
+
+**Two separate dependencies on Logan, and moving Netlify only solves one.**
+The repo is still `smallcovemedia/ccwheelers-site`, his GitHub org, while
+every other guide sits under `CCWheelers`. Transferring the repo is free,
+keeps history and issues, and preserves the Netlify link. Worth doing in the
+same sitting.
+
+**What moves by itself, because it is in the repo:** `netlify.toml` carries
+15 redirect rules, including the legacy `mobile/*` paths and the 410s for the
+hacked spam query URLs, plus 2 header blocks. All four functions (`gas`,
+`tides`, `history`, `metrics`) are code and travel with the repo. Do not
+recreate any of this by hand in the Netlify UI.
+
+**What does NOT move and must be set up on the new site:**
+
+- Environment variables: **`GA4_PROPERTY_ID`, `GSA_EMAIL`, `GSA_KEY`**. These
+  power `metrics.mjs`, the dashboard. `GSA_KEY` is a Google service-account
+  private key. Copy the values from the old site's settings into the new
+  one. They must never be committed to this repo or written into this file.
+  The other three functions need no secrets and will just work.
+- The custom domain and its certificate.
+- The site name, and any deploy notifications.
+
+**Order of operations.**
+
+1. Transfer the repo to the `CCWheelers` org, or skip and do it later.
+2. In Mike's Netlify account, create a new site from this repo. Let it build.
+3. Add the three environment variables.
+4. Test on the temporary `*.netlify.app` URL before touching the domain:
+   pages load, `/api/gas` and `/api/tides` return data, the dashboard renders
+   real metrics (that last one is what proves the env vars are right).
+5. Remove `ccwheelers.com` and `www.ccwheelers.com` from the old site.
+   Netlify will not let two sites claim the same custom domain, so this has
+   to come off before it goes on. This is the only step with a visible gap,
+   measured in minutes.
+6. Add both to the new site, set the apex as primary so `www` redirects to
+   it, and let the certificate issue.
+7. Verify: HTTPS on both hostnames, a legacy `mobile/*` redirect still
+   lands, a known spam URL still returns 410, and
+   `scripts/check-network-analytics.ps1` in the DuneGuideUSA repo comes back
+   clean for ccwheelers.com.
+
+**Rollback** is to put the domain back on Logan's site. Nothing is destroyed
+by this move, and DNS is not involved at any point.
+
+**DNS is not part of this.** ccwheelers.com resolves from Network Solutions
+in Mike's own registrar account, apex `A` to `75.2.60.5`. Netlify's load
+balancer address is the same whichever Netlify account serves the site, so no
+DNS record changes. See the separate note about moving email off Network
+Solutions to Microsoft 365; that is unrelated to this and should not be done
+in the same sitting.
+
+**One unresolved thing, worth settling before the move.** This file and
+`news-data.js` both claim the news feed is refreshed by an automated daily
+sweep. There is no GitHub Actions workflow in any of the six repos and no
+Netlify scheduled function anywhere, and the commits touching `news-data.js`
+follow work sessions rather than a daily cadence. Either that job runs from
+somewhere outside these repos, in which case find out where before migrating,
+or the automation does not exist and the documentation is wrong. Anything
+running inside Logan's environment would stop silently after this move.
+
 ### 2026-08-02 - Claude (Opus): sister-guide footer added on 22 pages. PUSHED as fd8648d.
 
 This site was the only one in the network that linked to none of the others,
