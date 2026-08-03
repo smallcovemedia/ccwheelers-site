@@ -8,6 +8,14 @@
    ============================================================ */
 window.CCW_NEWS = [
   {
+    date: '2026-08-03',
+    tag: 'event',
+    title: '68th Annual St. Anthony Celebration in Pismo, Sunday August 16',
+    summary: 'Pismo Beach Plaza hosts the 68th annual St. Anthony Celebration, a full weekend of food, music, and family events capped by a parade on Sunday, August 16. If you are camping the dunes that weekend, plan on heavier traffic and tight parking in downtown Pismo.',
+    source: 'Visit Pismo Beach',
+    url: 'https://experiencepismobeach.com/event-directory/68th-annual-st-anthony-celebration/'
+  },
+  {
     date: '2026-08-01',
     tag: 'community',
     title: 'Meet Dune Guide USA, the New Home of Our Growing Guide Network',
@@ -55,6 +63,7 @@ window.CCW_NEWS = [
     source: 'Friends of Oceano Dunes',
     url: 'https://www.oceanodunes.org/category/legal/rulings/'
   },
+
   {
     date: '2026-07-26',
     tag: 'community',
