@@ -9,6 +9,14 @@
 window.CCW_NEWS = [
   {
     date: '2026-08-03',
+    tag: 'community',
+    title: 'New Sister Site: Glamis Dune Guide Covers the Imperial Sand Dunes',
+    summary: 'Heading to Glamis this season? The newest guide from the same team covers the Imperial Sand Dunes: live California against Arizona fuel prices, an interactive map built on BLM published coordinates, permits, camping, riding, safety, and a history of the dunes. Up before the October 1 permit season.',
+    source: 'CCWheelers',
+    url: 'https://glamisduneguide.com/'
+  },
+  {
+    date: '2026-08-03',
     tag: 'event',
     title: '68th Annual St. Anthony Celebration in Pismo, Sunday August 16',
     summary: 'Pismo Beach Plaza hosts the 68th annual St. Anthony Celebration, a full weekend of food, music, and family events capped by a parade on Sunday, August 16. If you are camping the dunes that weekend, plan on heavier traffic and tight parking in downtown Pismo.',
