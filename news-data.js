@@ -8,6 +8,14 @@
    ============================================================ */
 window.CCW_NEWS = [
   {
+    date: '2026-08-04',
+    tag: 'event',
+    title: 'Grover Beach Dune Run Hits the Sand Sunday, September 13',
+    summary: 'The annual Grover Beach Dune Run is a beach and dune run and walk with several distances, going off from 9 to 11 a.m. on Sunday, September 13. It shares the same stretch of Grover Beach sand riders use, so expect foot traffic and a busier Grand Avenue entrance that morning.',
+    source: 'Visit Pismo Beach',
+    url: 'https://experiencepismobeach.com/event-directory/grover-beach-dune-run-2/'
+  },
+  {
     date: '2026-08-03',
     tag: 'community',
     title: 'New Sister Site: Glamis Dune Guide Covers the Imperial Sand Dunes',
