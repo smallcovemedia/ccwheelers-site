@@ -1,2 +1,7 @@
 .DS_Store
 node_modules/
+
+# Local working documents, not site content. This repo is public, so keep
+# anything with a name, phone number or unsent correspondence out of it.
+ASA-BOARD-REVIEW-REQUEST.md
+URL-CATEGORIZATION-REQUESTS.md
