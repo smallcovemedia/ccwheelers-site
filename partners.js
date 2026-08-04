@@ -73,7 +73,7 @@ const PARTNERS = {
    rather than sitting empty. Two reasons that matters: an empty slot
    tells a prospect nobody is buying, and a filled one shows them
    exactly what they would be getting. It also sends real traffic
-   between the four sites.
+   between the six sites.
 
    These are labelled "Our sister guide", not "Partner", because they
    are not sold placements and the fine print on advertise.html
