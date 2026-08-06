@@ -494,7 +494,7 @@ document.addEventListener('click', function (e) {
     var t = desc.toLowerCase(), out = [];
     if (/paddle/.test(t)) out.push({ h: '🔧 Paddle tire game plan', p: 'Paddles transform the dunes but they\'re miserable on the hard pack. They dig on firm sand and wear fast on the beach drive. If you can, ride down on stock tires or trailer the machine to the open sand, then swap. And paddles punch way above their weight on climbs: you\'ll clear faces that stop everyone else, so watch your speed over blind crests.' });
     if (/sand ?rail|buggy|long travel|longtravel/.test(t)) out.push({ h: '🔧 Rail & buggy notes', p: 'Rails live at Competition Hill and the open bowls south of Post 4. Full highway rules still apply on Sand Highway to Pole 11. That includes seatbelts. Double-check your whip height (8 ft) and mount solid tow points front and rear; even rails get stuck, and a strap beats a shovel every time.' });
-    if (/rzr|razor|maverick|x3|talon|pro ?r|krx|can-?am|sxs|side.?by.?side|utv/.test(t)) out.push({ h: '🔧 SxS setup', p: 'Harnesses clicked, doors and nets latched, and keep a fire extinguisher mounted where the passenger can reach it. Stock belts slip in deep sand when they\'re hot — carry a spare belt and let the machine cool before you swap. 15 MPH near camps applies to you especially: SxS traffic is what rangers watch closest.' });
+    if (/rzr|razor|maverick|x3|talon|pro ?r|krx|can-?am|sxs|side.?by.?side|utv/.test(t)) out.push({ h: '🔧 SxS setup', p: 'Harnesses clicked, doors and nets latched, and keep a fire extinguisher mounted where the passenger can reach it. Stock belts slip in deep sand when they\'re hot. Carry a spare belt and let the machine cool before you swap. 15 MPH near camps applies to you especially: SxS traffic is what rangers watch closest.' });
     if (/raptor|trx|prerunner|pre-?runner|f-?150|tundra|tacoma|silverado|ram\b|truck/.test(t)) out.push({ h: '🔧 Truck strategy', p: 'Momentum is your friend, commitment is your rule: pick your line before the soft stuff and don\'t lift mid-climb. Air down to 15–18 PSI, 4-high for the beach, 4-low for the dunes. Never crest a dune straight-on at speed. Square up slow the first pass, the backside might be a slipface with a 30-foot drop.' });
     if (/jeep|wrangler|bronco|4runner|land ?cruiser/.test(t)) out.push({ h: '🔧 Short-wheelbase 4x4', p: 'Disconnect the sway bar if you have it, 4-low in the dunes, and be honest about approach angles on razorbacks. Short wheelbase means you\'ll teeter where trucks bridge. Aired down to 15–18 you\'ll go almost anywhere the rails go, just slower.' });
     if (/banshee|2 ?stroke|two ?stroke|yz|cr\d|kx|rm\d/.test(t)) out.push({ h: '🔧 Two-stroke duty', p: 'Spark arrester is mandatory and checked. A stock silencer usually isn\'t enough. Jet for sea level (you\'re AT zero). Paddle rear if you have it, and keep it pinned in the deep stuff: momentum is everything on a bike out here.' });
@@ -811,7 +811,7 @@ document.addEventListener('click', function (e) {
 
     if (wet !== null && wet >= 0.75) {
       return '<div class="warn-box"><strong>Creek at ' + label + ':</strong> ' + wet.toFixed(1) + '" of rain in the day(s) around your ' + label +
-        ' — that\'s enough runoff to override the tide entirely. Arroyo Grande Creek can run high and fast no matter what the tide is doing. ' +
+        '. That\'s enough runoff to override the tide entirely. Arroyo Grande Creek can run high and fast no matter what the tide is doing. ' +
         'Treat the crossing as closed until you confirm the <a href="creek.html">creek status</a> in person or with rangers.</div>';
     }
     if (near) {
@@ -819,7 +819,7 @@ document.addEventListener('click', function (e) {
       var wetNote = (wet !== null && wet > 0.1) ? ' Add in ' + wet.toFixed(1) + '" of recent rain and this could run higher than the tide alone suggests.' : '';
       return '<div class="warn-box"><strong>Creek at ' + label + ':</strong> close to a' + (big ? ' big' : '') + ' high tide (' +
         near.v.toFixed(1) + ' ft at ' + fmtT(near.t) + '), when Arroyo Grande Creek runs deepest.' + wetNote + ' Check the ' +
-        '<a href="creek.html">creek status</a> before you cross — this is a tide-based estimate, not a guarantee.</div>';
+        '<a href="creek.html">creek status</a> before you cross. This is a tide-based estimate, not a guarantee.</div>';
     }
     if (wet !== null && wet > 0.1) {
       return '<div class="warn-box"><strong>Creek at ' + label + ':</strong> outside the high-tide window, but ' + wet.toFixed(1) +
@@ -838,7 +838,7 @@ document.addEventListener('click', function (e) {
     var now = new Date(), rainySeason = (now.getMonth() >= 10 || now.getMonth() <= 3) || (opts.arrive.getMonth() >= 10 || opts.arrive.getMonth() <= 3);
     if (rainySeason) {
       out.push('<div class="warn-box"><strong>Winter/rain note:</strong> the creek notes below are tide-based, plus a live check of rain in the forecast. ' +
-        'But heavy or sustained storms can push the creek up fast and keep it high well after tide alone would suggest it\'s clear — rain always beats tide. ' +
+        'But heavy or sustained storms can push the creek up fast and keep it high well after tide alone would suggest it\'s clear. Rain always beats tide. ' +
         'During wet months, confirm the <a href="creek.html">creek status</a> in person before you cross, no matter what this plan says.</div>');
     }
 
@@ -875,7 +875,7 @@ document.addEventListener('click', function (e) {
       arrHtml += '<p class="advice">Best arrival window: <strong>' + fmtT(lo) + ' to ' + fmtT(hi) + '</strong> (around the ' + fmtT(bestLow.t) + ' low). Firm, wet, hard-packed sand and the easiest creek crossing of the day.</p>';
       arrHtml += inWindow
         ? '<div class="ok-box">Your ' + fmtT(opts.arrive) + ' arrival lands inside that window. Nice planning.</div>'
-        : '<div class="warn-box">Your planned ' + fmtT(opts.arrive) + ' arrival is outside that window. If you can shift toward ' + fmtT(bestLow.t) + ', the drive down the beach gets a lot easier' + (opts.vehicle !== '4wd' ? ' — and with your vehicle, timing the low tide isn\'t optional, it\'s the plan' : '') + '.</div>';
+        : '<div class="warn-box">Your planned ' + fmtT(opts.arrive) + ' arrival is outside that window. If you can shift toward ' + fmtT(bestLow.t) + ', the drive down the beach gets a lot easier' + (opts.vehicle !== '4wd' ? ', and with your vehicle, timing the low tide isn\'t optional, it\'s the plan' : '') + '.</div>';
     }
     arrHtml += creekNote(evs, opts.arrive, 'arrival', rain);
     arrHtml += '</div>';
@@ -961,7 +961,7 @@ document.addEventListener('click', function (e) {
     /* --- basecamp block (hotel / RV park stays) --- */
     if (o.town && (o.lodgeName || o.lodgeConf)) {
       var lodge = '<div class="tide-day"><h3>Your Basecamp</h3>';
-      if (o.lodgeName) lodge += '<p class="advice"><strong>' + esc(o.lodgeName) + '</strong> — plan check-in around your ' + fmtT(o.arrive) + ' arrival.</p>';
+      if (o.lodgeName) lodge += '<p class="advice"><strong>' + esc(o.lodgeName) + '</strong>. Plan check-in around your ' + fmtT(o.arrive) + ' arrival.</p>';
       if (o.lodgeConf) lodge += '<p class="advice private"><strong>Confirmation #:</strong> ' + esc(o.lodgeConf) + '</p>';
       if (o.dog) lodge += '<p class="advice">Traveling with the dog: confirm the pet policy and pet fee with the front desk before you arrive.</p>';
       lodge += '</div>';
@@ -1023,7 +1023,7 @@ document.addEventListener('click', function (e) {
     /* --- checklist: assembled only from what applies --- */
     var groups = [];
     var before = [];
-    if (o.camp) before.push('Campsite reservation confirmed — (800) 444-7275');
+    if (o.camp) before.push('Campsite reservation confirmed: (800) 444-7275');
     if (o.town && o.lodgeName) before.push('Lodging confirmed at ' + esc(o.lodgeName) + (o.dog ? ' (pet policy checked)' : ''));
     if (o.sand) before.push(
       'Check creek status & weather the morning you leave',
@@ -1032,28 +1032,28 @@ document.addEventListener('click', function (e) {
       'Tow strap, shovel, and a traction board if you have one',
       'Water jugs or a bucket. Soaking the sand ahead of your tires is the oldest unsticking trick on the dunes');
     else before.push('Check the weather for your dates. Coastal mornings are foggy, afternoons windy');
-    before.push('Water' + (o.sand ? ' — bring ALL you need, there is none on the beach' : ' and snacks for the day'));
-    if (o.sand) before.push('Cooler packed — last ice/beer stop is Pier Liquor (Pier Ave) or Vons / Flyers (W Grand Ave)');
-    before.push('Trash bags — pack out everything');
+    before.push('Water' + (o.sand ? ': bring ALL you need, there is none on the beach' : ' and snacks for the day'));
+    if (o.sand) before.push('Cooler packed. Last ice/beer stop is Pier Liquor (Pier Ave) or Vons / Flyers (W Grand Ave)');
+    before.push('Trash bags: pack out everything');
     if (o.sand || o.riding || o.camp) before.push('First aid kit');
-    if (wx && wx.covered && wx.rainy) before.push('Rain gear — rain is in the forecast for your dates');
+    if (wx && wx.covered && wx.rainy) before.push('Rain gear: rain is in the forecast for your dates');
     if (o.group) before.push('Share this plan with the group. Print the group copy for everyone');
     if (o.toys) before.push('Green stickers current on every OHV (or nonresident permit)', 'Whip flags on every machine (8 ft, orange/red flag)', 'Helmets for every rider', 'Spark arresters in working order');
     if (o.kids && o.riding) before.push('ATV safety certificates for riders under 18' + (o.rent ? ' (rental shops require them too)' : ''));
-    if (o.rent) before.push('Rental reserved — Arnie\'s, BJ\'s, Steve\'s, or Sun Buggie (book ahead on weekends)');
-    if (o.fire) before.push('Lighter/matches — firewood can be collected on the beach');
+    if (o.rent) before.push('Rental reserved: Arnie\'s, BJ\'s, Steve\'s, or Sun Buggie (book ahead on weekends)');
+    if (o.fire) before.push('Lighter/matches: firewood can be collected on the beach');
     if (o.dog) before.push('Leash (6 ft), dog water bowl, and shade for the dog');
     if (o.clam) before.push('Fishing license + rigid clam measuring gauge');
-    if (o.camp) before.push('Headlamps/lanterns — it gets DARK', 'Stakes and guylines rated for wind');
+    if (o.camp) before.push('Headlamps/lanterns: it gets DARK', 'Stakes and guylines rated for wind');
     groups.push({ h: '📋 Before You Leave Home', items: before });
 
     if (o.sand) groups.push({ h: '🚧 At the Entrance', items: [
       (o.camp ? 'Reservation confirmation pulled up and ready to show at the kiosk'
-              : 'Pay the day-use fee at the kiosk' + (o.offsite ? ' — every riding day, so consider an annual pass' : '')),
+              : 'Pay the day-use fee at the kiosk' + (o.offsite ? ' every riding day, so consider an annual pass' : '')),
       'Air down to 15–20 PSI on the pavement',
       (o.fire ? 'Ask the kiosk: "Any fire restrictions in effect today?"' : 'Ask the kiosk about current fire rules, in case plans change'),
       'Note the tide times for today on your phone',
-      'Radios set — CB channel 9 is ranger base'] });
+      'Radios set: CB channel 9 is ranger base'] });
 
     if (o.camp) groups.push({ h: '⛺ Setting Camp', items: [
       'Drive past Post 2. Camping is south of it',
@@ -1065,7 +1065,7 @@ document.addEventListener('click', function (e) {
 
     if (o.riding) groups.push({ h: '🏁 Every Ride', items: [
       'Helmets on, whips up, flags flying',
-      'Buddy system — never ride alone in the dunes',
+      'Buddy system: never ride alone in the dunes',
       'Crest every dune slow the first time (slipfaces face east)',
       '15 MPH near camps and on the beach',
       'Stay out of fenced/posted nesting areas'] });
@@ -1075,9 +1075,9 @@ document.addEventListener('click', function (e) {
       'Watch for riders coming off the dunes',
       'Stay out of fenced/posted nesting areas'] });
     else groups.push({ h: '🏖 At the Beach', items: [
-      'Sunscreen and layers — coastal weather flips fast',
+      'Sunscreen and layers: coastal weather flips fast',
       'Stay out of fenced/posted nesting areas',
-      'Keep clear of vehicle lanes when crossing the open beach' + (o.dog ? '— dog leashed at all times' : '')] });
+      'Keep clear of vehicle lanes when crossing the open beach' + (o.dog ? ', dog leashed at all times' : '')] });
 
     document.getElementById('checklists').innerHTML = groups.map(function (g, gi) {
       return '<div class="check-group"><h3>' + g.h + '</h3><ul>' + g.items.map(function (it, i) {

@@ -21,6 +21,22 @@ entries once both sides have acted on them and nothing references them anymore.
 
 ## Messages
 
+### 2026-08-05 (later) - Claude (Opus): Trip Planner second pass, the last 19 em dashes
+
+The first pass used the checker's "three words or fewer in front" exemption to
+skip short label separators. Exercising the live planner in a browser showed
+five of them rendering straight into the reader's plan ("Trash bags - pack out
+everything", "Radios set - CB channel 9 is ranger base"). That exemption is the
+tool's heuristic, not house style, so all 19 reader-facing ones are now cleared.
+
+Checklist items take a colon, full sentences take a full stop. `planner.html`
+is down to one em dash, inside a `/* */` code comment, which is not copy.
+
+Verified by building an actual plan on the live page after deploy: the plan
+renders, no console errors, and the rendered output now contains zero em
+dashes. JS token counts identical to HEAD both passes.
+
+
 ### 2026-08-05 (later) - Claude (Opus): Trip Planner copy cleared of em dashes
 
 `planner.html` had 56 em dashes, none of which the network checker could see,
