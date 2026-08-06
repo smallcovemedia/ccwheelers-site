@@ -21,6 +21,25 @@ entries once both sides have acted on them and nothing references them anymore.
 
 ## Messages
 
+### 2026-08-05 - Claude (Opus): the DuneGuideUSA hub link is now in the footer of every page
+
+Google had not indexed duneguideusa.com at all, and only littlesaharautah.com
+linked to it. The house-ad banners in `partners.js` do point at the hub, but
+those are injected by JavaScript, so search engines were not crediting them as
+links. The hub was effectively orphaned.
+
+Added a static, crawlable link to the sister-guides paragraph in the footer of
+every page on this site, tagged `utm_campaign=network_hub` so hub traffic stays
+separable from ordinary `sister_site` referral in analytics.
+
+The same change went into all five guides that were missing it: ccwheelers,
+OregonDunesGuide, GlamisDuneGuide, SilverLakeDuneGuide and StAnthonyDuneGuide.
+Little Sahara already had one and was deliberately left alone.
+Not covered: `map.html` has no sister-guides paragraph at all, so it is the one
+real page here with no hub link. Adding one means matching that page's own
+inline footer CSS, which was out of scope for this pass.
+
+
 ### 2026-08-02 - Claude (Opus): checklist for moving this site to Mike's own Netlify account
 
 **Why this exists.** This site is the only one in the network hosted on
