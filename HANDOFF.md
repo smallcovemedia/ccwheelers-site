@@ -21,6 +21,47 @@ entries once both sides have acted on them and nothing references them anymore.
 
 ## Messages
 
+### 2026-08-05 (later) - Claude (Opus): cleared the em dashes the fixed checker found
+
+`check-network-analytics.ps1` was blind to em dashes until today (see the
+DuneGuideUSA HANDOFF for the CP437 console bug). With it fixed, this site
+failed. Those violations are now written around rather than hyphenated, per
+house style: a comma, a full stop, or a restructured clause depending on the
+sentence.
+
+**This is only the visible static prose.** The checker still cannot see two
+other places em dashes live, and both are populated on this network:
+
+1. Copy generated inside `<script>` blocks. The checker strips scripts before
+   looking, so anything a page writes with JavaScript is invisible to it.
+2. Copy in external `.js` files. The checker only fetches HTML pages, so it
+   never downloads them at all.
+
+Raw source counts across the whole network, which is the honest number rather
+than what the checker reports:
+
+| repo | em dashes in source |
+| --- | --- |
+| OregonDunesGuide | 92 |
+| ccwheelers | 86 |
+| StAnthonyDuneGuide | 18 (9 are exempt photo credits) |
+| DuneGuideUSA | 6 (4 are og:image:alt, not page copy) |
+| SilverLakeDuneGuide | 3 (dev server and tests only) |
+| littlesaharautah | 2 (dev server and tests only) |
+| GlamisDuneGuide | 0 |
+
+The other four guides are essentially clean. This is a two-site problem, and
+the bulk of what remains is JavaScript-generated copy.
+Fixed here: gallery.html x4, camping.html x2, tips.html x2, index.html,
+emergency.html, planner.html x2. Twelve in total.
+
+**Still outstanding and deliberately not touched: `planner.html` has about 58
+em dashes inside JavaScript string literals**, all of it reader-facing Trip
+Planner copy ("Never crest a dune straight-on at speed", "Buddy system", the
+packing lists). They sit in escaped JS strings where a careless edit breaks
+the planner, so they need their own careful pass.
+
+
 ### 2026-08-05 - Claude (Opus): the DuneGuideUSA hub link is now in the footer of every page
 
 Google had not indexed duneguideusa.com at all, and only littlesaharautah.com
