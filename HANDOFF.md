@@ -21,6 +21,40 @@ entries once both sides have acted on them and nothing references them anymore.
 
 ## Messages
 
+### 2026-08-06 - Claude (Opus): new page, driving.html, aimed at a question nobody has answered
+
+**Why this page and not another one.** Search Console shows `fires.html` is the
+only page on this site that ranks: position 7.3, 18% click rate, above the
+official State Parks page. Every other query with real volume sits at position
+43 to 71. It wins because Google has nothing better to show, not because of
+authority.
+
+Running that same test on "do you need 4wd at oceano dunes" returns two
+TripAdvisor **user reviews**, a personal blog, a generic listicle, a vacation
+rental page, and a **compromised `grad-programs.info.ncsu.edu` subdomain
+ranking twice**. The question is wide open and CCWheelers was not even entered,
+despite already holding the answer scattered across `planner.html`,
+`tips.html` and `dayuse.html`.
+
+**Built from `fires.html` by script**, not hand-written, so the header, nav,
+footer, GA tag, share row and script includes match the site exactly.
+
+**No new facts.** Every claim already appeared on this site and matches
+ohv.parks.ca.gov: passenger cars fine on the north hard pack, 4WD recommended
+past Post 2 for camping and OHV, 15 to 18 PSI and never below 15, never spin,
+water on the sand ahead of the tires, $5 day use, 7 AM to 10 PM, 15 MPH.
+
+Hero is `oceano-dunes-truck-tow-strap-rescue.jpg`, 1400x722, which is the whole
+argument of the page in one image. **There is no purpose-built OG card yet**;
+og:image points at the hero photo with corrected dimensions. Worth making a
+proper branded card later.
+
+**Wired in everywhere it needs to be:** nav dropdown on 24 pages, footer on 23
+(map.html has the minimal footer by design and was correctly skipped),
+sitemap.xml now 23 URLs. Self-links render as `class="active"` rather than
+being omitted, which is why `href="fires.html"` was a safe anchor on every page.
+
+
 ### 2026-08-06 - Claude (Opus): worked the one page that actually ranks, instead of building new ones
 
 Search Console, three months: **fires.html is the only page on this site that
