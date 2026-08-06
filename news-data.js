@@ -8,6 +8,14 @@
    ============================================================ */
 window.CCW_NEWS = [
   {
+    date: '2026-08-06',
+    tag: 'event',
+    title: '80th Pismo Beach Clam Festival Set for October 17 and 18',
+    summary: 'The Clam Festival takes over downtown Pismo on Saturday and Sunday, October 17 and 18, with the parade running up Price Street at 10 a.m. Saturday. Admission is free, but if you are camping the dunes that weekend plan on Price Street closures, slow traffic coming through town, and no easy parking downtown.',
+    source: 'Visit Pismo Beach',
+    url: 'https://experiencepismobeach.com/clam-festival/'
+  },
+  {
     date: '2026-08-04',
     tag: 'event',
     title: 'Grover Beach Dune Run Hits the Sand Sunday, September 13',
