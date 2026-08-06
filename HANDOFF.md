@@ -21,6 +21,32 @@ entries once both sides have acted on them and nothing references them anymore.
 
 ## Messages
 
+### 2026-08-05 (later) - Claude (Opus): Trip Planner copy cleared of em dashes
+
+`planner.html` had 56 em dashes, none of which the network checker could see,
+because they live inside JavaScript string literals and the checker strips
+script blocks before looking. This is the page that writes its own
+recommendations, so nearly all of it is reader-facing copy.
+
+36 were prose and are now rewritten: "Never crest a dune straight-on at speed.
+Square up slow the first pass", "Never spin. Spinning digs a grave", and so
+on. Mostly a full stop with the next clause capitalised, two joined with a
+comma where the second half was not a standalone sentence.
+
+20 were deliberately left. 19 are short label separators in the packing lists
+("Trash bags - pack out everything"), which the checker exempts as UI rather
+than voice, and one sits inside a `/* */` code comment.
+
+**Verification, since none of this could be run locally.** No Node in this
+environment and the preview pane renders local files as static snapshots, so
+the planner could not be exercised before pushing. Instead the JS structure
+was proved unchanged by diffing token counts against HEAD: single quotes,
+double quotes, backticks, backslashes, parens, braces, semicolons and newlines
+all identical, 1617/879/0/46/998/998/374/374/801/1191. The edits changed only
+prose characters inside string literals, so they cannot alter syntax. The live
+planner was then exercised in the browser after deploy.
+
+
 ### 2026-08-05 (later) - Claude (Opus): cleared the em dashes the fixed checker found
 
 `check-network-analytics.ps1` was blind to em dashes until today (see the

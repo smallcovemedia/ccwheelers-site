@@ -492,13 +492,13 @@ document.addEventListener('click', function (e) {
   function rideSmart(desc) {
     if (!desc) return [];
     var t = desc.toLowerCase(), out = [];
-    if (/paddle/.test(t)) out.push({ h: '🔧 Paddle tire game plan', p: 'Paddles transform the dunes but they\'re miserable on the hard pack — they dig on firm sand and wear fast on the beach drive. If you can, ride down on stock tires or trailer the machine to the open sand, then swap. And paddles punch way above their weight on climbs: you\'ll clear faces that stop everyone else, so watch your speed over blind crests.' });
-    if (/sand ?rail|buggy|long travel|longtravel/.test(t)) out.push({ h: '🔧 Rail & buggy notes', p: 'Rails live at Competition Hill and the open bowls south of Post 4. Full highway rules still apply on Sand Highway to Pole 11 — that includes seatbelts. Double-check your whip height (8 ft) and mount solid tow points front and rear; even rails get stuck, and a strap beats a shovel every time.' });
+    if (/paddle/.test(t)) out.push({ h: '🔧 Paddle tire game plan', p: 'Paddles transform the dunes but they\'re miserable on the hard pack. They dig on firm sand and wear fast on the beach drive. If you can, ride down on stock tires or trailer the machine to the open sand, then swap. And paddles punch way above their weight on climbs: you\'ll clear faces that stop everyone else, so watch your speed over blind crests.' });
+    if (/sand ?rail|buggy|long travel|longtravel/.test(t)) out.push({ h: '🔧 Rail & buggy notes', p: 'Rails live at Competition Hill and the open bowls south of Post 4. Full highway rules still apply on Sand Highway to Pole 11. That includes seatbelts. Double-check your whip height (8 ft) and mount solid tow points front and rear; even rails get stuck, and a strap beats a shovel every time.' });
     if (/rzr|razor|maverick|x3|talon|pro ?r|krx|can-?am|sxs|side.?by.?side|utv/.test(t)) out.push({ h: '🔧 SxS setup', p: 'Harnesses clicked, doors and nets latched, and keep a fire extinguisher mounted where the passenger can reach it. Stock belts slip in deep sand when they\'re hot — carry a spare belt and let the machine cool before you swap. 15 MPH near camps applies to you especially: SxS traffic is what rangers watch closest.' });
-    if (/raptor|trx|prerunner|pre-?runner|f-?150|tundra|tacoma|silverado|ram\b|truck/.test(t)) out.push({ h: '🔧 Truck strategy', p: 'Momentum is your friend, commitment is your rule: pick your line before the soft stuff and don\'t lift mid-climb. Air down to 15–18 PSI, 4-high for the beach, 4-low for the dunes. Never crest a dune straight-on at speed — square up slow the first pass, the backside might be a slipface with a 30-foot drop.' });
-    if (/jeep|wrangler|bronco|4runner|land ?cruiser/.test(t)) out.push({ h: '🔧 Short-wheelbase 4x4', p: 'Disconnect the sway bar if you have it, 4-low in the dunes, and be honest about approach angles on razorbacks — short wheelbase means you\'ll teeter where trucks bridge. Aired down to 15–18 you\'ll go almost anywhere the rails go, just slower.' });
-    if (/banshee|2 ?stroke|two ?stroke|yz|cr\d|kx|rm\d/.test(t)) out.push({ h: '🔧 Two-stroke duty', p: 'Spark arrester is mandatory and checked — a stock silencer usually isn\'t enough. Jet for sea level (you\'re AT zero). Paddle rear if you have it, and keep it pinned in the deep stuff: momentum is everything on a bike out here.' });
-    if (/stock|street tire|highway tire|all ?season/.test(t)) out.push({ h: '🔧 Running stock? Respect the sand', p: 'Stock vehicle on stock tires can absolutely do Oceano — at low tide, on the hard pack, aired down to 15–18. Skip the dry deep sand near the dunes, don\'t attempt climbs, and time your arrival and departure to the low tide windows above. The beach is the adventure; leave the bowls to the paddles.' });
+    if (/raptor|trx|prerunner|pre-?runner|f-?150|tundra|tacoma|silverado|ram\b|truck/.test(t)) out.push({ h: '🔧 Truck strategy', p: 'Momentum is your friend, commitment is your rule: pick your line before the soft stuff and don\'t lift mid-climb. Air down to 15–18 PSI, 4-high for the beach, 4-low for the dunes. Never crest a dune straight-on at speed. Square up slow the first pass, the backside might be a slipface with a 30-foot drop.' });
+    if (/jeep|wrangler|bronco|4runner|land ?cruiser/.test(t)) out.push({ h: '🔧 Short-wheelbase 4x4', p: 'Disconnect the sway bar if you have it, 4-low in the dunes, and be honest about approach angles on razorbacks. Short wheelbase means you\'ll teeter where trucks bridge. Aired down to 15–18 you\'ll go almost anywhere the rails go, just slower.' });
+    if (/banshee|2 ?stroke|two ?stroke|yz|cr\d|kx|rm\d/.test(t)) out.push({ h: '🔧 Two-stroke duty', p: 'Spark arrester is mandatory and checked. A stock silencer usually isn\'t enough. Jet for sea level (you\'re AT zero). Paddle rear if you have it, and keep it pinned in the deep stuff: momentum is everything on a bike out here.' });
+    if (/stock|street tire|highway tire|all ?season/.test(t)) out.push({ h: '🔧 Running stock? Respect the sand', p: 'Stock vehicle on stock tires can absolutely do Oceano, at low tide, on the hard pack, aired down to 15–18. Skip the dry deep sand near the dunes, don\'t attempt climbs, and time your arrival and departure to the low tide windows above. The beach is the adventure; leave the bowls to the paddles.' });
     return out;
   }
 
@@ -823,7 +823,7 @@ document.addEventListener('click', function (e) {
     }
     if (wet !== null && wet > 0.1) {
       return '<div class="warn-box"><strong>Creek at ' + label + ':</strong> outside the high-tide window, but ' + wet.toFixed(1) +
-        '" of rain fell nearby — rain can push the creek up regardless of tide. Check the <a href="creek.html">creek status</a> before you cross.</div>';
+        '" of rain fell nearby. Rain can push the creek up regardless of tide. Check the <a href="creek.html">creek status</a> before you cross.</div>';
     }
     return '<div class="ok-box"><strong>Creek at ' + label + ':</strong> outside the high-tide window, so the crossing is normally at its shallowest. Still confirm the ' +
       '<a href="creek.html">creek status</a> the morning you leave.</div>';
@@ -850,7 +850,7 @@ document.addEventListener('click', function (e) {
       if (cm) {
         out.push('<div class="warn-box"><strong>Creek Status Right Now: ' + cm.label + '.</strong> ' + cm.long +
           (CCW_CREEK.note ? ' ' + CCW_CREEK.note + '.' : '') +
-          ' This is today\'s status, not a forecast for your trip date — confirm the <a href="creek.html">creek status</a> again closer to when you leave.</div>');
+          ' This is today\'s status, not a forecast for your trip date. Confirm the <a href="creek.html">creek status</a> again closer to when you leave.</div>');
       }
     }
 
@@ -894,9 +894,9 @@ document.addEventListener('click', function (e) {
           var big = peak.v >= 6;
           out.push('<div class="tide-day"><h3>Overnight · ' + fmtDs(night) + ' → ' + fmtDs(new Date(night.getTime() + 86400000)) + '</h3>' +
             '<div class="evs">' + nightHighs.map(function (e) { return '<span class="ev hi">High ' + fmtT(e.t) + ' · ' + e.v.toFixed(1) + ' ft</span>'; }).join('') + '</div>' +
-            '<p class="advice">Peak overnight water: <strong>' + peak.v.toFixed(1) + ' ft at ' + fmtT(peak.t) + '</strong>. Before dark, find the line of wet sand and debris from the last high tide and set camp well above it — park rules say leave room for two lanes of traffic between camp and the water.</p>' +
+            '<p class="advice">Peak overnight water: <strong>' + peak.v.toFixed(1) + ' ft at ' + fmtT(peak.t) + '</strong>. Before dark, find the line of wet sand and debris from the last high tide and set camp well above it. Park rules say leave room for two lanes of traffic between camp and the water.</p>' +
             (big ? '<div class="warn-box"><strong>Big tide alert:</strong> ' + peak.v.toFixed(1) + ' ft is a serious high. The water will come up well past where the beach looks "safe" at sunset. Camp high, and don\'t judge your spot by where the waterline is when you pull in.</div>'
-                 : '<div class="ok-box">A ' + peak.v.toFixed(1) + ' ft high is moderate — still camp above the debris line, but you won\'t need to hug the dunes.</div>') +
+                 : '<div class="ok-box">A ' + peak.v.toFixed(1) + ' ft high is moderate. Still camp above the debris line, but you won\'t need to hug the dunes.</div>') +
             '</div>');
         }
         night = new Date(night.getTime() + 86400000);
@@ -916,7 +916,7 @@ document.addEventListener('click', function (e) {
       return '<span class="ev ' + (e.type === 'H' ? 'hi' : 'lo') + '">' + (e.type === 'H' ? 'High' : 'Low') + ' ' + fmtT(e.t) + ' · ' + e.v.toFixed(1) + ' ft</span>';
     }).join('') + '</div>';
     if (bestDep) {
-      depHtml += '<p class="advice">Aim to tow out around the <strong>' + fmtT(bestDep.t) + ' low (' + bestDep.v.toFixed(1) + ' ft)</strong>. By late in a busy weekend the soft sand is churned up — the low tide gives you the firm lane out' + (opts.vehicle === 'rv' ? ', and with a trailer you want every bit of it' : '') + '.</p>';
+      depHtml += '<p class="advice">Aim to tow out around the <strong>' + fmtT(bestDep.t) + ' low (' + bestDep.v.toFixed(1) + ' ft)</strong>. By late in a busy weekend the soft sand is churned up. The low tide gives you the firm lane out' + (opts.vehicle === 'rv' ? ', and with a trailer you want every bit of it' : '') + '.</p>';
     }
     depHtml += creekNote(evs, opts.depart, 'departure', rain);
     depHtml += '</div>';
@@ -947,9 +947,9 @@ document.addEventListener('click', function (e) {
           (x.gust >= 25 ? ' · gusts ' + Math.round(x.gust) : '') + '</span>';
       }).join('');
       var wxNotes = [];
-      if (wx.rainy) wxNotes.push('Rain is in this forecast — pack rain gear' + (o.camp ? ', a tarp for gear, and keep firewood covered' : '') + '.');
+      if (wx.rainy) wxNotes.push('Rain is in this forecast. Pack rain gear' + (o.camp ? ', a tarp for gear, and keep firewood covered' : '') + '.');
       if (wx.windy && (o.sand || o.riding)) wxNotes.push('Gusts over 25 mph expected: goggles for riding, and stake anything light the moment you set it down.');
-      if (wx.coldNights && o.camp) wxNotes.push('Nights dip into the 40s or colder — pack proper sleeping layers, the beach gets cold fast after sunset.');
+      if (wx.coldNights && o.camp) wxNotes.push('Nights dip into the 40s or colder. Pack proper sleeping layers, the beach gets cold fast after sunset.');
       if (wx.hot) wxNotes.push('Heat in the forecast: extra water, and mind paws and bare feet on hot sand.');
       pre.push('<div class="tide-day"><h3>Weather for Your Dates</h3><div class="evs">' + chips + '</div>' +
         (wxNotes.length ? '<p class="advice">' + wxNotes.join(' ') + '</p>' : '<p class="advice">No rain in the forecast for your dates. Coastal standard applies: sunny afternoons, wind after lunch, cool evenings.</p>') +
@@ -978,39 +978,39 @@ document.addEventListener('click', function (e) {
     if (mealRows.length) {
       pre.push('<div class="tide-day"><h3>Group Meal Plan</h3><div class="evs">' +
         mealRows.map(function (m) { return '<span class="ev lo"><strong>' + m[0] + ':</strong>&nbsp;' + esc(m[1]) + '</span>'; }).join('') +
-        '</div><p class="advice">Same table, same time — share this plan so nobody is texting "where is everyone?" at 8 AM.</p></div>');
+        '</div><p class="advice">Same table, same time. Share this plan so nobody is texting "where is everyone?" at 8 AM.</p></div>');
     }
 
     /* --- recommendations: every card must be earned by an input --- */
     var recs = [];
     if (o.sand) {
       recs = rideSmart(o.ride);
-      if (o.offsite) recs.push({ h: 'Off-beach basecamp strategy', p: 'Staying in town with riding days means a beach entry every morning — a mini tow-in each time. Hit the sand near the day\'s low tide, air down at the pavement every entry, and pay day use at the kiosk (or grab an annual pass if you come often). Pro move: stage toys and gear the night before so you roll at first light, when the beach is empty and firm.' });
-      recs.push({ h: 'Air down at the pavement, not in the sand', p: 'Drop to 15–20 PSI before you leave the hard surface (never below 15). Low pressure widens your footprint and is the single biggest difference between cruising and digging. Air back up before the highway home — bring a gauge and plan on the air station or your own compressor.' });
+      if (o.offsite) recs.push({ h: 'Off-beach basecamp strategy', p: 'Staying in town with riding days means a beach entry every morning. A mini tow-in each time. Hit the sand near the day\'s low tide, air down at the pavement every entry, and pay day use at the kiosk (or grab an annual pass if you come often). Pro move: stage toys and gear the night before so you roll at first light, when the beach is empty and firm.' });
+      recs.push({ h: 'Air down at the pavement, not in the sand', p: 'Drop to 15–20 PSI before you leave the hard surface (never below 15). Low pressure widens your footprint and is the single biggest difference between cruising and digging. Air back up before the highway home. Bring a gauge and plan on the air station or your own compressor.' });
       recs.push({ h: 'Stay on the hard pack', p: 'The firm, wet sand below the last high-tide line is your highway. The dry, deep, churned-up sand near the dunes is where 2WDs die and even 4WDs work hard. Follow the tracks of others down the beach, keep momentum in soft spots, and never stop pointed uphill in loose sand.' });
-      if (o.vehicle === '2wd') recs.push({ h: '2WD reality check', p: 'The park recommends 4WD past Post 2 — with 2WD, everything depends on tide timing and the hard pack. Arrive at low tide, stay off the dry sand entirely, don\'t stop on soft ground, and know that beach towing is available if it goes wrong. If conditions look sketchy when you arrive, camping north of Post 2 near the entrance beats a recovery bill.' });
-      if (o.vehicle === 'rv') recs.push({ h: 'Trailer strategy', p: 'Tow in on the morning low tide — Friday morning is gold, before the weekend chews up the beach. Drop the trailer above the high-tide line and level it before dark. Position so you can pull straight out; backing a trailer in soft sand is misery.' });
+      if (o.vehicle === '2wd') recs.push({ h: '2WD reality check', p: 'The park recommends 4WD past Post 2. With 2WD, everything depends on tide timing and the hard pack. Arrive at low tide, stay off the dry sand entirely, don\'t stop on soft ground, and know that beach towing is available if it goes wrong. If conditions look sketchy when you arrive, camping north of Post 2 near the entrance beats a recovery bill.' });
+      if (o.vehicle === 'rv') recs.push({ h: 'Trailer strategy', p: 'Tow in on the morning low tide. Friday morning is gold, before the weekend chews up the beach. Drop the trailer above the high-tide line and level it before dark. Position so you can pull straight out; backing a trailer in soft sand is misery.' });
       recs.push({ h: 'Speed rules', p: '15 MPH on the beach and within 50 feet of any camp. Sand Highway is a legal extension of Highway 1 down to Pole 11: seatbelts, helmet law, DUI, and speed limits all enforced.' });
     }
-    if (o.toys) recs.push({ h: 'Green sticker & gear', p: 'Every OHV needs current DMV registration (green sticker) or a nonresident permit, an 8-foot whip with a 6"×12" orange/red flag, a working spark arrester, and lights if you ride between sunset and sunrise. Helmets required on ATVs — no passengers on single-seat quads.' });
-    if (o.rent) recs.push({ h: 'Renting your ride', p: 'Four official concessionaires rent quads, buggies, and side-by-sides right at the entrances: Arnie\'s (805) 474-6060, BJ\'s (805) 481-5411, Steve\'s (805) 481-2597, and Sun Buggie (805) 473-8636. Helmets, whip flags, and a quick lesson are included, and the machines come registered — no green sticker needed. Book ahead for holiday weekends; walk-ups sell out.' });
-    if (o.riding) recs.push({ h: 'Read the dunes before you send it', p: 'Dune crests run north–south: gentle on the ocean side, steep drop (the slipface) on the east side. Riding east is where surprises live — crest slow the first time, every time. Walk Competition Hill before you climb it.' });
-    if (o.kids && o.riding) recs.push({ h: 'Young riders', p: 'Riders under 18 need an ATV safety certificate or direct supervision by a certificate-holding adult; under 14 also requires a parent or guardian supervising — and that applies to rentals too. Free training for ages 6–17: (800) 887-2887. Rangers do check.' });
-    if (o.fire) recs.push({ h: 'Campfire the right way', p: 'Fires are allowed on the sand south of Grand Avenue, up to 3 feet across. Wood only — pallets or boards with nails earn tickets. Collect driftwood freely (after a storm there\'s plenty). Keep real distance between the fire and anything with a gas tank, and put it out with water, never sand: buried coals stay hot for hours. Confirm restrictions at the kiosk on hot, windy days.' });
-    if (o.dog) recs.push({ h: 'Dogs on the beach', p: 'Dogs are welcome but must stay on a leash (6 ft max) — it protects them from traffic and protects the nesting snowy plovers. No dogs at Oso Flaco Lake or the Dune Preserve. Bring shade and fresh water; summer sand gets hot enough to burn paws.' });
+    if (o.toys) recs.push({ h: 'Green sticker & gear', p: 'Every OHV needs current DMV registration (green sticker) or a nonresident permit, an 8-foot whip with a 6"×12" orange/red flag, a working spark arrester, and lights if you ride between sunset and sunrise. Helmets required on ATVs. No passengers on single-seat quads.' });
+    if (o.rent) recs.push({ h: 'Renting your ride', p: 'Four official concessionaires rent quads, buggies, and side-by-sides right at the entrances: Arnie\'s (805) 474-6060, BJ\'s (805) 481-5411, Steve\'s (805) 481-2597, and Sun Buggie (805) 473-8636. Helmets, whip flags, and a quick lesson are included, and the machines come registered. No green sticker needed. Book ahead for holiday weekends; walk-ups sell out.' });
+    if (o.riding) recs.push({ h: 'Read the dunes before you send it', p: 'Dune crests run north–south: gentle on the ocean side, steep drop (the slipface) on the east side. Riding east is where surprises live. Crest slow the first time, every time. Walk Competition Hill before you climb it.' });
+    if (o.kids && o.riding) recs.push({ h: 'Young riders', p: 'Riders under 18 need an ATV safety certificate or direct supervision by a certificate-holding adult; under 14 also requires a parent or guardian supervising, and that applies to rentals too. Free training for ages 6–17: (800) 887-2887. Rangers do check.' });
+    if (o.fire) recs.push({ h: 'Campfire the right way', p: 'Fires are allowed on the sand south of Grand Avenue, up to 3 feet across. Wood only. Pallets or boards with nails earn tickets. Collect driftwood freely (after a storm there\'s plenty). Keep real distance between the fire and anything with a gas tank, and put it out with water, never sand: buried coals stay hot for hours. Confirm restrictions at the kiosk on hot, windy days.' });
+    if (o.dog) recs.push({ h: 'Dogs on the beach', p: 'Dogs are welcome but must stay on a leash (6 ft max). It protects them from traffic and protects the nesting snowy plovers. No dogs at Oso Flaco Lake or the Dune Preserve. Bring shade and fresh water; summer sand gets hot enough to burn paws.' });
     if (o.clam) recs.push({ h: 'Clamming basics', p: 'You need a California fishing license and a rigid measuring device. Pismo clams must be 4½ inches minimum, limit 10, from half an hour before sunrise to half an hour after sunset. Rebury the shorts right where you dug them.' });
     if (o.sand) {
-      recs.push({ h: 'Know the creek call', p: 'If Arroyo Grande Creek is posted closed, crossing is a ticket — no exceptions. Check the creek page the morning you leave. When it\'s open and running: cross slow, in the fresh water (not the surf line), and light cars should wait if it\'s over 2 feet deep.' });
+      recs.push({ h: 'Know the creek call', p: 'If Arroyo Grande Creek is posted closed, crossing is a ticket. No exceptions. Check the creek page the morning you leave. When it\'s open and running: cross slow, in the fresh water (not the surf line), and light cars should wait if it\'s over 2 feet deep.' });
       if (o.camp) recs.push({ h: 'Camp setup, in order', p: 'Arrive → find the high-tide debris line → camp above it with two traffic lanes of room → level up and stake down before dark. The wind picks up in the afternoon; anything light (canopies especially) gets staked or it leaves.' });
       recs.push({ h: 'Stock up before the gate', p: (o.camp
         ? 'Last stops: Pier Liquor (393 Pier Ave, right by the Oceano gate) for beer, ice, and basics, or Vons / Beverage House / the Flyers station on W Grand Ave in Grover Beach for a full run. Already set up? Vendor trucks patrol the beach selling ice, firewood, water, and snacks. And keep drinks at camp: open containers on an OHV and sand DUIs are both tickets.'
-        : 'Grab water, snacks, and sunscreen before you hit the sand — there are no services on the beach. Pier Liquor (393 Pier Ave) is the classic last stop by the Oceano gate; the W Grand Ave stores in Grover Beach work too.') });
-      recs.push({ h: 'If you get stuck', p: 'Air down more (to 15), dig out all four tires, keep the front wheels straight, and have friends push while you throttle gently. Never spin — spinning digs a grave. Old duner trick: pour water on the sand in front of your tires — wet sand packs hard. Bring jugs or a bucket (ocean\'s right there). CB channel 9 reaches ranger base; a solar call box sits at the Sand Highway entrance.' });
+        : 'Grab water, snacks, and sunscreen before you hit the sand. There are no services on the beach. Pier Liquor (393 Pier Ave) is the classic last stop by the Oceano gate; the W Grand Ave stores in Grover Beach work too.') });
+      recs.push({ h: 'If you get stuck', p: 'Air down more (to 15), dig out all four tires, keep the front wheels straight, and have friends push while you throttle gently. Never spin. Spinning digs a grave. Old duner trick: pour water on the sand in front of your tires. Wet sand packs hard. Bring jugs or a bucket (ocean\'s right there). CB channel 9 reaches ranger base; a solar call box sits at the Sand Highway entrance.' });
     }
     if (!o.sand) {
-      recs.push({ h: 'Seeing the dunes on foot', p: 'Walking in is free — the $5 day-use fee only applies to vehicles entering the beach. The Grand Avenue (Grover Beach) and Pier Avenue (Oceano) entrances both put you straight onto the sand, and sand wheelchairs are available first come, first served at the entrance stations.' });
-      recs.push({ h: 'The quiet side of the dunes', p: 'For the no-engines experience, the Oso Flaco Lake boardwalk (south end of the park) is a one-mile accessible walk across the lake and through the dunes to the ocean — bird life the whole way. No dogs on that side.' });
-      recs.push({ h: 'Watch the riders', p: 'The beach north of the creek is open to foot traffic and you can watch trucks and quads head south toward the riding area. Best light and fewest crowds: mornings. Bring layers — the coast is 15 degrees cooler than inland and the afternoon wind is real.' });
+      recs.push({ h: 'Seeing the dunes on foot', p: 'Walking in is free. The $5 day-use fee only applies to vehicles entering the beach. The Grand Avenue (Grover Beach) and Pier Avenue (Oceano) entrances both put you straight onto the sand, and sand wheelchairs are available first come, first served at the entrance stations.' });
+      recs.push({ h: 'The quiet side of the dunes', p: 'For the no-engines experience, the Oso Flaco Lake boardwalk (south end of the park) is a one-mile accessible walk across the lake and through the dunes to the ocean. Bird life the whole way. No dogs on that side.' });
+      recs.push({ h: 'Watch the riders', p: 'The beach north of the creek is open to foot traffic and you can watch trucks and quads head south toward the riding area. Best light and fewest crowds: mornings. Bring layers. The coast is 15 degrees cooler than inland and the afternoon wind is real.' });
     }
 
     document.getElementById('recs').innerHTML =
@@ -1030,14 +1030,14 @@ document.addEventListener('click', function (e) {
       'Check the tide chart for your dates',
       'Tire pressure gauge + air compressor (or plan for the air station)',
       'Tow strap, shovel, and a traction board if you have one',
-      'Water jugs or a bucket — soaking the sand ahead of your tires is the oldest unsticking trick on the dunes');
-    else before.push('Check the weather for your dates — coastal mornings are foggy, afternoons windy');
+      'Water jugs or a bucket. Soaking the sand ahead of your tires is the oldest unsticking trick on the dunes');
+    else before.push('Check the weather for your dates. Coastal mornings are foggy, afternoons windy');
     before.push('Water' + (o.sand ? ' — bring ALL you need, there is none on the beach' : ' and snacks for the day'));
     if (o.sand) before.push('Cooler packed — last ice/beer stop is Pier Liquor (Pier Ave) or Vons / Flyers (W Grand Ave)');
     before.push('Trash bags — pack out everything');
     if (o.sand || o.riding || o.camp) before.push('First aid kit');
     if (wx && wx.covered && wx.rainy) before.push('Rain gear — rain is in the forecast for your dates');
-    if (o.group) before.push('Share this plan with the group — print the group copy for everyone');
+    if (o.group) before.push('Share this plan with the group. Print the group copy for everyone');
     if (o.toys) before.push('Green stickers current on every OHV (or nonresident permit)', 'Whip flags on every machine (8 ft, orange/red flag)', 'Helmets for every rider', 'Spark arresters in working order');
     if (o.kids && o.riding) before.push('ATV safety certificates for riders under 18' + (o.rent ? ' (rental shops require them too)' : ''));
     if (o.rent) before.push('Rental reserved — Arnie\'s, BJ\'s, Steve\'s, or Sun Buggie (book ahead on weekends)');
@@ -1056,12 +1056,12 @@ document.addEventListener('click', function (e) {
       'Radios set — CB channel 9 is ranger base'] });
 
     if (o.camp) groups.push({ h: '⛺ Setting Camp', items: [
-      'Drive past Post 2 — camping is south of it',
+      'Drive past Post 2. Camping is south of it',
       'Find the last high-tide debris line',
       'Set camp ABOVE it, leaving two lanes of traffic room',
       'Stake everything before the afternoon wind',
       'Walk your exit route while it\'s light',
-      'No gray water on the beach — it\'s state law'] });
+      'No gray water on the beach. It\'s state law'] });
 
     if (o.riding) groups.push({ h: '🏁 Every Ride', items: [
       'Helmets on, whips up, flags flying',
