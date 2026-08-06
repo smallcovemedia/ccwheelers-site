@@ -21,6 +21,43 @@ entries once both sides have acted on them and nothing references them anymore.
 
 ## Messages
 
+### 2026-08-06 - Claude (Opus): worked the one page that actually ranks, instead of building new ones
+
+Search Console, three months: **fires.html is the only page on this site that
+ranks.** Position 7.3 for "oceano dunes fire rules", 9 clicks from 49
+impressions, an 18% click rate. Every other query with real volume sits at
+position 43 to 71, which is page five and beyond. There are no near misses.
+
+Two problems found on it, both now fixed.
+
+**1. It ranked 7.3 on one phrasing and 56.7 on the sibling.** "pismo beach
+bonfire rules" is the same question in the vocabulary that market actually
+uses, and the SLO Tribune piece beating us on page one is literally titled
+"Where are bonfires allowed at SLO County beaches". Our page said "Pismo" zero
+times and "bonfire" once, as a pejorative: "Bonfire-sized burns draw rangers,
+not compliments." The only appearance of the search term was telling people it
+was the wrong thing. The size-limit line now answers the bonfire question
+directly and still states the 3 foot by 2 foot rule.
+
+**2. The one door that works opened into a room with no exits.** The entire
+body carried three internal links, all buried in one closing paragraph. Added
+a `.cards` module before the closing callout pointing at camping, the live
+creek status and the tide chart, which is the real sequence for someone
+planning a fire night. Body links went 3 to 6.
+
+Every claim in the new module already appears on fires.html or dayuse.html and
+matches ohv.parks.ca.gov. No new facts introduced.
+
+**The method, which is the transferable part.** Search the query and read who
+Google ranks. For "oceano dunes fire rules" it is padding page one with Ocean
+City *Maryland* bonfire regulations, Ocean Beach San Francisco, a 2009 NBC
+article and a generic listicle. That is Google having nothing good to work
+with, and it is why a small site outranks parks.ca.gov there. For "do you need
+4wd at oceano dunes" it is TripAdvisor user reviews and a **compromised
+ncsu.edu subdomain, ranking twice**. Wherever the result set looks like that,
+the question is winnable. Where ReserveCalifornia or NOAA own it, it is not.
+
+
 ### 2026-08-06 - Claude (Opus): dayuse.html now speaks the searcher's language
 
 "oceano dunes non vehicle area" pulls impressions and zero clicks. The reason
