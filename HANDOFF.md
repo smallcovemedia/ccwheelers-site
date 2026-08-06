@@ -21,6 +21,22 @@ entries once both sides have acted on them and nothing references them anymore.
 
 ## Messages
 
+### 2026-08-06 - Claude (Opus): map.html now carries the sister guides and hub link
+
+It was the last page on this site with no link to DuneGuideUSA, because it has
+no sister-guides paragraph at all and does not load `site.css`, so the
+network-wide pass skipped it.
+
+The paragraph was copied verbatim from `index.html` rather than retyped, so the
+UTM tagging matches every other page exactly. `.foot-network` was added to
+map.html's own inline CSS in a compact form matching that page's smaller
+footer. The existing `.wrap` is a space-between flex row, so the paragraph sits
+in its own wrap above it instead of becoming a third flex item and throwing off
+the copyright line.
+
+Every page on ccwheelers.com now links to the hub.
+
+
 ### 2026-08-05 (later) - Claude (Opus): Trip Planner second pass, the last 19 em dashes
 
 The first pass used the checker's "three words or fewer in front" exemption to
