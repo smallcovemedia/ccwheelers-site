@@ -21,6 +21,34 @@ entries once both sides have acted on them and nothing references them anymore.
 
 ## Messages
 
+### 2026-08-06 - Claude (Opus): dayuse.html now speaks the searcher's language
+
+"oceano dunes non vehicle area" pulls impressions and zero clicks. The reason
+was not missing content. `dayuse.html` already describes Oso Flaco Lake as "a
+non-motorized day-use area" and even says "No vehicles, no dogs". Every fact on
+the page checks out against ohv.parks.ca.gov: $5 per vehicle, 7 AM to 10 PM,
+Post 2 one mile south of Pier Avenue.
+
+The page simply never used the words people type. "non-vehicle" appeared
+nowhere on the site.
+
+Changed: the Oso Flaco heading is now "Oso Flaco Lake: the non-vehicle area"
+with `id="non-vehicle-area"`, the lede calls it "the non-vehicle side of Oceano
+Dunes" before the park's own "non-motorized" wording, and the meta description
+leads with the concrete answers ($5, 7 AM to 10 PM) instead of listing topics.
+No fact was changed or added.
+
+Also gave the five section headings real `id` anchors, so `dayuse.html#post-2`
+and `dayuse.html#non-vehicle-area` are addressable. This is the same idea as
+the network-wide "named locations have no addressable pages" item in the
+backlog.
+
+**Worth recording, because it nearly caused a bad edit:** a case-sensitive grep
+for hours missed "Hours: vehicle day use runs 7 AM to 10 PM daily", and the
+conclusion "the page never states hours" was wrong. It does, on line 156. Check
+case before declaring a content gap.
+
+
 ### 2026-08-06 - Claude (Opus): map.html now carries the sister guides and hub link
 
 It was the last page on this site with no link to DuneGuideUSA, because it has
