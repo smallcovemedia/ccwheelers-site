@@ -8,6 +8,14 @@
    ============================================================ */
 window.CCW_NEWS = [
   {
+    date: '2026-08-08',
+    tag: 'park',
+    title: 'Sand Drag Event August 22, Advance Day-Use Passes On Sale Now',
+    summary: 'State Parks is selling advance vehicle day-use passes online for the August 22 sand drag event at Oceano Dunes, and they are expected to sell out. If you are camping that weekend you still need a separate day-use pass to take a vehicle onto the beach, because the camping pass does not cover it, and the license plate on the pass has to match the vehicle you bring.',
+    source: 'California State Parks',
+    url: 'https://ohv.parks.ca.gov/?page_id=1207'
+  },
+  {
     date: '2026-08-06',
     tag: 'event',
     title: '80th Pismo Beach Clam Festival Set for October 17 and 18',
